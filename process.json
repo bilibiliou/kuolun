@@ -1,0 +1,19 @@
+{
+    "apps": [
+    // {
+    //     "name": "webpack",
+    //     "script": "npm",  // linux 下需要添加 sudo webpack --colors -w
+    //     "args": "run dev",
+    //     "env": {
+    //         "NODE_ENV": "prod"
+    //     }
+    // },
+    {
+        "name": "server",
+        "script": "./server.js",
+        "watch": true,
+        "env": {
+            "NODE_PORT": 5000
+        }
+    }]
+}
