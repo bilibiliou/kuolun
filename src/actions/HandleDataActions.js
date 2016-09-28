@@ -19,6 +19,7 @@ export const getDataesThunk = (page, SortState) => {
             headers: {
                  "Content-Type": "application/x-www-form-urlencoded"
             },
+            credentials: 'include',
             body: `whichpage=${page}&SortState=${SortState}`
         })
         .then((res) => {                
@@ -47,5 +48,4 @@ export const getDataesThunk = (page, SortState) => {
         })
     }
 }
-
 

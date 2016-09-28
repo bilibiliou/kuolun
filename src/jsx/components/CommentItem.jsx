@@ -19,12 +19,21 @@ class CommentItem extends Component {
 		// 点赞功能 先从数据库获获取 加载页面后的点赞数，点击后
 		// 只在View 层做数据更新，不做总体的数据更新，并发送一个Ajax, 修改
 		// 数据库中的点赞数
+		// 将静态的props 数据转化为state 状态，便于更改
 		this.state = {
 			feedContentboff : false,
 			feedWrapboff : false,
-			// isVoted: this.props.ItemData.isVoted,
-			// vote_up: this.props.ItemData.vote_up
+			isVoted: this.props.ItemData.isVoted,
+			vote_up: this.props.ItemData.vote_up
 		};
+	}
+
+	componentWillReceiveProps (nextProps) {
+		// 新数据更新后，重新设置state
+		this.setState({
+			isVoted: nextProps.ItemData.isVoted,
+			vote_up: nextProps.ItemData.vote_up
+		});
 	}
 
 	DelSelf () {
@@ -56,26 +65,25 @@ class CommentItem extends Component {
 	}
 
 	VoteUpHandle () {
-		// let {
-		// 	actions,
-		// 	userInfo
-		// } = this.props,
-		// {
-		// 	index
-		// } = this.props.ItemData
+		let {
+			actions,
+			userInfo
+		} = this.props,
+		{
+			index
+		} = this.props.ItemData
 
-		// this.setState({
-		// 	isVoted: false,
-		// 	vote_up: this.state.vote_up + 1
-		// })
+		this.setState({
+			isVoted: true,
+			vote_up: this.state.vote_up + 1
+		})
 
-		// actions.VoteUpThunk(index, userInfo, function () {
-		// 	// 如果发生了错误，将点赞状态复原
-		// 	this.setState({
-		// 		isVoted: true,
-		// 		vote_up: this.state.vote_up - 1
-		// 	})
-		// }.bind(this));
+		actions.VoteUpThunk(index, function () {
+			this.setState({
+				isVoted: false,
+				vote_up: this.state.vote_up - 1
+			})
+		}.bind(this))
 	}
 
 	render () {
@@ -88,7 +96,6 @@ class CommentItem extends Component {
 			publish_content,
 			commentAuthor,
 			FeedBack,
-			vote_up
 		} = this.props.ItemData,
 		{
 			ItemDataes,
@@ -99,13 +106,16 @@ class CommentItem extends Component {
 		let pt = formatDate( publish_time ),
 			voteUpBox;
 
-		if (this.state.isVoted && author_name !== userInfo.userName) {
+		if (!userInfo.userEmail || this.state.isVoted  || author_email === userInfo.userEmail ) {
 			voteUpBox = (
-				<section className="comment__options__has-voted-up" >
+				<section 
+					className="comment__options__has-voted-up"
+					title="您尚未登陆，或已经点过赞。自己不能帮自己点赞" 
+				>
 					<button>
 						<span 
 							className="vote-up-counter"
-						>{vote_up}</span> 已赞
+						>{this.state.vote_up}</span> 已赞
 					</button>
 				</section>
 			)
@@ -118,7 +128,7 @@ class CommentItem extends Component {
 					>
 						<span 
 							className="vote-up-counter"
-						>{vote_up}</span> 赞
+						>{this.state.vote_up}</span> 赞
 					</button>
 				</section>
 			)

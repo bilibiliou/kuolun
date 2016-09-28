@@ -106,16 +106,17 @@ export const VoteUpThunk = (index, failback) => {
             headers: {
                  "Content-Type": "application/x-www-form-urlencoded"
             },
+            credentials: 'include',
             body: `index=${index}`
         })
-        .then(() => {
+        .then((res) => {
             if(!res.ok) {
                 return Promise.reject();
             }
         })
         .catch(() => {
             failback()
-            AlertPlaneThunk("点赞操作出错，请重新尝试");
+            dispatch(AlertPlaneThunk("点赞操作出错，请重新尝试"));
         })
 
     }

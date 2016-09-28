@@ -3,7 +3,7 @@ import { CommentFeedback } from "../router.jsx";
 import { getCookie } from "../../js/util.js";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { LoginOutTask, LoginTableStateTask } from "../../actions/LoginActions.js";
+import { LoginOutThunk, LoginTableStateTask } from "../../actions/LoginActions.js";
 import { AlertPlaneThunk} from "../../actions/AlertPlaneActions.js";
 
 // 主评论框
@@ -15,7 +15,7 @@ class CommentEditer extends Component {
 
 	LoginOut () {
 		this.props.actions.AlertPlaneThunk("您确定要登出吗？", function () {
-			this.props.actions.LoginOutTask();
+			this.props.actions.LoginOutThunk();
 		}.bind(this)); 
 	}
 
@@ -104,7 +104,7 @@ export default connect(
 		return {
 			actions: bindActionCreators({
 				AlertPlaneThunk,
-				LoginOutTask,
+				LoginOutThunk,
 				LoginTableStateTask
 			}, dispatch)
 		}

@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { checkLoginThunk } from "../../actions/LoginActions.js";
 import { getDataesThunk } from "../../actions/HandleDataActions.js";
 import { AlertPlaneThunk} from "../../actions/AlertPlaneActions.js";
 import { CommentItem } from "../router.jsx";
@@ -16,6 +17,8 @@ class CommentList extends Component {
 			SortState
 		} = this.props;
 
+		// 初始时候，更新登录状态
+		actions.checkLoginThunk();
 		// 初始时候请求数据，进行初始化
 		actions.getDataesThunk(0, SortState);
 	}
@@ -83,7 +86,8 @@ export default connect(
 		return {
 			actions: bindActionCreators({
 				getDataesThunk,
-				AlertPlaneThunk
+				AlertPlaneThunk,
+				checkLoginThunk
 			}, dispatch)
 		}
 	}

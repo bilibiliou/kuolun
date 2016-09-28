@@ -1,5 +1,4 @@
 const DAO = require("../database/dao.js");
-const VoteDAO = require("../database/vote_dao.js");
 
 const {
 	db,
@@ -7,13 +6,6 @@ const {
 	model,
 	schema
 } = DAO;
-
-const {
-    dbVote,
-    schemaVote,
-    modelVote,
-    mongoose : mongooseVote
-} = VoteDAO;
 
 // 测试数据
 
@@ -84,9 +76,8 @@ const delFeedBack = (index, ParentIndex, callback, failback) => {
 	model
 	  .update( 
 	  	{index: ParentIndex},
-	  	{
-	  		$pull: {
-		  		FeedBack: {
+	  	{ $pull: {
+            FeedBack: {
 		  			FeedBackIndex: index
 		  		}
 		  	}
@@ -122,54 +113,31 @@ const sortDataes = (arr, sortMethod) => {
     return temp;
 }
 
-const voteUp = (index, userEmail, callback, failback) => {
-	//  先更新 vote 表中已经赞！ 然后点赞数自增1
-	modelVote
-	  .update(
-	  	{index},
-	  	{
-	  		$set: {
-	  			hasVote: {
-	  				[userEmail] : true	
-	  			}
-	  		}
-	  	}
-	  )
-	  .then(() => {
-	  	model
-	  	  .update(
-	  	  	{index},
-	  	  	{
-	  	  		$inc: {
-	  	  			vote_up: 1 
-	  	  		}
-	  	  	}
-	  	  )
-	  	  .then(() => {
-	  	  	callback && callback();
-	  	  }) 
-	  	  .catch(() => {
-	  	  	// 如果存储过程中出现错误，将 标志重新设置为false
-	  	  	modelVote
-	  	  	  .update(
-	  	  	  	{index},
-			  	{
-			  		$set: {
-			  			hasVote: {
-			  				[userEmail] : false	
-			  			}
-			  		}
-			  	}
-	  	  	  )
-	  	  	 .then(() => {
-	  	  	 	failback && failback();
-	  	  	 }) 
-	  	  })
-	  })
-	  .catch(() => {
-	  	failback && failback();
-	  })
+const voteUp = (index, callback, failback) => {
+	// save 方法会查询是否存在，如果存在调用update 方法更新，如果不存在，新建一个colleciton
+	// mongodb 不允许存储 /\. "*<>:|? 等符号
 
+	// 点赞列表更新完成后，执行 点赞数自增
+	// 仅仅实现简单的点赞功能 
+
+	// 借口1 mongoose 不支持事务
+	// 借口2 使用mongoose 设计点赞表比较复杂繁琐
+    	
+    model
+  	  .update( 
+  	  	{"index": index},
+	  	{ $inc: { vote_up: 1 } }
+  	  )
+  	  .then((result) => {
+        console.log(">?>?>?>??",result)
+  	  	callback && callback();
+  	  }) 
+  	  .catch((err) => {
+  	  	// 如果存储过程中出现错误，将 标志重新设置为false
+		console.log(err)
+  	  	
+  	  	failback && failback(); 
+  	  })
 }
 
 module.exports = {
@@ -178,5 +146,6 @@ module.exports = {
 	getAllDataes,
 	sortDataes,
 	delData,
-	delFeedBack
+	delFeedBack,
+	voteUp
 };

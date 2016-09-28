@@ -1999,12 +1999,7 @@ webpackJsonp([0],[
 	var _util = __webpack_require__(202);
 
 	var initialState = {
-	    userInfo: {
-	        "userName": (0, _util.getCookie)("user-name") ? (0, _util.getCookie)("user-name")[1] : "",
-	        "userEmail": (0, _util.getCookie)("user-email") ? (0, _util.getCookie)("user-email")[1] : "",
-	        "userAvatar": "/img/default-avatar.png",
-	        "commentAuthor": "游客"
-	    },
+	    userInfo: {},
 	    loginTableState: true
 	};
 
@@ -2018,19 +2013,11 @@ webpackJsonp([0],[
 	            return Object.assign({}, state, { loginTableState: toggleState });
 
 	        case _constants.Types.UPDATE_USER_INFO:
-	            (0, _util.setCookie)("user-name", action.payload.newInfo.userName, 30);
-	            (0, _util.setCookie)("user-email", action.payload.newInfo.userEmail, 30);
+	            // setCookie("user-name", action.payload.newInfo.userName, 7);
+	            // setCookie("user-email", action.payload.newInfo.userEmail, 7);
 
 	            return Object.assign({}, state, {
 	                userInfo: action.payload.newInfo
-	            });
-
-	        case _constants.Types.LOGIN_OUT:
-	            (0, _util.delCookie)("user-name");
-	            (0, _util.delCookie)("user-email");
-	            return Object.assign({}, state, {
-	                userInfo: {},
-	                loginTableState: !state.loginTableState
 	            });
 
 	        default:
@@ -2281,7 +2268,7 @@ webpackJsonp([0],[
 			key: "LoginOut",
 			value: function LoginOut() {
 				this.props.actions.AlertPlaneThunk("您确定要登出吗？", function () {
-					this.props.actions.LoginOutTask();
+					this.props.actions.LoginOutThunk();
 				}.bind(this));
 			}
 		}, {
@@ -2389,7 +2376,7 @@ webpackJsonp([0],[
 		return {
 			actions: (0, _redux.bindActionCreators)({
 				AlertPlaneThunk: _AlertPlaneActions.AlertPlaneThunk,
-				LoginOutTask: _LoginActions.LoginOutTask,
+				LoginOutThunk: _LoginActions.LoginOutThunk,
 				LoginTableStateTask: _LoginActions.LoginTableStateTask
 			}, dispatch)
 		};
@@ -2406,7 +2393,7 @@ webpackJsonp([0],[
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.LoginOutTask = exports.LoginInThunk = exports.UpDateUserInfoTask = exports.LoginTableStateTask = undefined;
+	exports.checkLoginThunk = exports.LoginOutThunk = exports.LoginInThunk = exports.UpDateUserInfoTask = exports.LoginTableStateTask = undefined;
 
 	var _constants = __webpack_require__(200);
 
@@ -2428,9 +2415,10 @@ webpackJsonp([0],[
 	        fetch("/setSession", {
 	            method: "POST",
 	            headers: {
-	                "Content-Type": "application/x-www-form-urlencoded"
+	                "Content-Type": "application/json"
 	            },
-	            body: "newInfo=" + JSON.stringify(newInfo)
+	            credentials: 'include',
+	            body: JSON.stringify(newInfo)
 	        }).then(function (res) {
 	            switch (true) {
 	                case res.ok:
@@ -2449,7 +2437,55 @@ webpackJsonp([0],[
 	    };
 	};
 
-	var LoginOutTask = exports.LoginOutTask = (0, _reduxActions.createAction)(_constants.Types.LOGIN_OUT);
+	var LoginOutThunk = exports.LoginOutThunk = function LoginOutThunk() {
+
+	    return function (dispatch) {
+
+	        fetch("/delSession", {
+	            method: "POST",
+	            headers: {
+	                "Content-Type": "application/json"
+	            },
+	            credentials: 'include'
+	        }).then(function (res) {
+	            switch (true) {
+	                case res.ok:
+	                    dispatch(UpDateUserInfoTask({}));
+	                    break;
+	                case res.status === 404:
+	                    return Promise.reject(404);
+	            }
+	        }).catch(function (errCode) {
+	            if (errCode) {
+	                (0, _AlertPlaneActions.AlertPlaneThunk)("登出失败， " + errCode + " 错误");
+	            } else {
+	                (0, _AlertPlaneActions.AlertPlaneThunk)("登出失败， 未知错误");
+	            }
+	        });
+	    };
+	};
+
+	var checkLoginThunk = exports.checkLoginThunk = function checkLoginThunk() {
+	    return function (dispatch) {
+	        fetch("/checkLogin", {
+	            method: "POST",
+	            headers: {
+	                "Content-Type": "application/json"
+	            },
+	            credentials: 'include'
+	        }).then(function (res) {
+	            if (res.ok) {
+	                return res.json();
+	            } else {
+	                return Promise.reject();
+	            }
+	        }).catch(function () {
+	            dispatch(UpDateUserInfoTask(userInfo));
+	        }).then(function (value) {
+	            dispatch(UpDateUserInfoTask(JSON.parse(value)));
+	        });
+	    };
+	};
 
 /***/ },
 /* 209 */
@@ -2748,8 +2784,6 @@ webpackJsonp([0],[
 
 	var _redux = __webpack_require__(180);
 
-	var _util = __webpack_require__(202);
-
 	var _CommentActions = __webpack_require__(219);
 
 	var _LoginActions = __webpack_require__(208);
@@ -2816,7 +2850,16 @@ webpackJsonp([0],[
 
 				if (ev.ctrlKey && keyCode === 13) {
 					// 提交	
+					this.sendComment();
 				}
+			}
+		}, {
+			key: "FormatHTML",
+			value: function FormatHTML(value) {
+				console.log(">>>>>", value);
+				value = value.replace(/\<\/div\>/g, "").replace(/\<div\>/g, "\n");
+
+				return value;
 			}
 		}, {
 			key: "sendComment",
@@ -2853,13 +2896,15 @@ webpackJsonp([0],[
 					"author_name": userInfo.userName,
 					"author_email": userInfo.userEmail,
 					"publish_time": year + "-" + month + "-" + day + "|" + oDate.getTime(),
-					"publish_content": oEditerWrap.innerHTML,
+					"publish_content": this.FormatHTML(oEditerWrap.innerHTML),
 					"vote_up": 0,
 					"commentAuthor": userInfo.commentAuthor,
 					"ForBidFeedBack": CommentSubFeedBackTask ? true : false
 				};
 
-				if (!!(0, _util.getCookie)("user-email")) {
+				console.log(commentContent.publish_content);
+
+				if (!!userInfo.userEmail) {
 
 					if (!oEditerWrap.innerHTML) {
 						return;
@@ -3117,14 +3162,15 @@ webpackJsonp([0],[
 	            headers: {
 	                "Content-Type": "application/x-www-form-urlencoded"
 	            },
+	            credentials: 'include',
 	            body: "index=" + index
-	        }).then(function () {
+	        }).then(function (res) {
 	            if (!res.ok) {
 	                return Promise.reject();
 	            }
 	        }).catch(function () {
 	            failback();
-	            (0, _AlertPlaneActions.AlertPlaneThunk)("点赞操作出错，请重新尝试");
+	            dispatch((0, _AlertPlaneActions.AlertPlaneThunk)("点赞操作出错，请重新尝试"));
 	        });
 	    };
 	};
@@ -3162,6 +3208,7 @@ webpackJsonp([0],[
 	            headers: {
 	                "Content-Type": "application/x-www-form-urlencoded"
 	            },
+	            credentials: 'include',
 	            body: "whichpage=" + page + "&SortState=" + SortState
 	        }).then(function (res) {
 	            switch (true) {
@@ -3442,14 +3489,26 @@ webpackJsonp([0],[
 			// 点赞功能 先从数据库获获取 加载页面后的点赞数，点击后
 			// 只在View 层做数据更新，不做总体的数据更新，并发送一个Ajax, 修改
 			// 数据库中的点赞数
+			// 将静态的props 数据转化为state 状态，便于更改
 			_this.state = {
 				feedContentboff: false,
-				feedWrapboff: false
+				feedWrapboff: false,
+				isVoted: _this.props.ItemData.isVoted,
+				vote_up: _this.props.ItemData.vote_up
 			};
 			return _this;
 		}
 
 		_createClass(CommentItem, [{
+			key: "componentWillReceiveProps",
+			value: function componentWillReceiveProps(nextProps) {
+				// 新数据更新后，重新设置state
+				this.setState({
+					isVoted: nextProps.ItemData.isVoted,
+					vote_up: nextProps.ItemData.vote_up
+				});
+			}
+		}, {
 			key: "DelSelf",
 			value: function DelSelf() {
 				var index = this.props.ItemData.index;
@@ -3480,26 +3539,23 @@ webpackJsonp([0],[
 		}, {
 			key: "VoteUpHandle",
 			value: function VoteUpHandle() {
-				// let {
-				// 	actions,
-				// 	userInfo
-				// } = this.props,
-				// {
-				// 	index
-				// } = this.props.ItemData
+				var _props2 = this.props;
+				var actions = _props2.actions;
+				var userInfo = _props2.userInfo;
+				var index = this.props.ItemData.index;
 
-				// this.setState({
-				// 	isVoted: false,
-				// 	vote_up: this.state.vote_up + 1
-				// })
 
-				// actions.VoteUpThunk(index, userInfo, function () {
-				// 	// 如果发生了错误，将点赞状态复原
-				// 	this.setState({
-				// 		isVoted: true,
-				// 		vote_up: this.state.vote_up - 1
-				// 	})
-				// }.bind(this));
+				this.setState({
+					isVoted: true,
+					vote_up: this.state.vote_up + 1
+				});
+
+				actions.VoteUpThunk(index, function () {
+					this.setState({
+						isVoted: false,
+						vote_up: this.state.vote_up - 1
+					});
+				}.bind(this));
 			}
 		}, {
 			key: "render",
@@ -3513,20 +3569,22 @@ webpackJsonp([0],[
 				var publish_content = _props$ItemData.publish_content;
 				var commentAuthor = _props$ItemData.commentAuthor;
 				var FeedBack = _props$ItemData.FeedBack;
-				var vote_up = _props$ItemData.vote_up;
-				var _props2 = this.props;
-				var ItemDataes = _props2.ItemDataes;
-				var userInfo = _props2.userInfo;
-				var SelfIndex = _props2.SelfIndex;
+				var _props3 = this.props;
+				var ItemDataes = _props3.ItemDataes;
+				var userInfo = _props3.userInfo;
+				var SelfIndex = _props3.SelfIndex;
 
 
 				var pt = (0, _util.formatDate)(publish_time),
 				    voteUpBox = void 0;
 
-				if (this.state.isVoted && author_name !== userInfo.userName) {
+				if (!userInfo.userEmail || this.state.isVoted || author_email === userInfo.userEmail) {
 					voteUpBox = _react2.default.createElement(
 						"section",
-						{ className: "comment__options__has-voted-up" },
+						{
+							className: "comment__options__has-voted-up",
+							title: "您尚未登陆，或已经点过赞。自己不能帮自己点赞"
+						},
 						_react2.default.createElement(
 							"button",
 							null,
@@ -3535,7 +3593,7 @@ webpackJsonp([0],[
 								{
 									className: "vote-up-counter"
 								},
-								vote_up
+								this.state.vote_up
 							),
 							" 已赞"
 						)
@@ -3554,7 +3612,7 @@ webpackJsonp([0],[
 								{
 									className: "vote-up-counter"
 								},
-								vote_up
+								this.state.vote_up
 							),
 							" 赞"
 						)
@@ -3725,6 +3783,8 @@ webpackJsonp([0],[
 
 	var _redux = __webpack_require__(180);
 
+	var _LoginActions = __webpack_require__(208);
+
 	var _HandleDataActions = __webpack_require__(220);
 
 	var _AlertPlaneActions = __webpack_require__(215);
@@ -3755,8 +3815,10 @@ webpackJsonp([0],[
 				var actions = _props.actions;
 				var SortState = _props.SortState;
 
-				// 初始时候请求数据，进行初始化
+				// 初始时候，更新登录状态
 
+				actions.checkLoginThunk();
+				// 初始时候请求数据，进行初始化
 				actions.getDataesThunk(0, SortState);
 			}
 		}, {
@@ -3833,7 +3895,8 @@ webpackJsonp([0],[
 		return {
 			actions: (0, _redux.bindActionCreators)({
 				getDataesThunk: _HandleDataActions.getDataesThunk,
-				AlertPlaneThunk: _AlertPlaneActions.AlertPlaneThunk
+				AlertPlaneThunk: _AlertPlaneActions.AlertPlaneThunk,
+				checkLoginThunk: _LoginActions.checkLoginThunk
 			}, dispatch)
 		};
 	})(CommentList);

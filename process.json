@@ -9,6 +9,10 @@
     //     }
     // },
     {
+        "name": "mongodb",
+        "script": "mongod",
+        "args": "--dbpath d:mongodb/data/db"
+    },{
         "name": "server",
         "script": "./server.js",
         "watch": true,

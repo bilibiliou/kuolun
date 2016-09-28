@@ -21,7 +21,8 @@ let schemaVote = mongoose.Schema({
   },
 
   hasVote: {
-    type: Object
+    type: Object,
+    default: {}
   }
 })
 

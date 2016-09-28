@@ -17,9 +17,10 @@ export const LoginInThunk = (newInfo) => {
         fetch("/setSession", {
             method: "POST",
             headers: {
-                 "Content-Type": "application/x-www-form-urlencoded"
+                 "Content-Type": "application/json"
             },
-            body: `newInfo=${JSON.stringify(newInfo)}`
+            credentials: 'include',
+            body: JSON.stringify(newInfo)
         })
           .then((res) => {
             switch (true) {
@@ -40,4 +41,60 @@ export const LoginInThunk = (newInfo) => {
     }
 }
 
-export const LoginOutTask = createAction (Types.LOGIN_OUT)
+export const LoginOutThunk = () => {
+
+    return dispatch => {
+    
+        fetch("/delSession", {
+            method: "POST",
+            headers: {
+                 "Content-Type": "application/json"
+            },
+            credentials: 'include'
+        })
+          .then((res) => {
+            switch (true) {
+                case res.ok:
+                    dispatch(UpDateUserInfoTask({}))
+                    break;
+                case res.status === 404:
+                    return Promise.reject(404);
+            }
+          })
+          .catch((errCode) => {
+            if(errCode) {
+                AlertPlaneThunk(`登出失败， ${errCode} 错误`);
+            } else {
+                AlertPlaneThunk(`登出失败， 未知错误`);
+            }
+          })
+    
+    }
+}
+
+export const checkLoginThunk = () => {
+    return (dispatch) => {
+        fetch("/checkLogin", {
+            method: "POST",
+            headers: {
+                 "Content-Type": "application/json"
+            },
+            credentials: 'include'
+        })
+         .then((res) => {
+            if(res.ok) {
+                return res.json();
+            } else {
+                return Promise.reject();
+            }
+         })
+         .catch(() => {
+           dispatch(UpDateUserInfoTask(userInfo));
+         })
+         .then((value) => {
+            dispatch(UpDateUserInfoTask(JSON.parse(value)))
+         })
+    }
+}
+
+

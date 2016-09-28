@@ -6,7 +6,7 @@ let db,
 mongoose.Promise = global.Promise; // 修改mongoose 默认的Promise  方法
 
 // collection 名可以重新设置
-mongoose.connect("mongodb://localhost:27017/test");
+mongoose.connect("mongodb://127.0.0.1:27017/test");
 
 db = mongoose.connection;
 

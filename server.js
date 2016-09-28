@@ -16,25 +16,24 @@ const express      = require("express"),
       }            = require("./model/model.js")
 
 app.use(session({
-    url: "localhost:5000/",
+    url: "localhost:5000",
+    name: "kuolun_Id",
     secret: "KuoLun secret",
-    resave: true,
+    resave: false,
     saveUninitialized: true,
-    cookie: {maxAge: 60 * 1000}
+    cookie: { maxAge: 60 * 1000 * 60 * 24 * 7 }
 }))
 
-app.use(cookieparser());
-
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
 
+app.use(cookieparser());
+
 app.use(express.static(path.join(__dirname, "/test")));
 app.use(express.static(path.join(__dirname, "/dist")));
 app.use(express.static(path.join(__dirname, "/public")));
-
-// session 定义用户对象
-let users = {}
 
 // 分页页码限制 前后端都需要统一
 const PaginationLimit = 6;
@@ -47,27 +46,34 @@ const Ok = (res, meg) => {
 
 app.get("/", (req, res) => {
     res.sendFile(`${__dirname + "/test/test.html"}`);
-    console.log(req.cookies)
 })
 
-app.post("/setSession", (req, res) => {
-    let {
-        newInfo
-    } = req.body;
+// 用户访问时候，查询Session是否已经登录，如果登录，修改View层登录状态
+app.post("/checkLogin", (req, res) => {
+    let key = decodeURIComponent(req.cookies["kuolun_Id"]),
+        value = req.session[key] || {};
+    
+    res.json(JSON.stringify(value));
+})
 
-    let key = decodeURIComponent(req.cookies["connect.sid"]);
-    console.log(req.cookies)
+// 登出时 清除用户信息
+app.post("/delSession", (req, res) => {
+  let key = decodeURIComponent(req.cookies["kuolun_Id"]);
+  delete req.session[key]
+  Ok(res,"中断session 对话成功");
+})
 
-    users[key] = JSON.parse(newInfo);
+// 登录的时候设置用户信息在Session中
+app.post("/setSession", (req, res) => {    
+    let key = decodeURIComponent(req.cookies["kuolun_Id"]);
+    req.session[key] = req.body;
     Ok(res,"建立session 对话成功");
 })
 
 app.post("/resDataes", (req, res) => {
-    let { whichpage, SortState } = req.body;        
-        // user[key].userEmail, 
+    let { whichpage, SortState } = req.body;
     getAllDataes((result) => {
         let box = []
-
         box = sortDataes(result, SortState);
 
         let mul = whichpage * PaginationLimit;
@@ -75,10 +81,8 @@ app.post("/resDataes", (req, res) => {
             allLen: box.length,
             Data: box.slice(mul, mul + PaginationLimit)
         }))
-
     },(err) => {
         console.log(err);
-
         res
           .status(500)
           .end("数据库查询出现错误");
@@ -157,10 +161,9 @@ app.post("/saveData", (req,res) => {
 app.post("/VoteUpSomeItem", (req, res) => {
     let {
         index
-    } = req.body,
-    key = decodeURIComponent(req.cookies["connect.sid"]);
-    
-    voteUp(index, users[key].userEmail, () => {
+    } = req.body
+
+    voteUp(parseInt(index), () => {
         Ok(res, "点赞成功")
     }, () => {
         res

@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { $,$$,getCookie,setCookie } from "../../js/util.js";
 import { CommentThunk, ChangeBandHiddenBoffTask } from "../../actions/CommentActions.js";
 import { LoginTableStateTask } from "../../actions/LoginActions.js";
 import { AlertPlaneThunk } from "../../actions/AlertPlaneActions.js";
@@ -52,7 +51,17 @@ class CommentFeedback extends Component {
 
 		if (ev.ctrlKey && keyCode === 13) {
 			// 提交	
+			this.sendComment();
 		}
+	}
+
+	FormatHTML (value) {
+		console.log(">>>>>",value)
+		value = value
+		         .replace(/\<\/div\>/g , "")
+		         .replace(/\<div\>/g, "\n")
+
+		return value
 	}
 
 	sendComment (ev) {
@@ -87,13 +96,15 @@ class CommentFeedback extends Component {
 	  		"author_name": userInfo.userName,
 	  		"author_email": userInfo.userEmail, 
 	  		"publish_time": `${year}-${month}-${day}|${oDate.getTime()}`,
-	  		"publish_content": oEditerWrap.innerHTML,
+	  		"publish_content": this.FormatHTML(oEditerWrap.innerHTML),
 	  		"vote_up": 0,
 	  		"commentAuthor": userInfo.commentAuthor,
 	  		"ForBidFeedBack" : CommentSubFeedBackTask ? true : false
 		}
 
-		if (!!getCookie("user-email")) {
+		console.log(commentContent.publish_content)
+
+		if (!!userInfo.userEmail) {
 
 			if (!oEditerWrap.innerHTML) {
 				return;
