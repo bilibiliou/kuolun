@@ -12,6 +12,7 @@ class CommentFeedback extends Component {
 		super(props);
 
 		this.state = {
+			editorCotent: "",
 			editerHeight: 150
 		}
 
@@ -20,59 +21,90 @@ class CommentFeedback extends Component {
 		this.editDefalut = this.editDefalut.bind(this);
 		this.handleBandState = this.handleBandState.bind(this);
 		this.editorResizeHandle = this.editorResizeHandle.bind(this);
+		this.MarkdownHandle = this.MarkdownHandle.bind(this);
 	}
 
 	editDefalut (ev) {
-		let {
-			target,
-			keyCode
-		} = ev;
+		let 
+			editerWrap     = this.refs["editer-wrap"]
 
+		if (ev.keyCode === 9) {
+			// editerWrap.value += "\t";
+			let sel, range;
+			// if (window.getSelection) {
+			// 	sel = window.getSelection();
 
-		if (keyCode === 9) {
-			let selObj = window.getSelection(),
-				{
-					anchorOffset
-				} = selObj;
-			
-			target.innerHTML = target.innerHTML.splice(anchorOffset - 1,0,"  ");
+			// 	range = sel.getRangeAt(0);
+			// 	console.log(sel, range)
+			// 	range.insertNode( document.createTextNode("\t") )
 
-			let len = target.innerHTML.length;
-			
+			// }
 			ev.preventDefault();
-
-			
-			function setCaretPosition(ctrl, pos){//设置光标位置函数 
-				if(ctrl.setSelectionRange) { 
-					ctrl.focus(); 
-					ctrl.setSelectionRange(pos,pos); 
-				} else if (ctrl.createTextRange) {
-					let range = ctrl.createTextRange(); 
-					range.collapse(true); 
-					range.moveEnd('character', pos); 
-					range.moveStart('character', pos); 
-					range.select(); 
-				} 
-			}
 		}
 
-		if (ev.ctrlKey && keyCode === 13) {
+		if (ev.ctrlKey && ev.keyCode === 13) {
 			// 提交	
 			this.sendComment();
-		}
-
-		if (ev.keyCode === 13) {
-
 		}
 	}
 
 	FormatHTML (value) {
-		let html = value.replace(/<div>/g, "\n")
-						.replace(/<\/div>/g, "")
-			 		    .replace(/<br>/g, "\n")
+		let html = value.trim()
+				   .replace(/\n/g, "\n\n")  // 两个换行符号才能被转义为一个 p tag
+
 
 		return markdown.toHTML(html, "Maruku");
 	}
+
+	handleBandState (ev) {
+		let editerWrap = this.refs["editer-wrap"];
+
+		if (ev.type === "click") {
+			editerWrap.focus();
+		}
+
+		(editerWrap.value === "") && (this.props.actions.ChangeBandHiddenBoffTask()) 
+	}
+
+	editorResizeHandle ($event) {
+		console.log($event);
+		$event.target.addEventListener("mousedown", (ev) => {
+			let $top = ev.clientY 
+				
+
+			// document.addEventListener("mousemove", (ev) => {
+
+			// })
+
+			// document.addEventListener("mouseup", function () {
+	  //           document.removeEventListener("mousemove");
+	  //           $event.target.removeEventListener("mouseup");
+	  //       });
+		})
+	}
+
+	MarkdownHandle (ev, callback) {
+		let editerWrap     = this.refs["editer-wrap"]
+
+		  callback && callback(ev, editerWrap)
+		  this.props.actions.ChangeBandHiddenBoffTask(0);
+		  editerWrap.focus();
+		  ev.preventDefault();
+		  ev.stopPropagation();
+	}
+
+	reSet (ev) {
+		let editerWrap = this.refs["editer-wrap"];
+		
+		if(editerWrap.value) {
+			this.props.actions.AlertPlaneThunk("您确定需要进行文本重置？", function () {
+				
+				editerWrap.value = "";
+				editerWrap.focus();
+			}.bind(this))
+		}
+	}
+
 
 	sendComment (ev) {
 		let {
@@ -106,7 +138,7 @@ class CommentFeedback extends Component {
 	  		"author_name": userInfo.userName,
 	  		"author_email": userInfo.userEmail, 
 	  		"publish_time": `${year}-${month}-${day}|${oDate.getTime()}`,
-	  		"publish_content": this.FormatHTML(oEditerWrap.innerHTML),
+	  		"publish_content": this.FormatHTML(oEditerWrap.value),
 	  		"vote_up": 0,
 	  		"commentAuthor": userInfo.commentAuthor,
 	  		"ForBidFeedBack" : CommentSubFeedBackTask ? true : false
@@ -116,7 +148,7 @@ class CommentFeedback extends Component {
 
 		if (!!userInfo.userEmail) {
 
-			if (!oEditerWrap.innerHTML) {
+			if (!oEditerWrap.value) {
 				return;
 			}
 			
@@ -145,47 +177,10 @@ class CommentFeedback extends Component {
 			}
 
 			
-			oEditerWrap.innerHTML = "";
+			oEditerWrap.value = "";
 		} else {
 			actions.LoginTableStateTask();
 		}
-	}
-
-	reSet (ev) {
-		let editerWrap = this.refs["editer-wrap"];
-		
-		if(editerWrap.innerHTML) {
-			this.props.actions.AlertPlaneThunk("您确定需要进行文本重置？", function () {
-				
-				editerWrap.innerHTML = "";
-				editerWrap.focus();
-			}.bind(this))
-		}
-	}
-
-	handleBandState (ev) {
-		let editerWrap = this.refs["editer-wrap"];
-
-		if (ev.type === "click") {
-			editerWrap.focus();
-		}
-		(editerWrap.innerHTML === "") && (this.props.actions.ChangeBandHiddenBoffTask()) 
-	}
-
-	editorResizeHandle ($event) {
-		// $event.target.addEventListener("mousedown", (ev) => {
-		// 	let 
-
-
-		// 	document.addEventListener("mousemove", (ev) => {
-
-		// 	})
-
-		// 	document.addEventListener("mouseup", function () {
-	 //            document.removeEventListener("mousemove");
-	 //            $event.target.removeEventListener("mouseup");
-	 //        });
-		// })
 	}
 
 	render () {
@@ -200,16 +195,70 @@ class CommentFeedback extends Component {
 					<div className ="comment__feedback__box__syntaxs">
 						<ul className="syntaxs__list">
 							<li className="emoji-list" title="表情列表"></li>
-							<li className="bold" title="加粗"></li>
-							<li className="italic" title="斜体"></li>
-							<li className="a-link" title="A链接"></li>
-							<li className="image" title="引入图片"></li>
+							<li className="bold" 
+								title="加粗"
+								onClick={(ev) => {
+									this.MarkdownHandle.call(null, ev, (ev, editerWrap) => {
+										editerWrap.value += "** 加粗文本 **";
+									})
+								}}
+							>
+							</li>
+							<li className="italic" 
+								title="斜体"
+								onClick={(ev) => {
+									this.MarkdownHandle.call(null, ev, (ev, editerWrap) => {
+	      								editerWrap.value += "_ 斜体文本 _";
+									})
+								}}
+							>
+							</li>
+							<li className="a-link" 
+								title="A链接"
+								onClick={(ev) => {
+									this.MarkdownHandle.call(null, ev, (ev, editerWrap) => {
+	      								editerWrap.value += "[链接名](网址)";
+									})
+								}}
+							>
+							</li>
+							<li className="image" 
+								title="引入图片"
+								onClick={(ev) => {
+									this.MarkdownHandle.call(null, ev, (ev, editerWrap) => {
+	      								editerWrap.value += "![图片alt](图片地址)";
+									})
+								}}
+							></li>
 							<li className="table" title="选择表格"></li>
 							<li className="blockquote-block" title="引用"></li>
-							<li className="u-list" title="有序列表"></li>
-							<li className="o-list" title="无序列表"></li>
+							<li className="o-list" 
+								title="有序列表"
+								onClick={(ev) => {
+									this.MarkdownHandle.call(null, ev, (ev, editerWrap) => {
+	      								editerWrap.value += "\n1. 例1\n2. 例2\n3. 例3\n";
+									})
+								}}
+							>
+							</li>
+							<li className="u-list" 
+								title="无序列表"
+								onClick={(ev) => {
+									this.MarkdownHandle.call(null, ev, (ev, editerWrap) => {
+	      								editerWrap.value += "\n* 例1\n* 例2\n* 例3\n";
+									})
+								}}
+							></li>
 							<li className="h1-tag" title="大标题"></li>
-							<li className="h2-tag" title="小标题"></li>
+							<li className="h2-tag" 
+								title="小标题"
+								onClick={(ev) => {
+									this.MarkdownHandle.call(null, ev, (ev, editerWrap) => {
+	      								editerWrap.value += "\n## 小标题\n";
+									})
+								}}
+							>
+							</li>
 						</ul>
 						
 						{/*<div className="syntaxs__sub-list">
@@ -227,8 +276,7 @@ class CommentFeedback extends Component {
 					</div>
 
 					<section className="comment__feedback__box__wrap">
-						<div className="comment__feedback--edit" 
-							 contentEditable="true"
+						<textarea className="comment__feedback--edit" 
 							 name="feedback_content" 
 							 placeholder="说点什么吧..."
 							 aria-label="说点什么吧..."
@@ -244,8 +292,7 @@ class CommentFeedback extends Component {
 							 	null
 							 }
 						>
-						
-						</div>
+						</textarea>
 						
 						<div className="editor__resize__wrap">
 							<a className="editor__resize" 
