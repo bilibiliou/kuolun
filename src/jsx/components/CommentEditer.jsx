@@ -56,9 +56,9 @@ class CommentEditer extends Component {
 				<p className="login-infos" 
 	               ref="login-infos"
 	            >
-	        		<a href="javascript:;" className="init_prompt">
+	        		<span className="init_prompt">
 	                    欢迎您使用阔论，请先登录 
-	                </a>
+	                </span>
 	                <button 
 	                	className="login-in__btn"
 	                	onClick = {actions.LoginTableStateTask}
@@ -71,9 +71,6 @@ class CommentEditer extends Component {
 		 
 		return (
 			<section className="editer-wrap">
-				{/*<p className="sns__login" ref="sns-login">
-					<span>社交账号登录：</span>
-				</p>*/}
 				<section className="comment__feedback">
 					<figure className="editer-wrap__avatar">
 						<img src="/img/default-avatar.png" alt="avatar" />

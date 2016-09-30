@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
+import { markdown } from "markdown";
+import { $ } from "../../js/util.js";
 import { bindActionCreators } from "redux";
 import { CommentThunk, ChangeBandHiddenBoffTask } from "../../actions/CommentActions.js";
 import { LoginTableStateTask } from "../../actions/LoginActions.js";
@@ -9,10 +11,15 @@ class CommentFeedback extends Component {
 	constructor (props) {
 		super(props);
 
+		this.state = {
+			editerHeight: 150
+		}
+
 		this.reSet = this.reSet.bind(this);
 		this.sendComment = this.sendComment.bind(this);
 		this.editDefalut = this.editDefalut.bind(this);
 		this.handleBandState = this.handleBandState.bind(this);
+		this.editorResizeHandle = this.editorResizeHandle.bind(this);
 	}
 
 	editDefalut (ev) {
@@ -53,15 +60,18 @@ class CommentFeedback extends Component {
 			// 提交	
 			this.sendComment();
 		}
+
+		if (ev.keyCode === 13) {
+
+		}
 	}
 
 	FormatHTML (value) {
-		console.log(">>>>>",value)
-		value = value
-		         .replace(/\<\/div\>/g , "")
-		         .replace(/\<div\>/g, "\n")
+		let html = value.replace(/<div>/g, "\n")
+						.replace(/<\/div>/g, "")
+			 		    .replace(/<br>/g, "\n")
 
-		return value
+		return markdown.toHTML(html, "Maruku");
 	}
 
 	sendComment (ev) {
@@ -162,6 +172,22 @@ class CommentFeedback extends Component {
 		(editerWrap.innerHTML === "") && (this.props.actions.ChangeBandHiddenBoffTask()) 
 	}
 
+	editorResizeHandle ($event) {
+		// $event.target.addEventListener("mousedown", (ev) => {
+		// 	let 
+
+
+		// 	document.addEventListener("mousemove", (ev) => {
+
+		// 	})
+
+		// 	document.addEventListener("mouseup", function () {
+	 //            document.removeEventListener("mousemove");
+	 //            $event.target.removeEventListener("mouseup");
+	 //        });
+		// })
+	}
+
 	render () {
 		let {
 			actions,
@@ -171,35 +197,83 @@ class CommentFeedback extends Component {
 
 		return (
 				<div className="comment__feedback__box">
-					<div className="comment__feedback--edit" 
-						 contentEditable="true"
-						 name="feedback_content" 
-						 placeholder="说点什么吧..."
-						 aria-label="说点什么吧..."
-						 onKeyDown={this.editDefalut} 
-						 ref="editer-wrap"
-
-						 onBlur={
-						 	MainFeedBackBox ?
-						 	this.handleBandState :
-						 	null
-						 }
-					>
-					
-					</div>
-					
-					{
-						MainFeedBackBox && BandBoff ?
-						(
-							<div className="comment__feedback__mask"
-								 onClick = {this.handleBandState}
+					<div className ="comment__feedback__box__syntaxs">
+						<ul className="syntaxs__list">
+							<li className="emoji-list" title="表情列表"></li>
+							<li className="bold" title="加粗"></li>
+							<li className="italic" title="斜体"></li>
+							<li className="a-link" title="A链接"></li>
+							<li className="image" title="引入图片"></li>
+							<li className="table" title="选择表格"></li>
+							<li className="blockquote-block" title="引用"></li>
+							<li className="u-list" title="有序列表"></li>
+							<li className="o-list" title="无序列表"></li>
+							<li className="h1-tag" title="大标题"></li>
+							<li className="h2-tag" title="小标题"></li>
+						</ul>
+						
+						{/*<div className="syntaxs__sub-list">
+							<div
+								style={{
+									background: `linear-gradient(
+										-75deg,
+										#BE93C5 0,
+										#7BC6CC 100%
+									)`
+								}}
 							>
-								<p className="comment__feedback__mask--title">阔论</p>
-								<p className="comment__feedback__mask--pinyin">KUO LUN</p>
 							</div>
-						) : null
+						</div>*/}
+					</div>
 
-					}				
+					<section className="comment__feedback__box__wrap">
+						<div className="comment__feedback--edit" 
+							 contentEditable="true"
+							 name="feedback_content" 
+							 placeholder="说点什么吧..."
+							 aria-label="说点什么吧..."
+							 onKeyDown={this.editDefalut} 
+							 ref="editer-wrap"
+							 style = {{
+							 	height: this.state.editerHeight
+							 }}
+
+							 onBlur={
+							 	MainFeedBackBox ?
+							 	this.handleBandState :
+							 	null
+							 }
+						>
+						
+						</div>
+						
+						<div className="editor__resize__wrap">
+							<a className="editor__resize" 
+							   href="javascript:;"
+							   title="拖拽改变评论框大小"
+							   onClick={this.editorResizeHandle}
+							 ></a>
+						</div>
+						
+
+						{
+							MainFeedBackBox && BandBoff ?
+							(
+								<div className="comment__feedback__mask"
+									 onClick = {this.handleBandState}
+									 style = {{
+									 	height: this.state.editerHeight - 1
+									 }}
+								>
+									<p className="comment__feedback__mask--title">阔论</p>
+									<p className="comment__feedback__mask--pinyin">KUO LUN</p>
+								</div>
+							) : null
+
+						}				
+					</section>
+
+					
 					<div className="comment__feedback--btns">
 						<button className="feedback--btns__reset"
 								onClick={this.reSet}

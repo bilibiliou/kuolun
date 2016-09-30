@@ -118,20 +118,14 @@ app.post("/delData", (req, res) => {
 })
 
 app.post("/saveData", (req,res) => {
-    let {
-        whichpage,
-        SortState,
-        newContent,
-        FBIndex
-    } = req.body;
-
-    let newData = JSON.parse(newContent);
+    let oData = req.body.newContent,
+        FBIndex = req.body.FBIndex
 
     // 如果没有FBIndex 说明是普通评论
     if (FBIndex != -1) {
         PublishFeedBack(FBIndex,
         (result) => {
-            result.FeedBack.push(newData);
+            result.FeedBack.push(oData);
             result
               .save()
               .then(() => {
@@ -145,8 +139,8 @@ app.post("/saveData", (req,res) => {
               })
         }) 
     } else {
-        newData.index = parseInt(newData.index)
-        PublishNew(newData, 
+        oData.index = parseInt(oData.index)
+        PublishNew(oData, 
             () => {
                Ok(res, "存储成功");
             },(err) => {

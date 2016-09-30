@@ -85,9 +85,10 @@ class FeedBackMain extends Component {
 
 					<p className="feedback__content--time">发布于：{ pt }</p>
 
-					<p className="feedback__content--content">
-						{publish_content}
-					</p>
+					<div className="feedback__content--content"
+						 dangerouslySetInnerHTML={{__html: publish_content}}
+					>
+					</div>
 
 					<footer className="feedback__content--options">
 						<section className="feedback__content--options__wrap">

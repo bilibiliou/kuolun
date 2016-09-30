@@ -150,9 +150,10 @@ class CommentItem extends Component {
 							</p>
 							<p className="comment__content--time">发布于：{pt}</p>
 
-							<p className="comment__content--content">
-								{publish_content}
-							</p>
+							<div className="comment__content--content"
+								 dangerouslySetInnerHTML={{__html: publish_content}}
+							>
+							</div>
 
 							<footer className="comment__content--options">
 								<section className="comment__content--options__wrap">

@@ -15,7 +15,8 @@
     },{
         "name": "server",
         "script": "./server.js",
-        "watch": true,
+        // "watch": true,
+        "node_args" : "--harmony",
         "env": {
             "NODE_PORT": 5000
         }

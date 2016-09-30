@@ -20,9 +20,12 @@ export const CommentThunk = (page, SortState, newContent, FBIndex = -1) => {
         fetch("/saveData", {
              method: "POST",
              headers: {
-                 "Content-Type": "application/x-www-form-urlencoded"
+                 "Content-Type": "application/json"
              },
-             body: `newContent=${data}&FBIndex=${FBIndex}`
+             body: JSON.stringify({
+                newContent,
+                FBIndex
+             })
          })
 
         .then((res) => {
