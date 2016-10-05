@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
-import { markdown } from "markdown";
-import { $ } from "../../js/util.js";
+import 	marked 	   from "marked";
+import  hljs       from "highlight.js";
 import { bindActionCreators } from "redux";
-import { CommentThunk, ChangeBandHiddenBoffTask } from "../../actions/CommentActions.js";
+import { CommentThunk } from "../../actions/CommentActions.js";
 import { LoginTableStateTask } from "../../actions/LoginActions.js";
 import { AlertPlaneThunk } from "../../actions/AlertPlaneActions.js";
 
@@ -13,7 +13,9 @@ class CommentFeedback extends Component {
 
 		this.state = {
 			editorCotent: "",
-			editerHeight: 150
+			editerHeight: 150,
+			choiceType: "",
+			BandBoff: 1
 		}
 
 		this.reSet = this.reSet.bind(this);
@@ -25,20 +27,13 @@ class CommentFeedback extends Component {
 	}
 
 	editDefalut (ev) {
-		let 
-			editerWrap     = this.refs["editer-wrap"]
+		let editerWrap     = this.refs["editer-wrap"]
 
 		if (ev.keyCode === 9) {
-			// editerWrap.value += "\t";
-			let sel, range;
-			// if (window.getSelection) {
-			// 	sel = window.getSelection();
+			let aL = editerWrap.selectionEnd;
+			editerWrap.value = editerWrap.value.splice(aL-1, 0, "\t");
+			editerWrap.setSelectionRange(aL+1,aL+1); // 设置光标位置
 
-			// 	range = sel.getRangeAt(0);
-			// 	console.log(sel, range)
-			// 	range.insertNode( document.createTextNode("\t") )
-
-			// }
 			ev.preventDefault();
 		}
 
@@ -49,21 +44,48 @@ class CommentFeedback extends Component {
 	}
 
 	FormatHTML (value) {
-		let html = value.trim()
-				   .replace(/\n/g, "\n\n")  // 两个换行符号才能被转义为一个 p tag
+		let html = value.trim(),
+			renderer = new marked.Renderer();
 
+		marked.setOptions({
+			highlight: (code) => {
+				return hljs.highlightAuto(code).value;
+			}
+		})
 
-		return markdown.toHTML(html, "Maruku");
-	}
+		renderer.heading = (text, level) => {
+			if(level === 1) {
 
-	handleBandState (ev) {
-		let editerWrap = this.refs["editer-wrap"];
+			let colors = text.match(/(\#\w+)/g),
+				content = text.match(/(.+) \#/)[1]
+				return(`<h1
+					class="text-effect-basic"
+					style="background-image: linear-gradient(
+							-75deg,
+							${colors[0]},
+							${colors[1]} 25%,
+							${colors[0]} 50%,
+							${colors[1]} 75%,
+							${colors[0]}
+						)" 
+				>${content}</h1>`)
+				
 
-		if (ev.type === "click") {
-			editerWrap.focus();
+			} else {
+				return `<h${level}>${text}</h${level}>`
+			}
 		}
 
-		(editerWrap.value === "") && (this.props.actions.ChangeBandHiddenBoffTask()) 
+		return marked( html, { renderer });
+	}
+
+	handleBandState (BoffType) {
+		let editerWrap = this.refs["editer-wrap"];
+
+		(editerWrap.value === "") && (this.setState({
+			BandBoff: BoffType
+		}));
+
 	}
 
 	editorResizeHandle ($event) {
@@ -85,9 +107,10 @@ class CommentFeedback extends Component {
 
 	MarkdownHandle (ev, callback) {
 		let editerWrap     = this.refs["editer-wrap"]
-
-		  callback && callback(ev, editerWrap)
-		  this.props.actions.ChangeBandHiddenBoffTask(0);
+		  
+		  this.handleBandState(0);
+		  callback && callback(ev, editerWrap);
+		  
 		  editerWrap.focus();
 		  ev.preventDefault();
 		  ev.stopPropagation();
@@ -98,13 +121,11 @@ class CommentFeedback extends Component {
 		
 		if(editerWrap.value) {
 			this.props.actions.AlertPlaneThunk("您确定需要进行文本重置？", function () {
-				
 				editerWrap.value = "";
 				editerWrap.focus();
 			}.bind(this))
 		}
 	}
-
 
 	sendComment (ev) {
 		let {
@@ -143,8 +164,6 @@ class CommentFeedback extends Component {
 	  		"commentAuthor": userInfo.commentAuthor,
 	  		"ForBidFeedBack" : CommentSubFeedBackTask ? true : false
 		}
-
-		console.log(commentContent.publish_content)
 
 		if (!!userInfo.userEmail) {
 
@@ -186,10 +205,112 @@ class CommentFeedback extends Component {
 	render () {
 		let {
 			actions,
-			MainFeedBackBox,
-			BandBoff
-		} = this.props;
+			MainFeedBackBox
+		} = this.props,
+		choice_list,
+		editerWrap = this.refs["editer-wrap"],
+		colors = [
+			[`#BE93C5`,`#7BC6CC`],
+			[`#4ECDC4`,`#556270`],
+			[`#A1FFCE`,`#FAFFD1`],
+			[`#ff6e7f`,`#bfe9ff`]
+		];
 
+		switch (this.state.choiceType) {
+			case "h1_list":
+			    choice_list = (
+			    	<div className="syntaxs__sub-list"
+			    		 onClick={(ev) => {
+			    		 	if(ev.target.dataset.btnId !== undefined) {
+			    		 		let	id = parseInt(ev.target.dataset.btnId),
+									len = editerWrap.value.length;
+
+			    		 		editerWrap.value += 
+			    		 		(id != 0) ?
+			    		 		`\n# 大标题 # [${colors[id-1][0]}|${colors[id-1][1]}] \n` :
+								"\n# 大标题 \n"
+
+	      						editerWrap.setSelectionRange(len+3,len+6);
+			    		 	}	    		 	
+			    		 		
+			    		 	editerWrap.focus();
+							ev.preventDefault();
+							ev.stopPropagation();
+			    		 }}
+			    	>
+			    		<div
+			    			className="choice-btn"
+			    			data-btn-id={0}
+							style={{
+								background: `#7c795d`
+							}}
+							title="原色"
+						>
+						</div>
+						{
+							colors.map((value,idx) => {
+								return (<div 
+			    					className="choice-btn"
+									key={idx}
+									data-btn-id={idx+1}
+									style={{
+										background: `linear-gradient(
+											-75deg,
+											${value[0]} 0,
+											${value[1]} 100%
+										)`
+									}}
+								>
+								</div>)
+							})
+						}
+					</div>
+			    )
+				break;
+			case "img_list":
+				choice_list = (
+					<div className="syntaxs__sub-list">
+						<input type="text" placeholder="图片alt" ref="alt-input" />
+						<input type="text" placeholder="图片地址(url)" ref="img-url-input"/>
+						<button 
+							className="insert"
+							onClick={(ev) => {
+								let altInputValue = this.refs["alt-input"].value,
+									imgUrlInputValue = this.refs["img-url-input"].value
+
+								this.MarkdownHandle.call(this, ev, (ev, editerWrap) => {
+      								editerWrap.value += `![${altInputValue}](${imgUrlInputValue})`;
+								})
+							}}
+						>插入图片</button>
+						
+					</div>
+				)
+				break;
+			case "a_link_list":
+				choice_list = (
+					<div className="syntaxs__sub-list">
+						<input type="text" placeholder="链接名" ref="link-name-input" />
+						<input type="text" placeholder="链接地址(url)" ref="link-url-input"/>
+						<button 
+							className="insert"
+							onClick={(ev) => {
+								let LinkNameInput = this.refs["link-name-input"].value,
+									LinkUrlInput = this.refs["link-url-input"].value
+
+								this.MarkdownHandle.call(this, ev, (ev, editerWrap) => {
+	  								editerWrap.value += `[${LinkNameInput}](${LinkUrlInput})`;
+								})
+							}}
+						>插入链接</button>
+					</div>
+				)
+				
+				break; 
+			default: 
+				choice_list = null
+		}
+		
 		return (
 				<div className="comment__feedback__box">
 					<div className ="comment__feedback__box__syntaxs">
@@ -200,6 +321,8 @@ class CommentFeedback extends Component {
 								onClick={(ev) => {
 									this.MarkdownHandle.call(null, ev, (ev, editerWrap) => {
 										editerWrap.value += "** 加粗文本 **";
+										let len = editerWrap.value.length;
+	      								editerWrap.setSelectionRange(len - 7, len-3);
 									})
 								}}
 							>
@@ -209,6 +332,8 @@ class CommentFeedback extends Component {
 								onClick={(ev) => {
 									this.MarkdownHandle.call(null, ev, (ev, editerWrap) => {
 	      								editerWrap.value += "_ 斜体文本 _";
+										let len = editerWrap.value.length;
+	      								editerWrap.setSelectionRange(len - 6, len-2);
 									})
 								}}
 							>
@@ -216,8 +341,16 @@ class CommentFeedback extends Component {
 							<li className="a-link" 
 								title="A链接"
 								onClick={(ev) => {
-									this.MarkdownHandle.call(null, ev, (ev, editerWrap) => {
-	      								editerWrap.value += "[链接名](网址)";
+									this.MarkdownHandle.call(this, ev, (ev, editerWrap) => {
+	      								if(this.state.choiceType === "a_link_list") {
+	      									this.setState({
+												choiceType: ""
+											})
+	      								} else {
+	      									this.setState({
+												choiceType: "a_link_list"
+											})	
+	      								}					
 									})
 								}}
 							>
@@ -225,18 +358,35 @@ class CommentFeedback extends Component {
 							<li className="image" 
 								title="引入图片"
 								onClick={(ev) => {
-									this.MarkdownHandle.call(null, ev, (ev, editerWrap) => {
-	      								editerWrap.value += "![图片alt](图片地址)";
+									this.MarkdownHandle.call(this, ev, (ev, editerWrap) => {
+	      								if(this.state.choiceType === "img_list") {
+	      									this.setState({
+												choiceType: ""
+											})
+	      								} else {
+	      									this.setState({
+												choiceType: "img_list"
+											})	
+	      								}					
 									})
 								}}
 							></li>
 							<li className="table" title="选择表格"></li>
-							<li className="blockquote-block" title="引用"></li>
+							<li className="blockquote-block" 
+								title="引用"
+								onClick={(ev) => {
+									this.MarkdownHandle.call(null, ev, (ev, editerWrap) => {
+	      								editerWrap.value += "> 引用内容";
+	      								let len = editerWrap.value.length;
+	      								editerWrap.setSelectionRange(len - 4, len);
+									})
+								}}
+							></li>
 							<li className="o-list" 
 								title="有序列表"
 								onClick={(ev) => {
 									this.MarkdownHandle.call(null, ev, (ev, editerWrap) => {
-	      								editerWrap.value += "\n1. 例1\n2. 例2\n3. 例3\n";
+	      								editerWrap.value += "\n1. 例1\n2. 例2\n3. 例3";
 									})
 								}}
 							>
@@ -245,34 +395,40 @@ class CommentFeedback extends Component {
 								title="无序列表"
 								onClick={(ev) => {
 									this.MarkdownHandle.call(null, ev, (ev, editerWrap) => {
-	      								editerWrap.value += "\n* 例1\n* 例2\n* 例3\n";
+	      								editerWrap.value += "\n* 例1\n* 例2\n* 例3";
 									})
 								}}
 							></li>
-							<li className="h1-tag" title="大标题"></li>
+							<li className="h1-tag" 
+								title="大标题"
+								onClick={(ev) => {
+									this.MarkdownHandle.call(this, ev, (ev, editerWrap) => {
+	      								if(this.state.choiceType === "h1_list") {
+	      									this.setState({
+												choiceType: ""
+											})
+	      								} else {
+	      									this.setState({
+												choiceType: "h1_list"
+											})	
+	      								}					
+									})
+								}}
+							></li>
 							<li className="h2-tag" 
 								title="小标题"
 								onClick={(ev) => {
 									this.MarkdownHandle.call(null, ev, (ev, editerWrap) => {
+	      								let len = editerWrap.value.length;
 	      								editerWrap.value += "\n## 小标题\n";
+	      								editerWrap.setSelectionRange(len + 4,len + 7);
 									})
 								}}
 							>
 							</li>
 						</ul>
 						
-						{/*<div className="syntaxs__sub-list">
-							<div
-								style={{
-									background: `linear-gradient(
-										-75deg,
-										#BE93C5 0,
-										#7BC6CC 100%
-									)`
-								}}
-							>
-							</div>
-						</div>*/}
+						{ choice_list }
 					</div>
 
 					<section className="comment__feedback__box__wrap">
@@ -286,10 +442,10 @@ class CommentFeedback extends Component {
 							 	height: this.state.editerHeight
 							 }}
 
-							 onBlur={
+							 onBlur={/*
 							 	MainFeedBackBox ?
-							 	this.handleBandState :
-							 	null
+							 	this.handleBandState.bind(this,1) :
+							 	null*/null
 							 }
 						>
 						</textarea>
@@ -302,12 +458,17 @@ class CommentFeedback extends Component {
 							 ></a>
 						</div>
 						
-
 						{
-							MainFeedBackBox && BandBoff ?
+							MainFeedBackBox && this.state.BandBoff ?
 							(
 								<div className="comment__feedback__mask"
-									 onClick = {this.handleBandState}
+									 onClick = {
+									 	() => {
+											let editerWrap = this.refs["editer-wrap"]
+											this.handleBandState(0);
+									 		editerWrap.focus();
+									 	}}
+									 	
 									 style = {{
 									 	height: this.state.editerHeight - 1
 									 }}
@@ -329,6 +490,7 @@ class CommentFeedback extends Component {
 						</button>
 						<button className="feedback--btns__comment"
 								onClick={this.sendComment}
+								title="点击 & Ctrl+Enter"
 						>
 						评论一下
 						</button>
@@ -356,8 +518,7 @@ export default connect(
 			actions: bindActionCreators({
 				AlertPlaneThunk,
 				CommentThunk,
-				LoginTableStateTask,
-				ChangeBandHiddenBoffTask
+				LoginTableStateTask
 			}, dispatch)
 		}
 	}

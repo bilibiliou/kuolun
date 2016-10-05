@@ -1,4 +1,4 @@
-String.prototype.slipce = function(index, delnum, replaceContext="") {
+String.prototype.splice = function(index, delnum, replaceContext="") {
 	let result  = "",
 		len     = this.length,
 		start,

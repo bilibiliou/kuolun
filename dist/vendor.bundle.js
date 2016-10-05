@@ -1,7 +1,7 @@
 /*!
  * The MIT License (MIT)
  * 
- * Copyright (c) 2016 Comment-System
+ * Copyright (c) 2016 Kuo Lun (阔论-评论系统)
  * 
  * Author: Owen 
  * Email: <469564715@qq.com>
@@ -21537,7 +21537,7 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	String.prototype.slipce = function (index, delnum) {
+	String.prototype.splice = function (index, delnum) {
 		var replaceContext = arguments.length <= 2 || arguments[2] === undefined ? "" : arguments[2];
 
 		var result = "",

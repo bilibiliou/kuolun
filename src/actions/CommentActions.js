@@ -100,13 +100,6 @@ export const DelThunk = (page, SortState, index, ParentIndex=-1) => {
     }
 }
 
-export const ChangeBandHiddenBoffTask = createAction (
-    Types.CHANGE_BAND_STATE, (BandBoffState) => {
-        return {
-            BandBoffState
-        }
-    })
-
 export const VoteUpThunk = (index, failback) => {
     return dispatch => {
         fetch("/VoteUpSomeItem", {

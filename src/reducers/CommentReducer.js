@@ -15,13 +15,6 @@ const CommentReducer = (state = initialState, action) => {
 		case Types.UPDATE_ITEM_DATAES:
 
     		return Object.assign({}, state, { ItemDataes: action.payload.newDataes })
-		
-		case Types.CHANGE_BAND_STATE:
-			if (action.payload.BandBoffState !== undefined) {
-				return Object.assign({}, state, { BandBoff: action.payload.BandBoffState });
-			} else {
-				return Object.assign({}, state, { BandBoff: state.BandBoff ^ 1 });
-			}
 
 		default:
 			return state;
