@@ -29,6 +29,10 @@ ul, ol {
 	list-style: none;
 }
 
+select {
+	appearance: none;
+}
+
 h1,h2,h3 {
 	margin-bottom: 1em;
 }
@@ -213,7 +217,6 @@ i {
 	
 	table {
 		.br(5px);
-		display: table-caption;
         margin: 20px 0;
         padding: 8px;
         box-shadow: 0 4px 15px rgba(0,0,0,0.4);
@@ -226,6 +229,7 @@ i {
             td, th {
             	font-size: 14px;
                 padding: 5px;
+                word-break: break-word;
             }
 
             td { 
@@ -608,6 +612,14 @@ i {
 				background: url(@icon-hover) 4px -269px, #ccc;
 			}	
 		}
+		
+		.code-block {
+			background-position: 4px -341px;
+			
+			&:hover {
+				background: url(@icon-hover) 4px -341px, #ccc;
+			}	
+		}
 
 		.emoji-list {
 			background-position: 5px -316px;
@@ -621,7 +633,7 @@ i {
 	.syntaxs__sub-list {
 		display: flex;
 		flex-flow: row wrap;
-		align-items: space-between;
+		align-items: center;
 		padding: 5px;
 		border-top: 1px solid #272636;
 		& > div.choice-btn {
@@ -642,6 +654,7 @@ i {
 
 	input[type="text"] {
 		.br(3px);
+		height: 30px;
 		border: 1px solid @i-color;
 		margin-right: 20px;
 		font-size: 14px;
@@ -656,6 +669,82 @@ i {
 		line-height: 30px;
 		width: 70px;
 		height: 30px;
+	}
+
+	.code-type-choice__list {
+		
+		.select(none);
+		width: 140px;
+		height: 30px;
+		border: 1px solid #ccc;
+		cursor: pointer;
+		position: relative;
+		
+		border-radius: 3px 3px 0px 0px; 
+		color: #929699;
+		font-size: 14px;
+		
+		padding: 0px 5px;
+		margin-right: 20px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		p {
+			width: 100px;
+		}
+
+		&::after {
+			.t(.5);
+			content: "";
+			width: 16px;
+			height: 16px;
+			
+			display: block;
+			background: url(@icon) -30px -0px;
+		}
+
+		& > ul {
+			position: absolute;
+			bottom: -120px;
+			left: -1px;
+			width: 140px;
+			height: 120px;
+			padding: 5px 0;
+			overflow: hidden;
+			z-index: 1234;
+			border-radius: 0px 0px 3px 3px;
+			background: #E6E6E6;
+			border: 1px solid #ccc;
+			li {
+				height: 25px;
+				line-height: 25px;
+				padding: 0px 5px;
+
+				&:hover {
+					color: #fff;
+					background: @i-color;
+				}
+			}
+		}
+	}
+
+	.table-size-matrix {
+		border-collapse:collapse;
+		margin: 10px 0 10px 90px;
+		tr, td {
+			border: 1px solid #ccc;
+		}	
+
+		td {
+			padding: 15px;
+		}
+	}
+
+	.table-matrix-dimension {
+		font-size: 18px;
+		text-decoration: underline;
+		margin: 0 20px;
 	}
 }
 
@@ -1062,7 +1151,6 @@ i {
 	overflow: hidden;
 	width: 100%;
 	margin: 20px 10px 10px 5px;
-	padding: 0 0 0 74px;
 }
 
 .feedback__content--main {

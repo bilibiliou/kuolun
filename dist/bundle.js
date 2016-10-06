@@ -2797,6 +2797,8 @@ webpackJsonp([0],[
 
 	var _highlight2 = _interopRequireDefault(_highlight);
 
+	var _util = __webpack_require__(202);
+
 	var _redux = __webpack_require__(180);
 
 	var _CommentActions = __webpack_require__(388);
@@ -2823,11 +2825,23 @@ webpackJsonp([0],[
 
 			var _this = _possibleConstructorReturn(this, (CommentFeedback.__proto__ || Object.getPrototypeOf(CommentFeedback)).call(this, props));
 
+			var initEditerHeight = 0;
+			if (_this.props.MainFeedBackBox) {
+				initEditerHeight = 150;
+			} else {
+				initEditerHeight = 30;
+			}
 			_this.state = {
 				editorCotent: "",
-				editerHeight: 150,
+				editerHeight: initEditerHeight,
 				choiceType: "",
-				BandBoff: 1
+				BandBoff: 1,
+				codeTypeChoiceListBoff: 0,
+				codeType: "请选择代码种类",
+
+				tableChoiceLock: 0,
+				cTableX: 1,
+				cTableY: 1
 			};
 
 			_this.reSet = _this.reSet.bind(_this);
@@ -2835,7 +2849,7 @@ webpackJsonp([0],[
 			_this.editDefalut = _this.editDefalut.bind(_this);
 			_this.handleBandState = _this.handleBandState.bind(_this);
 			_this.editorResizeHandle = _this.editorResizeHandle.bind(_this);
-			_this.MarkdownHandle = _this.MarkdownHandle.bind(_this);
+			_this.SyntaxsListHandle = _this.SyntaxsListHandle.bind(_this);
 			return _this;
 		}
 
@@ -2880,6 +2894,10 @@ webpackJsonp([0],[
 					}
 				};
 
+				renderer.link = function (url, level, text) {
+					return "<a href=\"" + url + "\" target=\"_blank\">" + text + "</a>";
+				};
+
 				return (0, _marked2.default)(html, { renderer: renderer });
 			}
 		}, {
@@ -2892,25 +2910,8 @@ webpackJsonp([0],[
 				});
 			}
 		}, {
-			key: "editorResizeHandle",
-			value: function editorResizeHandle($event) {
-				console.log($event);
-				$event.target.addEventListener("mousedown", function (ev) {
-					var $top = ev.clientY;
-
-					// document.addEventListener("mousemove", (ev) => {
-
-					// })
-
-					// document.addEventListener("mouseup", function () {
-					//           document.removeEventListener("mousemove");
-					//           $event.target.removeEventListener("mouseup");
-					//       });
-				});
-			}
-		}, {
-			key: "MarkdownHandle",
-			value: function MarkdownHandle(ev, callback) {
+			key: "SyntaxsListHandle",
+			value: function SyntaxsListHandle(ev, callback) {
 				var editerWrap = this.refs["editer-wrap"];
 
 				this.handleBandState(0);
@@ -2981,8 +2982,6 @@ webpackJsonp([0],[
 
 					var arr = [].concat(_toConsumableArray(ItemDataes));
 
-					// 选择 发送主推送，还是回复推送
-					// 在这里就处理好数据
 					switch (true) {
 						case CommentMainTask:
 							commentContent["index"] = AllDataNum;
@@ -3009,9 +3008,40 @@ webpackJsonp([0],[
 				}
 			}
 		}, {
+			key: "editorResizeHandle",
+			value: function editorResizeHandle(ev) {
+				var _this2 = this;
+
+				var $self = this,
+				    oTarget = ev.target,
+				    currentTop = oTarget.offsetTop,
+				    $top = ev.clientY - oTarget.offsetTop;
+
+				var mmove = function mmove(ev) {
+					var lastTop = ev.clientY - $top;
+
+					if (_this2.props.MainFeedBackBox && lastTop <= 150) {
+						lastTop = 150;
+					} else if (lastTop <= 30) {
+						lastTop = 30;
+					}
+
+					$self.setState({
+						editerHeight: lastTop
+					});
+				},
+				    mup = function mup() {
+					document.removeEventListener("mousemove", mmove);
+					oTarget.removeEventListener("mouseup", mup);
+				};
+
+				document.addEventListener("mousemove", mmove);
+				document.addEventListener("mouseup", mup);
+			}
+		}, {
 			key: "render",
 			value: function render() {
-				var _this2 = this;
+				var _this3 = this;
 
 				var _props2 = this.props;
 				var actions = _props2.actions;
@@ -3019,6 +3049,34 @@ webpackJsonp([0],[
 				var choice_list = void 0;
 				var editerWrap = this.refs["editer-wrap"];
 				var colors = [["#BE93C5", "#7BC6CC"], ["#4ECDC4", "#556270"], ["#A1FFCE", "#FAFFD1"], ["#ff6e7f", "#bfe9ff"]];
+				var codeTypeList = ["c", "c++", "c#", "java", "javascript", "go", "python", "php", "ruby", "lisp", "nginx", "objective-c", "http", "json", "sql", "html", "xml", "css", "less", "scss", "stylus"];
+				var tableSizeX = 5;
+				var tableSizeY = 5;
+				var tdSize = 31; //( x === y)
+				var tablePosition = (0, _util.getPostion)(this.refs["table-matrix"]);
+				var tableRow = [];
+				var tableCol = [];
+
+				for (var i = 0; i < tableSizeX; i++) {
+					tableCol = [];
+					for (var j = 0; j < tableSizeY; j++) {
+						if (i + 1 <= this.state.cTableY && j + 1 <= this.state.cTableX) {
+							tableCol.push(_react2.default.createElement("td", {
+								style: {
+									background: "#f5f5f5"
+								},
+								key: j }));
+						} else {
+							tableCol.push(_react2.default.createElement("td", { key: j }));
+						}
+					}
+
+					tableRow.push(_react2.default.createElement(
+						"tr",
+						{ key: i },
+						tableCol
+					));
+				}
 
 				switch (this.state.choiceType) {
 					case "h1_list":
@@ -3071,12 +3129,15 @@ webpackJsonp([0],[
 								{
 									className: "insert",
 									onClick: function onClick(ev) {
-										var altInputValue = _this2.refs["alt-input"].value,
-										    imgUrlInputValue = _this2.refs["img-url-input"].value;
+										var altInput = _this3.refs["alt-input"],
+										    imgUrlInput = _this3.refs["img-url-input"];
 
-										_this2.MarkdownHandle.call(_this2, ev, function (ev, editerWrap) {
-											editerWrap.value += "![" + altInputValue + "](" + imgUrlInputValue + ")";
+										_this3.SyntaxsListHandle.call(_this3, ev, function (ev, editerWrap) {
+											editerWrap.value += "![" + altInput.value + "](" + imgUrlInput.value + ")";
 										});
+
+										altInput.value = "";
+										imgUrlInput.value = "";
 									}
 								},
 								"插入图片"
@@ -3094,18 +3155,173 @@ webpackJsonp([0],[
 								{
 									className: "insert",
 									onClick: function onClick(ev) {
-										var LinkNameInput = _this2.refs["link-name-input"].value,
-										    LinkUrlInput = _this2.refs["link-url-input"].value;
+										var LinkNameInput = _this3.refs["link-name-input"],
+										    LinkUrlInput = _this3.refs["link-url-input"];
 
-										_this2.MarkdownHandle.call(_this2, ev, function (ev, editerWrap) {
-											editerWrap.value += "[" + LinkNameInput + "](" + LinkUrlInput + ")";
+										_this3.SyntaxsListHandle.call(_this3, ev, function (ev, editerWrap) {
+											editerWrap.value += "[" + LinkNameInput.value + "](" + LinkUrlInput.value + ")";
 										});
+
+										LinkNameInput.value = "";
+										LinkUrlInput.value = "";
 									}
 								},
 								"插入链接"
 							)
 						);
+						break;
+					case "code_block_list":
+						choice_list = _react2.default.createElement(
+							"div",
+							{ className: "syntaxs__sub-list" },
+							_react2.default.createElement(
+								"div",
+								{ className: "code-type-choice__list",
+									onClick: function onClick() {
+										_this3.setState({
+											codeTypeChoiceListBoff: _this3.state.codeTypeChoiceListBoff ^= 1
+										});
+									} },
+								_react2.default.createElement(
+									"p",
+									null,
+									this.state.codeType
+								),
+								_react2.default.createElement(
+									"ul",
+									{ style: this.state.codeTypeChoiceListBoff ? { display: "block" } : { display: "none" },
 
+										onClick: function onClick(ev) {
+											var codeTypeShowWrap = _this3.refs["code-type-show__wrap"],
+											    oTarget = ev.target;
+
+											if (oTarget.tagName.toLowerCase() === "li") {
+												_this3.setState({
+													codeType: oTarget.innerHTML
+												});
+											}
+										}
+									},
+									codeTypeList.map(function (value, idx) {
+										return _react2.default.createElement(
+											"li",
+											{
+												key: idx
+											},
+											value
+										);
+									})
+								)
+							),
+							_react2.default.createElement(
+								"button",
+								{
+									className: "insert",
+
+									onClick: function onClick(ev) {
+										var codeTypeSelection = _this3.refs["code-type-selection"];
+										_this3.SyntaxsListHandle.call(_this3, ev, function (ev, editerWrap) {
+											if (_this3.state.codeType === "请选择代码种类") {
+												return;
+											} else {
+												editerWrap.value += "\n```" + _this3.state.codeType + "\n代码内容\n```\n";
+												var len = editerWrap.value.length;
+												editerWrap.setSelectionRange(len - 9, len - 5);
+												_this3.setState({
+													codeType: "请选择代码种类"
+												});
+											}
+										});
+									}
+								},
+								"插入代码"
+							)
+						);
+						break;
+					case "table_list":
+						choice_list = _react2.default.createElement(
+							"div",
+							{ className: "syntaxs__sub-list" },
+							_react2.default.createElement(
+								"table",
+								{ className: "table-size-matrix",
+									ref: "table-matrix",
+									onMouseMove: function onMouseMove(ev) {
+										if (!_this3.state.tableChoiceLock) {
+											var $cX = ev.pageX,
+											    $cY = ev.pageY,
+											    $dX = $cX - tablePosition[0],
+											    $dY = $cY - tablePosition[1],
+											    XNum = Math.ceil($dX / tdSize),
+											    YNum = Math.ceil($dY / tdSize);
+											XNum < 1 && (XNum = 1);
+											YNum < 1 && (YNum = 1);
+											_this3.setState({
+												cTableX: XNum,
+												cTableY: YNum
+											});
+										}
+									},
+									onClick: function onClick() {
+										_this3.setState({
+											tableChoiceLock: _this3.state.tableChoiceLock ^= 1
+										});
+									}
+								},
+								_react2.default.createElement(
+									"tbody",
+									null,
+									tableRow
+								)
+							),
+							_react2.default.createElement(
+								"p",
+								{ className: "table-matrix-dimension" },
+								this.state.cTableX,
+								" x ",
+								this.state.cTableY,
+								" 表格"
+							),
+							_react2.default.createElement(
+								"button",
+								{ className: "insert",
+									onClick: function onClick(ev) {
+										_this3.SyntaxsListHandle.call(_this3, ev, function (ev, editerWrap) {
+											var $x = _this3.state.cTableX,
+											    $y = _this3.state.cTableY,
+											    str = "";
+
+											for (var _i = 0; _i < $x; _i++) {
+												str += "|   标题" + (_i + 1) + "   ";
+											}
+											str += "|\n";
+											for (var _i2 = 0; _i2 < $x; _i2++) {
+												str += "| :---------: ";
+											}
+											str += "|\n";
+
+											var count = 1;
+
+											for (var _j = 0; _j < $y; _j++) {
+												for (var _i3 = 0; _i3 < $x; _i3++) {
+													str += "| 表格内容" + count + " ";
+													count++;
+												}
+												str += "|\n";
+											}
+
+											editerWrap.value += str;
+											_this3.setState({
+												tableChoiceLock: 0,
+												cTableX: 1,
+												cTableY: 1
+											});
+										});
+									}
+								},
+								"插入表格"
+							)
+						);
 						break;
 					default:
 						choice_list = null;
@@ -3124,7 +3340,7 @@ webpackJsonp([0],[
 							_react2.default.createElement("li", { className: "bold",
 								title: "加粗",
 								onClick: function onClick(ev) {
-									_this2.MarkdownHandle.call(null, ev, function (ev, editerWrap) {
+									_this3.SyntaxsListHandle.call(null, ev, function (ev, editerWrap) {
 										editerWrap.value += "** 加粗文本 **";
 										var len = editerWrap.value.length;
 										editerWrap.setSelectionRange(len - 7, len - 3);
@@ -3134,7 +3350,7 @@ webpackJsonp([0],[
 							_react2.default.createElement("li", { className: "italic",
 								title: "斜体",
 								onClick: function onClick(ev) {
-									_this2.MarkdownHandle.call(null, ev, function (ev, editerWrap) {
+									_this3.SyntaxsListHandle.call(null, ev, function (ev, editerWrap) {
 										editerWrap.value += "_ 斜体文本 _";
 										var len = editerWrap.value.length;
 										editerWrap.setSelectionRange(len - 6, len - 2);
@@ -3144,13 +3360,13 @@ webpackJsonp([0],[
 							_react2.default.createElement("li", { className: "a-link",
 								title: "A链接",
 								onClick: function onClick(ev) {
-									_this2.MarkdownHandle.call(_this2, ev, function (ev, editerWrap) {
-										if (_this2.state.choiceType === "a_link_list") {
-											_this2.setState({
+									_this3.SyntaxsListHandle.call(_this3, ev, function (ev, editerWrap) {
+										if (_this3.state.choiceType === "a_link_list") {
+											_this3.setState({
 												choiceType: ""
 											});
 										} else {
-											_this2.setState({
+											_this3.setState({
 												choiceType: "a_link_list"
 											});
 										}
@@ -3160,24 +3376,39 @@ webpackJsonp([0],[
 							_react2.default.createElement("li", { className: "image",
 								title: "引入图片",
 								onClick: function onClick(ev) {
-									_this2.MarkdownHandle.call(_this2, ev, function (ev, editerWrap) {
-										if (_this2.state.choiceType === "img_list") {
-											_this2.setState({
+									_this3.SyntaxsListHandle.call(_this3, ev, function (ev, editerWrap) {
+										if (_this3.state.choiceType === "img_list") {
+											_this3.setState({
 												choiceType: ""
 											});
 										} else {
-											_this2.setState({
+											_this3.setState({
 												choiceType: "img_list"
 											});
 										}
 									});
 								}
 							}),
-							_react2.default.createElement("li", { className: "table", title: "选择表格" }),
+							_react2.default.createElement("li", { className: "table",
+								title: "选择表格",
+								onClick: function onClick(ev) {
+									_this3.SyntaxsListHandle.call(_this3, ev, function (ev, editerWrap) {
+										if (_this3.state.choiceType === "table_list") {
+											_this3.setState({
+												choiceType: ""
+											});
+										} else {
+											_this3.setState({
+												choiceType: "table_list"
+											});
+										}
+									});
+								}
+							}),
 							_react2.default.createElement("li", { className: "blockquote-block",
 								title: "引用",
 								onClick: function onClick(ev) {
-									_this2.MarkdownHandle.call(null, ev, function (ev, editerWrap) {
+									_this3.SyntaxsListHandle.call(null, ev, function (ev, editerWrap) {
 										editerWrap.value += "> 引用内容";
 										var len = editerWrap.value.length;
 										editerWrap.setSelectionRange(len - 4, len);
@@ -3187,7 +3418,7 @@ webpackJsonp([0],[
 							_react2.default.createElement("li", { className: "o-list",
 								title: "有序列表",
 								onClick: function onClick(ev) {
-									_this2.MarkdownHandle.call(null, ev, function (ev, editerWrap) {
+									_this3.SyntaxsListHandle.call(null, ev, function (ev, editerWrap) {
 										editerWrap.value += "\n1. 例1\n2. 例2\n3. 例3";
 									});
 								}
@@ -3195,7 +3426,7 @@ webpackJsonp([0],[
 							_react2.default.createElement("li", { className: "u-list",
 								title: "无序列表",
 								onClick: function onClick(ev) {
-									_this2.MarkdownHandle.call(null, ev, function (ev, editerWrap) {
+									_this3.SyntaxsListHandle.call(_this3, ev, function (ev, editerWrap) {
 										editerWrap.value += "\n* 例1\n* 例2\n* 例3";
 									});
 								}
@@ -3203,13 +3434,13 @@ webpackJsonp([0],[
 							_react2.default.createElement("li", { className: "h1-tag",
 								title: "大标题",
 								onClick: function onClick(ev) {
-									_this2.MarkdownHandle.call(_this2, ev, function (ev, editerWrap) {
-										if (_this2.state.choiceType === "h1_list") {
-											_this2.setState({
+									_this3.SyntaxsListHandle.call(_this3, ev, function (ev, editerWrap) {
+										if (_this3.state.choiceType === "h1_list") {
+											_this3.setState({
 												choiceType: ""
 											});
 										} else {
-											_this2.setState({
+											_this3.setState({
 												choiceType: "h1_list"
 											});
 										}
@@ -3219,10 +3450,26 @@ webpackJsonp([0],[
 							_react2.default.createElement("li", { className: "h2-tag",
 								title: "小标题",
 								onClick: function onClick(ev) {
-									_this2.MarkdownHandle.call(null, ev, function (ev, editerWrap) {
+									_this3.SyntaxsListHandle.call(null, ev, function (ev, editerWrap) {
 										var len = editerWrap.value.length;
 										editerWrap.value += "\n## 小标题\n";
 										editerWrap.setSelectionRange(len + 4, len + 7);
+									});
+								}
+							}),
+							_react2.default.createElement("li", { className: "code-block",
+								title: "代码高亮",
+								onClick: function onClick(ev) {
+									_this3.SyntaxsListHandle.call(_this3, ev, function (ev, editerWrap) {
+										if (_this3.state.choiceType === "code_block_list") {
+											_this3.setState({
+												choiceType: ""
+											});
+										} else {
+											_this3.setState({
+												choiceType: "code_block_list"
+											});
+										}
 									});
 								}
 							})
@@ -3253,15 +3500,16 @@ webpackJsonp([0],[
 							_react2.default.createElement("a", { className: "editor__resize",
 								href: "javascript:;",
 								title: "拖拽改变评论框大小",
-								onClick: this.editorResizeHandle
+								draggable: false,
+								onMouseDown: this.editorResizeHandle
 							})
 						),
 						MainFeedBackBox && this.state.BandBoff ? _react2.default.createElement(
 							"div",
 							{ className: "comment__feedback__mask",
 								onClick: function onClick() {
-									var editerWrap = _this2.refs["editer-wrap"];
-									_this2.handleBandState(0);
+									var editerWrap = _this3.refs["editer-wrap"];
+									_this3.handleBandState(0);
 									editerWrap.focus();
 								},
 
@@ -21535,7 +21783,7 @@ webpackJsonp([0],[
 								_react2.default.createElement(
 									"section",
 									{ className: "comment__content--options__wrap" },
-									!(userInfo.userEmail === author_email) ? _react2.default.createElement(
+									_react2.default.createElement(
 										"a",
 										{ className: "comment__content--options__callback",
 											href: "javascript:;",
@@ -21549,7 +21797,7 @@ webpackJsonp([0],[
 											FeedBack.length,
 											"条)"
 										)
-									) : null,
+									),
 									userInfo.userEmail === author_email ? _react2.default.createElement(
 										"a",
 										{ className: "comment__content--options__del",
@@ -21592,7 +21840,7 @@ webpackJsonp([0],[
 								_react2.default.createElement(
 									"h3",
 									null,
-									"说点什么吧..."
+									"分享您的思想和看法..."
 								),
 								_react2.default.createElement(_router.CommentFeedback, {
 									CommentFeedBackTask: true,
@@ -22805,7 +23053,7 @@ webpackJsonp([0],[
 
 
 	// module
-	exports.push([module.id, "@charset \"utf-8\";\n* {\n  box-sizing: border-box;\n  font-family: arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  font-size: 14px;\n  outline: none;\n}\nbody {\n  margin: 0;\n  padding: 0;\n  font-size: 0;\n}\na {\n  -webkit-transition: 5s;\n  transition: 5s;\n  text-decoration: none;\n}\nul,\nol {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\nh1,\nh2,\nh3 {\n  margin-bottom: 1em;\n}\np,\npre {\n  margin: 0;\n}\nblockquote {\n  margin: 0;\n}\ninput[type=\"submit\"],\nbutton {\n  display: inline-block;\n  border-radius: 0;\n  border: none;\n  padding: 0;\n  background: none;\n  cursor: pointer;\n}\nfigure {\n  margin: 0;\n}\ni {\n  display: inline-block;\n}\n.none {\n  display: none !important;\n}\n.b-c {\n  position: fixed;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  margin: auto;\n}\n.hidden {\n  height: 0 !important;\n}\n@-webkit-keyframes swing {\n  20%,\n  40%,\n  60%,\n  80%,\n  100% {\n    -webkit-transform-origin: topcenter;\n            transform-origin: topcenter;\n  }\n  20% {\n    -webkit-transform: rotate(15deg);\n            transform: rotate(15deg);\n  }\n  40% {\n    -webkit-transform: rotate(-10deg);\n            transform: rotate(-10deg);\n  }\n  60% {\n    -webkit-transform: rotate(5deg);\n            transform: rotate(5deg);\n  }\n  80% {\n    -webkit-transform: rotate(-5deg);\n            transform: rotate(-5deg);\n  }\n  100% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n  }\n}\n@keyframes swing {\n  20%,\n  40%,\n  60%,\n  80%,\n  100% {\n    -webkit-transform-origin: topcenter;\n            transform-origin: topcenter;\n  }\n  20% {\n    -webkit-transform: rotate(15deg);\n            transform: rotate(15deg);\n  }\n  40% {\n    -webkit-transform: rotate(-10deg);\n            transform: rotate(-10deg);\n  }\n  60% {\n    -webkit-transform: rotate(5deg);\n            transform: rotate(5deg);\n  }\n  80% {\n    -webkit-transform: rotate(-5deg);\n            transform: rotate(-5deg);\n  }\n  100% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n  }\n}\n@-webkit-keyframes masked {\n  0% {\n    background-position: 0 0;\n  }\n  100% {\n    background-position: -100% 0;\n  }\n}\n@keyframes masked {\n  0% {\n    background-position: 0 0;\n  }\n  100% {\n    background-position: -100% 0;\n  }\n}\n.comment__feedback__wrap {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  overflow: hidden;\n  background: #fbfbfb;\n  width: 100%;\n  margin-top: 20px;\n}\n.comment__feedback__box__syntaxs {\n  border-radius: 5px 5px 0 0;\n  border: 1px solid #272636;\n}\n.comment__feedback__box__syntaxs .syntaxs__list {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 32px;\n  -ms-flex-flow: row no-wrap;\n      flex-flow: row no-wrap;\n}\n.comment__feedback__box__syntaxs .syntaxs__list li {\n  width: 32px;\n  height: 32px;\n  margin: 0 4px;\n  background-image: url(\"/img/icon.png\");\n  cursor: pointer;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .bold {\n  background-position: 6px -79px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .bold:hover {\n  background: url(\"/img/icon-hover.png\") 6px -79px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .italic {\n  background-position: 8px -127px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .italic:hover {\n  background: url(\"/img/icon-hover.png\") 8px -127px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .a-link {\n  background-position: 4px -103px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .a-link:hover {\n  background: url(\"/img/icon-hover.png\") 4px -103px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .image {\n  background-position: 4px -151px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .image:hover {\n  background: url(\"/img/icon-hover.png\") 4px -151px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .table {\n  background-position: 4px -175px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .table:hover {\n  background: url(\"/img/icon-hover.png\") 4px -175px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .blockquote-block {\n  background-position: 4px -292px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .blockquote-block:hover {\n  background: url(\"/img/icon-hover.png\") 4px -292px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .u-list {\n  background-position: 2px -223px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .u-list:hover {\n  background: url(\"/img/icon-hover.png\") 2px -223px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .o-list {\n  background-position: 2px -199px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .o-list:hover {\n  background: url(\"/img/icon-hover.png\") 2px -199px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h1-tag {\n  background-position: 4px -247px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h1-tag:hover {\n  background: url(\"/img/icon-hover.png\") 4px -247px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h2-tag {\n  background-position: 4px -269px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h2-tag:hover {\n  background: url(\"/img/icon-hover.png\") 4px -269px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .emoji-list {\n  background-position: 5px -316px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .emoji-list:hover {\n  background: url(\"/img/icon-hover.png\") 5px -316px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  -webkit-box-align: space-between;\n      -ms-flex-align: space-between;\n          align-items: space-between;\n  padding: 5px;\n  border-top: 1px solid #272636;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list > div.choice-btn {\n  border-radius: 5px;\n  position: relative;\n  width: 32px;\n  height: 32px;\n  margin: 0 4px;\n  cursor: pointer;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list > div.choice-btn:hover {\n  box-shadow: 0 0 1px 1px #1C86D1;\n}\n.comment__feedback__box__syntaxs input[type=\"text\"] {\n  border-radius: 3px;\n  border: 1px solid #1C86D1;\n  margin-right: 20px;\n  font-size: 14px;\n  text-indent: 5px;\n}\n.comment__feedback__box__syntaxs .insert {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  border-radius: 5px;\n  color: #272636;\n  border: 1px solid #1C86D1;\n  line-height: 30px;\n  width: 70px;\n  height: 30px;\n}\n.comment__feedback__box__syntaxs .insert:hover {\n  background: #1C86D1;\n  color: #fff;\n}\n.comment__feedback__box__wrap {\n  position: relative;\n}\n.editor__resize__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.editor__resize {\n  display: inline-block;\n  width: 130px;\n  height: 8px;\n  cursor: row-resize;\n  margin-top: 2px;\n  border-top: 1px solid #ccc;\n  border-bottom: 1px solid #ccc;\n}\n.comment__feedback__box {\n  position: relative;\n  width: 100%;\n}\n.comment__feedback {\n  padding: 10px;\n  border-top: 1px solid #272636;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n}\n.comment__feedback h3 {\n  font: 200 24px/1 arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n}\n.login-infos {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  font-size: 16px;\n  padding-bottom: 10px;\n}\n.login-infos a {\n  color: #1C86D1;\n}\n.login-infos .init_prompt {\n  cursor: default;\n  color: rgba(0, 0, 0, 0.5);\n}\n.login-out__btn {\n  border-radius: 5px;\n  float: right;\n  width: 70px;\n  height: 25px;\n  background: #C81623;\n  color: #fff;\n}\n.login-in__btn {\n  border-radius: 5px;\n  float: right;\n  width: 70px;\n  height: 25px;\n  padding: 0 5px;\n  background: #1C86D1;\n  color: #fff;\n}\n.comment__feedback--section {\n  width: calc(100% - 74px);\n}\n.comment__feedback--edit {\n  border-radius: 0px 0px 5px 5px;\n  width: 100%;\n  min-height: 30px;\n  padding: 5px;\n  border: 1px solid #272636;\n  border-top: none;\n  font: 200 14px/1.5 arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  resize: none;\n  overflow: hidden;\n  white-space: pre-wrap;\n  -moz-tab-size: 4;\n    -o-tab-size: 4;\n       tab-size: 4;\n}\n.comment__feedback--btns {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  width: 100%;\n  margin-top: 10px;\n}\n.comment__feedback--btns button {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  border-radius: 5px;\n  line-height: 30px;\n  width: 70px;\n  height: 30px;\n}\n.feedback--btns__reset {\n  color: #C81623;\n  border: 1px solid #C81623;\n}\n.feedback--btns__reset:hover {\n  background: #C81623;\n  color: #fff;\n}\n.feedback--btns__comment {\n  margin-left: 10px;\n  color: #272636;\n  border: 1px solid #1C86D1;\n}\n.feedback--btns__comment:hover {\n  background: #1C86D1;\n  color: #fff;\n}\n.comment__feedback__mask {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  border-radius: 2px;\n  position: absolute;\n  top: 0;\n  left: 1px;\n  width: 604px;\n  height: 149px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  cursor: default;\n  background: #ccc;\n}\n.comment__feedback__mask p {\n  color: #fff;\n}\n.comment__feedback__mask--title {\n  font: 100 60px/60px \"\\5FAE\\8F6F\\96C5\\9ED1\";\n}\n.comment__feedback__mask--pinyin {\n  margin-top: 15px;\n  font: 100 20px/20px arial;\n}\n.clearfix::after {\n  content: \".\";\n  display: block;\n  height: 0;\n  visibility: hidden;\n  clear: both;\n}\n.demo {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  width: 900px;\n  margin: 50px auto 50px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  padding: 0 100px;\n}\n.comment__wrap {\n  width: 100%;\n}\n.comment__header {\n  border-radius: 5px;\n  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.6);\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -moz-justify-content: space-between;\n  height: 50px;\n  background: #1C86D1;\n  color: #fff;\n  font-size: 0;\n  padding: 5px 8px;\n}\n.comment__header::after {\n  content: \"\";\n  display: block;\n  position: absolute;\n  left: 41px;\n  bottom: -20px;\n  height: 0px;\n  border: 10px solid transparent;\n  border-top: 10px solid #1C86D1;\n}\n.comment__header .comment__header__span {\n  width: 150px;\n  height: 16px;\n  font: 200 16px/16px arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  margin-left: 10px;\n}\n.comment__header .comment__header__btns {\n  width: 80px;\n  height: 30px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.comment__header .comment__header__btns button {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  display: inline-block;\n  width: 40px;\n  height: 30px;\n  color: #fff;\n  font-size: 14px;\n}\n.comment__header .comment__header__btns button:hover {\n  color: #d32;\n}\n.comment__footer {\n  border-radius: 5px;\n  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.6);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  position: relative;\n  height: 70px;\n  background: #1C86D1;\n}\n.comment__footer::before {\n  content: \"\";\n  display: block;\n  position: absolute;\n  top: -20px;\n  left: 41px;\n  height: 0;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #1C86D1;\n}\n.comment__pagination {\n  border-radius: 5px;\n  box-shadow: 0 0 2px rgba(0, 0, 0, 0.7);\n  overflow: hidden;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 35px;\n}\n.comment__pagination li {\n  -webkit-transition: 0.3s;\n  transition: 0.3s;\n  width: 40px;\n  height: 100%;\n  color: #fff;\n  text-align: center;\n  cursor: pointer;\n}\n.comment__pagination li:hover {\n  color: #1C86D1;\n  background: #fff;\n}\n.comment__pagination li div {\n  padding: 10px 0;\n  height: 100%;\n  line-height: 15px;\n}\n.comment__pagination li > div.active {\n  color: #1C86D1;\n  background: #fff;\n  border-left: none !important;\n}\n.comment__pagination li:not(:nth-of-type(1)) div {\n  border-left: 1px solid rgba(0, 0, 0, 0.2);\n}\n.comment__list {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  margin: 0 0 0 50px;\n  border-left: 2px solid #1C86D1;\n}\n.no__comment__item {\n  padding: 20px;\n  text-align: center;\n}\n.no__comment__item p {\n  border-radius: 5px;\n  height: 70px;\n  font-size: 24px;\n  line-height: 70px;\n  color: rgba(0, 0, 0, 0.6);\n  border: 1px solid #272636;\n}\n.comment__item {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: relative;\n  padding: 20px;\n}\n.comment__item::after {\n  border-radius: 50%;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  left: -8px;\n  top: 40px;\n  content: \"\";\n  display: block;\n  background: #1C86D1;\n  width: 10px;\n  height: 10px;\n  border: 2px solid #fff;\n}\n.comment__item:hover::after {\n  background: #51CA65;\n}\n.comment__item:hover .comment__content {\n  -webkit-transform: translateX(15px);\n          transform: translateX(15px);\n}\n.comment__content {\n  border-radius: 5px;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n  padding: 10px;\n  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);\n}\n.comment__author--avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.comment__author--avatar > img:hover,\n.comment__author--avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.comment__content--main {\n  width: calc(100% - 74px);\n}\n.comment__content--author {\n  font-size: 18px;\n}\n.comment__content--author a {\n  color: #1C86D1;\n}\n.comment__content--time {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  font-size: 12px;\n  margin-top: 2px;\n  color: #ddd;\n  cursor: default;\n}\n.comment__content--time:hover {\n  color: #1C86D1;\n}\n.comment__content--content {\n  font-size: 0px;\n  line-height: 1.4;\n  padding: 24px 0 0 0px;\n  white-space: pre;\n}\n.comment__content--content h1.text-effect-basic {\n  text-fill-color: transparent;\n  background-clip: text;\n  -webkit-text-fill-color: transparent;\n  -webkit-background-clip: text;\n  background-size: 200% 200%;\n  -webkit-animation: masked 3s infinite linear;\n          animation: masked 3s infinite linear;\n}\n.comment__content--content h1 {\n  margin-top: 10px;\n  padding-bottom: 10px;\n  font-size: 25px;\n  color: #7c795d;\n  font-weight: normal;\n  line-height: 1.1;\n  border-bottom: 1px solid #7c795d;\n}\n.comment__content--content h2 {\n  margin: 5px 0;\n  height: 30px;\n  text-indent: 5px;\n  color: #7c795d;\n  font: 400 20px/30px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  border-left: 5px solid #1C86D1;\n}\n.comment__content--content pre,\n.comment__content--content p,\n.comment__content--content code {\n  -moz-tab-size: 2;\n    -o-tab-size: 2;\n       tab-size: 2;\n  white-space: pre-wrap;\n  word-break: break-all;\n}\n.comment__content--content p,\n.comment__content--content code {\n  font-size: 14px;\n}\n.comment__content--content strong {\n  font-size: 16px;\n}\n.comment__content--content a {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  color: #1C86D1;\n  margin: 0px 2px;\n}\n.comment__content--content a:hover {\n  color: #C91523;\n}\n.comment__content--content img {\n  max-width: 512px;\n}\n.comment__content--content table {\n  border-radius: 5px;\n  display: table-caption;\n  margin: 20px 0;\n  padding: 8px;\n  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);\n  white-space: normal;\n  border-collapse: collapse;\n}\n.comment__content--content table tr {\n  border: 1px solid #000;\n}\n.comment__content--content table tr td,\n.comment__content--content table tr th {\n  font-size: 14px;\n  padding: 5px;\n}\n.comment__content--content table tr td {\n  font-weight: 200;\n  border: 1px solid #000;\n}\n.comment__content--content blockquote {\n  border-radius: 5px;\n  position: relative;\n  background: #CCD0D5;\n  padding: 25px 10px 10px 30px;\n  overflow: hidden;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n}\n.comment__content--content blockquote::before {\n  position: absolute;\n  top: 0;\n  left: 0;\n  font-size: 14px;\n  background: -webkit-linear-gradient(112deg, transparent 50%, #1C86D1 50%);\n  background: linear-gradient(-22deg, transparent 50%, #1C86D1 50%);\n  width: 80px;\n  height: 30px;\n  display: block;\n  content: \"\\5F15\\8FF0\";\n  color: #fff;\n  padding: 3px 0 0 4px;\n}\n.comment__content--content pre {\n  border-radius: 5px;\n  overflow: hidden;\n  padding: 15px 0px 15px 8px;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n  margin: 15px 0;\n  background: #49483e;\n}\n.comment__content--content pre code {\n  color: #a6e22e;\n}\n.comment__content--content pre code .hljs-comment,\n.comment__content--content pre code .hljs-quote {\n  color: #999580;\n}\n.comment__content--content pre code .hljs-variable,\n.comment__content--content pre code .hljs-template-variable,\n.comment__content--content pre code .hljs-attr,\n.comment__content--content pre code .hljs-tag,\n.comment__content--content pre code .hljs-name,\n.comment__content--content pre code .hljs-regexp,\n.comment__content--content pre code .hljs-link,\n.comment__content--content pre code .hljs-name,\n.comment__content--content pre code .hljs-selector-id,\n.comment__content--content pre code .hljs-selector-class {\n  color: #f2777a;\n}\n.comment__content--content pre code .hljs-number,\n.comment__content--content pre code .hljs-meta,\n.comment__content--content pre code .hljs-built_in,\n.comment__content--content pre code .hljs-builtin-name,\n.comment__content--content pre code .hljs-literal,\n.comment__content--content pre code .hljs-type,\n.comment__content--content pre code .hljs-params {\n  color: #ae81ff;\n}\n.comment__content--content pre code .hljs-string,\n.comment__content--content pre code .hljs-symbol,\n.comment__content--content pre code .hljs-bullet {\n  color: #e6db74;\n}\n.comment__content--content pre code .hljs-title,\n.comment__content--content pre code .hljs-section {\n  color: #6684e1;\n}\n.comment__content--content pre code .hljs-keyword,\n.comment__content--content pre code .hljs-selector-tag {\n  color: #66D9EF;\n}\n.comment__content--content pre code .hljs {\n  display: block;\n  overflow-x: auto;\n  background: #20201d;\n  color: #a6a28c;\n  padding: 0.5em;\n}\n.comment__content--content pre code .hljs-emphasis {\n  font-style: italic;\n}\n.comment__content--content pre code .hljs-strong {\n  font-weight: bold;\n}\n.comment__content--content ol {\n  counter-reset: section;\n  padding: 10px 0 10px 20px;\n}\n.comment__content--content ol > li {\n  position: relative;\n  min-height: 20px;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  margin: 5px 0px;\n}\n.comment__content--content ol > li:before {\n  counter-increment: section;\n  content: counters(section, \"\") \".\";\n  display: inline-block;\n  position: absolute;\n  top: 0;\n  left: -20px;\n  font-size: 16px;\n  font-weight: bold;\n  font-style: italic;\n}\n.comment__content--content ol > li:nth-of-type(3n+1)::before {\n  color: #FE0002;\n}\n.comment__content--content ol > li:nth-of-type(3n+2)::before {\n  color: #F4F800;\n}\n.comment__content--content ol > li:nth-of-type(3n+3)::before {\n  color: #A3DF03;\n}\n.comment__content--content ul {\n  padding: 10px 0 10px 15px;\n}\n.comment__content--content ul > li {\n  position: relative;\n  margin-bottom: 10px;\n  line-height: 1.1;\n  min-height: 20px;\n  word-break: break-all;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n}\n.comment__content--content ul > li::before {\n  border-radius: 50%;\n  position: absolute;\n  top: 6px;\n  left: -13px;\n  content: \"\";\n  display: inline-block;\n  width: 8px;\n  height: 8px;\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #1C86D1 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #1C86D1 100%);\n}\n.comment__content--content ul > li:hover::before {\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #91E22E 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #91E22E 100%);\n}\n.comment__content--options {\n  padding-top: 15px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.comment__content--options__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-flex: 8;\n      -ms-flex-positive: 8;\n          flex-grow: 8;\n}\n.comment__content--options__wrap a {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.comment__content--options__wrap a i {\n  width: 16px;\n  height: 16px;\n  background-image: url(\"/img/icon.png\");\n}\n.comment__content--options__wrap a span {\n  font-size: 12px;\n  margin-left: 3px;\n  color: #272636;\n}\n.comment__content--options__wrap a:hover span {\n  color: #1C86D1;\n}\n.comment__content--options__wrap a:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.comment__content--options__callback i {\n  background-position: -5px 0px;\n}\n.comment__content--options__del {\n  margin-left: 8px;\n}\n.comment__content--options__del i {\n  background-position: -5px -16px;\n}\n.comment__options__vote-up {\n  text-align: right;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n.comment__options__vote-up button {\n  font-size: 18px;\n}\n.comment__options__vote-up button:hover {\n  color: #1C86D1;\n}\n.comment__options__has-voted-up {\n  text-align: right;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n.comment__options__has-voted-up button {\n  font-size: 18px;\n  color: #C91523;\n  cursor: default;\n}\n.comment__options__has-voted-up button span {\n  font-size: 18px;\n}\n.feedback__content {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  overflow: hidden;\n  width: 100%;\n  margin: 20px 10px 10px 5px;\n  padding: 0 0 0 74px;\n}\n.feedback__content--main {\n  border-radius: 5px;\n  position: relative;\n  border: 1px solid #272636;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  padding: 5px;\n  margin: 20px 0 0;\n}\n.feedback__content--main::after,\n.feedback__content--main::before {\n  content: \"\";\n  height: 0;\n  position: absolute;\n  left: 30px;\n}\n.feedback__content--main::after {\n  top: -20px;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #272636;\n}\n.feedback__content--main::before {\n  z-index: 2;\n  top: -19px;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #fff;\n}\n.sub__feedback {\n  margin: 5px 0;\n}\n.sub__feedback span {\n  font-size: 18px;\n  color: #1C86D1;\n}\n.feedback__wrap--content {\n  width: calc(100% - 74px);\n}\n.feedback__content--avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.feedback__content--avatar > img:hover,\n.feedback__content--avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.feedback__wrap--content {\n  width: calc(100% - 74px);\n}\n.feedback__content--author {\n  font-size: 18px;\n}\n.feedback__content--author a {\n  color: #1C86D1;\n}\n.feedback__content--time {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  font-size: 12px;\n  margin-top: 2px;\n  color: #ddd;\n  cursor: default;\n}\n.feedback__content--time:hover {\n  color: #1C86D1;\n}\n.feedback__content--content {\n  font-size: 0px;\n  line-height: 1.4;\n  padding: 24px 0 0 0px;\n  white-space: pre;\n}\n.feedback__content--content h1.text-effect-basic {\n  text-fill-color: transparent;\n  background-clip: text;\n  -webkit-text-fill-color: transparent;\n  -webkit-background-clip: text;\n  background-size: 200% 200%;\n  -webkit-animation: masked 3s infinite linear;\n          animation: masked 3s infinite linear;\n}\n.feedback__content--content h1 {\n  margin-top: 10px;\n  padding-bottom: 10px;\n  font-size: 25px;\n  color: #7c795d;\n  font-weight: normal;\n  line-height: 1.1;\n  border-bottom: 1px solid #7c795d;\n}\n.feedback__content--content h2 {\n  margin: 5px 0;\n  height: 30px;\n  text-indent: 5px;\n  color: #7c795d;\n  font: 400 20px/30px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  border-left: 5px solid #1C86D1;\n}\n.feedback__content--content pre,\n.feedback__content--content p,\n.feedback__content--content code {\n  -moz-tab-size: 2;\n    -o-tab-size: 2;\n       tab-size: 2;\n  white-space: pre-wrap;\n  word-break: break-all;\n}\n.feedback__content--content p,\n.feedback__content--content code {\n  font-size: 14px;\n}\n.feedback__content--content strong {\n  font-size: 16px;\n}\n.feedback__content--content a {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  color: #1C86D1;\n  margin: 0px 2px;\n}\n.feedback__content--content a:hover {\n  color: #C91523;\n}\n.feedback__content--content img {\n  max-width: 512px;\n}\n.feedback__content--content table {\n  border-radius: 5px;\n  display: table-caption;\n  margin: 20px 0;\n  padding: 8px;\n  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);\n  white-space: normal;\n  border-collapse: collapse;\n}\n.feedback__content--content table tr {\n  border: 1px solid #000;\n}\n.feedback__content--content table tr td,\n.feedback__content--content table tr th {\n  font-size: 14px;\n  padding: 5px;\n}\n.feedback__content--content table tr td {\n  font-weight: 200;\n  border: 1px solid #000;\n}\n.feedback__content--content blockquote {\n  border-radius: 5px;\n  position: relative;\n  background: #CCD0D5;\n  padding: 25px 10px 10px 30px;\n  overflow: hidden;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n}\n.feedback__content--content blockquote::before {\n  position: absolute;\n  top: 0;\n  left: 0;\n  font-size: 14px;\n  background: -webkit-linear-gradient(112deg, transparent 50%, #1C86D1 50%);\n  background: linear-gradient(-22deg, transparent 50%, #1C86D1 50%);\n  width: 80px;\n  height: 30px;\n  display: block;\n  content: \"\\5F15\\8FF0\";\n  color: #fff;\n  padding: 3px 0 0 4px;\n}\n.feedback__content--content pre {\n  border-radius: 5px;\n  overflow: hidden;\n  padding: 15px 0px 15px 8px;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n  margin: 15px 0;\n  background: #49483e;\n}\n.feedback__content--content pre code {\n  color: #a6e22e;\n}\n.feedback__content--content pre code .hljs-comment,\n.feedback__content--content pre code .hljs-quote {\n  color: #999580;\n}\n.feedback__content--content pre code .hljs-variable,\n.feedback__content--content pre code .hljs-template-variable,\n.feedback__content--content pre code .hljs-attr,\n.feedback__content--content pre code .hljs-tag,\n.feedback__content--content pre code .hljs-name,\n.feedback__content--content pre code .hljs-regexp,\n.feedback__content--content pre code .hljs-link,\n.feedback__content--content pre code .hljs-name,\n.feedback__content--content pre code .hljs-selector-id,\n.feedback__content--content pre code .hljs-selector-class {\n  color: #f2777a;\n}\n.feedback__content--content pre code .hljs-number,\n.feedback__content--content pre code .hljs-meta,\n.feedback__content--content pre code .hljs-built_in,\n.feedback__content--content pre code .hljs-builtin-name,\n.feedback__content--content pre code .hljs-literal,\n.feedback__content--content pre code .hljs-type,\n.feedback__content--content pre code .hljs-params {\n  color: #ae81ff;\n}\n.feedback__content--content pre code .hljs-string,\n.feedback__content--content pre code .hljs-symbol,\n.feedback__content--content pre code .hljs-bullet {\n  color: #e6db74;\n}\n.feedback__content--content pre code .hljs-title,\n.feedback__content--content pre code .hljs-section {\n  color: #6684e1;\n}\n.feedback__content--content pre code .hljs-keyword,\n.feedback__content--content pre code .hljs-selector-tag {\n  color: #66D9EF;\n}\n.feedback__content--content pre code .hljs {\n  display: block;\n  overflow-x: auto;\n  background: #20201d;\n  color: #a6a28c;\n  padding: 0.5em;\n}\n.feedback__content--content pre code .hljs-emphasis {\n  font-style: italic;\n}\n.feedback__content--content pre code .hljs-strong {\n  font-weight: bold;\n}\n.feedback__content--content ol {\n  counter-reset: section;\n  padding: 10px 0 10px 20px;\n}\n.feedback__content--content ol > li {\n  position: relative;\n  min-height: 20px;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  margin: 5px 0px;\n}\n.feedback__content--content ol > li:before {\n  counter-increment: section;\n  content: counters(section, \"\") \".\";\n  display: inline-block;\n  position: absolute;\n  top: 0;\n  left: -20px;\n  font-size: 16px;\n  font-weight: bold;\n  font-style: italic;\n}\n.feedback__content--content ol > li:nth-of-type(3n+1)::before {\n  color: #FE0002;\n}\n.feedback__content--content ol > li:nth-of-type(3n+2)::before {\n  color: #F4F800;\n}\n.feedback__content--content ol > li:nth-of-type(3n+3)::before {\n  color: #A3DF03;\n}\n.feedback__content--content ul {\n  padding: 10px 0 10px 15px;\n}\n.feedback__content--content ul > li {\n  position: relative;\n  margin-bottom: 10px;\n  line-height: 1.1;\n  min-height: 20px;\n  word-break: break-all;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n}\n.feedback__content--content ul > li::before {\n  border-radius: 50%;\n  position: absolute;\n  top: 6px;\n  left: -13px;\n  content: \"\";\n  display: inline-block;\n  width: 8px;\n  height: 8px;\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #1C86D1 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #1C86D1 100%);\n}\n.feedback__content--content ul > li:hover::before {\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #91E22E 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #91E22E 100%);\n}\n.feedback__content--options {\n  padding-top: 15px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.feedback__content--options__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 8;\n      -ms-flex-positive: 8;\n          flex-grow: 8;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.feedback__content--options__wrap a {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.feedback__content--options__wrap a i {\n  width: 16px;\n  height: 16px;\n  background-image: url(\"/img/icon.png\");\n}\n.feedback__content--options__wrap a span {\n  font-size: 12px;\n  margin-left: 3px;\n  color: #272636;\n}\n.feedback__content--options__wrap a:hover span {\n  color: #1C86D1;\n}\n.feedback__content--options__wrap a:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.feedback__content--options__callback i {\n  background-position: -5px 0px;\n}\n.feedback__content--options__del {\n  margin-left: 8px;\n}\n.feedback__content--options__del i {\n  background-position: -5px -16px;\n}\n.feedback__options__vote-up {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  text-align: right;\n}\n.feedback__options__vote-up button {\n  font-size: 18px;\n}\n.feedback__options__vote-up button:hover {\n  color: #1C86D1;\n}\n.editer-wrap {\n  margin-top: 20px;\n}\n.editer-wrap .comment__feedback {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  width: 100%;\n  border-top: none;\n}\n.editer-wrap .editer-wrap__avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.editer-wrap .editer-wrap__avatar > img:hover,\n.editer-wrap .editer-wrap__avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.editer-wrap .editer-wrap__avatar img {\n  height: 100%;\n}\n.editer-wrap .comment__feedback--edit {\n  min-height: 150px;\n}\n.editer-wrap .comment__feddback--btns {\n  width: 100%;\n}\n.login__table__bg {\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 999998;\n  background: rgba(0, 0, 0, 0.4);\n}\n.login__table {\n  border-radius: 5px;\n  box-shadow: 0 0 10px #000000;\n  position: fixed;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  margin: auto;\n  width: 320px;\n  height: 340px;\n  border: 1px solid rgba(0, 0, 0, 0.3);\n  background: #fff;\n  z-index: 999999;\n}\n.login__table__wrap {\n  overflow: hidden;\n  padding: 0 10px;\n}\n.login__table__header {\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 40px;\n}\n.login__table__header button {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  line-height: 50px;\n}\n.state__bar {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  bottom: 0;\n  left: 32px;\n  width: 80px;\n  height: 2px;\n  background: #1C86D1;\n}\n.state__bar:hover {\n  color: #1C86D1;\n}\n.state__bar--toggle {\n  left: 186px;\n}\n.login__table__forms {\n  position: relative;\n  height: 300px;\n}\n.login__table__forms form {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  top: 0;\n  left: 0;\n}\n.tourist__login {\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  padding-top: 50px;\n}\n.input__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  padding: 5px 0;\n  line-height: 20px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  margin-bottom: 15px;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n}\n.input__wrap p {\n  width: 60px;\n}\n.input__wrap input[type=\"text\"] {\n  border-radius: 5px;\n  border: 1px solid #272636;\n  padding: 5px;\n  width: 180px;\n  height: 27px;\n}\n.input__wrap label {\n  display: inline-block;\n  width: 100%;\n  height: 20px;\n  font-size: 12px;\n  color: #B61D1D;\n  padding: 5px 30px 0 0;\n  text-align: right;\n}\ninput[type=\"button\"].tourist__login--submit {\n  border-radius: 5px;\n  width: 180px;\n  height: 35px;\n  color: #fff;\n  background: #1C86D1;\n  margin: 30px auto 0;\n  cursor: pointer;\n}\n.sns__login {\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 20px;\n}\n.sns__login div {\n  width: 70px;\n  height: 70px;\n  background: red;\n}\n.alert__wrap {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 99999999;\n  background: rgba(0, 0, 0, 0.8);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  overflow: hidden;\n}\n.alert__plane {\n  width: 100%;\n  height: 0px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background: rgba(255, 255, 255, 0.65);\n  -webkit-animation: alert_plane_animate .5s;\n          animation: alert_plane_animate .5s;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n.alert__plane header {\n  width: 100%;\n  height: 8px;\n  background: -webkit-linear-gradient(left, #F00001 12.5%, transparent 0px), -webkit-linear-gradient(left, #FF7F00 25%, transparent 0px), -webkit-linear-gradient(left, #E1E23B 37.5%, transparent 0px), -webkit-linear-gradient(left, #007940 50%, transparent 0px), -webkit-linear-gradient(left, #4041FE 62.5%, transparent 0px), -webkit-linear-gradient(left, #A001C0 75%, transparent 0px), -webkit-linear-gradient(left, #F7941E 87.5%, transparent 0px), -webkit-linear-gradient(left, #9AC147 100%, transparent 0px);\n  background: linear-gradient(to right, #F00001 12.5%, transparent 0px), linear-gradient(to right, #FF7F00 25%, transparent 0px), linear-gradient(to right, #E1E23B 37.5%, transparent 0px), linear-gradient(to right, #007940 50%, transparent 0px), linear-gradient(to right, #4041FE 62.5%, transparent 0px), linear-gradient(to right, #A001C0 75%, transparent 0px), linear-gradient(to right, #F7941E 87.5%, transparent 0px), linear-gradient(to right, #9AC147 100%, transparent 0px);\n  background-repeat: no-repeat;\n}\n.alert__plane footer {\n  width: 100%;\n  height: 42px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.alert__plane footer label {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  height: 100%;\n  cursor: pointer;\n  line-height: 42px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.alert__plane footer label:hover button {\n  color: #1C86D1;\n}\n.alert__plane footer label:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.alert__plane footer label:hover i::before {\n  -webkit-transform: scale(1);\n          transform: scale(1);\n}\n.alert__plane footer i {\n  position: relative;\n  width: 20px;\n  height: 20px;\n  background-image: url(\"/img/icon.png\");\n}\n.alert__plane footer i::before {\n  border-radius: 50%;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  content: \"\";\n  display: block;\n  width: 20px;\n  height: 20px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  z-index: -1;\n  background: #1C86D1;\n  -webkit-transform: scale(0);\n          transform: scale(0);\n}\n.alert__plane footer .alert__plane--btn_sure {\n  background-position: -4px -59px;\n}\n.alert__plane footer .alert__plane--btn_cancel {\n  background-position: -4px -36px;\n}\n.alert__plane footer button {\n  font-size: 18px;\n}\n@-webkit-keyframes alert_plane_animate {\n  0% {\n    height: 0;\n  }\n  100% {\n    height: 280px;\n  }\n}\n@keyframes alert_plane_animate {\n  0% {\n    height: 0;\n  }\n  100% {\n    height: 280px;\n  }\n}\n.alert__plane--question {\n  width: 100%;\n  height: 230px;\n  padding-top: 50px;\n  text-align: center;\n  font-size: 30px;\n  font-weight: 100;\n  line-height: 1.2;\n  overflow: hidden;\n  color: rgba(0, 0, 0, 0.7);\n}\n", ""]);
+	exports.push([module.id, "@charset \"utf-8\";\n* {\n  box-sizing: border-box;\n  font-family: arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  font-size: 14px;\n  outline: none;\n}\nbody {\n  margin: 0;\n  padding: 0;\n  font-size: 0;\n}\na {\n  -webkit-transition: 5s;\n  transition: 5s;\n  text-decoration: none;\n}\nul,\nol {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\nselect {\n  -webkit-appearance: none;\n     -moz-appearance: none;\n          appearance: none;\n}\nh1,\nh2,\nh3 {\n  margin-bottom: 1em;\n}\np,\npre {\n  margin: 0;\n}\nblockquote {\n  margin: 0;\n}\ninput[type=\"submit\"],\nbutton {\n  display: inline-block;\n  border-radius: 0;\n  border: none;\n  padding: 0;\n  background: none;\n  cursor: pointer;\n}\nfigure {\n  margin: 0;\n}\ni {\n  display: inline-block;\n}\n.none {\n  display: none !important;\n}\n.b-c {\n  position: fixed;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  margin: auto;\n}\n.hidden {\n  height: 0 !important;\n}\n@-webkit-keyframes swing {\n  20%,\n  40%,\n  60%,\n  80%,\n  100% {\n    -webkit-transform-origin: topcenter;\n            transform-origin: topcenter;\n  }\n  20% {\n    -webkit-transform: rotate(15deg);\n            transform: rotate(15deg);\n  }\n  40% {\n    -webkit-transform: rotate(-10deg);\n            transform: rotate(-10deg);\n  }\n  60% {\n    -webkit-transform: rotate(5deg);\n            transform: rotate(5deg);\n  }\n  80% {\n    -webkit-transform: rotate(-5deg);\n            transform: rotate(-5deg);\n  }\n  100% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n  }\n}\n@keyframes swing {\n  20%,\n  40%,\n  60%,\n  80%,\n  100% {\n    -webkit-transform-origin: topcenter;\n            transform-origin: topcenter;\n  }\n  20% {\n    -webkit-transform: rotate(15deg);\n            transform: rotate(15deg);\n  }\n  40% {\n    -webkit-transform: rotate(-10deg);\n            transform: rotate(-10deg);\n  }\n  60% {\n    -webkit-transform: rotate(5deg);\n            transform: rotate(5deg);\n  }\n  80% {\n    -webkit-transform: rotate(-5deg);\n            transform: rotate(-5deg);\n  }\n  100% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n  }\n}\n@-webkit-keyframes masked {\n  0% {\n    background-position: 0 0;\n  }\n  100% {\n    background-position: -100% 0;\n  }\n}\n@keyframes masked {\n  0% {\n    background-position: 0 0;\n  }\n  100% {\n    background-position: -100% 0;\n  }\n}\n.comment__feedback__wrap {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  overflow: hidden;\n  background: #fbfbfb;\n  width: 100%;\n  margin-top: 20px;\n}\n.comment__feedback__box__syntaxs {\n  border-radius: 5px 5px 0 0;\n  border: 1px solid #272636;\n}\n.comment__feedback__box__syntaxs .syntaxs__list {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 32px;\n  -ms-flex-flow: row no-wrap;\n      flex-flow: row no-wrap;\n}\n.comment__feedback__box__syntaxs .syntaxs__list li {\n  width: 32px;\n  height: 32px;\n  margin: 0 4px;\n  background-image: url(\"/img/icon.png\");\n  cursor: pointer;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .bold {\n  background-position: 6px -79px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .bold:hover {\n  background: url(\"/img/icon-hover.png\") 6px -79px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .italic {\n  background-position: 8px -127px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .italic:hover {\n  background: url(\"/img/icon-hover.png\") 8px -127px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .a-link {\n  background-position: 4px -103px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .a-link:hover {\n  background: url(\"/img/icon-hover.png\") 4px -103px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .image {\n  background-position: 4px -151px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .image:hover {\n  background: url(\"/img/icon-hover.png\") 4px -151px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .table {\n  background-position: 4px -175px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .table:hover {\n  background: url(\"/img/icon-hover.png\") 4px -175px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .blockquote-block {\n  background-position: 4px -292px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .blockquote-block:hover {\n  background: url(\"/img/icon-hover.png\") 4px -292px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .u-list {\n  background-position: 2px -223px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .u-list:hover {\n  background: url(\"/img/icon-hover.png\") 2px -223px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .o-list {\n  background-position: 2px -199px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .o-list:hover {\n  background: url(\"/img/icon-hover.png\") 2px -199px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h1-tag {\n  background-position: 4px -247px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h1-tag:hover {\n  background: url(\"/img/icon-hover.png\") 4px -247px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h2-tag {\n  background-position: 4px -269px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h2-tag:hover {\n  background: url(\"/img/icon-hover.png\") 4px -269px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .code-block {\n  background-position: 4px -341px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .code-block:hover {\n  background: url(\"/img/icon-hover.png\") 4px -341px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .emoji-list {\n  background-position: 5px -316px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .emoji-list:hover {\n  background: url(\"/img/icon-hover.png\") 5px -316px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 5px;\n  border-top: 1px solid #272636;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list > div.choice-btn {\n  border-radius: 5px;\n  position: relative;\n  width: 32px;\n  height: 32px;\n  margin: 0 4px;\n  cursor: pointer;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list > div.choice-btn:hover {\n  box-shadow: 0 0 1px 1px #1C86D1;\n}\n.comment__feedback__box__syntaxs input[type=\"text\"] {\n  border-radius: 3px;\n  height: 30px;\n  border: 1px solid #1C86D1;\n  margin-right: 20px;\n  font-size: 14px;\n  text-indent: 5px;\n}\n.comment__feedback__box__syntaxs .insert {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  border-radius: 5px;\n  color: #272636;\n  border: 1px solid #1C86D1;\n  line-height: 30px;\n  width: 70px;\n  height: 30px;\n}\n.comment__feedback__box__syntaxs .insert:hover {\n  background: #1C86D1;\n  color: #fff;\n}\n.comment__feedback__box__syntaxs .code-type-choice__list {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  width: 140px;\n  height: 30px;\n  border: 1px solid #ccc;\n  cursor: pointer;\n  position: relative;\n  border-radius: 3px 3px 0px 0px;\n  color: #929699;\n  font-size: 14px;\n  padding: 0px 5px;\n  margin-right: 20px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.comment__feedback__box__syntaxs .code-type-choice__list p {\n  width: 100px;\n}\n.comment__feedback__box__syntaxs .code-type-choice__list::after {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  content: \"\";\n  width: 16px;\n  height: 16px;\n  display: block;\n  background: url(\"/img/icon.png\") -30px 0px;\n}\n.comment__feedback__box__syntaxs .code-type-choice__list > ul {\n  position: absolute;\n  bottom: -120px;\n  left: -1px;\n  width: 140px;\n  height: 120px;\n  padding: 5px 0;\n  overflow: hidden;\n  z-index: 1234;\n  border-radius: 0px 0px 3px 3px;\n  background: #E6E6E6;\n  border: 1px solid #ccc;\n}\n.comment__feedback__box__syntaxs .code-type-choice__list > ul li {\n  height: 25px;\n  line-height: 25px;\n  padding: 0px 5px;\n}\n.comment__feedback__box__syntaxs .code-type-choice__list > ul li:hover {\n  color: #fff;\n  background: #1C86D1;\n}\n.comment__feedback__box__syntaxs .table-size-matrix {\n  border-collapse: collapse;\n  margin: 10px 0 10px 90px;\n}\n.comment__feedback__box__syntaxs .table-size-matrix tr,\n.comment__feedback__box__syntaxs .table-size-matrix td {\n  border: 1px solid #ccc;\n}\n.comment__feedback__box__syntaxs .table-size-matrix td {\n  padding: 15px;\n}\n.comment__feedback__box__syntaxs .table-matrix-dimension {\n  font-size: 18px;\n  text-decoration: underline;\n  margin: 0 20px;\n}\n.comment__feedback__box__wrap {\n  position: relative;\n}\n.editor__resize__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.editor__resize {\n  display: inline-block;\n  width: 130px;\n  height: 8px;\n  cursor: row-resize;\n  margin-top: 2px;\n  border-top: 1px solid #ccc;\n  border-bottom: 1px solid #ccc;\n}\n.comment__feedback__box {\n  position: relative;\n  width: 100%;\n}\n.comment__feedback {\n  padding: 10px;\n  border-top: 1px solid #272636;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n}\n.comment__feedback h3 {\n  font: 200 24px/1 arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n}\n.login-infos {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  font-size: 16px;\n  padding-bottom: 10px;\n}\n.login-infos a {\n  color: #1C86D1;\n}\n.login-infos .init_prompt {\n  cursor: default;\n  color: rgba(0, 0, 0, 0.5);\n}\n.login-out__btn {\n  border-radius: 5px;\n  float: right;\n  width: 70px;\n  height: 25px;\n  background: #C81623;\n  color: #fff;\n}\n.login-in__btn {\n  border-radius: 5px;\n  float: right;\n  width: 70px;\n  height: 25px;\n  padding: 0 5px;\n  background: #1C86D1;\n  color: #fff;\n}\n.comment__feedback--section {\n  width: calc(100% - 74px);\n}\n.comment__feedback--edit {\n  border-radius: 0px 0px 5px 5px;\n  width: 100%;\n  min-height: 30px;\n  padding: 5px;\n  border: 1px solid #272636;\n  border-top: none;\n  font: 200 14px/1.5 arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  resize: none;\n  overflow: hidden;\n  white-space: pre-wrap;\n  -moz-tab-size: 4;\n    -o-tab-size: 4;\n       tab-size: 4;\n}\n.comment__feedback--btns {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  width: 100%;\n  margin-top: 10px;\n}\n.comment__feedback--btns button {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  border-radius: 5px;\n  line-height: 30px;\n  width: 70px;\n  height: 30px;\n}\n.feedback--btns__reset {\n  color: #C81623;\n  border: 1px solid #C81623;\n}\n.feedback--btns__reset:hover {\n  background: #C81623;\n  color: #fff;\n}\n.feedback--btns__comment {\n  margin-left: 10px;\n  color: #272636;\n  border: 1px solid #1C86D1;\n}\n.feedback--btns__comment:hover {\n  background: #1C86D1;\n  color: #fff;\n}\n.comment__feedback__mask {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  border-radius: 2px;\n  position: absolute;\n  top: 0;\n  left: 1px;\n  width: 604px;\n  height: 149px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  cursor: default;\n  background: #ccc;\n}\n.comment__feedback__mask p {\n  color: #fff;\n}\n.comment__feedback__mask--title {\n  font: 100 60px/60px \"\\5FAE\\8F6F\\96C5\\9ED1\";\n}\n.comment__feedback__mask--pinyin {\n  margin-top: 15px;\n  font: 100 20px/20px arial;\n}\n.clearfix::after {\n  content: \".\";\n  display: block;\n  height: 0;\n  visibility: hidden;\n  clear: both;\n}\n.demo {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  width: 900px;\n  margin: 50px auto 50px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  padding: 0 100px;\n}\n.comment__wrap {\n  width: 100%;\n}\n.comment__header {\n  border-radius: 5px;\n  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.6);\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -moz-justify-content: space-between;\n  height: 50px;\n  background: #1C86D1;\n  color: #fff;\n  font-size: 0;\n  padding: 5px 8px;\n}\n.comment__header::after {\n  content: \"\";\n  display: block;\n  position: absolute;\n  left: 41px;\n  bottom: -20px;\n  height: 0px;\n  border: 10px solid transparent;\n  border-top: 10px solid #1C86D1;\n}\n.comment__header .comment__header__span {\n  width: 150px;\n  height: 16px;\n  font: 200 16px/16px arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  margin-left: 10px;\n}\n.comment__header .comment__header__btns {\n  width: 80px;\n  height: 30px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.comment__header .comment__header__btns button {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  display: inline-block;\n  width: 40px;\n  height: 30px;\n  color: #fff;\n  font-size: 14px;\n}\n.comment__header .comment__header__btns button:hover {\n  color: #d32;\n}\n.comment__footer {\n  border-radius: 5px;\n  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.6);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  position: relative;\n  height: 70px;\n  background: #1C86D1;\n}\n.comment__footer::before {\n  content: \"\";\n  display: block;\n  position: absolute;\n  top: -20px;\n  left: 41px;\n  height: 0;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #1C86D1;\n}\n.comment__pagination {\n  border-radius: 5px;\n  box-shadow: 0 0 2px rgba(0, 0, 0, 0.7);\n  overflow: hidden;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 35px;\n}\n.comment__pagination li {\n  -webkit-transition: 0.3s;\n  transition: 0.3s;\n  width: 40px;\n  height: 100%;\n  color: #fff;\n  text-align: center;\n  cursor: pointer;\n}\n.comment__pagination li:hover {\n  color: #1C86D1;\n  background: #fff;\n}\n.comment__pagination li div {\n  padding: 10px 0;\n  height: 100%;\n  line-height: 15px;\n}\n.comment__pagination li > div.active {\n  color: #1C86D1;\n  background: #fff;\n  border-left: none !important;\n}\n.comment__pagination li:not(:nth-of-type(1)) div {\n  border-left: 1px solid rgba(0, 0, 0, 0.2);\n}\n.comment__list {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  margin: 0 0 0 50px;\n  border-left: 2px solid #1C86D1;\n}\n.no__comment__item {\n  padding: 20px;\n  text-align: center;\n}\n.no__comment__item p {\n  border-radius: 5px;\n  height: 70px;\n  font-size: 24px;\n  line-height: 70px;\n  color: rgba(0, 0, 0, 0.6);\n  border: 1px solid #272636;\n}\n.comment__item {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: relative;\n  padding: 20px;\n}\n.comment__item::after {\n  border-radius: 50%;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  left: -8px;\n  top: 40px;\n  content: \"\";\n  display: block;\n  background: #1C86D1;\n  width: 10px;\n  height: 10px;\n  border: 2px solid #fff;\n}\n.comment__item:hover::after {\n  background: #51CA65;\n}\n.comment__item:hover .comment__content {\n  -webkit-transform: translateX(15px);\n          transform: translateX(15px);\n}\n.comment__content {\n  border-radius: 5px;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n  padding: 10px;\n  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);\n}\n.comment__author--avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.comment__author--avatar > img:hover,\n.comment__author--avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.comment__content--main {\n  width: calc(100% - 74px);\n}\n.comment__content--author {\n  font-size: 18px;\n}\n.comment__content--author a {\n  color: #1C86D1;\n}\n.comment__content--time {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  font-size: 12px;\n  margin-top: 2px;\n  color: #ddd;\n  cursor: default;\n}\n.comment__content--time:hover {\n  color: #1C86D1;\n}\n.comment__content--content {\n  font-size: 0px;\n  line-height: 1.4;\n  padding: 24px 0 0 0px;\n  white-space: pre;\n}\n.comment__content--content h1.text-effect-basic {\n  text-fill-color: transparent;\n  background-clip: text;\n  -webkit-text-fill-color: transparent;\n  -webkit-background-clip: text;\n  background-size: 200% 200%;\n  -webkit-animation: masked 3s infinite linear;\n          animation: masked 3s infinite linear;\n}\n.comment__content--content h1 {\n  margin-top: 10px;\n  padding-bottom: 10px;\n  font-size: 25px;\n  color: #7c795d;\n  font-weight: normal;\n  line-height: 1.1;\n  border-bottom: 1px solid #7c795d;\n}\n.comment__content--content h2 {\n  margin: 5px 0;\n  height: 30px;\n  text-indent: 5px;\n  color: #7c795d;\n  font: 400 20px/30px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  border-left: 5px solid #1C86D1;\n}\n.comment__content--content pre,\n.comment__content--content p,\n.comment__content--content code {\n  -moz-tab-size: 2;\n    -o-tab-size: 2;\n       tab-size: 2;\n  white-space: pre-wrap;\n  word-break: break-all;\n}\n.comment__content--content p,\n.comment__content--content code {\n  font-size: 14px;\n}\n.comment__content--content strong {\n  font-size: 16px;\n}\n.comment__content--content a {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  color: #1C86D1;\n  margin: 0px 2px;\n}\n.comment__content--content a:hover {\n  color: #C91523;\n}\n.comment__content--content img {\n  max-width: 512px;\n}\n.comment__content--content table {\n  border-radius: 5px;\n  margin: 20px 0;\n  padding: 8px;\n  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);\n  white-space: normal;\n  border-collapse: collapse;\n}\n.comment__content--content table tr {\n  border: 1px solid #000;\n}\n.comment__content--content table tr td,\n.comment__content--content table tr th {\n  font-size: 14px;\n  padding: 5px;\n  word-break: break-word;\n}\n.comment__content--content table tr td {\n  font-weight: 200;\n  border: 1px solid #000;\n}\n.comment__content--content blockquote {\n  border-radius: 5px;\n  position: relative;\n  background: #CCD0D5;\n  padding: 25px 10px 10px 30px;\n  overflow: hidden;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n}\n.comment__content--content blockquote::before {\n  position: absolute;\n  top: 0;\n  left: 0;\n  font-size: 14px;\n  background: -webkit-linear-gradient(112deg, transparent 50%, #1C86D1 50%);\n  background: linear-gradient(-22deg, transparent 50%, #1C86D1 50%);\n  width: 80px;\n  height: 30px;\n  display: block;\n  content: \"\\5F15\\8FF0\";\n  color: #fff;\n  padding: 3px 0 0 4px;\n}\n.comment__content--content pre {\n  border-radius: 5px;\n  overflow: hidden;\n  padding: 15px 0px 15px 8px;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n  margin: 15px 0;\n  background: #49483e;\n}\n.comment__content--content pre code {\n  color: #a6e22e;\n}\n.comment__content--content pre code .hljs-comment,\n.comment__content--content pre code .hljs-quote {\n  color: #999580;\n}\n.comment__content--content pre code .hljs-variable,\n.comment__content--content pre code .hljs-template-variable,\n.comment__content--content pre code .hljs-attr,\n.comment__content--content pre code .hljs-tag,\n.comment__content--content pre code .hljs-name,\n.comment__content--content pre code .hljs-regexp,\n.comment__content--content pre code .hljs-link,\n.comment__content--content pre code .hljs-name,\n.comment__content--content pre code .hljs-selector-id,\n.comment__content--content pre code .hljs-selector-class {\n  color: #f2777a;\n}\n.comment__content--content pre code .hljs-number,\n.comment__content--content pre code .hljs-meta,\n.comment__content--content pre code .hljs-built_in,\n.comment__content--content pre code .hljs-builtin-name,\n.comment__content--content pre code .hljs-literal,\n.comment__content--content pre code .hljs-type,\n.comment__content--content pre code .hljs-params {\n  color: #ae81ff;\n}\n.comment__content--content pre code .hljs-string,\n.comment__content--content pre code .hljs-symbol,\n.comment__content--content pre code .hljs-bullet {\n  color: #e6db74;\n}\n.comment__content--content pre code .hljs-title,\n.comment__content--content pre code .hljs-section {\n  color: #6684e1;\n}\n.comment__content--content pre code .hljs-keyword,\n.comment__content--content pre code .hljs-selector-tag {\n  color: #66D9EF;\n}\n.comment__content--content pre code .hljs {\n  display: block;\n  overflow-x: auto;\n  background: #20201d;\n  color: #a6a28c;\n  padding: 0.5em;\n}\n.comment__content--content pre code .hljs-emphasis {\n  font-style: italic;\n}\n.comment__content--content pre code .hljs-strong {\n  font-weight: bold;\n}\n.comment__content--content ol {\n  counter-reset: section;\n  padding: 10px 0 10px 20px;\n}\n.comment__content--content ol > li {\n  position: relative;\n  min-height: 20px;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  margin: 5px 0px;\n}\n.comment__content--content ol > li:before {\n  counter-increment: section;\n  content: counters(section, \"\") \".\";\n  display: inline-block;\n  position: absolute;\n  top: 0;\n  left: -20px;\n  font-size: 16px;\n  font-weight: bold;\n  font-style: italic;\n}\n.comment__content--content ol > li:nth-of-type(3n+1)::before {\n  color: #FE0002;\n}\n.comment__content--content ol > li:nth-of-type(3n+2)::before {\n  color: #F4F800;\n}\n.comment__content--content ol > li:nth-of-type(3n+3)::before {\n  color: #A3DF03;\n}\n.comment__content--content ul {\n  padding: 10px 0 10px 15px;\n}\n.comment__content--content ul > li {\n  position: relative;\n  margin-bottom: 10px;\n  line-height: 1.1;\n  min-height: 20px;\n  word-break: break-all;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n}\n.comment__content--content ul > li::before {\n  border-radius: 50%;\n  position: absolute;\n  top: 6px;\n  left: -13px;\n  content: \"\";\n  display: inline-block;\n  width: 8px;\n  height: 8px;\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #1C86D1 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #1C86D1 100%);\n}\n.comment__content--content ul > li:hover::before {\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #91E22E 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #91E22E 100%);\n}\n.comment__content--options {\n  padding-top: 15px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.comment__content--options__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-flex: 8;\n      -ms-flex-positive: 8;\n          flex-grow: 8;\n}\n.comment__content--options__wrap a {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.comment__content--options__wrap a i {\n  width: 16px;\n  height: 16px;\n  background-image: url(\"/img/icon.png\");\n}\n.comment__content--options__wrap a span {\n  font-size: 12px;\n  margin-left: 3px;\n  color: #272636;\n}\n.comment__content--options__wrap a:hover span {\n  color: #1C86D1;\n}\n.comment__content--options__wrap a:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.comment__content--options__callback i {\n  background-position: -5px 0px;\n}\n.comment__content--options__del {\n  margin-left: 8px;\n}\n.comment__content--options__del i {\n  background-position: -5px -16px;\n}\n.comment__options__vote-up {\n  text-align: right;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n.comment__options__vote-up button {\n  font-size: 18px;\n}\n.comment__options__vote-up button:hover {\n  color: #1C86D1;\n}\n.comment__options__has-voted-up {\n  text-align: right;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n.comment__options__has-voted-up button {\n  font-size: 18px;\n  color: #C91523;\n  cursor: default;\n}\n.comment__options__has-voted-up button span {\n  font-size: 18px;\n}\n.feedback__content {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  overflow: hidden;\n  width: 100%;\n  margin: 20px 10px 10px 5px;\n}\n.feedback__content--main {\n  border-radius: 5px;\n  position: relative;\n  border: 1px solid #272636;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  padding: 5px;\n  margin: 20px 0 0;\n}\n.feedback__content--main::after,\n.feedback__content--main::before {\n  content: \"\";\n  height: 0;\n  position: absolute;\n  left: 30px;\n}\n.feedback__content--main::after {\n  top: -20px;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #272636;\n}\n.feedback__content--main::before {\n  z-index: 2;\n  top: -19px;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #fff;\n}\n.sub__feedback {\n  margin: 5px 0;\n}\n.sub__feedback span {\n  font-size: 18px;\n  color: #1C86D1;\n}\n.feedback__wrap--content {\n  width: calc(100% - 74px);\n}\n.feedback__content--avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.feedback__content--avatar > img:hover,\n.feedback__content--avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.feedback__wrap--content {\n  width: calc(100% - 74px);\n}\n.feedback__content--author {\n  font-size: 18px;\n}\n.feedback__content--author a {\n  color: #1C86D1;\n}\n.feedback__content--time {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  font-size: 12px;\n  margin-top: 2px;\n  color: #ddd;\n  cursor: default;\n}\n.feedback__content--time:hover {\n  color: #1C86D1;\n}\n.feedback__content--content {\n  font-size: 0px;\n  line-height: 1.4;\n  padding: 24px 0 0 0px;\n  white-space: pre;\n}\n.feedback__content--content h1.text-effect-basic {\n  text-fill-color: transparent;\n  background-clip: text;\n  -webkit-text-fill-color: transparent;\n  -webkit-background-clip: text;\n  background-size: 200% 200%;\n  -webkit-animation: masked 3s infinite linear;\n          animation: masked 3s infinite linear;\n}\n.feedback__content--content h1 {\n  margin-top: 10px;\n  padding-bottom: 10px;\n  font-size: 25px;\n  color: #7c795d;\n  font-weight: normal;\n  line-height: 1.1;\n  border-bottom: 1px solid #7c795d;\n}\n.feedback__content--content h2 {\n  margin: 5px 0;\n  height: 30px;\n  text-indent: 5px;\n  color: #7c795d;\n  font: 400 20px/30px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  border-left: 5px solid #1C86D1;\n}\n.feedback__content--content pre,\n.feedback__content--content p,\n.feedback__content--content code {\n  -moz-tab-size: 2;\n    -o-tab-size: 2;\n       tab-size: 2;\n  white-space: pre-wrap;\n  word-break: break-all;\n}\n.feedback__content--content p,\n.feedback__content--content code {\n  font-size: 14px;\n}\n.feedback__content--content strong {\n  font-size: 16px;\n}\n.feedback__content--content a {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  color: #1C86D1;\n  margin: 0px 2px;\n}\n.feedback__content--content a:hover {\n  color: #C91523;\n}\n.feedback__content--content img {\n  max-width: 512px;\n}\n.feedback__content--content table {\n  border-radius: 5px;\n  margin: 20px 0;\n  padding: 8px;\n  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);\n  white-space: normal;\n  border-collapse: collapse;\n}\n.feedback__content--content table tr {\n  border: 1px solid #000;\n}\n.feedback__content--content table tr td,\n.feedback__content--content table tr th {\n  font-size: 14px;\n  padding: 5px;\n  word-break: break-word;\n}\n.feedback__content--content table tr td {\n  font-weight: 200;\n  border: 1px solid #000;\n}\n.feedback__content--content blockquote {\n  border-radius: 5px;\n  position: relative;\n  background: #CCD0D5;\n  padding: 25px 10px 10px 30px;\n  overflow: hidden;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n}\n.feedback__content--content blockquote::before {\n  position: absolute;\n  top: 0;\n  left: 0;\n  font-size: 14px;\n  background: -webkit-linear-gradient(112deg, transparent 50%, #1C86D1 50%);\n  background: linear-gradient(-22deg, transparent 50%, #1C86D1 50%);\n  width: 80px;\n  height: 30px;\n  display: block;\n  content: \"\\5F15\\8FF0\";\n  color: #fff;\n  padding: 3px 0 0 4px;\n}\n.feedback__content--content pre {\n  border-radius: 5px;\n  overflow: hidden;\n  padding: 15px 0px 15px 8px;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n  margin: 15px 0;\n  background: #49483e;\n}\n.feedback__content--content pre code {\n  color: #a6e22e;\n}\n.feedback__content--content pre code .hljs-comment,\n.feedback__content--content pre code .hljs-quote {\n  color: #999580;\n}\n.feedback__content--content pre code .hljs-variable,\n.feedback__content--content pre code .hljs-template-variable,\n.feedback__content--content pre code .hljs-attr,\n.feedback__content--content pre code .hljs-tag,\n.feedback__content--content pre code .hljs-name,\n.feedback__content--content pre code .hljs-regexp,\n.feedback__content--content pre code .hljs-link,\n.feedback__content--content pre code .hljs-name,\n.feedback__content--content pre code .hljs-selector-id,\n.feedback__content--content pre code .hljs-selector-class {\n  color: #f2777a;\n}\n.feedback__content--content pre code .hljs-number,\n.feedback__content--content pre code .hljs-meta,\n.feedback__content--content pre code .hljs-built_in,\n.feedback__content--content pre code .hljs-builtin-name,\n.feedback__content--content pre code .hljs-literal,\n.feedback__content--content pre code .hljs-type,\n.feedback__content--content pre code .hljs-params {\n  color: #ae81ff;\n}\n.feedback__content--content pre code .hljs-string,\n.feedback__content--content pre code .hljs-symbol,\n.feedback__content--content pre code .hljs-bullet {\n  color: #e6db74;\n}\n.feedback__content--content pre code .hljs-title,\n.feedback__content--content pre code .hljs-section {\n  color: #6684e1;\n}\n.feedback__content--content pre code .hljs-keyword,\n.feedback__content--content pre code .hljs-selector-tag {\n  color: #66D9EF;\n}\n.feedback__content--content pre code .hljs {\n  display: block;\n  overflow-x: auto;\n  background: #20201d;\n  color: #a6a28c;\n  padding: 0.5em;\n}\n.feedback__content--content pre code .hljs-emphasis {\n  font-style: italic;\n}\n.feedback__content--content pre code .hljs-strong {\n  font-weight: bold;\n}\n.feedback__content--content ol {\n  counter-reset: section;\n  padding: 10px 0 10px 20px;\n}\n.feedback__content--content ol > li {\n  position: relative;\n  min-height: 20px;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  margin: 5px 0px;\n}\n.feedback__content--content ol > li:before {\n  counter-increment: section;\n  content: counters(section, \"\") \".\";\n  display: inline-block;\n  position: absolute;\n  top: 0;\n  left: -20px;\n  font-size: 16px;\n  font-weight: bold;\n  font-style: italic;\n}\n.feedback__content--content ol > li:nth-of-type(3n+1)::before {\n  color: #FE0002;\n}\n.feedback__content--content ol > li:nth-of-type(3n+2)::before {\n  color: #F4F800;\n}\n.feedback__content--content ol > li:nth-of-type(3n+3)::before {\n  color: #A3DF03;\n}\n.feedback__content--content ul {\n  padding: 10px 0 10px 15px;\n}\n.feedback__content--content ul > li {\n  position: relative;\n  margin-bottom: 10px;\n  line-height: 1.1;\n  min-height: 20px;\n  word-break: break-all;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n}\n.feedback__content--content ul > li::before {\n  border-radius: 50%;\n  position: absolute;\n  top: 6px;\n  left: -13px;\n  content: \"\";\n  display: inline-block;\n  width: 8px;\n  height: 8px;\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #1C86D1 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #1C86D1 100%);\n}\n.feedback__content--content ul > li:hover::before {\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #91E22E 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #91E22E 100%);\n}\n.feedback__content--options {\n  padding-top: 15px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.feedback__content--options__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 8;\n      -ms-flex-positive: 8;\n          flex-grow: 8;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.feedback__content--options__wrap a {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.feedback__content--options__wrap a i {\n  width: 16px;\n  height: 16px;\n  background-image: url(\"/img/icon.png\");\n}\n.feedback__content--options__wrap a span {\n  font-size: 12px;\n  margin-left: 3px;\n  color: #272636;\n}\n.feedback__content--options__wrap a:hover span {\n  color: #1C86D1;\n}\n.feedback__content--options__wrap a:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.feedback__content--options__callback i {\n  background-position: -5px 0px;\n}\n.feedback__content--options__del {\n  margin-left: 8px;\n}\n.feedback__content--options__del i {\n  background-position: -5px -16px;\n}\n.feedback__options__vote-up {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  text-align: right;\n}\n.feedback__options__vote-up button {\n  font-size: 18px;\n}\n.feedback__options__vote-up button:hover {\n  color: #1C86D1;\n}\n.editer-wrap {\n  margin-top: 20px;\n}\n.editer-wrap .comment__feedback {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  width: 100%;\n  border-top: none;\n}\n.editer-wrap .editer-wrap__avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.editer-wrap .editer-wrap__avatar > img:hover,\n.editer-wrap .editer-wrap__avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.editer-wrap .editer-wrap__avatar img {\n  height: 100%;\n}\n.editer-wrap .comment__feedback--edit {\n  min-height: 150px;\n}\n.editer-wrap .comment__feddback--btns {\n  width: 100%;\n}\n.login__table__bg {\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 999998;\n  background: rgba(0, 0, 0, 0.4);\n}\n.login__table {\n  border-radius: 5px;\n  box-shadow: 0 0 10px #000000;\n  position: fixed;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  margin: auto;\n  width: 320px;\n  height: 340px;\n  border: 1px solid rgba(0, 0, 0, 0.3);\n  background: #fff;\n  z-index: 999999;\n}\n.login__table__wrap {\n  overflow: hidden;\n  padding: 0 10px;\n}\n.login__table__header {\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 40px;\n}\n.login__table__header button {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  line-height: 50px;\n}\n.state__bar {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  bottom: 0;\n  left: 32px;\n  width: 80px;\n  height: 2px;\n  background: #1C86D1;\n}\n.state__bar:hover {\n  color: #1C86D1;\n}\n.state__bar--toggle {\n  left: 186px;\n}\n.login__table__forms {\n  position: relative;\n  height: 300px;\n}\n.login__table__forms form {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  top: 0;\n  left: 0;\n}\n.tourist__login {\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  padding-top: 50px;\n}\n.input__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  padding: 5px 0;\n  line-height: 20px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  margin-bottom: 15px;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n}\n.input__wrap p {\n  width: 60px;\n}\n.input__wrap input[type=\"text\"] {\n  border-radius: 5px;\n  border: 1px solid #272636;\n  padding: 5px;\n  width: 180px;\n  height: 27px;\n}\n.input__wrap label {\n  display: inline-block;\n  width: 100%;\n  height: 20px;\n  font-size: 12px;\n  color: #B61D1D;\n  padding: 5px 30px 0 0;\n  text-align: right;\n}\ninput[type=\"button\"].tourist__login--submit {\n  border-radius: 5px;\n  width: 180px;\n  height: 35px;\n  color: #fff;\n  background: #1C86D1;\n  margin: 30px auto 0;\n  cursor: pointer;\n}\n.sns__login {\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 20px;\n}\n.sns__login div {\n  width: 70px;\n  height: 70px;\n  background: red;\n}\n.alert__wrap {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 99999999;\n  background: rgba(0, 0, 0, 0.8);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  overflow: hidden;\n}\n.alert__plane {\n  width: 100%;\n  height: 0px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background: rgba(255, 255, 255, 0.65);\n  -webkit-animation: alert_plane_animate .5s;\n          animation: alert_plane_animate .5s;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n.alert__plane header {\n  width: 100%;\n  height: 8px;\n  background: -webkit-linear-gradient(left, #F00001 12.5%, transparent 0px), -webkit-linear-gradient(left, #FF7F00 25%, transparent 0px), -webkit-linear-gradient(left, #E1E23B 37.5%, transparent 0px), -webkit-linear-gradient(left, #007940 50%, transparent 0px), -webkit-linear-gradient(left, #4041FE 62.5%, transparent 0px), -webkit-linear-gradient(left, #A001C0 75%, transparent 0px), -webkit-linear-gradient(left, #F7941E 87.5%, transparent 0px), -webkit-linear-gradient(left, #9AC147 100%, transparent 0px);\n  background: linear-gradient(to right, #F00001 12.5%, transparent 0px), linear-gradient(to right, #FF7F00 25%, transparent 0px), linear-gradient(to right, #E1E23B 37.5%, transparent 0px), linear-gradient(to right, #007940 50%, transparent 0px), linear-gradient(to right, #4041FE 62.5%, transparent 0px), linear-gradient(to right, #A001C0 75%, transparent 0px), linear-gradient(to right, #F7941E 87.5%, transparent 0px), linear-gradient(to right, #9AC147 100%, transparent 0px);\n  background-repeat: no-repeat;\n}\n.alert__plane footer {\n  width: 100%;\n  height: 42px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.alert__plane footer label {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  height: 100%;\n  cursor: pointer;\n  line-height: 42px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.alert__plane footer label:hover button {\n  color: #1C86D1;\n}\n.alert__plane footer label:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.alert__plane footer label:hover i::before {\n  -webkit-transform: scale(1);\n          transform: scale(1);\n}\n.alert__plane footer i {\n  position: relative;\n  width: 20px;\n  height: 20px;\n  background-image: url(\"/img/icon.png\");\n}\n.alert__plane footer i::before {\n  border-radius: 50%;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  content: \"\";\n  display: block;\n  width: 20px;\n  height: 20px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  z-index: -1;\n  background: #1C86D1;\n  -webkit-transform: scale(0);\n          transform: scale(0);\n}\n.alert__plane footer .alert__plane--btn_sure {\n  background-position: -4px -59px;\n}\n.alert__plane footer .alert__plane--btn_cancel {\n  background-position: -4px -36px;\n}\n.alert__plane footer button {\n  font-size: 18px;\n}\n@-webkit-keyframes alert_plane_animate {\n  0% {\n    height: 0;\n  }\n  100% {\n    height: 280px;\n  }\n}\n@keyframes alert_plane_animate {\n  0% {\n    height: 0;\n  }\n  100% {\n    height: 280px;\n  }\n}\n.alert__plane--question {\n  width: 100%;\n  height: 230px;\n  padding-top: 50px;\n  text-align: center;\n  font-size: 30px;\n  font-weight: 100;\n  line-height: 1.2;\n  overflow: hidden;\n  color: rgba(0, 0, 0, 0.7);\n}\n", ""]);
 
 	// exports
 

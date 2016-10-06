@@ -158,14 +158,14 @@ class CommentItem extends Component {
 							<footer className="comment__content--options">
 								<section className="comment__content--options__wrap">
 									{
-										!(userInfo.userEmail === author_email) ?
-										(<a  className="comment__content--options__callback" 
+										
+										<a  className="comment__content--options__callback" 
 										    href="javascript:;"
 											onClick={this.ToggleFeedbackShow}
 										>
 											<i></i>
 											<span>回复 ({FeedBack.length}条)</span>
-										</a>): null
+										</a>
 									}	
 
 
@@ -209,13 +209,13 @@ class CommentItem extends Component {
 						}
 
 						{
-							this.state.feedWrapboff ?
+							this.state.feedWrapboff  ?
 							(
 								<section className="comment__feedback__wrap"
 										 ref="comment-feedback-wrap"
 								>
 									<section className="comment__feedback">
-										<h3>说点什么吧...</h3>
+										<h3>分享您的思想和看法...</h3>
 										<CommentFeedback 
 											CommentFeedBackTask={true}
 											ParentIndex={SelfIndex}

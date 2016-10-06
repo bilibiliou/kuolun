@@ -98,3 +98,16 @@ export const formatDate = (publish_time) => {
 
     return pt;
 }
+
+export const getPostion = (ele) => {
+    let result = [0,0];
+    
+    while(ele) {
+        result[0] += ele.offsetLeft;
+        result[1] += ele.offsetTop;
+
+        ele = ele.offsetParent;
+    }
+
+    return result;
+}

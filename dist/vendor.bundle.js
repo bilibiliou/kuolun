@@ -21641,5 +21641,18 @@
 		return pt;
 	};
 
+	var getPostion = exports.getPostion = function getPostion(ele) {
+		var result = [0, 0];
+
+		while (ele) {
+			result[0] += ele.offsetLeft;
+			result[1] += ele.offsetTop;
+
+			ele = ele.offsetParent;
+		}
+
+		return result;
+	};
+
 /***/ }
 /******/ ]);

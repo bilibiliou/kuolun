@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
 import 	marked 	   from "marked";
 import  hljs       from "highlight.js";
+import { getPostion } from "../../js/util.js";
 import { bindActionCreators } from "redux";
 import { CommentThunk } from "../../actions/CommentActions.js";
 import { LoginTableStateTask } from "../../actions/LoginActions.js";
@@ -11,11 +12,23 @@ class CommentFeedback extends Component {
 	constructor (props) {
 		super(props);
 
+		let initEditerHeight = 0;
+		if(this.props.MainFeedBackBox) {
+			initEditerHeight = 150;
+		} else {
+			initEditerHeight = 30;
+		}
 		this.state = {
 			editorCotent: "",
-			editerHeight: 150,
+			editerHeight: initEditerHeight,
 			choiceType: "",
-			BandBoff: 1
+			BandBoff: 1,
+			codeTypeChoiceListBoff: 0,
+			codeType: "请选择代码种类",
+
+			tableChoiceLock: 0,
+			cTableX: 1,
+			cTableY: 1
 		}
 
 		this.reSet = this.reSet.bind(this);
@@ -23,7 +36,7 @@ class CommentFeedback extends Component {
 		this.editDefalut = this.editDefalut.bind(this);
 		this.handleBandState = this.handleBandState.bind(this);
 		this.editorResizeHandle = this.editorResizeHandle.bind(this);
-		this.MarkdownHandle = this.MarkdownHandle.bind(this);
+		this.SyntaxsListHandle = this.SyntaxsListHandle.bind(this);
 	}
 
 	editDefalut (ev) {
@@ -76,6 +89,10 @@ class CommentFeedback extends Component {
 			}
 		}
 
+		renderer.link = (url, level, text) => {
+			return (`<a href="${url}" target="_blank">${text}</a>`)
+		}
+
 		return marked( html, { renderer });
 	}
 
@@ -88,24 +105,7 @@ class CommentFeedback extends Component {
 
 	}
 
-	editorResizeHandle ($event) {
-		console.log($event);
-		$event.target.addEventListener("mousedown", (ev) => {
-			let $top = ev.clientY 
-				
-
-			// document.addEventListener("mousemove", (ev) => {
-
-			// })
-
-			// document.addEventListener("mouseup", function () {
-	  //           document.removeEventListener("mousemove");
-	  //           $event.target.removeEventListener("mouseup");
-	  //       });
-		})
-	}
-
-	MarkdownHandle (ev, callback) {
+	SyntaxsListHandle (ev, callback) {
 		let editerWrap     = this.refs["editer-wrap"]
 		  
 		  this.handleBandState(0);
@@ -173,8 +173,6 @@ class CommentFeedback extends Component {
 			
 			let arr = [...ItemDataes];
 
-			// 选择 发送主推送，还是回复推送
-			// 在这里就处理好数据
 			switch(true) {
 				case CommentMainTask:
 					commentContent["index"] =  AllDataNum;
@@ -202,6 +200,34 @@ class CommentFeedback extends Component {
 		}
 	}
 
+	editorResizeHandle (ev) {
+		let $self = this,
+			oTarget = ev.target,
+			currentTop = oTarget.offsetTop,
+			$top = ev.clientY - oTarget.offsetTop
+
+		let mmove = (ev) => {
+			let lastTop = ev.clientY - $top
+
+			if(this.props.MainFeedBackBox && lastTop <= 150) {
+				lastTop = 150;
+
+			} else if (lastTop <= 30) {
+				lastTop = 30;
+			}
+
+			$self.setState({
+				editerHeight: lastTop
+			})
+		}, mup = () => {
+			document.removeEventListener("mousemove", mmove);
+			oTarget.removeEventListener("mouseup", mup);
+		}
+
+		document.addEventListener("mousemove", mmove)
+		document.addEventListener("mouseup", mup);
+	}
+
 	render () {
 		let {
 			actions,
@@ -214,7 +240,41 @@ class CommentFeedback extends Component {
 			[`#4ECDC4`,`#556270`],
 			[`#A1FFCE`,`#FAFFD1`],
 			[`#ff6e7f`,`#bfe9ff`]
-		];
+		],
+		codeTypeList = [
+			"c","c++","c#",
+			"java","javascript","go","python","php","ruby","lisp","nginx","objective-c",
+			"http","json","sql",
+			"html","xml",
+			"css","less","scss","stylus"
+		],
+		tableSizeX = 5,
+		tableSizeY = 5,
+		tdSize = 31, //( x === y)
+		tablePosition = getPostion(this.refs["table-matrix"]),
+		tableRow   = [],
+		tableCol   = []
+
+
+		for(let i = 0; i<tableSizeX;i++) {
+			tableCol = []
+			for(let j = 0; j<tableSizeY; j++) {
+				if( (i+1 <= this.state.cTableY) && (j+1 <= this.state.cTableX)) {
+					tableCol.push(<td 
+						style={{
+							background: "#f5f5f5"
+						}}
+						key={j}></td>);
+				} else {
+					tableCol.push(<td key={j}></td>);
+				}
+			}
+			
+			tableRow.push(
+			<tr key={i}>
+				{tableCol}
+			</tr>); 
+		}
 
 		switch (this.state.choiceType) {
 			case "h1_list":
@@ -275,12 +335,15 @@ class CommentFeedback extends Component {
 						<button 
 							className="insert"
 							onClick={(ev) => {
-								let altInputValue = this.refs["alt-input"].value,
-									imgUrlInputValue = this.refs["img-url-input"].value
+								let altInput = this.refs["alt-input"],
+									imgUrlInput = this.refs["img-url-input"]
 
-								this.MarkdownHandle.call(this, ev, (ev, editerWrap) => {
-      								editerWrap.value += `![${altInputValue}](${imgUrlInputValue})`;
+								this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
+      								editerWrap.value += `![${altInput.value}](${imgUrlInput.value})`;
 								})
+
+								altInput.value = "";
+								imgUrlInput.value = "";
 							}}
 						>插入图片</button>
 						
@@ -295,18 +358,148 @@ class CommentFeedback extends Component {
 						<button 
 							className="insert"
 							onClick={(ev) => {
-								let LinkNameInput = this.refs["link-name-input"].value,
-									LinkUrlInput = this.refs["link-url-input"].value
+								let LinkNameInput = this.refs["link-name-input"],
+									LinkUrlInput = this.refs["link-url-input"]
 
-								this.MarkdownHandle.call(this, ev, (ev, editerWrap) => {
-	  								editerWrap.value += `[${LinkNameInput}](${LinkUrlInput})`;
+								this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
+	  								editerWrap.value += `[${LinkNameInput.value}](${LinkUrlInput.value})`;
 								})
+
+								LinkNameInput.value = "";
+								LinkUrlInput.value = "";
 							}}
 						>插入链接</button>
 					</div>
 				)
-				
+				break;
+			case "code_block_list":
+				choice_list = (
+					<div className="syntaxs__sub-list">
+						<div className="code-type-choice__list"
+							onClick={() => {
+								this.setState({
+									codeTypeChoiceListBoff: this.state.codeTypeChoiceListBoff ^= 1
+								})
+							}}> 
+							<p>{this.state.codeType}</p>
+							<ul style={
+									this.state.codeTypeChoiceListBoff ? 
+									{display: "block"} :
+									{display: "none"}
+								}
+								
+								onClick={(ev) => {
+									let codeTypeShowWrap = this.refs["code-type-show__wrap"],
+										oTarget = ev.target
+
+									if (oTarget.tagName.toLowerCase() === "li") {
+										this.setState({
+											codeType: oTarget.innerHTML
+										})
+									}
+								}}
+							>
+								{
+									codeTypeList.map((value, idx) => 
+										<li 
+											key={idx}
+										>{value}</li>
+									)
+								}
+							</ul>
+						</div>
+						<button 
+							className="insert"
+							
+							onClick={(ev) => {
+								let codeTypeSelection = this.refs["code-type-selection"];
+								this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
+	  								if (this.state.codeType === "请选择代码种类") {
+	  									return;
+	  								} else {
+	  									editerWrap.value += "\n```"+this.state.codeType+"\n代码内容\n```\n";
+	  									let len = editerWrap.value.length;
+	  									editerWrap.setSelectionRange(len-9,len-5)
+	  									this.setState({
+	  										codeType: "请选择代码种类"
+	  									})
+	  								}
+								})
+							}}
+						>插入代码</button>
+					</div>
+				)
 				break; 
+			case "table_list": 
+				choice_list = (
+					<div className="syntaxs__sub-list">
+						<table className="table-size-matrix"
+							ref = "table-matrix"
+							onMouseMove={(ev) => {
+								if(!this.state.tableChoiceLock) {
+									let $cX = ev.pageX,
+										$cY = ev.pageY,
+										$dX = $cX - tablePosition[0],
+										$dY = $cY - tablePosition[1],
+										XNum = Math.ceil($dX / tdSize),
+										YNum = Math.ceil($dY / tdSize);
+									(XNum < 1) && (XNum = 1); 
+									(YNum < 1) && (YNum = 1);
+									this.setState({
+										cTableX: XNum,
+										cTableY: YNum
+									}) 
+								}
+							}}
+							onClick={() => {
+								this.setState({
+									tableChoiceLock: this.state.tableChoiceLock ^= 1
+								})
+							}}
+						>
+							<tbody>
+								{tableRow}
+							</tbody>
+						</table>
+						<p className="table-matrix-dimension">{this.state.cTableX} x {this.state.cTableY} 表格</p>
+						<button className="insert"
+							onClick={(ev) => {
+								this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
+									let $x = this.state.cTableX,
+										$y = this.state.cTableY,
+										str = ""
+
+									for(let i = 0; i<$x; i++) {
+										str += `|   标题${i+1}   `;
+									}
+									str += "|\n";
+									for(let i = 0; i<$x; i++) {
+										str += `| :---------: `;
+									}
+									str += "|\n";
+
+									let count = 1;
+									
+									for(let j = 0; j<$y; j++) {
+										for(let i = 0; i<$x; i++) {
+											str += `| 表格内容${count} `;
+											count++;
+										}
+										str += "|\n";
+									}
+
+									editerWrap.value += str;
+									this.setState({
+										tableChoiceLock: 0,
+										cTableX: 1,
+										cTableY: 1
+									})
+								})
+							}}
+						>插入表格</button>
+					</div>
+				)
+				break;
 			default: 
 				choice_list = null
 		}
@@ -319,7 +512,7 @@ class CommentFeedback extends Component {
 							<li className="bold" 
 								title="加粗"
 								onClick={(ev) => {
-									this.MarkdownHandle.call(null, ev, (ev, editerWrap) => {
+									this.SyntaxsListHandle.call(null, ev, (ev, editerWrap) => {
 										editerWrap.value += "** 加粗文本 **";
 										let len = editerWrap.value.length;
 	      								editerWrap.setSelectionRange(len - 7, len-3);
@@ -330,7 +523,7 @@ class CommentFeedback extends Component {
 							<li className="italic" 
 								title="斜体"
 								onClick={(ev) => {
-									this.MarkdownHandle.call(null, ev, (ev, editerWrap) => {
+									this.SyntaxsListHandle.call(null, ev, (ev, editerWrap) => {
 	      								editerWrap.value += "_ 斜体文本 _";
 										let len = editerWrap.value.length;
 	      								editerWrap.setSelectionRange(len - 6, len-2);
@@ -341,7 +534,7 @@ class CommentFeedback extends Component {
 							<li className="a-link" 
 								title="A链接"
 								onClick={(ev) => {
-									this.MarkdownHandle.call(this, ev, (ev, editerWrap) => {
+									this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
 	      								if(this.state.choiceType === "a_link_list") {
 	      									this.setState({
 												choiceType: ""
@@ -358,7 +551,7 @@ class CommentFeedback extends Component {
 							<li className="image" 
 								title="引入图片"
 								onClick={(ev) => {
-									this.MarkdownHandle.call(this, ev, (ev, editerWrap) => {
+									this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
 	      								if(this.state.choiceType === "img_list") {
 	      									this.setState({
 												choiceType: ""
@@ -371,11 +564,26 @@ class CommentFeedback extends Component {
 									})
 								}}
 							></li>
-							<li className="table" title="选择表格"></li>
+							<li className="table" 
+								title="选择表格"
+								onClick={(ev) => {
+									this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
+	      								if(this.state.choiceType === "table_list") {
+	      									this.setState({
+												choiceType: ""
+											})
+	      								} else {
+	      									this.setState({
+												choiceType: "table_list"
+											})	
+	      								}					
+									})
+								}}
+							></li>
 							<li className="blockquote-block" 
 								title="引用"
 								onClick={(ev) => {
-									this.MarkdownHandle.call(null, ev, (ev, editerWrap) => {
+									this.SyntaxsListHandle.call(null, ev, (ev, editerWrap) => {
 	      								editerWrap.value += "> 引用内容";
 	      								let len = editerWrap.value.length;
 	      								editerWrap.setSelectionRange(len - 4, len);
@@ -385,7 +593,7 @@ class CommentFeedback extends Component {
 							<li className="o-list" 
 								title="有序列表"
 								onClick={(ev) => {
-									this.MarkdownHandle.call(null, ev, (ev, editerWrap) => {
+									this.SyntaxsListHandle.call(null, ev, (ev, editerWrap) => {
 	      								editerWrap.value += "\n1. 例1\n2. 例2\n3. 例3";
 									})
 								}}
@@ -394,7 +602,7 @@ class CommentFeedback extends Component {
 							<li className="u-list" 
 								title="无序列表"
 								onClick={(ev) => {
-									this.MarkdownHandle.call(null, ev, (ev, editerWrap) => {
+									this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
 	      								editerWrap.value += "\n* 例1\n* 例2\n* 例3";
 									})
 								}}
@@ -402,7 +610,7 @@ class CommentFeedback extends Component {
 							<li className="h1-tag" 
 								title="大标题"
 								onClick={(ev) => {
-									this.MarkdownHandle.call(this, ev, (ev, editerWrap) => {
+									this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
 	      								if(this.state.choiceType === "h1_list") {
 	      									this.setState({
 												choiceType: ""
@@ -418,10 +626,27 @@ class CommentFeedback extends Component {
 							<li className="h2-tag" 
 								title="小标题"
 								onClick={(ev) => {
-									this.MarkdownHandle.call(null, ev, (ev, editerWrap) => {
+									this.SyntaxsListHandle.call(null, ev, (ev, editerWrap) => {
 	      								let len = editerWrap.value.length;
 	      								editerWrap.value += "\n## 小标题\n";
 	      								editerWrap.setSelectionRange(len + 4,len + 7);
+									})
+								}}
+							>
+							</li>
+							<li className="code-block" 
+								title="代码高亮"
+								onClick={(ev)=> {
+									this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
+	      								if(this.state.choiceType === "code_block_list") {
+	      									this.setState({
+												choiceType: ""
+											})
+	      								} else {
+	      									this.setState({
+												choiceType: "code_block_list"
+											})	
+	      								}					
 									})
 								}}
 							>
@@ -454,7 +679,8 @@ class CommentFeedback extends Component {
 							<a className="editor__resize" 
 							   href="javascript:;"
 							   title="拖拽改变评论框大小"
-							   onClick={this.editorResizeHandle}
+							   draggable={false}
+							   onMouseDown={this.editorResizeHandle}
 							 ></a>
 						</div>
 						
