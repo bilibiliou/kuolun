@@ -7,7 +7,7 @@ import { bindActionCreators } from "redux";
 import { CommentThunk } from "../../actions/CommentActions.js";
 import { LoginTableStateTask } from "../../actions/LoginActions.js";
 import { AlertPlaneThunk } from "../../actions/AlertPlaneActions.js";
-
+import { DropList } from "../router.jsx"
 class CommentFeedback extends Component {
 	constructor (props) {
 		super(props);
@@ -23,9 +23,7 @@ class CommentFeedback extends Component {
 			editerHeight: initEditerHeight,
 			choiceType: "",
 			BandBoff: 1,
-			codeTypeChoiceListBoff: 0,
-			codeType: "请选择代码种类",
-
+			codeListBeChoice: "请选择代码种类",
 			tableChoiceLock: 0,
 			cTableX: 1,
 			cTableY: 1
@@ -35,7 +33,7 @@ class CommentFeedback extends Component {
 		this.sendComment = this.sendComment.bind(this);
 		this.editDefalut = this.editDefalut.bind(this);
 		this.handleBandState = this.handleBandState.bind(this);
-		this.editorResizeHandle = this.editorResizeHandle.bind(this);
+		this.mdown = this.mdown.bind(this);
 		this.SyntaxsListHandle = this.SyntaxsListHandle.bind(this);
 	}
 
@@ -200,25 +198,22 @@ class CommentFeedback extends Component {
 		}
 	}
 
-	editorResizeHandle (ev) {
+	mdown (ev, callback) {
 		let $self = this,
 			oTarget = ev.target,
 			currentTop = oTarget.offsetTop,
-			$top = ev.clientY - oTarget.offsetTop
+			$top = ev.clientY - oTarget.offsetTop,
+			$left = ev.clientY - oTarget.offsetLeft
 
 		let mmove = (ev) => {
-			let lastTop = ev.clientY - $top
+			let dragTop = ev.clientY - $top,
+				dragLeft = ev.clientX - $left
 
-			if(this.props.MainFeedBackBox && lastTop <= 150) {
-				lastTop = 150;
-
-			} else if (lastTop <= 30) {
-				lastTop = 30;
-			}
-
-			$self.setState({
-				editerHeight: lastTop
-			})
+			callback && callback([
+				dragTop,
+				dragLeft
+			]);
+			
 		}, mup = () => {
 			document.removeEventListener("mousemove", mmove);
 			oTarget.removeEventListener("mouseup", mup);
@@ -375,58 +370,35 @@ class CommentFeedback extends Component {
 			case "code_block_list":
 				choice_list = (
 					<div className="syntaxs__sub-list">
-						<div className="code-type-choice__list"
-							onClick={() => {
+						<DropList 
+							dataList={codeTypeList}
+							initPrompt={this.state.codeListBeChoice}
+							returnDataCallback={(data)=> {
 								this.setState({
-									codeTypeChoiceListBoff: this.state.codeTypeChoiceListBoff ^= 1
-								})
-							}}> 
-							<p>{this.state.codeType}</p>
-							<ul style={
-									this.state.codeTypeChoiceListBoff ? 
-									{display: "block"} :
-									{display: "none"}
-								}
-								
-								onClick={(ev) => {
-									let codeTypeShowWrap = this.refs["code-type-show__wrap"],
-										oTarget = ev.target
-
-									if (oTarget.tagName.toLowerCase() === "li") {
-										this.setState({
-											codeType: oTarget.innerHTML
-										})
-									}
-								}}
-							>
-								{
-									codeTypeList.map((value, idx) => 
-										<li 
-											key={idx}
-										>{value}</li>
-									)
-								}
-							</ul>
-						</div>
-						<button 
-							className="insert"
-							
-							onClick={(ev) => {
-								let codeTypeSelection = this.refs["code-type-selection"];
-								this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
-	  								if (this.state.codeType === "请选择代码种类") {
-	  									return;
-	  								} else {
-	  									editerWrap.value += "\n```"+this.state.codeType+"\n代码内容\n```\n";
-	  									let len = editerWrap.value.length;
-	  									editerWrap.setSelectionRange(len-9,len-5)
-	  									this.setState({
-	  										codeType: "请选择代码种类"
-	  									})
-	  								}
+									codeListBeChoice: data
 								})
 							}}
-						>插入代码</button>
+						/>
+
+						<button 
+			                className="insert"
+			                
+			                onClick={(ev) => {
+			                    let codeTypeSelection = this.refs["code-type-selection"];
+			                    this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
+			                        if (this.state.codeListBeChoice === "请选择代码种类") {
+			                            return;
+			                        } else {
+			                            editerWrap.value += "\n```"+this.state.codeListBeChoice+"\n代码内容\n```\n";
+			                            let len = editerWrap.value.length;
+			                            editerWrap.setSelectionRange(len-9,len-5)
+			                            this.setState({
+			                                codeListBeChoice: "请选择代码种类"
+			                            })
+			                        }
+			                    })
+			                }}
+			            >插入代码</button>
 					</div>
 				)
 				break; 
@@ -680,7 +652,25 @@ class CommentFeedback extends Component {
 							   href="javascript:;"
 							   title="拖拽改变评论框大小"
 							   draggable={false}
-							   onMouseDown={this.editorResizeHandle}
+							   onMouseDown={(ev)=> {
+							   	this.mdown.call(this,ev,(params)=>{
+							   		let [
+							   			dragTop,
+							   			dragLeft
+							   		] = params;
+
+							   		if(this.props.MainFeedBackBox && dragTop <= 150) {
+										dragTop = 150;
+
+									} else if (dragTop <= 30) {
+										dragTop = 30;
+									}
+
+									this.setState({
+										editerHeight: dragTop
+									})
+							   	})
+							   }}
 							 ></a>
 						</div>
 						

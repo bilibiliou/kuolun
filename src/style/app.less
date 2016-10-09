@@ -62,6 +62,109 @@ i {
 	display: inline-block;
 }
 
+
+/*下拉组件*/
+.drop__list {
+	.select(none);
+	width: 140px;
+
+	border: 1px solid #ccc;
+	cursor: pointer;
+	position: relative;
+	
+	border-radius: 3px 3px 0px 0px; 
+	color: #929699;
+	font-size: 0px;
+	margin-right: 20px;
+	p {
+		width: 100px;
+		height: 20px; 
+		margin: 3px 0 3px 5px;
+		font-size: 14px; 
+	}
+
+	&::before {
+		.t(.5);
+		position: absolute;
+		top: 5px;
+		right: 5px;
+		content: "";
+		width: 16px;
+		height: 16px;
+		
+		display: block;
+		background: url(@icon) -30px -0px;
+	}
+
+	.drop__wrap {
+		position: absolute;
+		top: 26px;
+		left: 0;
+		width: 100%;
+		border-radius: 0px 0px 3px 3px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		overflow: hidden;
+		border: 1px solid #ccc;
+		border-top: none;
+		z-index: 1234;
+		height: 120px;
+	}
+
+	ul {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		padding: 5px 0;
+		overflow: hidden;
+		background: #E6E6E6;
+		font-size: 14px;
+		li {
+			height: 25px;
+			line-height: 25px;
+			padding: 0px 5px;
+
+			&:hover {
+				color: #fff;
+				background: @i-color;
+			}
+		}
+	}
+}
+
+.drag__wrap {
+	.t(.5);
+	position: absolute;
+	top: 0;
+	right: 0;
+	background: #F5F5F5;
+	display: flex;
+	justify-content: center;
+
+	.drag__btn {
+		.br(3px);
+		position: absolute;
+		top: 0;
+		left: 0;
+		min-height: 5px;
+		width: 100%;
+		border: 1px solid #979797;
+		background-color: rgba(0,0,0,.6);
+
+		&:hover {
+			border: 1px solid #636363;
+    		background-color: rgba(0,0,0,.8);
+		}
+
+		&:active {
+			border: 1px solid #636363;
+    		background-color: rgba(0,0,0,1);
+		}
+	}
+}
+
 .br (@radius) {
 	border-radius: @radius;
 }
@@ -506,6 +609,7 @@ i {
 }
 
 // 评论框样式（公用）--start
+
 .comment__feedback__wrap {
 	.t(.5);
 	overflow: hidden;
@@ -669,64 +773,6 @@ i {
 		line-height: 30px;
 		width: 70px;
 		height: 30px;
-	}
-
-	.code-type-choice__list {
-		
-		.select(none);
-		width: 140px;
-		height: 30px;
-		border: 1px solid #ccc;
-		cursor: pointer;
-		position: relative;
-		
-		border-radius: 3px 3px 0px 0px; 
-		color: #929699;
-		font-size: 14px;
-		
-		padding: 0px 5px;
-		margin-right: 20px;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-
-		p {
-			width: 100px;
-		}
-
-		&::after {
-			.t(.5);
-			content: "";
-			width: 16px;
-			height: 16px;
-			
-			display: block;
-			background: url(@icon) -30px -0px;
-		}
-
-		& > ul {
-			position: absolute;
-			bottom: -120px;
-			left: -1px;
-			width: 140px;
-			height: 120px;
-			padding: 5px 0;
-			overflow: hidden;
-			z-index: 1234;
-			border-radius: 0px 0px 3px 3px;
-			background: #E6E6E6;
-			border: 1px solid #ccc;
-			li {
-				height: 25px;
-				line-height: 25px;
-				padding: 0px 5px;
-
-				&:hover {
-					color: #fff;
-					background: @i-color;
-				}
-			}
-		}
 	}
 
 	.table-size-matrix {

@@ -9,7 +9,7 @@ import CommentWrap       from "./components/CommentWrap.jsx";
 import FeedBackMain      from "./components/FeedBackMain.jsx";
 import LoginTable        from "./components/LoginTable.jsx";
 import AlertPlane        from "./components/AlertPlane.jsx";
-
+import DropList	         from "./components/DropList.jsx";
 
 export {
 	CommentEditer,    
@@ -22,5 +22,6 @@ export {
 	CommentWrap,      
 	FeedBackMain,     
 	LoginTable,
-	AlertPlane       
+	AlertPlane,
+	DropList       
 } 
