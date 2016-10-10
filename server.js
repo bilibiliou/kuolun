@@ -66,6 +66,7 @@ app.post("/delSession", (req, res) => {
 // 登录的时候设置用户信息在Session中
 app.post("/setSession", (req, res) => {    
     let key = decodeURIComponent(req.cookies["kuolun_Id"]);
+
     req.session[key] = req.body;
     Ok(res,"建立session 对话成功");
 })

@@ -65,19 +65,41 @@ class DropList extends Component {
                 }}
 
                 onWheel = {(ev) => {
-                    console.log(ev);
+                    let deltaY = ev.deltaY,
+                        currentTop = this.state.BtnOffset,
+                        speed  = 5 // 滚动速度
+
+                    currentTop = (deltaY >= 0) ? currentTop+speed : currentTop-speed;
+                    
+                    if (currentTop >= 120 - this.state.dragBtnHeight) {
+                        currentTop = 120 - this.state.dragBtnHeight;
+                    } else if (currentTop < 0) {
+                        currentTop = 0;
+                    }
+
+                    this.setState({
+                        ListOffset: -((currentTop * this.state.dragListHeight) / 120),
+                        BtnOffset: currentTop 
+                    })
+
                     ev.stopPropagation();
                     ev.preventDefault();
                 }}
                 >
-
+                <i
+                    style={
+                        this.state.isDrop ? 
+                        {transform: "rotate(180deg)"}:
+                        {transform: "rotate(0deg)"}
+                    }
+                ></i>
                 <p>{this.props.initPrompt}</p>
 
                 <section className="drop__wrap"
                     style={
                         this.state.isDrop ? 
-                        {display: "block"} :
-                        {display: "none"}
+                        {height: "120px"} :
+                        {height: "0px"}
                     }
                 >
                     <ul 
@@ -111,17 +133,16 @@ class DropList extends Component {
                                 postionArr = getPostion(dragWrap),
                                 d = ev.pageY - postionArr[1]
 
-                            // console.log(123)
-                            // if (d >= 120 - this.state.dragBtnHeight) {
-                            //     d = 120 - this.state.dragBtnHeight;
-                            // } else if (d < 0) {
-                            //     d = 0;
-                            // }
+                            if (d >= 120 - this.state.dragBtnHeight) {
+                                d = 120 - this.state.dragBtnHeight;
+                            } else if (d < 0) {
+                                d = 0;
+                            }
 
-                            // this.setState({
-                            //     ListOffset: -((d * this.state.dragListHeight) / 120),
-                            //     BtnOffset: d 
-                            // })
+                            this.setState({
+                                ListOffset: -((d * this.state.dragListHeight) / 120),
+                                BtnOffset: d
+                            })
                             ev.stopPropagation();
                          }}
                     >
@@ -152,6 +173,10 @@ class DropList extends Component {
                                 })
                                 ev.stopPropagation();
                                 return false;
+                            }}
+
+                            onClick={(ev)=> {
+                                ev.stopPropagation();
                             }}
                         ></button>
                     </div>

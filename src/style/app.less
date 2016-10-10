@@ -29,6 +29,10 @@ ul, ol {
 	list-style: none;
 }
 
+table {
+	border-collapse:collapse;
+}
+
 select {
 	appearance: none;
 }
@@ -83,7 +87,7 @@ i {
 		font-size: 14px; 
 	}
 
-	&::before {
+	i {
 		.t(.5);
 		position: absolute;
 		top: 5px;
@@ -97,6 +101,7 @@ i {
 	}
 
 	.drop__wrap {
+		.t(.5);
 		position: absolute;
 		top: 26px;
 		left: 0;
@@ -109,7 +114,7 @@ i {
 		border: 1px solid #ccc;
 		border-top: none;
 		z-index: 1234;
-		height: 120px;
+		height: 0px;
 	}
 
 	ul {
@@ -225,8 +230,8 @@ i {
 
 .stress-text-basic () {
 	text-fill-color: transparent;
+    -webkit-text-fill-color: transparent;
     background-clip: text;
-	-webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
     background-size: 200% 200%;
 }
@@ -316,6 +321,7 @@ i {
 
 	img {
 		max-width: 512px;
+		vertical-align: bottom;
 	}
 	
 	table {
@@ -571,6 +577,9 @@ i {
 	text-align: right;
 	button {
 		font-size: 18px;
+		span {
+			font-size: 18px;
+		}
 		&:hover {
 			color: @i-color;
 		}
@@ -776,7 +785,6 @@ i {
 	}
 
 	.table-size-matrix {
-		border-collapse:collapse;
 		margin: 10px 0 10px 90px;
 		tr, td {
 			border: 1px solid #ccc;
@@ -791,6 +799,27 @@ i {
 		font-size: 18px;
 		text-decoration: underline;
 		margin: 0 20px;
+	}
+
+	.expressions__list__wrap {
+		width: 100%;
+		display: flex;
+		flex-flow: row wrap;
+		border-top: 1px solid #ccc;
+		border-left: 1px solid #ccc;
+		td {
+			border-right: 1px solid #ccc;
+			border-bottom: 1px solid #ccc;
+			&:hover {
+				background: #ccc;
+			}
+			a {
+				display: inline-block;
+				width: 32px;
+				height: 32px;
+				padding: 4px;
+			}
+		}
 	}
 }
 
@@ -851,6 +880,9 @@ i {
 	height: 25px;
 	background: #C81623;
 	color: #fff;
+	&:active {
+		background: #AA151F
+	}
 }
 
 .login-in__btn {
@@ -861,6 +893,9 @@ i {
 	padding: 0 5px;
 	background: @i-color;
 	color: #fff;
+	&:active {
+		background: #3075DC;
+	}
 }
 
 .comment__feedback--section {
@@ -1422,6 +1457,10 @@ input[type="button"].tourist__login--submit {
 	background: @i-color;
 	margin: 30px auto 0;
 	cursor: pointer;
+	border: 1px solid #ccc;
+	&:active {
+		background: #3075DC;
+	}
 }
 
 

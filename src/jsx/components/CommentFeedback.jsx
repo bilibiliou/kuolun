@@ -7,7 +7,8 @@ import { bindActionCreators } from "redux";
 import { CommentThunk } from "../../actions/CommentActions.js";
 import { LoginTableStateTask } from "../../actions/LoginActions.js";
 import { AlertPlaneThunk } from "../../actions/AlertPlaneActions.js";
-import { DropList } from "../router.jsx"
+import { DropList } from "../router.jsx";
+
 class CommentFeedback extends Component {
 	constructor (props) {
 		super(props);
@@ -230,6 +231,69 @@ class CommentFeedback extends Component {
 		} = this.props,
 		choice_list,
 		editerWrap = this.refs["editer-wrap"],
+		expressions_list = [
+		  { faceName: 'weixiao', faceUrl: '/0_weixiao.gif' },
+		  { faceName: 'piezui', faceUrl: '/1_piezui.gif' },
+		  { faceName: 'se', faceUrl: '/2_se.gif' },
+		  { faceName: 'fadai', faceUrl: '/3_fadai.gif' },
+		  { faceName: 'deyi', faceUrl: '/4_deyi.gif' },
+		  { faceName: 'liulei', faceUrl: '/5_liulei.gif' },
+		  { faceName: 'haixiu', faceUrl: '/6_haixiu.gif' },
+		  { faceName: 'bizui', faceUrl: '/7_bizui.gif' },
+		  { faceName: 'daku', faceUrl: '/9_daku.gif' },
+		  { faceName: 'ganga', faceUrl: '/10_ganga.gif' },
+		  { faceName: 'fennu', faceUrl: '/11_fennu.gif' },
+		  { faceName: 'tiaopi', faceUrl: '/12_tiaopi.gif' },
+		  { faceName: 'ziya', faceUrl: '/13_ziya.gif' },
+		  { faceName: 'jingya', faceUrl: '/14_jingya.gif' },
+		  { faceName: 'nanguo', faceUrl: '/15_nanguo.gif' },
+		  { faceName: 'ku', faceUrl: '/16_ku.gif' },
+		  { faceName: 'lenghan', faceUrl: '/17_lenghan.gif' },
+		  { faceName: 'zhuakuang', faceUrl: '/18_zhuakuang.gif' },
+		  { faceName: 'tu', faceUrl: '/19_tu.gif' },
+		  { faceName: 'touxiao', faceUrl: '/20_touxiao.gif' },
+		  { faceName: 'keai', faceUrl: '/21_keai.gif' },
+		  { faceName: 'baiyan', faceUrl: '/22_baiyan.gif' },
+		  { faceName: 'aoman', faceUrl: '/23_aoman.gif' },
+		  { faceName: 'jie', faceUrl: '/24_jie.gif' },
+		  { faceName: 'kun', faceUrl: '/25_kun.gif' },
+		  { faceName: 'jingkong', faceUrl: '/26_jingkong.gif' },
+		  { faceName: 'liuhan', faceUrl: '/27_liuhan.gif' },
+		  { faceName: 'hanxiao', faceUrl: '/28_hanxiao.gif' },
+		  { faceName: 'dabing', faceUrl: '/29_dabing.gif' },
+		  { faceName: 'fengdou', faceUrl: '/30_fengdou.gif' },
+		  { faceName: 'zhouma', faceUrl: '/31_zhouma.gif' },
+		  { faceName: 'yiwen', faceUrl: '/32_yiwen.gif' },
+		  { faceName: 'xu', faceUrl: '/33_xu.gif' },
+		  { faceName: 'yun', faceUrl: '/34_yun.gif' },
+		  { faceName: 'zhemo', faceUrl: '/35_zhemo.gif' },
+		  { faceName: 'shuai', faceUrl: '/36_shuai.gif' },
+		  { faceName: 'kulou', faceUrl: '/37_kulou.gif' },
+		  { faceName: 'qiaoda', faceUrl: '/38_qiaoda.gif' },
+		  { faceName: 'zaijian', faceUrl: '/39_zaijian.gif' },
+		  { faceName: 'chahan', faceUrl: '/40_chahan.gif' },
+		  { faceName: 'koubi', faceUrl: '/41_koubi.gif' },
+		  { faceName: 'guzhang', faceUrl: '/42_guzhang.gif' },
+		  { faceName: 'qiudale', faceUrl: '/43_qiudale.gif' },
+		  { faceName: 'huaixiao', faceUrl: '/44_huaixiao.gif' },
+		  { faceName: 'zuohengheng', faceUrl: '/45_zuohengheng.gif' },
+		  { faceName: 'youhengheng', faceUrl: '/46_youhengheng.gif' },
+		  { faceName: 'haqian', faceUrl: '/47_haqian.gif' },
+		  { faceName: 'bishi', faceUrl: '/48_bishi.gif' },
+		  { faceName: 'weiqu', faceUrl: '/49_weiqu.gif' },
+		  { faceName: 'kuaikule', faceUrl: '/50_kuaikule.gif' },
+		  { faceName: 'yinxian', faceUrl: '/51_yinxian.gif' },
+		  { faceName: 'qinqin', faceUrl: '/52_qinqin.gif' },
+		  { faceName: 'xia', faceUrl: '/53_xia.gif' },
+		  { faceName: 'kelian', faceUrl: '/54_kelian.gif' },
+		  { faceName: 'caidao', faceUrl: '/55_caidao.gif' },
+		  { faceName: 'xigua', faceUrl: '/56_xigua.gif' },
+		  { faceName: 'pijiu', faceUrl: '/57_pijiu.gif' },
+		  { faceName: 'lanqiu', faceUrl: '/58_lanqiu.gif' },
+		  { faceName: 'pingpang', faceUrl: '/59_pingpang.gif' },
+		  { faceName: 'yongbao', faceUrl: '/78_yongbao.gif' },
+		  { faceName: 'woshou', faceUrl: '/81_woshou.gif' } 
+		],
 		colors = [
 			[`#BE93C5`,`#7BC6CC`],
 			[`#4ECDC4`,`#556270`],
@@ -248,7 +312,26 @@ class CommentFeedback extends Component {
 		tdSize = 31, //( x === y)
 		tablePosition = getPostion(this.refs["table-matrix"]),
 		tableRow   = [],
-		tableCol   = []
+		tableCol   = [],
+
+		expressionsListColNum = 17, //每行10列
+		expressionsListBox = []
+
+		for (let i = 1 ,name,url,tableCol=[]; i <= expressions_list.length; i++) {
+			name = expressions_list[i-1]["faceName"]
+			url  = expressions_list[i-1]["faceUrl"]
+
+			tableCol.push(<td key={i}>
+				<a href="javascript:;">
+					<img src={`/expressions${url}`} title={name} alt={name} />
+				</a>
+			</td>)
+			
+			if ( (i % expressionsListColNum) === 0 || i === expressions_list.length) {
+				expressionsListBox.push(<tr key={i/10} >{ tableCol }</tr>);
+				tableCol = [];
+			}
+		}
 
 
 		for(let i = 0; i<tableSizeX;i++) {
@@ -272,6 +355,26 @@ class CommentFeedback extends Component {
 		}
 
 		switch (this.state.choiceType) {
+			case "expressions_list":
+				choice_list = (
+					<div className="syntaxs__sub-list">
+						<table 
+							onClick={(ev) => {
+								let oTarget = ev.target;
+								if (oTarget.tagName.toLowerCase() === "img") {
+									this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
+	      								editerWrap.value += `![${oTarget.title}](${oTarget.src})`;
+									})
+								}
+							}}
+						>
+							<tbody className="expressions__list__wrap">
+								{ expressionsListBox }
+							</tbody>
+						</table>
+					</div>
+				)
+				break;
 			case "h1_list":
 			    choice_list = (
 			    	<div className="syntaxs__sub-list"
@@ -480,7 +583,23 @@ class CommentFeedback extends Component {
 				<div className="comment__feedback__box">
 					<div className ="comment__feedback__box__syntaxs">
 						<ul className="syntaxs__list">
-							<li className="emoji-list" title="表情列表"></li>
+							<li className="emoji-list" 
+								title="表情列表"
+								onClick={(ev) => {
+									this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
+	      								if(this.state.choiceType === "expressions_list") {
+	      									this.setState({
+												choiceType: ""
+											})
+	      								} else {
+	      									this.setState({
+												choiceType: "expressions_list"
+											})	
+	      								}					
+									})
+								}}
+								
+							></li>
 							<li className="bold" 
 								title="加粗"
 								onClick={(ev) => {
@@ -697,7 +816,6 @@ class CommentFeedback extends Component {
 						}				
 					</section>
 
-					
 					<div className="comment__feedback--btns">
 						<button className="feedback--btns__reset"
 								onClick={this.reSet}
