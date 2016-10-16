@@ -178,6 +178,12 @@ i {
 	box-shadow: @param;
 }
 
+.column-arrange {
+	display: flex;
+	flex-flow: column wrap;
+	align-items: center;
+}
+
 .none {
 	display: none !important;
 }
@@ -762,6 +768,67 @@ i {
 				box-shadow: 0 0 1px 1px @i-color;
 			}
 			
+		}
+	}
+	
+	.drop__upload__area {
+		.br(5px);
+		.select(none);
+		position: relative;
+		width: 454px;
+		height: 80px;
+		margin: 15px 0;
+		border: 1px dashed @i-color;
+		text-align: center;
+		font: 300 30px/75px "微软雅黑";
+		cursor: default;
+
+		&::after, &::before {
+			content: '';
+			display: block;
+			
+            z-index: -1;
+			color: @i-color;
+            box-shadow: inset 0 0 0 2px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            animation: clip-me 6s linear infinite;
+		}
+
+		&::before {
+			animation-delay: -3s
+		}
+	}
+	
+	@keyframes clip-me {
+		0%, 100% {
+	         clip: rect(0px, 454px, 4px, 0px);
+	    }
+	    25% {
+	        clip: rect(0px, 4px, 80px, 0px); 
+	    }
+	    50% {
+	        clip: rect(76px, 454px, 80px, 0px);
+	    }
+	    75% {
+	        clip: rect(0px, 454px, 80px, 450px);
+	    }
+	}	
+	
+
+	.upload__btn {
+		.br(5px);
+		width: 454px;
+		height: 40px;
+		background: @i-color;
+		color: #fff;
+		font-size: 18px;
+		margin-bottom: 10px;
+		&:active {
+			background: #3075DC;
 		}
 	}
 

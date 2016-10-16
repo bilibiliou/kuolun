@@ -1,3 +1,9 @@
+const M = Math,
+      log = M.log,
+      floor = M.floor,
+      min = M.min,
+      pow = M.pow
+
 String.prototype.splice = function(index, delnum, replaceContext="") {
 	let result  = "",
 		len     = this.length,
@@ -110,4 +116,13 @@ export const getPostion = (ele) => {
     }
 
     return result;
+}
+
+export const MemoryHumanReadable = (num) => {
+    const units = ["B","KB","MB","GB","TB","PB","EB","ZB","YB"],
+          exponent = Math.min(floor(log(num)/log(1024)),units.length - 1),
+          size = Number((num / Math.pow(1024, exponent))).toPrecision(3),
+          unit = units[exponent]
+
+    return size + unit;
 }

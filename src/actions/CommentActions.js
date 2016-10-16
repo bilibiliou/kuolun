@@ -13,7 +13,6 @@ export const UpDateItemDataesTask = createAction (
     })
 
 // 每次进行操作完成后，需要更新数据栈
-
 export const CommentThunk = (page, SortState, newContent, FBIndex = -1) => {
     return (dispatch) => {
         let data = JSON.stringify(newContent);

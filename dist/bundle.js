@@ -31,7 +31,7 @@ webpackJsonp([0],[
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
-	module.exports = __webpack_require__(401);
+	module.exports = __webpack_require__(403);
 
 
 /***/ },
@@ -2158,7 +2158,7 @@ webpackJsonp([0],[
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.DropList = exports.AlertPlane = exports.LoginTable = exports.FeedBackMain = exports.CommentWrap = exports.CommentPagination = exports.CommentList = exports.CommentItem = exports.CommentHeader = exports.CommentFooter = exports.CommentFeedback = exports.CommentEditer = undefined;
+	exports.DragAndUpdate = exports.DropList = exports.AlertPlane = exports.LoginTable = exports.FeedBackMain = exports.CommentWrap = exports.CommentPagination = exports.CommentList = exports.CommentItem = exports.CommentHeader = exports.CommentFooter = exports.CommentFeedback = exports.CommentEditer = undefined;
 
 	var _CommentEditer = __webpack_require__(207);
 
@@ -2168,45 +2168,49 @@ webpackJsonp([0],[
 
 	var _CommentFeedback2 = _interopRequireDefault(_CommentFeedback);
 
-	var _CommentFooter = __webpack_require__(390);
+	var _CommentFooter = __webpack_require__(391);
 
 	var _CommentFooter2 = _interopRequireDefault(_CommentFooter);
 
-	var _CommentHeader = __webpack_require__(391);
+	var _CommentHeader = __webpack_require__(392);
 
 	var _CommentHeader2 = _interopRequireDefault(_CommentHeader);
 
-	var _CommentItem = __webpack_require__(393);
+	var _CommentItem = __webpack_require__(394);
 
 	var _CommentItem2 = _interopRequireDefault(_CommentItem);
 
-	var _CommentList = __webpack_require__(394);
+	var _CommentList = __webpack_require__(395);
 
 	var _CommentList2 = _interopRequireDefault(_CommentList);
 
-	var _CommentPagination = __webpack_require__(395);
+	var _CommentPagination = __webpack_require__(396);
 
 	var _CommentPagination2 = _interopRequireDefault(_CommentPagination);
 
-	var _CommentWrap = __webpack_require__(396);
+	var _CommentWrap = __webpack_require__(397);
 
 	var _CommentWrap2 = _interopRequireDefault(_CommentWrap);
 
-	var _FeedBackMain = __webpack_require__(397);
+	var _FeedBackMain = __webpack_require__(398);
 
 	var _FeedBackMain2 = _interopRequireDefault(_FeedBackMain);
 
-	var _LoginTable = __webpack_require__(398);
+	var _LoginTable = __webpack_require__(399);
 
 	var _LoginTable2 = _interopRequireDefault(_LoginTable);
 
-	var _AlertPlane = __webpack_require__(399);
+	var _AlertPlane = __webpack_require__(400);
 
 	var _AlertPlane2 = _interopRequireDefault(_AlertPlane);
 
-	var _DropList = __webpack_require__(400);
+	var _DropList = __webpack_require__(401);
 
 	var _DropList2 = _interopRequireDefault(_DropList);
+
+	var _DragAndUpdate = __webpack_require__(402);
+
+	var _DragAndUpdate2 = _interopRequireDefault(_DragAndUpdate);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2222,6 +2226,7 @@ webpackJsonp([0],[
 	exports.LoginTable = _LoginTable2.default;
 	exports.AlertPlane = _AlertPlane2.default;
 	exports.DropList = _DropList2.default;
+	exports.DragAndUpdate = _DragAndUpdate2.default;
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "router.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -2794,6 +2799,8 @@ webpackJsonp([0],[
 
 	var _reactRedux = __webpack_require__(173);
 
+	var _redux = __webpack_require__(180);
+
 	var _marked = __webpack_require__(219);
 
 	var _marked2 = _interopRequireDefault(_marked);
@@ -2804,9 +2811,11 @@ webpackJsonp([0],[
 
 	var _util = __webpack_require__(202);
 
-	var _redux = __webpack_require__(180);
+	var _expressions_list = __webpack_require__(388);
 
-	var _CommentActions = __webpack_require__(388);
+	var _expressions_list2 = _interopRequireDefault(_expressions_list);
+
+	var _CommentActions = __webpack_require__(389);
 
 	var _LoginActions = __webpack_require__(208);
 
@@ -3045,7 +3054,6 @@ webpackJsonp([0],[
 				var MainFeedBackBox = _props2.MainFeedBackBox;
 				var choice_list = void 0;
 				var editerWrap = this.refs["editer-wrap"];
-				var expressions_list = [{ faceName: 'weixiao', faceUrl: '/0_weixiao.gif' }, { faceName: 'piezui', faceUrl: '/1_piezui.gif' }, { faceName: 'se', faceUrl: '/2_se.gif' }, { faceName: 'fadai', faceUrl: '/3_fadai.gif' }, { faceName: 'deyi', faceUrl: '/4_deyi.gif' }, { faceName: 'liulei', faceUrl: '/5_liulei.gif' }, { faceName: 'haixiu', faceUrl: '/6_haixiu.gif' }, { faceName: 'bizui', faceUrl: '/7_bizui.gif' }, { faceName: 'daku', faceUrl: '/9_daku.gif' }, { faceName: 'ganga', faceUrl: '/10_ganga.gif' }, { faceName: 'fennu', faceUrl: '/11_fennu.gif' }, { faceName: 'tiaopi', faceUrl: '/12_tiaopi.gif' }, { faceName: 'ziya', faceUrl: '/13_ziya.gif' }, { faceName: 'jingya', faceUrl: '/14_jingya.gif' }, { faceName: 'nanguo', faceUrl: '/15_nanguo.gif' }, { faceName: 'ku', faceUrl: '/16_ku.gif' }, { faceName: 'lenghan', faceUrl: '/17_lenghan.gif' }, { faceName: 'zhuakuang', faceUrl: '/18_zhuakuang.gif' }, { faceName: 'tu', faceUrl: '/19_tu.gif' }, { faceName: 'touxiao', faceUrl: '/20_touxiao.gif' }, { faceName: 'keai', faceUrl: '/21_keai.gif' }, { faceName: 'baiyan', faceUrl: '/22_baiyan.gif' }, { faceName: 'aoman', faceUrl: '/23_aoman.gif' }, { faceName: 'jie', faceUrl: '/24_jie.gif' }, { faceName: 'kun', faceUrl: '/25_kun.gif' }, { faceName: 'jingkong', faceUrl: '/26_jingkong.gif' }, { faceName: 'liuhan', faceUrl: '/27_liuhan.gif' }, { faceName: 'hanxiao', faceUrl: '/28_hanxiao.gif' }, { faceName: 'dabing', faceUrl: '/29_dabing.gif' }, { faceName: 'fengdou', faceUrl: '/30_fengdou.gif' }, { faceName: 'zhouma', faceUrl: '/31_zhouma.gif' }, { faceName: 'yiwen', faceUrl: '/32_yiwen.gif' }, { faceName: 'xu', faceUrl: '/33_xu.gif' }, { faceName: 'yun', faceUrl: '/34_yun.gif' }, { faceName: 'zhemo', faceUrl: '/35_zhemo.gif' }, { faceName: 'shuai', faceUrl: '/36_shuai.gif' }, { faceName: 'kulou', faceUrl: '/37_kulou.gif' }, { faceName: 'qiaoda', faceUrl: '/38_qiaoda.gif' }, { faceName: 'zaijian', faceUrl: '/39_zaijian.gif' }, { faceName: 'chahan', faceUrl: '/40_chahan.gif' }, { faceName: 'koubi', faceUrl: '/41_koubi.gif' }, { faceName: 'guzhang', faceUrl: '/42_guzhang.gif' }, { faceName: 'qiudale', faceUrl: '/43_qiudale.gif' }, { faceName: 'huaixiao', faceUrl: '/44_huaixiao.gif' }, { faceName: 'zuohengheng', faceUrl: '/45_zuohengheng.gif' }, { faceName: 'youhengheng', faceUrl: '/46_youhengheng.gif' }, { faceName: 'haqian', faceUrl: '/47_haqian.gif' }, { faceName: 'bishi', faceUrl: '/48_bishi.gif' }, { faceName: 'weiqu', faceUrl: '/49_weiqu.gif' }, { faceName: 'kuaikule', faceUrl: '/50_kuaikule.gif' }, { faceName: 'yinxian', faceUrl: '/51_yinxian.gif' }, { faceName: 'qinqin', faceUrl: '/52_qinqin.gif' }, { faceName: 'xia', faceUrl: '/53_xia.gif' }, { faceName: 'kelian', faceUrl: '/54_kelian.gif' }, { faceName: 'caidao', faceUrl: '/55_caidao.gif' }, { faceName: 'xigua', faceUrl: '/56_xigua.gif' }, { faceName: 'pijiu', faceUrl: '/57_pijiu.gif' }, { faceName: 'lanqiu', faceUrl: '/58_lanqiu.gif' }, { faceName: 'pingpang', faceUrl: '/59_pingpang.gif' }, { faceName: 'yongbao', faceUrl: '/78_yongbao.gif' }, { faceName: 'woshou', faceUrl: '/81_woshou.gif' }];
 				var colors = [["#BE93C5", "#7BC6CC"], ["#4ECDC4", "#556270"], ["#A1FFCE", "#FAFFD1"], ["#ff6e7f", "#bfe9ff"]];
 				var codeTypeList = ["c", "c++", "c#", "java", "javascript", "go", "python", "php", "ruby", "lisp", "nginx", "objective-c", "http", "json", "sql", "html", "xml", "css", "less", "scss", "stylus"];
 				var tableSizeX = 5;
@@ -3058,9 +3066,9 @@ webpackJsonp([0],[
 				var expressionsListColNum = 17; //每行10列
 				var expressionsListBox = [];
 
-				for (var i = 1, name, url, _tableCol = []; i <= expressions_list.length; i++) {
-					name = expressions_list[i - 1]["faceName"];
-					url = expressions_list[i - 1]["faceUrl"];
+				for (var i = 1, name, url, _tableCol = []; i <= _expressions_list2.default.length; i++) {
+					name = _expressions_list2.default[i - 1]["faceName"];
+					url = _expressions_list2.default[i - 1]["faceUrl"];
 
 					_tableCol.push(_react2.default.createElement(
 						"td",
@@ -3072,7 +3080,7 @@ webpackJsonp([0],[
 						)
 					));
 
-					if (i % expressionsListColNum === 0 || i === expressions_list.length) {
+					if (i % expressionsListColNum === 0 || i === _expressions_list2.default.length) {
 						expressionsListBox.push(_react2.default.createElement(
 							"tr",
 							{ key: i / 10 },
@@ -3171,25 +3179,41 @@ webpackJsonp([0],[
 						choice_list = _react2.default.createElement(
 							"div",
 							{ className: "syntaxs__sub-list" },
-							_react2.default.createElement("input", { type: "text", placeholder: "图片alt", ref: "alt-input" }),
-							_react2.default.createElement("input", { type: "text", placeholder: "图片地址(url)", ref: "img-url-input" }),
 							_react2.default.createElement(
-								"button",
-								{
-									className: "insert",
-									onClick: function onClick(ev) {
-										var altInput = _this2.refs["alt-input"],
-										    imgUrlInput = _this2.refs["img-url-input"];
+								"section",
+								{ className: "column-arrange", style: { width: "100%" } },
+								_react2.default.createElement(
+									"div",
+									null,
+									_react2.default.createElement("input", { type: "text", placeholder: "图片alt", ref: "alt-input" }),
+									_react2.default.createElement("input", { type: "text", placeholder: "图片地址(url)", ref: "img-url-input" }),
+									_react2.default.createElement(
+										"button",
+										{
+											className: "insert",
+											onClick: function onClick(ev) {
+												var altInput = _this2.refs["alt-input"],
+												    imgUrlInput = _this2.refs["img-url-input"];
 
-										_this2.SyntaxsListHandle.call(_this2, ev, function (ev, editerWrap) {
-											editerWrap.value += "![" + altInput.value + "](" + imgUrlInput.value + ")";
+												_this2.SyntaxsListHandle.call(_this2, ev, function (ev, editerWrap) {
+													editerWrap.value += "![" + altInput.value + "](" + imgUrlInput.value + ")";
+												});
+
+												altInput.value = "";
+												imgUrlInput.value = "";
+											}
+										},
+										"插入图片"
+									)
+								),
+								_react2.default.createElement(_router.DragAndUpdate, {
+									callback: function callback(datas) {
+										_this2.handleBandState(0);
+										editerWrap.focus();
+										datas.forEach(function (value) {
+											editerWrap.value += "![pic](" + value.url + ") \n";
 										});
-
-										altInput.value = "";
-										imgUrlInput.value = "";
-									}
-								},
-								"插入图片"
+									} })
 							)
 						);
 						break;
@@ -21221,6 +21245,19 @@ webpackJsonp([0],[
 
 /***/ },
 /* 388 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var expressions_list = [{ faceName: 'weixiao', faceUrl: '/0_weixiao.gif' }, { faceName: 'piezui', faceUrl: '/1_piezui.gif' }, { faceName: 'se', faceUrl: '/2_se.gif' }, { faceName: 'fadai', faceUrl: '/3_fadai.gif' }, { faceName: 'deyi', faceUrl: '/4_deyi.gif' }, { faceName: 'liulei', faceUrl: '/5_liulei.gif' }, { faceName: 'haixiu', faceUrl: '/6_haixiu.gif' }, { faceName: 'bizui', faceUrl: '/7_bizui.gif' }, { faceName: 'daku', faceUrl: '/9_daku.gif' }, { faceName: 'ganga', faceUrl: '/10_ganga.gif' }, { faceName: 'fennu', faceUrl: '/11_fennu.gif' }, { faceName: 'tiaopi', faceUrl: '/12_tiaopi.gif' }, { faceName: 'ziya', faceUrl: '/13_ziya.gif' }, { faceName: 'jingya', faceUrl: '/14_jingya.gif' }, { faceName: 'nanguo', faceUrl: '/15_nanguo.gif' }, { faceName: 'ku', faceUrl: '/16_ku.gif' }, { faceName: 'lenghan', faceUrl: '/17_lenghan.gif' }, { faceName: 'zhuakuang', faceUrl: '/18_zhuakuang.gif' }, { faceName: 'tu', faceUrl: '/19_tu.gif' }, { faceName: 'touxiao', faceUrl: '/20_touxiao.gif' }, { faceName: 'keai', faceUrl: '/21_keai.gif' }, { faceName: 'baiyan', faceUrl: '/22_baiyan.gif' }, { faceName: 'aoman', faceUrl: '/23_aoman.gif' }, { faceName: 'jie', faceUrl: '/24_jie.gif' }, { faceName: 'kun', faceUrl: '/25_kun.gif' }, { faceName: 'jingkong', faceUrl: '/26_jingkong.gif' }, { faceName: 'liuhan', faceUrl: '/27_liuhan.gif' }, { faceName: 'hanxiao', faceUrl: '/28_hanxiao.gif' }, { faceName: 'dabing', faceUrl: '/29_dabing.gif' }, { faceName: 'fengdou', faceUrl: '/30_fengdou.gif' }, { faceName: 'zhouma', faceUrl: '/31_zhouma.gif' }, { faceName: 'yiwen', faceUrl: '/32_yiwen.gif' }, { faceName: 'xu', faceUrl: '/33_xu.gif' }, { faceName: 'yun', faceUrl: '/34_yun.gif' }, { faceName: 'zhemo', faceUrl: '/35_zhemo.gif' }, { faceName: 'shuai', faceUrl: '/36_shuai.gif' }, { faceName: 'kulou', faceUrl: '/37_kulou.gif' }, { faceName: 'qiaoda', faceUrl: '/38_qiaoda.gif' }, { faceName: 'zaijian', faceUrl: '/39_zaijian.gif' }, { faceName: 'chahan', faceUrl: '/40_chahan.gif' }, { faceName: 'koubi', faceUrl: '/41_koubi.gif' }, { faceName: 'guzhang', faceUrl: '/42_guzhang.gif' }, { faceName: 'qiudale', faceUrl: '/43_qiudale.gif' }, { faceName: 'huaixiao', faceUrl: '/44_huaixiao.gif' }, { faceName: 'zuohengheng', faceUrl: '/45_zuohengheng.gif' }, { faceName: 'youhengheng', faceUrl: '/46_youhengheng.gif' }, { faceName: 'haqian', faceUrl: '/47_haqian.gif' }, { faceName: 'bishi', faceUrl: '/48_bishi.gif' }, { faceName: 'weiqu', faceUrl: '/49_weiqu.gif' }, { faceName: 'kuaikule', faceUrl: '/50_kuaikule.gif' }, { faceName: 'yinxian', faceUrl: '/51_yinxian.gif' }, { faceName: 'qinqin', faceUrl: '/52_qinqin.gif' }, { faceName: 'xia', faceUrl: '/53_xia.gif' }, { faceName: 'kelian', faceUrl: '/54_kelian.gif' }, { faceName: 'caidao', faceUrl: '/55_caidao.gif' }, { faceName: 'xigua', faceUrl: '/56_xigua.gif' }, { faceName: 'pijiu', faceUrl: '/57_pijiu.gif' }, { faceName: 'lanqiu', faceUrl: '/58_lanqiu.gif' }, { faceName: 'pingpang', faceUrl: '/59_pingpang.gif' }, { faceName: 'yongbao', faceUrl: '/78_yongbao.gif' }, { faceName: 'woshou', faceUrl: '/81_woshou.gif' }];
+
+	exports.default = expressions_list;
+
+/***/ },
+/* 389 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -21236,7 +21273,7 @@ webpackJsonp([0],[
 
 	var _AlertPlaneActions = __webpack_require__(215);
 
-	var _HandleDataActions = __webpack_require__(389);
+	var _HandleDataActions = __webpack_require__(390);
 
 	var UpDateItemDataesTask = exports.UpDateItemDataesTask = (0, _reduxActions.createAction)(_constants.Types.UPDATE_ITEM_DATAES, function (newDataes) {
 	    return {
@@ -21245,7 +21282,6 @@ webpackJsonp([0],[
 	});
 
 	// 每次进行操作完成后，需要更新数据栈
-
 	var CommentThunk = exports.CommentThunk = function CommentThunk(page, SortState, newContent) {
 	    var FBIndex = arguments.length <= 3 || arguments[3] === undefined ? -1 : arguments[3];
 
@@ -21348,7 +21384,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 389 */
+/* 390 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -21364,7 +21400,7 @@ webpackJsonp([0],[
 
 	var _AlertPlaneActions = __webpack_require__(215);
 
-	var _CommentActions = __webpack_require__(388);
+	var _CommentActions = __webpack_require__(389);
 
 	var UpDateDataInfoTask = exports.UpDateDataInfoTask = (0, _reduxActions.createAction)(_constants.Types.UPDATE_GLOBAL_DATA_INFO, function (AllDataNum, NowPage) {
 	    return {
@@ -21408,7 +21444,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 390 */
+/* 391 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -21463,7 +21499,7 @@ webpackJsonp([0],[
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CommentFooter.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 391 */
+/* 392 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -21484,9 +21520,9 @@ webpackJsonp([0],[
 
 	var _redux = __webpack_require__(180);
 
-	var _SortActions = __webpack_require__(392);
+	var _SortActions = __webpack_require__(393);
 
-	var _HandleDataActions = __webpack_require__(389);
+	var _HandleDataActions = __webpack_require__(390);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21588,7 +21624,7 @@ webpackJsonp([0],[
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CommentHeader.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 392 */
+/* 393 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -21609,7 +21645,7 @@ webpackJsonp([0],[
 	});
 
 /***/ },
-/* 393 */
+/* 394 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -21630,7 +21666,7 @@ webpackJsonp([0],[
 
 	var _redux = __webpack_require__(180);
 
-	var _CommentActions = __webpack_require__(388);
+	var _CommentActions = __webpack_require__(389);
 
 	var _AlertPlaneActions = __webpack_require__(215);
 
@@ -21932,7 +21968,7 @@ webpackJsonp([0],[
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CommentItem.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 394 */
+/* 395 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -21955,7 +21991,7 @@ webpackJsonp([0],[
 
 	var _LoginActions = __webpack_require__(208);
 
-	var _HandleDataActions = __webpack_require__(389);
+	var _HandleDataActions = __webpack_require__(390);
 
 	var _AlertPlaneActions = __webpack_require__(215);
 
@@ -22074,7 +22110,7 @@ webpackJsonp([0],[
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CommentList.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 395 */
+/* 396 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -22097,7 +22133,7 @@ webpackJsonp([0],[
 
 	var _redux = __webpack_require__(180);
 
-	var _HandleDataActions = __webpack_require__(389);
+	var _HandleDataActions = __webpack_require__(390);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22268,7 +22304,7 @@ webpackJsonp([0],[
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CommentPagination.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 396 */
+/* 397 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -22328,7 +22364,7 @@ webpackJsonp([0],[
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CommentWrap.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 397 */
+/* 398 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -22349,7 +22385,7 @@ webpackJsonp([0],[
 
 	var _redux = __webpack_require__(180);
 
-	var _CommentActions = __webpack_require__(388);
+	var _CommentActions = __webpack_require__(389);
 
 	var _util = __webpack_require__(202);
 
@@ -22544,7 +22580,7 @@ webpackJsonp([0],[
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "FeedBackMain.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 398 */
+/* 399 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -22913,7 +22949,7 @@ webpackJsonp([0],[
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "LoginTable.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 399 */
+/* 400 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -23072,7 +23108,7 @@ webpackJsonp([0],[
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "AlertPlane.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 400 */
+/* 401 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -23304,16 +23340,231 @@ webpackJsonp([0],[
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "DropList.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 401 */
+/* 402 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(173);
+
+	var _redux = __webpack_require__(180);
+
+	var _util = __webpack_require__(202);
+
+	var _AlertPlaneActions = __webpack_require__(215);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var DragAndUpdate = function (_Component) {
+	    _inherits(DragAndUpdate, _Component);
+
+	    function DragAndUpdate(props) {
+	        _classCallCheck(this, DragAndUpdate);
+
+	        var _this = _possibleConstructorReturn(this, (DragAndUpdate.__proto__ || Object.getPrototypeOf(DragAndUpdate)).call(this, props));
+
+	        _this.state = {
+	            buttonbOff: 1
+	        };
+	        _this.handleUploadData = _this.handleUploadData.bind(_this);
+	        _this.handleDrag = _this.handleDrag.bind(_this);
+	        _this.handleFileChoose = _this.handleFileChoose.bind(_this);
+	        _this.handleClickUpload = _this.handleClickUpload.bind(_this);
+	        _this.clearDefault = _this.clearDefault.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(DragAndUpdate, [{
+	        key: "handleUploadData",
+	        value: function handleUploadData(fileList) {
+	            var _props = this.props;
+	            var actions = _props.actions;
+	            var callback = _props.callback;
+	            var fr = new FileReader();
+	            var promiseStack = [];
+	            var flag = 0;
+	            var allSize = 0;
+	            var SizeLimit = 5 * 1024 * 1024;
+
+	            fileList = fileList.map(function (value, idx) {
+	                if (!value.type) {
+	                    actions.AlertPlaneThunk("非图片类型文件禁止上传");
+	                    return null;
+	                }
+	                allSize += value.size;
+	                return {
+	                    size: (0, _util.MemoryHumanReadable)(value.size),
+	                    file: value
+	                };
+	            });
+
+	            if (allSize > SizeLimit) {
+	                return actions.AlertPlaneThunk("单次上传图片总量不能超过5MB");
+	            } else {
+	                (function () {
+	                    var parseImageAndFetch = function parseImageAndFetch() {
+	                        var value = fileList[0];
+	                        fr.readAsDataURL(value.file);
+
+	                        fr.onloadend = function (evt) {
+	                            var promise = fetch("/upLoadImage", {
+	                                method: "POST",
+	                                headers: {
+	                                    "Charset": "utf-8",
+	                                    "Content-Type": "text/plain"
+	                                },
+	                                body: flag + evt.target.result
+	                            }).then(function (res) {
+	                                if (res.ok) {
+	                                    return res.json();
+	                                }
+	                            });
+
+	                            promiseStack.push(promise);
+	                            fileList.pop();
+
+	                            if (flag !== fileList.length) {
+	                                return parseImageAndFetch();
+	                            } else {
+	                                Promise.all(promiseStack).then(function (pics) {
+	                                    var datas = pics.sort(function (objA, objB) {
+	                                        return objA.order - objB.order;
+	                                    });
+	                                    callback && callback(datas);
+	                                }).catch(function (err) {
+	                                    throw err;
+	                                    actions.AlertPlaneThunk("上传图片失败");
+	                                });
+	                            }
+	                        };
+	                    };
+
+	                    parseImageAndFetch();
+	                })();
+	            }
+	        }
+	    }, {
+	        key: "handleDrag",
+	        value: function handleDrag(ev) {
+	            var dt = ev.dataTransfer,
+	                oDatas = Array.from(dt.files);
+
+	            this.clearDefault(ev);
+	            this.handleUploadData(oDatas);
+	        }
+	    }, {
+	        key: "handleFileChoose",
+	        value: function handleFileChoose() {
+	            var files = this.refs["file"].files;
+	            if (files.length) {
+	                this.handleUploadData(Array.from(files));
+	            }
+	            this.setState({
+	                buttonbOff: this.state.buttonbOff ^= 1
+	            });
+	        }
+	    }, {
+	        key: "handleClickUpload",
+	        value: function handleClickUpload(ev) {
+	            console.log(this.state.buttonbOff);
+	            if (this.state.buttonbOff) {
+	                this.setState({
+	                    buttonbOff: this.state.buttonbOff ^= 1
+	                });
+
+	                this.refs["file"].click();
+	            }
+
+	            this.clearDefault(ev);
+	        }
+	    }, {
+	        key: "clearDefault",
+	        value: function clearDefault(ev) {
+	            ev.stopPropagation();
+	            ev.preventDefault();
+	        }
+	    }, {
+	        key: "render",
+	        value: function render() {
+	            return _react2.default.createElement(
+	                "div",
+	                { className: "column-arrange" },
+	                _react2.default.createElement(
+	                    "figure",
+	                    { className: "drop__upload__area",
+	                        onDragEnter: this.clearDefault,
+	                        onDragOver: this.clearDefault,
+	                        onDrop: this.handleDrag
+	                    },
+	                    "拖拽上传图片"
+	                ),
+	                _react2.default.createElement("input", { type: "file",
+	                    accept: "image/*",
+	                    style: { display: "none" },
+	                    multiple: true,
+	                    ref: "file",
+	                    onChange: this.handleFileChoose
+	                }),
+	                _react2.default.createElement(
+	                    "button",
+	                    { className: "upload__btn",
+	                        onClick: this.handleClickUpload
+	                    },
+	                    "点击上传"
+	                ),
+	                _react2.default.createElement(
+	                    "p",
+	                    { style: { color: "red" } },
+	                    "（ps: 单次上传图片总量不能超过5MB！）"
+	                )
+	            );
+	        }
+	    }]);
+
+	    return DragAndUpdate;
+	}(_react.Component);
+
+	exports.default = (0, _reactRedux.connect)(function (state) {
+	    return {};
+	}, function (dispatch) {
+	    return {
+	        actions: (0, _redux.bindActionCreators)({
+	            AlertPlaneThunk: _AlertPlaneActions.AlertPlaneThunk
+	        }, dispatch)
+	    };
+	})(DragAndUpdate);
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "DragAndUpdate.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 403 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(402);
+	var content = __webpack_require__(404);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(404)(content, {});
+	var update = __webpack_require__(406)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -23330,21 +23581,21 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 402 */
+/* 404 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(403)();
+	exports = module.exports = __webpack_require__(405)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "@charset \"utf-8\";\n* {\n  box-sizing: border-box;\n  font-family: arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  font-size: 14px;\n  outline: none;\n}\nbody {\n  margin: 0;\n  padding: 0;\n  font-size: 0;\n}\na {\n  -webkit-transition: 5s;\n  transition: 5s;\n  text-decoration: none;\n}\nul,\nol {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\ntable {\n  border-collapse: collapse;\n}\nselect {\n  -webkit-appearance: none;\n     -moz-appearance: none;\n          appearance: none;\n}\nh1,\nh2,\nh3 {\n  margin-bottom: 1em;\n}\np,\npre {\n  margin: 0;\n}\nblockquote {\n  margin: 0;\n}\ninput[type=\"submit\"],\nbutton {\n  display: inline-block;\n  border-radius: 0;\n  border: none;\n  padding: 0;\n  background: none;\n  cursor: pointer;\n}\nfigure {\n  margin: 0;\n}\ni {\n  display: inline-block;\n}\n/*下拉组件*/\n.drop__list {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  width: 140px;\n  border: 1px solid #ccc;\n  cursor: pointer;\n  position: relative;\n  border-radius: 3px 3px 0px 0px;\n  color: #929699;\n  font-size: 0px;\n  margin-right: 20px;\n}\n.drop__list p {\n  width: 100px;\n  height: 20px;\n  margin: 3px 0 3px 5px;\n  font-size: 14px;\n}\n.drop__list i {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  top: 5px;\n  right: 5px;\n  content: \"\";\n  width: 16px;\n  height: 16px;\n  display: block;\n  background: url(\"/img/icon.png\") -30px 0px;\n}\n.drop__list .drop__wrap {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  top: 26px;\n  left: 0;\n  width: 100%;\n  border-radius: 0px 0px 3px 3px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  overflow: hidden;\n  border: 1px solid #ccc;\n  border-top: none;\n  z-index: 1234;\n  height: 0px;\n}\n.drop__list ul {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  padding: 5px 0;\n  overflow: hidden;\n  background: #E6E6E6;\n  font-size: 14px;\n}\n.drop__list ul li {\n  height: 25px;\n  line-height: 25px;\n  padding: 0px 5px;\n}\n.drop__list ul li:hover {\n  color: #fff;\n  background: #1C86D1;\n}\n.drag__wrap {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  top: 0;\n  right: 0;\n  background: #F5F5F5;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.drag__wrap .drag__btn {\n  border-radius: 3px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  min-height: 5px;\n  width: 100%;\n  border: 1px solid #979797;\n  background-color: rgba(0, 0, 0, 0.6);\n}\n.drag__wrap .drag__btn:hover {\n  border: 1px solid #636363;\n  background-color: rgba(0, 0, 0, 0.8);\n}\n.drag__wrap .drag__btn:active {\n  border: 1px solid #636363;\n  background-color: #000000;\n}\n.none {\n  display: none !important;\n}\n.b-c {\n  position: fixed;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  margin: auto;\n}\n.hidden {\n  height: 0 !important;\n}\n@-webkit-keyframes swing {\n  20%,\n  40%,\n  60%,\n  80%,\n  100% {\n    -webkit-transform-origin: topcenter;\n            transform-origin: topcenter;\n  }\n  20% {\n    -webkit-transform: rotate(15deg);\n            transform: rotate(15deg);\n  }\n  40% {\n    -webkit-transform: rotate(-10deg);\n            transform: rotate(-10deg);\n  }\n  60% {\n    -webkit-transform: rotate(5deg);\n            transform: rotate(5deg);\n  }\n  80% {\n    -webkit-transform: rotate(-5deg);\n            transform: rotate(-5deg);\n  }\n  100% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n  }\n}\n@keyframes swing {\n  20%,\n  40%,\n  60%,\n  80%,\n  100% {\n    -webkit-transform-origin: topcenter;\n            transform-origin: topcenter;\n  }\n  20% {\n    -webkit-transform: rotate(15deg);\n            transform: rotate(15deg);\n  }\n  40% {\n    -webkit-transform: rotate(-10deg);\n            transform: rotate(-10deg);\n  }\n  60% {\n    -webkit-transform: rotate(5deg);\n            transform: rotate(5deg);\n  }\n  80% {\n    -webkit-transform: rotate(-5deg);\n            transform: rotate(-5deg);\n  }\n  100% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n  }\n}\n@-webkit-keyframes masked {\n  0% {\n    background-position: 0 0;\n  }\n  100% {\n    background-position: -100% 0;\n  }\n}\n@keyframes masked {\n  0% {\n    background-position: 0 0;\n  }\n  100% {\n    background-position: -100% 0;\n  }\n}\n.comment__feedback__wrap {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  overflow: hidden;\n  background: #fbfbfb;\n  width: 100%;\n  margin-top: 20px;\n}\n.comment__feedback__box__syntaxs {\n  border-radius: 5px 5px 0 0;\n  border: 1px solid #272636;\n}\n.comment__feedback__box__syntaxs .syntaxs__list {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 32px;\n  -ms-flex-flow: row no-wrap;\n      flex-flow: row no-wrap;\n}\n.comment__feedback__box__syntaxs .syntaxs__list li {\n  width: 32px;\n  height: 32px;\n  margin: 0 4px;\n  background-image: url(\"/img/icon.png\");\n  cursor: pointer;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .bold {\n  background-position: 6px -79px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .bold:hover {\n  background: url(\"/img/icon-hover.png\") 6px -79px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .italic {\n  background-position: 8px -127px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .italic:hover {\n  background: url(\"/img/icon-hover.png\") 8px -127px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .a-link {\n  background-position: 4px -103px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .a-link:hover {\n  background: url(\"/img/icon-hover.png\") 4px -103px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .image {\n  background-position: 4px -151px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .image:hover {\n  background: url(\"/img/icon-hover.png\") 4px -151px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .table {\n  background-position: 4px -175px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .table:hover {\n  background: url(\"/img/icon-hover.png\") 4px -175px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .blockquote-block {\n  background-position: 4px -292px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .blockquote-block:hover {\n  background: url(\"/img/icon-hover.png\") 4px -292px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .u-list {\n  background-position: 2px -223px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .u-list:hover {\n  background: url(\"/img/icon-hover.png\") 2px -223px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .o-list {\n  background-position: 2px -199px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .o-list:hover {\n  background: url(\"/img/icon-hover.png\") 2px -199px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h1-tag {\n  background-position: 4px -247px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h1-tag:hover {\n  background: url(\"/img/icon-hover.png\") 4px -247px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h2-tag {\n  background-position: 4px -269px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h2-tag:hover {\n  background: url(\"/img/icon-hover.png\") 4px -269px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .code-block {\n  background-position: 4px -341px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .code-block:hover {\n  background: url(\"/img/icon-hover.png\") 4px -341px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .emoji-list {\n  background-position: 5px -316px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .emoji-list:hover {\n  background: url(\"/img/icon-hover.png\") 5px -316px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 5px;\n  border-top: 1px solid #272636;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list > div.choice-btn {\n  border-radius: 5px;\n  position: relative;\n  width: 32px;\n  height: 32px;\n  margin: 0 4px;\n  cursor: pointer;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list > div.choice-btn:hover {\n  box-shadow: 0 0 1px 1px #1C86D1;\n}\n.comment__feedback__box__syntaxs input[type=\"text\"] {\n  border-radius: 3px;\n  height: 30px;\n  border: 1px solid #1C86D1;\n  margin-right: 20px;\n  font-size: 14px;\n  text-indent: 5px;\n}\n.comment__feedback__box__syntaxs .insert {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  border-radius: 5px;\n  color: #272636;\n  border: 1px solid #1C86D1;\n  line-height: 30px;\n  width: 70px;\n  height: 30px;\n}\n.comment__feedback__box__syntaxs .insert:hover {\n  background: #1C86D1;\n  color: #fff;\n}\n.comment__feedback__box__syntaxs .table-size-matrix {\n  margin: 10px 0 10px 90px;\n}\n.comment__feedback__box__syntaxs .table-size-matrix tr,\n.comment__feedback__box__syntaxs .table-size-matrix td {\n  border: 1px solid #ccc;\n}\n.comment__feedback__box__syntaxs .table-size-matrix td {\n  padding: 15px;\n}\n.comment__feedback__box__syntaxs .table-matrix-dimension {\n  font-size: 18px;\n  text-decoration: underline;\n  margin: 0 20px;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap {\n  width: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  border-top: 1px solid #ccc;\n  border-left: 1px solid #ccc;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap td {\n  border-right: 1px solid #ccc;\n  border-bottom: 1px solid #ccc;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap td:hover {\n  background: #ccc;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap td a {\n  display: inline-block;\n  width: 32px;\n  height: 32px;\n  padding: 4px;\n}\n.comment__feedback__box__wrap {\n  position: relative;\n}\n.editor__resize__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.editor__resize {\n  display: inline-block;\n  width: 130px;\n  height: 8px;\n  cursor: row-resize;\n  margin-top: 2px;\n  border-top: 1px solid #ccc;\n  border-bottom: 1px solid #ccc;\n}\n.comment__feedback__box {\n  position: relative;\n  width: 100%;\n}\n.comment__feedback {\n  padding: 10px;\n  border-top: 1px solid #272636;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n}\n.comment__feedback h3 {\n  font: 200 24px/1 arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n}\n.login-infos {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  font-size: 16px;\n  padding-bottom: 10px;\n}\n.login-infos a {\n  color: #1C86D1;\n}\n.login-infos .init_prompt {\n  cursor: default;\n  color: rgba(0, 0, 0, 0.5);\n}\n.login-out__btn {\n  border-radius: 5px;\n  float: right;\n  width: 70px;\n  height: 25px;\n  background: #C81623;\n  color: #fff;\n}\n.login-out__btn:active {\n  background: #AA151F;\n}\n.login-in__btn {\n  border-radius: 5px;\n  float: right;\n  width: 70px;\n  height: 25px;\n  padding: 0 5px;\n  background: #1C86D1;\n  color: #fff;\n}\n.login-in__btn:active {\n  background: #3075DC;\n}\n.comment__feedback--section {\n  width: calc(100% - 74px);\n}\n.comment__feedback--edit {\n  border-radius: 0px 0px 5px 5px;\n  width: 100%;\n  min-height: 30px;\n  padding: 5px;\n  border: 1px solid #272636;\n  border-top: none;\n  font: 200 14px/1.5 arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  resize: none;\n  overflow: hidden;\n  white-space: pre-wrap;\n  -moz-tab-size: 4;\n    -o-tab-size: 4;\n       tab-size: 4;\n}\n.comment__feedback--btns {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  width: 100%;\n  margin-top: 10px;\n}\n.comment__feedback--btns button {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  border-radius: 5px;\n  line-height: 30px;\n  width: 70px;\n  height: 30px;\n}\n.feedback--btns__reset {\n  color: #C81623;\n  border: 1px solid #C81623;\n}\n.feedback--btns__reset:hover {\n  background: #C81623;\n  color: #fff;\n}\n.feedback--btns__comment {\n  margin-left: 10px;\n  color: #272636;\n  border: 1px solid #1C86D1;\n}\n.feedback--btns__comment:hover {\n  background: #1C86D1;\n  color: #fff;\n}\n.comment__feedback__mask {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  border-radius: 2px;\n  position: absolute;\n  top: 0;\n  left: 1px;\n  width: 604px;\n  height: 149px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  cursor: default;\n  background: #ccc;\n}\n.comment__feedback__mask p {\n  color: #fff;\n}\n.comment__feedback__mask--title {\n  font: 100 60px/60px \"\\5FAE\\8F6F\\96C5\\9ED1\";\n}\n.comment__feedback__mask--pinyin {\n  margin-top: 15px;\n  font: 100 20px/20px arial;\n}\n.clearfix::after {\n  content: \".\";\n  display: block;\n  height: 0;\n  visibility: hidden;\n  clear: both;\n}\n.demo {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  width: 900px;\n  margin: 50px auto 50px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  padding: 0 100px;\n}\n.comment__wrap {\n  width: 100%;\n}\n.comment__header {\n  border-radius: 5px;\n  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.6);\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -moz-justify-content: space-between;\n  height: 50px;\n  background: #1C86D1;\n  color: #fff;\n  font-size: 0;\n  padding: 5px 8px;\n}\n.comment__header::after {\n  content: \"\";\n  display: block;\n  position: absolute;\n  left: 41px;\n  bottom: -20px;\n  height: 0px;\n  border: 10px solid transparent;\n  border-top: 10px solid #1C86D1;\n}\n.comment__header .comment__header__span {\n  width: 150px;\n  height: 16px;\n  font: 200 16px/16px arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  margin-left: 10px;\n}\n.comment__header .comment__header__btns {\n  width: 80px;\n  height: 30px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.comment__header .comment__header__btns button {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  display: inline-block;\n  width: 40px;\n  height: 30px;\n  color: #fff;\n  font-size: 14px;\n}\n.comment__header .comment__header__btns button:hover {\n  color: #d32;\n}\n.comment__footer {\n  border-radius: 5px;\n  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.6);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  position: relative;\n  height: 70px;\n  background: #1C86D1;\n}\n.comment__footer::before {\n  content: \"\";\n  display: block;\n  position: absolute;\n  top: -20px;\n  left: 41px;\n  height: 0;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #1C86D1;\n}\n.comment__pagination {\n  border-radius: 5px;\n  box-shadow: 0 0 2px rgba(0, 0, 0, 0.7);\n  overflow: hidden;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 35px;\n}\n.comment__pagination li {\n  -webkit-transition: 0.3s;\n  transition: 0.3s;\n  width: 40px;\n  height: 100%;\n  color: #fff;\n  text-align: center;\n  cursor: pointer;\n}\n.comment__pagination li:hover {\n  color: #1C86D1;\n  background: #fff;\n}\n.comment__pagination li div {\n  padding: 10px 0;\n  height: 100%;\n  line-height: 15px;\n}\n.comment__pagination li > div.active {\n  color: #1C86D1;\n  background: #fff;\n  border-left: none !important;\n}\n.comment__pagination li:not(:nth-of-type(1)) div {\n  border-left: 1px solid rgba(0, 0, 0, 0.2);\n}\n.comment__list {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  margin: 0 0 0 50px;\n  border-left: 2px solid #1C86D1;\n}\n.no__comment__item {\n  padding: 20px;\n  text-align: center;\n}\n.no__comment__item p {\n  border-radius: 5px;\n  height: 70px;\n  font-size: 24px;\n  line-height: 70px;\n  color: rgba(0, 0, 0, 0.6);\n  border: 1px solid #272636;\n}\n.comment__item {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: relative;\n  padding: 20px;\n}\n.comment__item::after {\n  border-radius: 50%;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  left: -8px;\n  top: 40px;\n  content: \"\";\n  display: block;\n  background: #1C86D1;\n  width: 10px;\n  height: 10px;\n  border: 2px solid #fff;\n}\n.comment__item:hover::after {\n  background: #51CA65;\n}\n.comment__item:hover .comment__content {\n  -webkit-transform: translateX(15px);\n          transform: translateX(15px);\n}\n.comment__content {\n  border-radius: 5px;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n  padding: 10px;\n  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);\n}\n.comment__author--avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.comment__author--avatar > img:hover,\n.comment__author--avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.comment__content--main {\n  width: calc(100% - 74px);\n}\n.comment__content--author {\n  font-size: 18px;\n}\n.comment__content--author a {\n  color: #1C86D1;\n}\n.comment__content--time {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  font-size: 12px;\n  margin-top: 2px;\n  color: #ddd;\n  cursor: default;\n}\n.comment__content--time:hover {\n  color: #1C86D1;\n}\n.comment__content--content {\n  font-size: 0px;\n  line-height: 1.4;\n  padding: 24px 0 0 0px;\n  white-space: pre;\n}\n.comment__content--content h1.text-effect-basic {\n  text-fill-color: transparent;\n  -webkit-text-fill-color: transparent;\n  background-clip: text;\n  -webkit-background-clip: text;\n  background-size: 200% 200%;\n  -webkit-animation: masked 3s infinite linear;\n          animation: masked 3s infinite linear;\n}\n.comment__content--content h1 {\n  margin-top: 10px;\n  padding-bottom: 10px;\n  font-size: 25px;\n  color: #7c795d;\n  font-weight: normal;\n  line-height: 1.1;\n  border-bottom: 1px solid #7c795d;\n}\n.comment__content--content h2 {\n  margin: 5px 0;\n  height: 30px;\n  text-indent: 5px;\n  color: #7c795d;\n  font: 400 20px/30px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  border-left: 5px solid #1C86D1;\n}\n.comment__content--content pre,\n.comment__content--content p,\n.comment__content--content code {\n  -moz-tab-size: 2;\n    -o-tab-size: 2;\n       tab-size: 2;\n  white-space: pre-wrap;\n  word-break: break-all;\n}\n.comment__content--content p,\n.comment__content--content code {\n  font-size: 14px;\n}\n.comment__content--content strong {\n  font-size: 16px;\n}\n.comment__content--content a {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  color: #1C86D1;\n  margin: 0px 2px;\n}\n.comment__content--content a:hover {\n  color: #C91523;\n}\n.comment__content--content img {\n  max-width: 512px;\n  vertical-align: bottom;\n}\n.comment__content--content table {\n  border-radius: 5px;\n  margin: 20px 0;\n  padding: 8px;\n  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);\n  white-space: normal;\n  border-collapse: collapse;\n}\n.comment__content--content table tr {\n  border: 1px solid #000;\n}\n.comment__content--content table tr td,\n.comment__content--content table tr th {\n  font-size: 14px;\n  padding: 5px;\n  word-break: break-word;\n}\n.comment__content--content table tr td {\n  font-weight: 200;\n  border: 1px solid #000;\n}\n.comment__content--content blockquote {\n  border-radius: 5px;\n  position: relative;\n  background: #CCD0D5;\n  padding: 25px 10px 10px 30px;\n  overflow: hidden;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n}\n.comment__content--content blockquote::before {\n  position: absolute;\n  top: 0;\n  left: 0;\n  font-size: 14px;\n  background: -webkit-linear-gradient(112deg, transparent 50%, #1C86D1 50%);\n  background: linear-gradient(-22deg, transparent 50%, #1C86D1 50%);\n  width: 80px;\n  height: 30px;\n  display: block;\n  content: \"\\5F15\\8FF0\";\n  color: #fff;\n  padding: 3px 0 0 4px;\n}\n.comment__content--content pre {\n  border-radius: 5px;\n  overflow: hidden;\n  padding: 15px 0px 15px 8px;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n  margin: 15px 0;\n  background: #49483e;\n}\n.comment__content--content pre code {\n  color: #a6e22e;\n}\n.comment__content--content pre code .hljs-comment,\n.comment__content--content pre code .hljs-quote {\n  color: #999580;\n}\n.comment__content--content pre code .hljs-variable,\n.comment__content--content pre code .hljs-template-variable,\n.comment__content--content pre code .hljs-attr,\n.comment__content--content pre code .hljs-tag,\n.comment__content--content pre code .hljs-name,\n.comment__content--content pre code .hljs-regexp,\n.comment__content--content pre code .hljs-link,\n.comment__content--content pre code .hljs-name,\n.comment__content--content pre code .hljs-selector-id,\n.comment__content--content pre code .hljs-selector-class {\n  color: #f2777a;\n}\n.comment__content--content pre code .hljs-number,\n.comment__content--content pre code .hljs-meta,\n.comment__content--content pre code .hljs-built_in,\n.comment__content--content pre code .hljs-builtin-name,\n.comment__content--content pre code .hljs-literal,\n.comment__content--content pre code .hljs-type,\n.comment__content--content pre code .hljs-params {\n  color: #ae81ff;\n}\n.comment__content--content pre code .hljs-string,\n.comment__content--content pre code .hljs-symbol,\n.comment__content--content pre code .hljs-bullet {\n  color: #e6db74;\n}\n.comment__content--content pre code .hljs-title,\n.comment__content--content pre code .hljs-section {\n  color: #6684e1;\n}\n.comment__content--content pre code .hljs-keyword,\n.comment__content--content pre code .hljs-selector-tag {\n  color: #66D9EF;\n}\n.comment__content--content pre code .hljs {\n  display: block;\n  overflow-x: auto;\n  background: #20201d;\n  color: #a6a28c;\n  padding: 0.5em;\n}\n.comment__content--content pre code .hljs-emphasis {\n  font-style: italic;\n}\n.comment__content--content pre code .hljs-strong {\n  font-weight: bold;\n}\n.comment__content--content ol {\n  counter-reset: section;\n  padding: 10px 0 10px 20px;\n}\n.comment__content--content ol > li {\n  position: relative;\n  min-height: 20px;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  margin: 5px 0px;\n}\n.comment__content--content ol > li:before {\n  counter-increment: section;\n  content: counters(section, \"\") \".\";\n  display: inline-block;\n  position: absolute;\n  top: 0;\n  left: -20px;\n  font-size: 16px;\n  font-weight: bold;\n  font-style: italic;\n}\n.comment__content--content ol > li:nth-of-type(3n+1)::before {\n  color: #FE0002;\n}\n.comment__content--content ol > li:nth-of-type(3n+2)::before {\n  color: #F4F800;\n}\n.comment__content--content ol > li:nth-of-type(3n+3)::before {\n  color: #A3DF03;\n}\n.comment__content--content ul {\n  padding: 10px 0 10px 15px;\n}\n.comment__content--content ul > li {\n  position: relative;\n  margin-bottom: 10px;\n  line-height: 1.1;\n  min-height: 20px;\n  word-break: break-all;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n}\n.comment__content--content ul > li::before {\n  border-radius: 50%;\n  position: absolute;\n  top: 6px;\n  left: -13px;\n  content: \"\";\n  display: inline-block;\n  width: 8px;\n  height: 8px;\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #1C86D1 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #1C86D1 100%);\n}\n.comment__content--content ul > li:hover::before {\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #91E22E 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #91E22E 100%);\n}\n.comment__content--options {\n  padding-top: 15px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.comment__content--options__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-flex: 8;\n      -ms-flex-positive: 8;\n          flex-grow: 8;\n}\n.comment__content--options__wrap a {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.comment__content--options__wrap a i {\n  width: 16px;\n  height: 16px;\n  background-image: url(\"/img/icon.png\");\n}\n.comment__content--options__wrap a span {\n  font-size: 12px;\n  margin-left: 3px;\n  color: #272636;\n}\n.comment__content--options__wrap a:hover span {\n  color: #1C86D1;\n}\n.comment__content--options__wrap a:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.comment__content--options__callback i {\n  background-position: -5px 0px;\n}\n.comment__content--options__del {\n  margin-left: 8px;\n}\n.comment__content--options__del i {\n  background-position: -5px -16px;\n}\n.comment__options__vote-up {\n  text-align: right;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n.comment__options__vote-up button {\n  font-size: 18px;\n}\n.comment__options__vote-up button span {\n  font-size: 18px;\n}\n.comment__options__vote-up button:hover {\n  color: #1C86D1;\n}\n.comment__options__has-voted-up {\n  text-align: right;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n.comment__options__has-voted-up button {\n  font-size: 18px;\n  color: #C91523;\n  cursor: default;\n}\n.comment__options__has-voted-up button span {\n  font-size: 18px;\n}\n.feedback__content {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  overflow: hidden;\n  width: 100%;\n  margin: 20px 10px 10px 5px;\n}\n.feedback__content--main {\n  border-radius: 5px;\n  position: relative;\n  border: 1px solid #272636;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  padding: 5px;\n  margin: 20px 0 0;\n}\n.feedback__content--main::after,\n.feedback__content--main::before {\n  content: \"\";\n  height: 0;\n  position: absolute;\n  left: 30px;\n}\n.feedback__content--main::after {\n  top: -20px;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #272636;\n}\n.feedback__content--main::before {\n  z-index: 2;\n  top: -19px;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #fff;\n}\n.sub__feedback {\n  margin: 5px 0;\n}\n.sub__feedback span {\n  font-size: 18px;\n  color: #1C86D1;\n}\n.feedback__wrap--content {\n  width: calc(100% - 74px);\n}\n.feedback__content--avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.feedback__content--avatar > img:hover,\n.feedback__content--avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.feedback__wrap--content {\n  width: calc(100% - 74px);\n}\n.feedback__content--author {\n  font-size: 18px;\n}\n.feedback__content--author a {\n  color: #1C86D1;\n}\n.feedback__content--time {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  font-size: 12px;\n  margin-top: 2px;\n  color: #ddd;\n  cursor: default;\n}\n.feedback__content--time:hover {\n  color: #1C86D1;\n}\n.feedback__content--content {\n  font-size: 0px;\n  line-height: 1.4;\n  padding: 24px 0 0 0px;\n  white-space: pre;\n}\n.feedback__content--content h1.text-effect-basic {\n  text-fill-color: transparent;\n  -webkit-text-fill-color: transparent;\n  background-clip: text;\n  -webkit-background-clip: text;\n  background-size: 200% 200%;\n  -webkit-animation: masked 3s infinite linear;\n          animation: masked 3s infinite linear;\n}\n.feedback__content--content h1 {\n  margin-top: 10px;\n  padding-bottom: 10px;\n  font-size: 25px;\n  color: #7c795d;\n  font-weight: normal;\n  line-height: 1.1;\n  border-bottom: 1px solid #7c795d;\n}\n.feedback__content--content h2 {\n  margin: 5px 0;\n  height: 30px;\n  text-indent: 5px;\n  color: #7c795d;\n  font: 400 20px/30px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  border-left: 5px solid #1C86D1;\n}\n.feedback__content--content pre,\n.feedback__content--content p,\n.feedback__content--content code {\n  -moz-tab-size: 2;\n    -o-tab-size: 2;\n       tab-size: 2;\n  white-space: pre-wrap;\n  word-break: break-all;\n}\n.feedback__content--content p,\n.feedback__content--content code {\n  font-size: 14px;\n}\n.feedback__content--content strong {\n  font-size: 16px;\n}\n.feedback__content--content a {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  color: #1C86D1;\n  margin: 0px 2px;\n}\n.feedback__content--content a:hover {\n  color: #C91523;\n}\n.feedback__content--content img {\n  max-width: 512px;\n  vertical-align: bottom;\n}\n.feedback__content--content table {\n  border-radius: 5px;\n  margin: 20px 0;\n  padding: 8px;\n  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);\n  white-space: normal;\n  border-collapse: collapse;\n}\n.feedback__content--content table tr {\n  border: 1px solid #000;\n}\n.feedback__content--content table tr td,\n.feedback__content--content table tr th {\n  font-size: 14px;\n  padding: 5px;\n  word-break: break-word;\n}\n.feedback__content--content table tr td {\n  font-weight: 200;\n  border: 1px solid #000;\n}\n.feedback__content--content blockquote {\n  border-radius: 5px;\n  position: relative;\n  background: #CCD0D5;\n  padding: 25px 10px 10px 30px;\n  overflow: hidden;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n}\n.feedback__content--content blockquote::before {\n  position: absolute;\n  top: 0;\n  left: 0;\n  font-size: 14px;\n  background: -webkit-linear-gradient(112deg, transparent 50%, #1C86D1 50%);\n  background: linear-gradient(-22deg, transparent 50%, #1C86D1 50%);\n  width: 80px;\n  height: 30px;\n  display: block;\n  content: \"\\5F15\\8FF0\";\n  color: #fff;\n  padding: 3px 0 0 4px;\n}\n.feedback__content--content pre {\n  border-radius: 5px;\n  overflow: hidden;\n  padding: 15px 0px 15px 8px;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n  margin: 15px 0;\n  background: #49483e;\n}\n.feedback__content--content pre code {\n  color: #a6e22e;\n}\n.feedback__content--content pre code .hljs-comment,\n.feedback__content--content pre code .hljs-quote {\n  color: #999580;\n}\n.feedback__content--content pre code .hljs-variable,\n.feedback__content--content pre code .hljs-template-variable,\n.feedback__content--content pre code .hljs-attr,\n.feedback__content--content pre code .hljs-tag,\n.feedback__content--content pre code .hljs-name,\n.feedback__content--content pre code .hljs-regexp,\n.feedback__content--content pre code .hljs-link,\n.feedback__content--content pre code .hljs-name,\n.feedback__content--content pre code .hljs-selector-id,\n.feedback__content--content pre code .hljs-selector-class {\n  color: #f2777a;\n}\n.feedback__content--content pre code .hljs-number,\n.feedback__content--content pre code .hljs-meta,\n.feedback__content--content pre code .hljs-built_in,\n.feedback__content--content pre code .hljs-builtin-name,\n.feedback__content--content pre code .hljs-literal,\n.feedback__content--content pre code .hljs-type,\n.feedback__content--content pre code .hljs-params {\n  color: #ae81ff;\n}\n.feedback__content--content pre code .hljs-string,\n.feedback__content--content pre code .hljs-symbol,\n.feedback__content--content pre code .hljs-bullet {\n  color: #e6db74;\n}\n.feedback__content--content pre code .hljs-title,\n.feedback__content--content pre code .hljs-section {\n  color: #6684e1;\n}\n.feedback__content--content pre code .hljs-keyword,\n.feedback__content--content pre code .hljs-selector-tag {\n  color: #66D9EF;\n}\n.feedback__content--content pre code .hljs {\n  display: block;\n  overflow-x: auto;\n  background: #20201d;\n  color: #a6a28c;\n  padding: 0.5em;\n}\n.feedback__content--content pre code .hljs-emphasis {\n  font-style: italic;\n}\n.feedback__content--content pre code .hljs-strong {\n  font-weight: bold;\n}\n.feedback__content--content ol {\n  counter-reset: section;\n  padding: 10px 0 10px 20px;\n}\n.feedback__content--content ol > li {\n  position: relative;\n  min-height: 20px;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  margin: 5px 0px;\n}\n.feedback__content--content ol > li:before {\n  counter-increment: section;\n  content: counters(section, \"\") \".\";\n  display: inline-block;\n  position: absolute;\n  top: 0;\n  left: -20px;\n  font-size: 16px;\n  font-weight: bold;\n  font-style: italic;\n}\n.feedback__content--content ol > li:nth-of-type(3n+1)::before {\n  color: #FE0002;\n}\n.feedback__content--content ol > li:nth-of-type(3n+2)::before {\n  color: #F4F800;\n}\n.feedback__content--content ol > li:nth-of-type(3n+3)::before {\n  color: #A3DF03;\n}\n.feedback__content--content ul {\n  padding: 10px 0 10px 15px;\n}\n.feedback__content--content ul > li {\n  position: relative;\n  margin-bottom: 10px;\n  line-height: 1.1;\n  min-height: 20px;\n  word-break: break-all;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n}\n.feedback__content--content ul > li::before {\n  border-radius: 50%;\n  position: absolute;\n  top: 6px;\n  left: -13px;\n  content: \"\";\n  display: inline-block;\n  width: 8px;\n  height: 8px;\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #1C86D1 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #1C86D1 100%);\n}\n.feedback__content--content ul > li:hover::before {\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #91E22E 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #91E22E 100%);\n}\n.feedback__content--options {\n  padding-top: 15px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.feedback__content--options__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 8;\n      -ms-flex-positive: 8;\n          flex-grow: 8;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.feedback__content--options__wrap a {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.feedback__content--options__wrap a i {\n  width: 16px;\n  height: 16px;\n  background-image: url(\"/img/icon.png\");\n}\n.feedback__content--options__wrap a span {\n  font-size: 12px;\n  margin-left: 3px;\n  color: #272636;\n}\n.feedback__content--options__wrap a:hover span {\n  color: #1C86D1;\n}\n.feedback__content--options__wrap a:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.feedback__content--options__callback i {\n  background-position: -5px 0px;\n}\n.feedback__content--options__del {\n  margin-left: 8px;\n}\n.feedback__content--options__del i {\n  background-position: -5px -16px;\n}\n.feedback__options__vote-up {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  text-align: right;\n}\n.feedback__options__vote-up button {\n  font-size: 18px;\n}\n.feedback__options__vote-up button span {\n  font-size: 18px;\n}\n.feedback__options__vote-up button:hover {\n  color: #1C86D1;\n}\n.editer-wrap {\n  margin-top: 20px;\n}\n.editer-wrap .comment__feedback {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  width: 100%;\n  border-top: none;\n}\n.editer-wrap .editer-wrap__avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.editer-wrap .editer-wrap__avatar > img:hover,\n.editer-wrap .editer-wrap__avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.editer-wrap .editer-wrap__avatar img {\n  height: 100%;\n}\n.editer-wrap .comment__feedback--edit {\n  min-height: 150px;\n}\n.editer-wrap .comment__feddback--btns {\n  width: 100%;\n}\n.login__table__bg {\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 999998;\n  background: rgba(0, 0, 0, 0.4);\n}\n.login__table {\n  border-radius: 5px;\n  box-shadow: 0 0 10px #000000;\n  position: fixed;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  margin: auto;\n  width: 320px;\n  height: 340px;\n  border: 1px solid rgba(0, 0, 0, 0.3);\n  background: #fff;\n  z-index: 999999;\n}\n.login__table__wrap {\n  overflow: hidden;\n  padding: 0 10px;\n}\n.login__table__header {\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 40px;\n}\n.login__table__header button {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  line-height: 50px;\n}\n.state__bar {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  bottom: 0;\n  left: 32px;\n  width: 80px;\n  height: 2px;\n  background: #1C86D1;\n}\n.state__bar:hover {\n  color: #1C86D1;\n}\n.state__bar--toggle {\n  left: 186px;\n}\n.login__table__forms {\n  position: relative;\n  height: 300px;\n}\n.login__table__forms form {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  top: 0;\n  left: 0;\n}\n.tourist__login {\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  padding-top: 50px;\n}\n.input__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  padding: 5px 0;\n  line-height: 20px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  margin-bottom: 15px;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n}\n.input__wrap p {\n  width: 60px;\n}\n.input__wrap input[type=\"text\"] {\n  border-radius: 5px;\n  border: 1px solid #272636;\n  padding: 5px;\n  width: 180px;\n  height: 27px;\n}\n.input__wrap label {\n  display: inline-block;\n  width: 100%;\n  height: 20px;\n  font-size: 12px;\n  color: #B61D1D;\n  padding: 5px 30px 0 0;\n  text-align: right;\n}\ninput[type=\"button\"].tourist__login--submit {\n  border-radius: 5px;\n  width: 180px;\n  height: 35px;\n  color: #fff;\n  background: #1C86D1;\n  margin: 30px auto 0;\n  cursor: pointer;\n  border: 1px solid #ccc;\n}\ninput[type=\"button\"].tourist__login--submit:active {\n  background: #3075DC;\n}\n.sns__login {\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 20px;\n}\n.sns__login div {\n  width: 70px;\n  height: 70px;\n  background: red;\n}\n.alert__wrap {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 99999999;\n  background: rgba(0, 0, 0, 0.8);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  overflow: hidden;\n}\n.alert__plane {\n  width: 100%;\n  height: 0px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background: rgba(255, 255, 255, 0.65);\n  -webkit-animation: alert_plane_animate .5s;\n          animation: alert_plane_animate .5s;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n.alert__plane header {\n  width: 100%;\n  height: 8px;\n  background: -webkit-linear-gradient(left, #F00001 12.5%, transparent 0px), -webkit-linear-gradient(left, #FF7F00 25%, transparent 0px), -webkit-linear-gradient(left, #E1E23B 37.5%, transparent 0px), -webkit-linear-gradient(left, #007940 50%, transparent 0px), -webkit-linear-gradient(left, #4041FE 62.5%, transparent 0px), -webkit-linear-gradient(left, #A001C0 75%, transparent 0px), -webkit-linear-gradient(left, #F7941E 87.5%, transparent 0px), -webkit-linear-gradient(left, #9AC147 100%, transparent 0px);\n  background: linear-gradient(to right, #F00001 12.5%, transparent 0px), linear-gradient(to right, #FF7F00 25%, transparent 0px), linear-gradient(to right, #E1E23B 37.5%, transparent 0px), linear-gradient(to right, #007940 50%, transparent 0px), linear-gradient(to right, #4041FE 62.5%, transparent 0px), linear-gradient(to right, #A001C0 75%, transparent 0px), linear-gradient(to right, #F7941E 87.5%, transparent 0px), linear-gradient(to right, #9AC147 100%, transparent 0px);\n  background-repeat: no-repeat;\n}\n.alert__plane footer {\n  width: 100%;\n  height: 42px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.alert__plane footer label {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  height: 100%;\n  cursor: pointer;\n  line-height: 42px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.alert__plane footer label:hover button {\n  color: #1C86D1;\n}\n.alert__plane footer label:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.alert__plane footer label:hover i::before {\n  -webkit-transform: scale(1);\n          transform: scale(1);\n}\n.alert__plane footer i {\n  position: relative;\n  width: 20px;\n  height: 20px;\n  background-image: url(\"/img/icon.png\");\n}\n.alert__plane footer i::before {\n  border-radius: 50%;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  content: \"\";\n  display: block;\n  width: 20px;\n  height: 20px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  z-index: -1;\n  background: #1C86D1;\n  -webkit-transform: scale(0);\n          transform: scale(0);\n}\n.alert__plane footer .alert__plane--btn_sure {\n  background-position: -4px -59px;\n}\n.alert__plane footer .alert__plane--btn_cancel {\n  background-position: -4px -36px;\n}\n.alert__plane footer button {\n  font-size: 18px;\n}\n@-webkit-keyframes alert_plane_animate {\n  0% {\n    height: 0;\n  }\n  100% {\n    height: 280px;\n  }\n}\n@keyframes alert_plane_animate {\n  0% {\n    height: 0;\n  }\n  100% {\n    height: 280px;\n  }\n}\n.alert__plane--question {\n  width: 100%;\n  height: 230px;\n  padding-top: 50px;\n  text-align: center;\n  font-size: 30px;\n  font-weight: 100;\n  line-height: 1.2;\n  overflow: hidden;\n  color: rgba(0, 0, 0, 0.7);\n}\n", ""]);
+	exports.push([module.id, "@charset \"utf-8\";\n* {\n  box-sizing: border-box;\n  font-family: arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  font-size: 14px;\n  outline: none;\n}\nbody {\n  margin: 0;\n  padding: 0;\n  font-size: 0;\n}\na {\n  -webkit-transition: 5s;\n  transition: 5s;\n  text-decoration: none;\n}\nul,\nol {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\ntable {\n  border-collapse: collapse;\n}\nselect {\n  -webkit-appearance: none;\n     -moz-appearance: none;\n          appearance: none;\n}\nh1,\nh2,\nh3 {\n  margin-bottom: 1em;\n}\np,\npre {\n  margin: 0;\n}\nblockquote {\n  margin: 0;\n}\ninput[type=\"submit\"],\nbutton {\n  display: inline-block;\n  border-radius: 0;\n  border: none;\n  padding: 0;\n  background: none;\n  cursor: pointer;\n}\nfigure {\n  margin: 0;\n}\ni {\n  display: inline-block;\n}\n/*下拉组件*/\n.drop__list {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  width: 140px;\n  border: 1px solid #ccc;\n  cursor: pointer;\n  position: relative;\n  border-radius: 3px 3px 0px 0px;\n  color: #929699;\n  font-size: 0px;\n  margin-right: 20px;\n}\n.drop__list p {\n  width: 100px;\n  height: 20px;\n  margin: 3px 0 3px 5px;\n  font-size: 14px;\n}\n.drop__list i {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  top: 5px;\n  right: 5px;\n  content: \"\";\n  width: 16px;\n  height: 16px;\n  display: block;\n  background: url(\"/img/icon.png\") -30px 0px;\n}\n.drop__list .drop__wrap {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  top: 26px;\n  left: 0;\n  width: 100%;\n  border-radius: 0px 0px 3px 3px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  overflow: hidden;\n  border: 1px solid #ccc;\n  border-top: none;\n  z-index: 1234;\n  height: 0px;\n}\n.drop__list ul {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  padding: 5px 0;\n  overflow: hidden;\n  background: #E6E6E6;\n  font-size: 14px;\n}\n.drop__list ul li {\n  height: 25px;\n  line-height: 25px;\n  padding: 0px 5px;\n}\n.drop__list ul li:hover {\n  color: #fff;\n  background: #1C86D1;\n}\n.drag__wrap {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  top: 0;\n  right: 0;\n  background: #F5F5F5;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.drag__wrap .drag__btn {\n  border-radius: 3px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  min-height: 5px;\n  width: 100%;\n  border: 1px solid #979797;\n  background-color: rgba(0, 0, 0, 0.6);\n}\n.drag__wrap .drag__btn:hover {\n  border: 1px solid #636363;\n  background-color: rgba(0, 0, 0, 0.8);\n}\n.drag__wrap .drag__btn:active {\n  border: 1px solid #636363;\n  background-color: #000000;\n}\n.column-arrange {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.none {\n  display: none !important;\n}\n.b-c {\n  position: fixed;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  margin: auto;\n}\n.hidden {\n  height: 0 !important;\n}\n@-webkit-keyframes swing {\n  20%,\n  40%,\n  60%,\n  80%,\n  100% {\n    -webkit-transform-origin: topcenter;\n            transform-origin: topcenter;\n  }\n  20% {\n    -webkit-transform: rotate(15deg);\n            transform: rotate(15deg);\n  }\n  40% {\n    -webkit-transform: rotate(-10deg);\n            transform: rotate(-10deg);\n  }\n  60% {\n    -webkit-transform: rotate(5deg);\n            transform: rotate(5deg);\n  }\n  80% {\n    -webkit-transform: rotate(-5deg);\n            transform: rotate(-5deg);\n  }\n  100% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n  }\n}\n@keyframes swing {\n  20%,\n  40%,\n  60%,\n  80%,\n  100% {\n    -webkit-transform-origin: topcenter;\n            transform-origin: topcenter;\n  }\n  20% {\n    -webkit-transform: rotate(15deg);\n            transform: rotate(15deg);\n  }\n  40% {\n    -webkit-transform: rotate(-10deg);\n            transform: rotate(-10deg);\n  }\n  60% {\n    -webkit-transform: rotate(5deg);\n            transform: rotate(5deg);\n  }\n  80% {\n    -webkit-transform: rotate(-5deg);\n            transform: rotate(-5deg);\n  }\n  100% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n  }\n}\n@-webkit-keyframes masked {\n  0% {\n    background-position: 0 0;\n  }\n  100% {\n    background-position: -100% 0;\n  }\n}\n@keyframes masked {\n  0% {\n    background-position: 0 0;\n  }\n  100% {\n    background-position: -100% 0;\n  }\n}\n.comment__feedback__wrap {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  overflow: hidden;\n  background: #fbfbfb;\n  width: 100%;\n  margin-top: 20px;\n}\n.comment__feedback__box__syntaxs {\n  border-radius: 5px 5px 0 0;\n  border: 1px solid #272636;\n}\n.comment__feedback__box__syntaxs .syntaxs__list {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 32px;\n  -ms-flex-flow: row no-wrap;\n      flex-flow: row no-wrap;\n}\n.comment__feedback__box__syntaxs .syntaxs__list li {\n  width: 32px;\n  height: 32px;\n  margin: 0 4px;\n  background-image: url(\"/img/icon.png\");\n  cursor: pointer;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .bold {\n  background-position: 6px -79px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .bold:hover {\n  background: url(\"/img/icon-hover.png\") 6px -79px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .italic {\n  background-position: 8px -127px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .italic:hover {\n  background: url(\"/img/icon-hover.png\") 8px -127px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .a-link {\n  background-position: 4px -103px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .a-link:hover {\n  background: url(\"/img/icon-hover.png\") 4px -103px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .image {\n  background-position: 4px -151px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .image:hover {\n  background: url(\"/img/icon-hover.png\") 4px -151px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .table {\n  background-position: 4px -175px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .table:hover {\n  background: url(\"/img/icon-hover.png\") 4px -175px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .blockquote-block {\n  background-position: 4px -292px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .blockquote-block:hover {\n  background: url(\"/img/icon-hover.png\") 4px -292px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .u-list {\n  background-position: 2px -223px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .u-list:hover {\n  background: url(\"/img/icon-hover.png\") 2px -223px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .o-list {\n  background-position: 2px -199px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .o-list:hover {\n  background: url(\"/img/icon-hover.png\") 2px -199px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h1-tag {\n  background-position: 4px -247px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h1-tag:hover {\n  background: url(\"/img/icon-hover.png\") 4px -247px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h2-tag {\n  background-position: 4px -269px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h2-tag:hover {\n  background: url(\"/img/icon-hover.png\") 4px -269px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .code-block {\n  background-position: 4px -341px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .code-block:hover {\n  background: url(\"/img/icon-hover.png\") 4px -341px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .emoji-list {\n  background-position: 5px -316px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .emoji-list:hover {\n  background: url(\"/img/icon-hover.png\") 5px -316px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 5px;\n  border-top: 1px solid #272636;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list > div.choice-btn {\n  border-radius: 5px;\n  position: relative;\n  width: 32px;\n  height: 32px;\n  margin: 0 4px;\n  cursor: pointer;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list > div.choice-btn:hover {\n  box-shadow: 0 0 1px 1px #1C86D1;\n}\n.comment__feedback__box__syntaxs .drop__upload__area {\n  border-radius: 5px;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  position: relative;\n  width: 454px;\n  height: 80px;\n  margin: 15px 0;\n  border: 1px dashed #1C86D1;\n  text-align: center;\n  font: 300 30px/75px \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  cursor: default;\n}\n.comment__feedback__box__syntaxs .drop__upload__area::after,\n.comment__feedback__box__syntaxs .drop__upload__area::before {\n  content: '';\n  display: block;\n  z-index: -1;\n  color: #1C86D1;\n  box-shadow: inset 0 0 0 2px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  -webkit-animation: clip-me 6s linear infinite;\n          animation: clip-me 6s linear infinite;\n}\n.comment__feedback__box__syntaxs .drop__upload__area::before {\n  -webkit-animation-delay: -3s;\n          animation-delay: -3s;\n}\n@-webkit-keyframes clip-me {\n  0%,\n  100% {\n    clip: rect(0px, 454px, 4px, 0px);\n  }\n  25% {\n    clip: rect(0px, 4px, 80px, 0px);\n  }\n  50% {\n    clip: rect(76px, 454px, 80px, 0px);\n  }\n  75% {\n    clip: rect(0px, 454px, 80px, 450px);\n  }\n}\n@keyframes clip-me {\n  0%,\n  100% {\n    clip: rect(0px, 454px, 4px, 0px);\n  }\n  25% {\n    clip: rect(0px, 4px, 80px, 0px);\n  }\n  50% {\n    clip: rect(76px, 454px, 80px, 0px);\n  }\n  75% {\n    clip: rect(0px, 454px, 80px, 450px);\n  }\n}\n.comment__feedback__box__syntaxs .upload__btn {\n  border-radius: 5px;\n  width: 454px;\n  height: 40px;\n  background: #1C86D1;\n  color: #fff;\n  font-size: 18px;\n  margin-bottom: 10px;\n}\n.comment__feedback__box__syntaxs .upload__btn:active {\n  background: #3075DC;\n}\n.comment__feedback__box__syntaxs input[type=\"text\"] {\n  border-radius: 3px;\n  height: 30px;\n  border: 1px solid #1C86D1;\n  margin-right: 20px;\n  font-size: 14px;\n  text-indent: 5px;\n}\n.comment__feedback__box__syntaxs .insert {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  border-radius: 5px;\n  color: #272636;\n  border: 1px solid #1C86D1;\n  line-height: 30px;\n  width: 70px;\n  height: 30px;\n}\n.comment__feedback__box__syntaxs .insert:hover {\n  background: #1C86D1;\n  color: #fff;\n}\n.comment__feedback__box__syntaxs .table-size-matrix {\n  margin: 10px 0 10px 90px;\n}\n.comment__feedback__box__syntaxs .table-size-matrix tr,\n.comment__feedback__box__syntaxs .table-size-matrix td {\n  border: 1px solid #ccc;\n}\n.comment__feedback__box__syntaxs .table-size-matrix td {\n  padding: 15px;\n}\n.comment__feedback__box__syntaxs .table-matrix-dimension {\n  font-size: 18px;\n  text-decoration: underline;\n  margin: 0 20px;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap {\n  width: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  border-top: 1px solid #ccc;\n  border-left: 1px solid #ccc;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap td {\n  border-right: 1px solid #ccc;\n  border-bottom: 1px solid #ccc;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap td:hover {\n  background: #ccc;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap td a {\n  display: inline-block;\n  width: 32px;\n  height: 32px;\n  padding: 4px;\n}\n.comment__feedback__box__wrap {\n  position: relative;\n}\n.editor__resize__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.editor__resize {\n  display: inline-block;\n  width: 130px;\n  height: 8px;\n  cursor: row-resize;\n  margin-top: 2px;\n  border-top: 1px solid #ccc;\n  border-bottom: 1px solid #ccc;\n}\n.comment__feedback__box {\n  position: relative;\n  width: 100%;\n}\n.comment__feedback {\n  padding: 10px;\n  border-top: 1px solid #272636;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n}\n.comment__feedback h3 {\n  font: 200 24px/1 arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n}\n.login-infos {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  font-size: 16px;\n  padding-bottom: 10px;\n}\n.login-infos a {\n  color: #1C86D1;\n}\n.login-infos .init_prompt {\n  cursor: default;\n  color: rgba(0, 0, 0, 0.5);\n}\n.login-out__btn {\n  border-radius: 5px;\n  float: right;\n  width: 70px;\n  height: 25px;\n  background: #C81623;\n  color: #fff;\n}\n.login-out__btn:active {\n  background: #AA151F;\n}\n.login-in__btn {\n  border-radius: 5px;\n  float: right;\n  width: 70px;\n  height: 25px;\n  padding: 0 5px;\n  background: #1C86D1;\n  color: #fff;\n}\n.login-in__btn:active {\n  background: #3075DC;\n}\n.comment__feedback--section {\n  width: calc(100% - 74px);\n}\n.comment__feedback--edit {\n  border-radius: 0px 0px 5px 5px;\n  width: 100%;\n  min-height: 30px;\n  padding: 5px;\n  border: 1px solid #272636;\n  border-top: none;\n  font: 200 14px/1.5 arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  resize: none;\n  overflow: hidden;\n  white-space: pre-wrap;\n  -moz-tab-size: 4;\n    -o-tab-size: 4;\n       tab-size: 4;\n}\n.comment__feedback--btns {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  width: 100%;\n  margin-top: 10px;\n}\n.comment__feedback--btns button {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  border-radius: 5px;\n  line-height: 30px;\n  width: 70px;\n  height: 30px;\n}\n.feedback--btns__reset {\n  color: #C81623;\n  border: 1px solid #C81623;\n}\n.feedback--btns__reset:hover {\n  background: #C81623;\n  color: #fff;\n}\n.feedback--btns__comment {\n  margin-left: 10px;\n  color: #272636;\n  border: 1px solid #1C86D1;\n}\n.feedback--btns__comment:hover {\n  background: #1C86D1;\n  color: #fff;\n}\n.comment__feedback__mask {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  border-radius: 2px;\n  position: absolute;\n  top: 0;\n  left: 1px;\n  width: 604px;\n  height: 149px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  cursor: default;\n  background: #ccc;\n}\n.comment__feedback__mask p {\n  color: #fff;\n}\n.comment__feedback__mask--title {\n  font: 100 60px/60px \"\\5FAE\\8F6F\\96C5\\9ED1\";\n}\n.comment__feedback__mask--pinyin {\n  margin-top: 15px;\n  font: 100 20px/20px arial;\n}\n.clearfix::after {\n  content: \".\";\n  display: block;\n  height: 0;\n  visibility: hidden;\n  clear: both;\n}\n.demo {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  width: 900px;\n  margin: 50px auto 50px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  padding: 0 100px;\n}\n.comment__wrap {\n  width: 100%;\n}\n.comment__header {\n  border-radius: 5px;\n  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.6);\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -moz-justify-content: space-between;\n  height: 50px;\n  background: #1C86D1;\n  color: #fff;\n  font-size: 0;\n  padding: 5px 8px;\n}\n.comment__header::after {\n  content: \"\";\n  display: block;\n  position: absolute;\n  left: 41px;\n  bottom: -20px;\n  height: 0px;\n  border: 10px solid transparent;\n  border-top: 10px solid #1C86D1;\n}\n.comment__header .comment__header__span {\n  width: 150px;\n  height: 16px;\n  font: 200 16px/16px arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  margin-left: 10px;\n}\n.comment__header .comment__header__btns {\n  width: 80px;\n  height: 30px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.comment__header .comment__header__btns button {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  display: inline-block;\n  width: 40px;\n  height: 30px;\n  color: #fff;\n  font-size: 14px;\n}\n.comment__header .comment__header__btns button:hover {\n  color: #d32;\n}\n.comment__footer {\n  border-radius: 5px;\n  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.6);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  position: relative;\n  height: 70px;\n  background: #1C86D1;\n}\n.comment__footer::before {\n  content: \"\";\n  display: block;\n  position: absolute;\n  top: -20px;\n  left: 41px;\n  height: 0;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #1C86D1;\n}\n.comment__pagination {\n  border-radius: 5px;\n  box-shadow: 0 0 2px rgba(0, 0, 0, 0.7);\n  overflow: hidden;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 35px;\n}\n.comment__pagination li {\n  -webkit-transition: 0.3s;\n  transition: 0.3s;\n  width: 40px;\n  height: 100%;\n  color: #fff;\n  text-align: center;\n  cursor: pointer;\n}\n.comment__pagination li:hover {\n  color: #1C86D1;\n  background: #fff;\n}\n.comment__pagination li div {\n  padding: 10px 0;\n  height: 100%;\n  line-height: 15px;\n}\n.comment__pagination li > div.active {\n  color: #1C86D1;\n  background: #fff;\n  border-left: none !important;\n}\n.comment__pagination li:not(:nth-of-type(1)) div {\n  border-left: 1px solid rgba(0, 0, 0, 0.2);\n}\n.comment__list {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  margin: 0 0 0 50px;\n  border-left: 2px solid #1C86D1;\n}\n.no__comment__item {\n  padding: 20px;\n  text-align: center;\n}\n.no__comment__item p {\n  border-radius: 5px;\n  height: 70px;\n  font-size: 24px;\n  line-height: 70px;\n  color: rgba(0, 0, 0, 0.6);\n  border: 1px solid #272636;\n}\n.comment__item {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: relative;\n  padding: 20px;\n}\n.comment__item::after {\n  border-radius: 50%;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  left: -8px;\n  top: 40px;\n  content: \"\";\n  display: block;\n  background: #1C86D1;\n  width: 10px;\n  height: 10px;\n  border: 2px solid #fff;\n}\n.comment__item:hover::after {\n  background: #51CA65;\n}\n.comment__item:hover .comment__content {\n  -webkit-transform: translateX(15px);\n          transform: translateX(15px);\n}\n.comment__content {\n  border-radius: 5px;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n  padding: 10px;\n  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);\n}\n.comment__author--avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.comment__author--avatar > img:hover,\n.comment__author--avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.comment__content--main {\n  width: calc(100% - 74px);\n}\n.comment__content--author {\n  font-size: 18px;\n}\n.comment__content--author a {\n  color: #1C86D1;\n}\n.comment__content--time {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  font-size: 12px;\n  margin-top: 2px;\n  color: #ddd;\n  cursor: default;\n}\n.comment__content--time:hover {\n  color: #1C86D1;\n}\n.comment__content--content {\n  font-size: 0px;\n  line-height: 1.4;\n  padding: 24px 0 0 0px;\n  white-space: pre;\n}\n.comment__content--content h1.text-effect-basic {\n  text-fill-color: transparent;\n  -webkit-text-fill-color: transparent;\n  background-clip: text;\n  -webkit-background-clip: text;\n  background-size: 200% 200%;\n  -webkit-animation: masked 3s infinite linear;\n          animation: masked 3s infinite linear;\n}\n.comment__content--content h1 {\n  margin-top: 10px;\n  padding-bottom: 10px;\n  font-size: 25px;\n  color: #7c795d;\n  font-weight: normal;\n  line-height: 1.1;\n  border-bottom: 1px solid #7c795d;\n}\n.comment__content--content h2 {\n  margin: 5px 0;\n  height: 30px;\n  text-indent: 5px;\n  color: #7c795d;\n  font: 400 20px/30px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  border-left: 5px solid #1C86D1;\n}\n.comment__content--content pre,\n.comment__content--content p,\n.comment__content--content code {\n  -moz-tab-size: 2;\n    -o-tab-size: 2;\n       tab-size: 2;\n  white-space: pre-wrap;\n  word-break: break-all;\n}\n.comment__content--content p,\n.comment__content--content code {\n  font-size: 14px;\n}\n.comment__content--content strong {\n  font-size: 16px;\n}\n.comment__content--content a {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  color: #1C86D1;\n  margin: 0px 2px;\n}\n.comment__content--content a:hover {\n  color: #C91523;\n}\n.comment__content--content img {\n  max-width: 512px;\n  vertical-align: bottom;\n}\n.comment__content--content table {\n  border-radius: 5px;\n  margin: 20px 0;\n  padding: 8px;\n  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);\n  white-space: normal;\n  border-collapse: collapse;\n}\n.comment__content--content table tr {\n  border: 1px solid #000;\n}\n.comment__content--content table tr td,\n.comment__content--content table tr th {\n  font-size: 14px;\n  padding: 5px;\n  word-break: break-word;\n}\n.comment__content--content table tr td {\n  font-weight: 200;\n  border: 1px solid #000;\n}\n.comment__content--content blockquote {\n  border-radius: 5px;\n  position: relative;\n  background: #CCD0D5;\n  padding: 25px 10px 10px 30px;\n  overflow: hidden;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n}\n.comment__content--content blockquote::before {\n  position: absolute;\n  top: 0;\n  left: 0;\n  font-size: 14px;\n  background: -webkit-linear-gradient(112deg, transparent 50%, #1C86D1 50%);\n  background: linear-gradient(-22deg, transparent 50%, #1C86D1 50%);\n  width: 80px;\n  height: 30px;\n  display: block;\n  content: \"\\5F15\\8FF0\";\n  color: #fff;\n  padding: 3px 0 0 4px;\n}\n.comment__content--content pre {\n  border-radius: 5px;\n  overflow: hidden;\n  padding: 15px 0px 15px 8px;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n  margin: 15px 0;\n  background: #49483e;\n}\n.comment__content--content pre code {\n  color: #a6e22e;\n}\n.comment__content--content pre code .hljs-comment,\n.comment__content--content pre code .hljs-quote {\n  color: #999580;\n}\n.comment__content--content pre code .hljs-variable,\n.comment__content--content pre code .hljs-template-variable,\n.comment__content--content pre code .hljs-attr,\n.comment__content--content pre code .hljs-tag,\n.comment__content--content pre code .hljs-name,\n.comment__content--content pre code .hljs-regexp,\n.comment__content--content pre code .hljs-link,\n.comment__content--content pre code .hljs-name,\n.comment__content--content pre code .hljs-selector-id,\n.comment__content--content pre code .hljs-selector-class {\n  color: #f2777a;\n}\n.comment__content--content pre code .hljs-number,\n.comment__content--content pre code .hljs-meta,\n.comment__content--content pre code .hljs-built_in,\n.comment__content--content pre code .hljs-builtin-name,\n.comment__content--content pre code .hljs-literal,\n.comment__content--content pre code .hljs-type,\n.comment__content--content pre code .hljs-params {\n  color: #ae81ff;\n}\n.comment__content--content pre code .hljs-string,\n.comment__content--content pre code .hljs-symbol,\n.comment__content--content pre code .hljs-bullet {\n  color: #e6db74;\n}\n.comment__content--content pre code .hljs-title,\n.comment__content--content pre code .hljs-section {\n  color: #6684e1;\n}\n.comment__content--content pre code .hljs-keyword,\n.comment__content--content pre code .hljs-selector-tag {\n  color: #66D9EF;\n}\n.comment__content--content pre code .hljs {\n  display: block;\n  overflow-x: auto;\n  background: #20201d;\n  color: #a6a28c;\n  padding: 0.5em;\n}\n.comment__content--content pre code .hljs-emphasis {\n  font-style: italic;\n}\n.comment__content--content pre code .hljs-strong {\n  font-weight: bold;\n}\n.comment__content--content ol {\n  counter-reset: section;\n  padding: 10px 0 10px 20px;\n}\n.comment__content--content ol > li {\n  position: relative;\n  min-height: 20px;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  margin: 5px 0px;\n}\n.comment__content--content ol > li:before {\n  counter-increment: section;\n  content: counters(section, \"\") \".\";\n  display: inline-block;\n  position: absolute;\n  top: 0;\n  left: -20px;\n  font-size: 16px;\n  font-weight: bold;\n  font-style: italic;\n}\n.comment__content--content ol > li:nth-of-type(3n+1)::before {\n  color: #FE0002;\n}\n.comment__content--content ol > li:nth-of-type(3n+2)::before {\n  color: #F4F800;\n}\n.comment__content--content ol > li:nth-of-type(3n+3)::before {\n  color: #A3DF03;\n}\n.comment__content--content ul {\n  padding: 10px 0 10px 15px;\n}\n.comment__content--content ul > li {\n  position: relative;\n  margin-bottom: 10px;\n  line-height: 1.1;\n  min-height: 20px;\n  word-break: break-all;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n}\n.comment__content--content ul > li::before {\n  border-radius: 50%;\n  position: absolute;\n  top: 6px;\n  left: -13px;\n  content: \"\";\n  display: inline-block;\n  width: 8px;\n  height: 8px;\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #1C86D1 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #1C86D1 100%);\n}\n.comment__content--content ul > li:hover::before {\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #91E22E 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #91E22E 100%);\n}\n.comment__content--options {\n  padding-top: 15px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.comment__content--options__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-flex: 8;\n      -ms-flex-positive: 8;\n          flex-grow: 8;\n}\n.comment__content--options__wrap a {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.comment__content--options__wrap a i {\n  width: 16px;\n  height: 16px;\n  background-image: url(\"/img/icon.png\");\n}\n.comment__content--options__wrap a span {\n  font-size: 12px;\n  margin-left: 3px;\n  color: #272636;\n}\n.comment__content--options__wrap a:hover span {\n  color: #1C86D1;\n}\n.comment__content--options__wrap a:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.comment__content--options__callback i {\n  background-position: -5px 0px;\n}\n.comment__content--options__del {\n  margin-left: 8px;\n}\n.comment__content--options__del i {\n  background-position: -5px -16px;\n}\n.comment__options__vote-up {\n  text-align: right;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n.comment__options__vote-up button {\n  font-size: 18px;\n}\n.comment__options__vote-up button span {\n  font-size: 18px;\n}\n.comment__options__vote-up button:hover {\n  color: #1C86D1;\n}\n.comment__options__has-voted-up {\n  text-align: right;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n.comment__options__has-voted-up button {\n  font-size: 18px;\n  color: #C91523;\n  cursor: default;\n}\n.comment__options__has-voted-up button span {\n  font-size: 18px;\n}\n.feedback__content {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  overflow: hidden;\n  width: 100%;\n  margin: 20px 10px 10px 5px;\n}\n.feedback__content--main {\n  border-radius: 5px;\n  position: relative;\n  border: 1px solid #272636;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  padding: 5px;\n  margin: 20px 0 0;\n}\n.feedback__content--main::after,\n.feedback__content--main::before {\n  content: \"\";\n  height: 0;\n  position: absolute;\n  left: 30px;\n}\n.feedback__content--main::after {\n  top: -20px;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #272636;\n}\n.feedback__content--main::before {\n  z-index: 2;\n  top: -19px;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #fff;\n}\n.sub__feedback {\n  margin: 5px 0;\n}\n.sub__feedback span {\n  font-size: 18px;\n  color: #1C86D1;\n}\n.feedback__wrap--content {\n  width: calc(100% - 74px);\n}\n.feedback__content--avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.feedback__content--avatar > img:hover,\n.feedback__content--avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.feedback__wrap--content {\n  width: calc(100% - 74px);\n}\n.feedback__content--author {\n  font-size: 18px;\n}\n.feedback__content--author a {\n  color: #1C86D1;\n}\n.feedback__content--time {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  font-size: 12px;\n  margin-top: 2px;\n  color: #ddd;\n  cursor: default;\n}\n.feedback__content--time:hover {\n  color: #1C86D1;\n}\n.feedback__content--content {\n  font-size: 0px;\n  line-height: 1.4;\n  padding: 24px 0 0 0px;\n  white-space: pre;\n}\n.feedback__content--content h1.text-effect-basic {\n  text-fill-color: transparent;\n  -webkit-text-fill-color: transparent;\n  background-clip: text;\n  -webkit-background-clip: text;\n  background-size: 200% 200%;\n  -webkit-animation: masked 3s infinite linear;\n          animation: masked 3s infinite linear;\n}\n.feedback__content--content h1 {\n  margin-top: 10px;\n  padding-bottom: 10px;\n  font-size: 25px;\n  color: #7c795d;\n  font-weight: normal;\n  line-height: 1.1;\n  border-bottom: 1px solid #7c795d;\n}\n.feedback__content--content h2 {\n  margin: 5px 0;\n  height: 30px;\n  text-indent: 5px;\n  color: #7c795d;\n  font: 400 20px/30px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  border-left: 5px solid #1C86D1;\n}\n.feedback__content--content pre,\n.feedback__content--content p,\n.feedback__content--content code {\n  -moz-tab-size: 2;\n    -o-tab-size: 2;\n       tab-size: 2;\n  white-space: pre-wrap;\n  word-break: break-all;\n}\n.feedback__content--content p,\n.feedback__content--content code {\n  font-size: 14px;\n}\n.feedback__content--content strong {\n  font-size: 16px;\n}\n.feedback__content--content a {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  color: #1C86D1;\n  margin: 0px 2px;\n}\n.feedback__content--content a:hover {\n  color: #C91523;\n}\n.feedback__content--content img {\n  max-width: 512px;\n  vertical-align: bottom;\n}\n.feedback__content--content table {\n  border-radius: 5px;\n  margin: 20px 0;\n  padding: 8px;\n  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);\n  white-space: normal;\n  border-collapse: collapse;\n}\n.feedback__content--content table tr {\n  border: 1px solid #000;\n}\n.feedback__content--content table tr td,\n.feedback__content--content table tr th {\n  font-size: 14px;\n  padding: 5px;\n  word-break: break-word;\n}\n.feedback__content--content table tr td {\n  font-weight: 200;\n  border: 1px solid #000;\n}\n.feedback__content--content blockquote {\n  border-radius: 5px;\n  position: relative;\n  background: #CCD0D5;\n  padding: 25px 10px 10px 30px;\n  overflow: hidden;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n}\n.feedback__content--content blockquote::before {\n  position: absolute;\n  top: 0;\n  left: 0;\n  font-size: 14px;\n  background: -webkit-linear-gradient(112deg, transparent 50%, #1C86D1 50%);\n  background: linear-gradient(-22deg, transparent 50%, #1C86D1 50%);\n  width: 80px;\n  height: 30px;\n  display: block;\n  content: \"\\5F15\\8FF0\";\n  color: #fff;\n  padding: 3px 0 0 4px;\n}\n.feedback__content--content pre {\n  border-radius: 5px;\n  overflow: hidden;\n  padding: 15px 0px 15px 8px;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n  margin: 15px 0;\n  background: #49483e;\n}\n.feedback__content--content pre code {\n  color: #a6e22e;\n}\n.feedback__content--content pre code .hljs-comment,\n.feedback__content--content pre code .hljs-quote {\n  color: #999580;\n}\n.feedback__content--content pre code .hljs-variable,\n.feedback__content--content pre code .hljs-template-variable,\n.feedback__content--content pre code .hljs-attr,\n.feedback__content--content pre code .hljs-tag,\n.feedback__content--content pre code .hljs-name,\n.feedback__content--content pre code .hljs-regexp,\n.feedback__content--content pre code .hljs-link,\n.feedback__content--content pre code .hljs-name,\n.feedback__content--content pre code .hljs-selector-id,\n.feedback__content--content pre code .hljs-selector-class {\n  color: #f2777a;\n}\n.feedback__content--content pre code .hljs-number,\n.feedback__content--content pre code .hljs-meta,\n.feedback__content--content pre code .hljs-built_in,\n.feedback__content--content pre code .hljs-builtin-name,\n.feedback__content--content pre code .hljs-literal,\n.feedback__content--content pre code .hljs-type,\n.feedback__content--content pre code .hljs-params {\n  color: #ae81ff;\n}\n.feedback__content--content pre code .hljs-string,\n.feedback__content--content pre code .hljs-symbol,\n.feedback__content--content pre code .hljs-bullet {\n  color: #e6db74;\n}\n.feedback__content--content pre code .hljs-title,\n.feedback__content--content pre code .hljs-section {\n  color: #6684e1;\n}\n.feedback__content--content pre code .hljs-keyword,\n.feedback__content--content pre code .hljs-selector-tag {\n  color: #66D9EF;\n}\n.feedback__content--content pre code .hljs {\n  display: block;\n  overflow-x: auto;\n  background: #20201d;\n  color: #a6a28c;\n  padding: 0.5em;\n}\n.feedback__content--content pre code .hljs-emphasis {\n  font-style: italic;\n}\n.feedback__content--content pre code .hljs-strong {\n  font-weight: bold;\n}\n.feedback__content--content ol {\n  counter-reset: section;\n  padding: 10px 0 10px 20px;\n}\n.feedback__content--content ol > li {\n  position: relative;\n  min-height: 20px;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  margin: 5px 0px;\n}\n.feedback__content--content ol > li:before {\n  counter-increment: section;\n  content: counters(section, \"\") \".\";\n  display: inline-block;\n  position: absolute;\n  top: 0;\n  left: -20px;\n  font-size: 16px;\n  font-weight: bold;\n  font-style: italic;\n}\n.feedback__content--content ol > li:nth-of-type(3n+1)::before {\n  color: #FE0002;\n}\n.feedback__content--content ol > li:nth-of-type(3n+2)::before {\n  color: #F4F800;\n}\n.feedback__content--content ol > li:nth-of-type(3n+3)::before {\n  color: #A3DF03;\n}\n.feedback__content--content ul {\n  padding: 10px 0 10px 15px;\n}\n.feedback__content--content ul > li {\n  position: relative;\n  margin-bottom: 10px;\n  line-height: 1.1;\n  min-height: 20px;\n  word-break: break-all;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n}\n.feedback__content--content ul > li::before {\n  border-radius: 50%;\n  position: absolute;\n  top: 6px;\n  left: -13px;\n  content: \"\";\n  display: inline-block;\n  width: 8px;\n  height: 8px;\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #1C86D1 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #1C86D1 100%);\n}\n.feedback__content--content ul > li:hover::before {\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #91E22E 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #91E22E 100%);\n}\n.feedback__content--options {\n  padding-top: 15px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.feedback__content--options__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 8;\n      -ms-flex-positive: 8;\n          flex-grow: 8;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.feedback__content--options__wrap a {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.feedback__content--options__wrap a i {\n  width: 16px;\n  height: 16px;\n  background-image: url(\"/img/icon.png\");\n}\n.feedback__content--options__wrap a span {\n  font-size: 12px;\n  margin-left: 3px;\n  color: #272636;\n}\n.feedback__content--options__wrap a:hover span {\n  color: #1C86D1;\n}\n.feedback__content--options__wrap a:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.feedback__content--options__callback i {\n  background-position: -5px 0px;\n}\n.feedback__content--options__del {\n  margin-left: 8px;\n}\n.feedback__content--options__del i {\n  background-position: -5px -16px;\n}\n.feedback__options__vote-up {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  text-align: right;\n}\n.feedback__options__vote-up button {\n  font-size: 18px;\n}\n.feedback__options__vote-up button span {\n  font-size: 18px;\n}\n.feedback__options__vote-up button:hover {\n  color: #1C86D1;\n}\n.editer-wrap {\n  margin-top: 20px;\n}\n.editer-wrap .comment__feedback {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  width: 100%;\n  border-top: none;\n}\n.editer-wrap .editer-wrap__avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.editer-wrap .editer-wrap__avatar > img:hover,\n.editer-wrap .editer-wrap__avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.editer-wrap .editer-wrap__avatar img {\n  height: 100%;\n}\n.editer-wrap .comment__feedback--edit {\n  min-height: 150px;\n}\n.editer-wrap .comment__feddback--btns {\n  width: 100%;\n}\n.login__table__bg {\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 999998;\n  background: rgba(0, 0, 0, 0.4);\n}\n.login__table {\n  border-radius: 5px;\n  box-shadow: 0 0 10px #000000;\n  position: fixed;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  margin: auto;\n  width: 320px;\n  height: 340px;\n  border: 1px solid rgba(0, 0, 0, 0.3);\n  background: #fff;\n  z-index: 999999;\n}\n.login__table__wrap {\n  overflow: hidden;\n  padding: 0 10px;\n}\n.login__table__header {\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 40px;\n}\n.login__table__header button {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  line-height: 50px;\n}\n.state__bar {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  bottom: 0;\n  left: 32px;\n  width: 80px;\n  height: 2px;\n  background: #1C86D1;\n}\n.state__bar:hover {\n  color: #1C86D1;\n}\n.state__bar--toggle {\n  left: 186px;\n}\n.login__table__forms {\n  position: relative;\n  height: 300px;\n}\n.login__table__forms form {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  top: 0;\n  left: 0;\n}\n.tourist__login {\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  padding-top: 50px;\n}\n.input__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  padding: 5px 0;\n  line-height: 20px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  margin-bottom: 15px;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n}\n.input__wrap p {\n  width: 60px;\n}\n.input__wrap input[type=\"text\"] {\n  border-radius: 5px;\n  border: 1px solid #272636;\n  padding: 5px;\n  width: 180px;\n  height: 27px;\n}\n.input__wrap label {\n  display: inline-block;\n  width: 100%;\n  height: 20px;\n  font-size: 12px;\n  color: #B61D1D;\n  padding: 5px 30px 0 0;\n  text-align: right;\n}\ninput[type=\"button\"].tourist__login--submit {\n  border-radius: 5px;\n  width: 180px;\n  height: 35px;\n  color: #fff;\n  background: #1C86D1;\n  margin: 30px auto 0;\n  cursor: pointer;\n  border: 1px solid #ccc;\n}\ninput[type=\"button\"].tourist__login--submit:active {\n  background: #3075DC;\n}\n.sns__login {\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 20px;\n}\n.sns__login div {\n  width: 70px;\n  height: 70px;\n  background: red;\n}\n.alert__wrap {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 99999999;\n  background: rgba(0, 0, 0, 0.8);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  overflow: hidden;\n}\n.alert__plane {\n  width: 100%;\n  height: 0px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background: rgba(255, 255, 255, 0.65);\n  -webkit-animation: alert_plane_animate .5s;\n          animation: alert_plane_animate .5s;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n.alert__plane header {\n  width: 100%;\n  height: 8px;\n  background: -webkit-linear-gradient(left, #F00001 12.5%, transparent 0px), -webkit-linear-gradient(left, #FF7F00 25%, transparent 0px), -webkit-linear-gradient(left, #E1E23B 37.5%, transparent 0px), -webkit-linear-gradient(left, #007940 50%, transparent 0px), -webkit-linear-gradient(left, #4041FE 62.5%, transparent 0px), -webkit-linear-gradient(left, #A001C0 75%, transparent 0px), -webkit-linear-gradient(left, #F7941E 87.5%, transparent 0px), -webkit-linear-gradient(left, #9AC147 100%, transparent 0px);\n  background: linear-gradient(to right, #F00001 12.5%, transparent 0px), linear-gradient(to right, #FF7F00 25%, transparent 0px), linear-gradient(to right, #E1E23B 37.5%, transparent 0px), linear-gradient(to right, #007940 50%, transparent 0px), linear-gradient(to right, #4041FE 62.5%, transparent 0px), linear-gradient(to right, #A001C0 75%, transparent 0px), linear-gradient(to right, #F7941E 87.5%, transparent 0px), linear-gradient(to right, #9AC147 100%, transparent 0px);\n  background-repeat: no-repeat;\n}\n.alert__plane footer {\n  width: 100%;\n  height: 42px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.alert__plane footer label {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  height: 100%;\n  cursor: pointer;\n  line-height: 42px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.alert__plane footer label:hover button {\n  color: #1C86D1;\n}\n.alert__plane footer label:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.alert__plane footer label:hover i::before {\n  -webkit-transform: scale(1);\n          transform: scale(1);\n}\n.alert__plane footer i {\n  position: relative;\n  width: 20px;\n  height: 20px;\n  background-image: url(\"/img/icon.png\");\n}\n.alert__plane footer i::before {\n  border-radius: 50%;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  content: \"\";\n  display: block;\n  width: 20px;\n  height: 20px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  z-index: -1;\n  background: #1C86D1;\n  -webkit-transform: scale(0);\n          transform: scale(0);\n}\n.alert__plane footer .alert__plane--btn_sure {\n  background-position: -4px -59px;\n}\n.alert__plane footer .alert__plane--btn_cancel {\n  background-position: -4px -36px;\n}\n.alert__plane footer button {\n  font-size: 18px;\n}\n@-webkit-keyframes alert_plane_animate {\n  0% {\n    height: 0;\n  }\n  100% {\n    height: 280px;\n  }\n}\n@keyframes alert_plane_animate {\n  0% {\n    height: 0;\n  }\n  100% {\n    height: 280px;\n  }\n}\n.alert__plane--question {\n  width: 100%;\n  height: 230px;\n  padding-top: 50px;\n  text-align: center;\n  font-size: 30px;\n  font-weight: 100;\n  line-height: 1.2;\n  overflow: hidden;\n  color: rgba(0, 0, 0, 0.7);\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 403 */
+/* 405 */
 /***/ function(module, exports) {
 
 	/*
@@ -23400,7 +23651,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 404 */
+/* 406 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*

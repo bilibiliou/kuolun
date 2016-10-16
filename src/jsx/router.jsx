@@ -10,6 +10,7 @@ import FeedBackMain      from "./components/FeedBackMain.jsx";
 import LoginTable        from "./components/LoginTable.jsx";
 import AlertPlane        from "./components/AlertPlane.jsx";
 import DropList	         from "./components/DropList.jsx";
+import DragAndUpdate     from "./components/DragAndUpdate.jsx";
 
 export {
 	CommentEditer,    
@@ -23,5 +24,6 @@ export {
 	FeedBackMain,     
 	LoginTable,
 	AlertPlane,
-	DropList       
+	DropList,
+	DragAndUpdate       
 } 

@@ -1,13 +1,15 @@
 import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
 import 	marked 	   from "marked";
 import  hljs       from "highlight.js";
 import { getPostion } from "../../js/util.js";
-import { bindActionCreators } from "redux";
+import expressions_list from "../../constants/expressions_list.js";
 import { CommentThunk } from "../../actions/CommentActions.js";
 import { LoginTableStateTask } from "../../actions/LoginActions.js";
 import { AlertPlaneThunk } from "../../actions/AlertPlaneActions.js";
-import { DropList } from "../router.jsx";
+import { DropList, DragAndUpdate } from "../router.jsx";
 
 class CommentFeedback extends Component {
 	constructor (props) {
@@ -231,69 +233,6 @@ class CommentFeedback extends Component {
 		} = this.props,
 		choice_list,
 		editerWrap = this.refs["editer-wrap"],
-		expressions_list = [
-		  { faceName: 'weixiao', faceUrl: '/0_weixiao.gif' },
-		  { faceName: 'piezui', faceUrl: '/1_piezui.gif' },
-		  { faceName: 'se', faceUrl: '/2_se.gif' },
-		  { faceName: 'fadai', faceUrl: '/3_fadai.gif' },
-		  { faceName: 'deyi', faceUrl: '/4_deyi.gif' },
-		  { faceName: 'liulei', faceUrl: '/5_liulei.gif' },
-		  { faceName: 'haixiu', faceUrl: '/6_haixiu.gif' },
-		  { faceName: 'bizui', faceUrl: '/7_bizui.gif' },
-		  { faceName: 'daku', faceUrl: '/9_daku.gif' },
-		  { faceName: 'ganga', faceUrl: '/10_ganga.gif' },
-		  { faceName: 'fennu', faceUrl: '/11_fennu.gif' },
-		  { faceName: 'tiaopi', faceUrl: '/12_tiaopi.gif' },
-		  { faceName: 'ziya', faceUrl: '/13_ziya.gif' },
-		  { faceName: 'jingya', faceUrl: '/14_jingya.gif' },
-		  { faceName: 'nanguo', faceUrl: '/15_nanguo.gif' },
-		  { faceName: 'ku', faceUrl: '/16_ku.gif' },
-		  { faceName: 'lenghan', faceUrl: '/17_lenghan.gif' },
-		  { faceName: 'zhuakuang', faceUrl: '/18_zhuakuang.gif' },
-		  { faceName: 'tu', faceUrl: '/19_tu.gif' },
-		  { faceName: 'touxiao', faceUrl: '/20_touxiao.gif' },
-		  { faceName: 'keai', faceUrl: '/21_keai.gif' },
-		  { faceName: 'baiyan', faceUrl: '/22_baiyan.gif' },
-		  { faceName: 'aoman', faceUrl: '/23_aoman.gif' },
-		  { faceName: 'jie', faceUrl: '/24_jie.gif' },
-		  { faceName: 'kun', faceUrl: '/25_kun.gif' },
-		  { faceName: 'jingkong', faceUrl: '/26_jingkong.gif' },
-		  { faceName: 'liuhan', faceUrl: '/27_liuhan.gif' },
-		  { faceName: 'hanxiao', faceUrl: '/28_hanxiao.gif' },
-		  { faceName: 'dabing', faceUrl: '/29_dabing.gif' },
-		  { faceName: 'fengdou', faceUrl: '/30_fengdou.gif' },
-		  { faceName: 'zhouma', faceUrl: '/31_zhouma.gif' },
-		  { faceName: 'yiwen', faceUrl: '/32_yiwen.gif' },
-		  { faceName: 'xu', faceUrl: '/33_xu.gif' },
-		  { faceName: 'yun', faceUrl: '/34_yun.gif' },
-		  { faceName: 'zhemo', faceUrl: '/35_zhemo.gif' },
-		  { faceName: 'shuai', faceUrl: '/36_shuai.gif' },
-		  { faceName: 'kulou', faceUrl: '/37_kulou.gif' },
-		  { faceName: 'qiaoda', faceUrl: '/38_qiaoda.gif' },
-		  { faceName: 'zaijian', faceUrl: '/39_zaijian.gif' },
-		  { faceName: 'chahan', faceUrl: '/40_chahan.gif' },
-		  { faceName: 'koubi', faceUrl: '/41_koubi.gif' },
-		  { faceName: 'guzhang', faceUrl: '/42_guzhang.gif' },
-		  { faceName: 'qiudale', faceUrl: '/43_qiudale.gif' },
-		  { faceName: 'huaixiao', faceUrl: '/44_huaixiao.gif' },
-		  { faceName: 'zuohengheng', faceUrl: '/45_zuohengheng.gif' },
-		  { faceName: 'youhengheng', faceUrl: '/46_youhengheng.gif' },
-		  { faceName: 'haqian', faceUrl: '/47_haqian.gif' },
-		  { faceName: 'bishi', faceUrl: '/48_bishi.gif' },
-		  { faceName: 'weiqu', faceUrl: '/49_weiqu.gif' },
-		  { faceName: 'kuaikule', faceUrl: '/50_kuaikule.gif' },
-		  { faceName: 'yinxian', faceUrl: '/51_yinxian.gif' },
-		  { faceName: 'qinqin', faceUrl: '/52_qinqin.gif' },
-		  { faceName: 'xia', faceUrl: '/53_xia.gif' },
-		  { faceName: 'kelian', faceUrl: '/54_kelian.gif' },
-		  { faceName: 'caidao', faceUrl: '/55_caidao.gif' },
-		  { faceName: 'xigua', faceUrl: '/56_xigua.gif' },
-		  { faceName: 'pijiu', faceUrl: '/57_pijiu.gif' },
-		  { faceName: 'lanqiu', faceUrl: '/58_lanqiu.gif' },
-		  { faceName: 'pingpang', faceUrl: '/59_pingpang.gif' },
-		  { faceName: 'yongbao', faceUrl: '/78_yongbao.gif' },
-		  { faceName: 'woshou', faceUrl: '/81_woshou.gif' } 
-		],
 		colors = [
 			[`#BE93C5`,`#7BC6CC`],
 			[`#4ECDC4`,`#556270`],
@@ -428,23 +367,35 @@ class CommentFeedback extends Component {
 			case "img_list":
 				choice_list = (
 					<div className="syntaxs__sub-list">
-						<input type="text" placeholder="图片alt" ref="alt-input" />
-						<input type="text" placeholder="图片地址(url)" ref="img-url-input"/>
-						<button 
-							className="insert"
-							onClick={(ev) => {
-								let altInput = this.refs["alt-input"],
-									imgUrlInput = this.refs["img-url-input"]
+						<section className="column-arrange" style={{width: "100%"}}>
+							<div>
+								<input type="text" placeholder="图片alt" ref="alt-input" />
+								<input type="text" placeholder="图片地址(url)" ref="img-url-input"/>
+								<button 
+									className="insert"
+									onClick={(ev) => {
+										let altInput = this.refs["alt-input"],
+											imgUrlInput = this.refs["img-url-input"]
 
-								this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
-      								editerWrap.value += `![${altInput.value}](${imgUrlInput.value})`;
-								})
+										this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
+		      								editerWrap.value += `![${altInput.value}](${imgUrlInput.value})`;
+										})
 
-								altInput.value = "";
-								imgUrlInput.value = "";
-							}}
-						>插入图片</button>
-						
+										altInput.value = "";
+										imgUrlInput.value = "";
+									}}
+								>插入图片</button>
+							</div>
+							<DragAndUpdate 
+								callback={(datas) => {
+									this.handleBandState(0);
+      								editerWrap.focus();
+      								datas.forEach((value) => {
+										editerWrap.value += `![pic](${value.url}) \n`
+									})
+									
+							}} />
+						</section>
 					</div>
 				)
 				break;
