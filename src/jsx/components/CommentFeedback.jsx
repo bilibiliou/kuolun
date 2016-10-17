@@ -59,14 +59,17 @@ class CommentFeedback extends Component {
 
 	FormatHTML (value) {
 		let html = value.trim(),
-			renderer = new marked.Renderer();
+			renderer = new marked.Renderer(),
+			expressions_reg = /\[\/([\u4e00-\u9fa5]+)\]/g;
 
+		// 使用 highlight.js
 		marked.setOptions({
 			highlight: (code) => {
 				return hljs.highlightAuto(code).value;
 			}
 		})
 
+		// 处理大标题
 		renderer.heading = (text, level) => {
 			if(level === 1) {
 
@@ -90,9 +93,15 @@ class CommentFeedback extends Component {
 			}
 		}
 
+		// 处理A链接
 		renderer.link = (url, level, text) => {
 			return (`<a href="${url}" target="_blank">${text}</a>`)
 		}
+
+		// 处理标签链接
+		html = html.replace(expressions_reg, (substr, $str) => {
+			return `![${$str}](/expressions${expressions_list[$str]["faceUrl"]})`
+		})
 
 		return marked( html, { renderer });
 	}
@@ -251,29 +260,33 @@ class CommentFeedback extends Component {
 		tdSize = 31, //( x === y)
 		tablePosition = getPostion(this.refs["table-matrix"]),
 		tableRow   = [],
-		tableCol   = [],
 
 		expressionsListColNum = 17, //每行10列
 		expressionsListBox = []
 
-		for (let i = 1 ,name,url,tableCol=[]; i <= expressions_list.length; i++) {
-			name = expressions_list[i-1]["faceName"]
-			url  = expressions_list[i-1]["faceUrl"]
+		let name, url, tableCol=[], flag = 0, 
+			keys = Object.keys(expressions_list),
+			len  = keys.length;
 
-			tableCol.push(<td key={i}>
+		for (let i of keys) {
+			name = i
+			url  = expressions_list[i].faceUrl
+			flag++;
+			
+			tableCol.push(<td key={flag}>
 				<a href="javascript:;">
 					<img src={`/expressions${url}`} title={name} alt={name} />
 				</a>
 			</td>)
 			
-			if ( (i % expressionsListColNum) === 0 || i === expressions_list.length) {
-				expressionsListBox.push(<tr key={i/10} >{ tableCol }</tr>);
+			if ( (flag % expressionsListColNum) === 0 || flag === len) {
+				expressionsListBox.push(<tr key={flag/10} >{ tableCol }</tr>);
 				tableCol = [];
 			}
 		}
 
 
-		for(let i = 0; i<tableSizeX;i++) {
+		for(let i = 0 , tableCol = []; i<tableSizeX;i++) {
 			tableCol = []
 			for(let j = 0; j<tableSizeY; j++) {
 				if( (i+1 <= this.state.cTableY) && (j+1 <= this.state.cTableX)) {
@@ -299,10 +312,16 @@ class CommentFeedback extends Component {
 					<div className="syntaxs__sub-list">
 						<table 
 							onClick={(ev) => {
-								let oTarget = ev.target;
-								if (oTarget.tagName.toLowerCase() === "img") {
+								let oTarget = ev.target,
+									tagName = oTarget.tagName.toLowerCase()
+
+								if (tagName === "a" ) {
 									this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
-	      								editerWrap.value += `![${oTarget.title}](${oTarget.src})`;
+	      								editerWrap.value += `[\/${oTarget.children[0].title}]`;
+									})
+								} else if (tagName === "img") {
+									this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
+	      								editerWrap.value += `[\/${oTarget.title}]`;
 									})
 								}
 							}}
@@ -536,6 +555,7 @@ class CommentFeedback extends Component {
 						<ul className="syntaxs__list">
 							<li className="emoji-list" 
 								title="表情列表"
+								style={this.state.choiceType === "expressions_list" ? {background: "url(/img/icon-hover.png) 5px -316px , #ccc"} : null}
 								onClick={(ev) => {
 									this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
 	      								if(this.state.choiceType === "expressions_list") {
@@ -575,6 +595,7 @@ class CommentFeedback extends Component {
 							</li>
 							<li className="a-link" 
 								title="A链接"
+								style={this.state.choiceType === "a_link_list" ? {background: "url(/img/icon-hover.png) 4px -103px,#ccc"} : null}
 								onClick={(ev) => {
 									this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
 	      								if(this.state.choiceType === "a_link_list") {
@@ -592,6 +613,7 @@ class CommentFeedback extends Component {
 							</li>
 							<li className="image" 
 								title="引入图片"
+								style={this.state.choiceType === "img_list" ? {background: "url(/img/icon-hover.png) 4px -151px,#ccc"} : null}
 								onClick={(ev) => {
 									this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
 	      								if(this.state.choiceType === "img_list") {
@@ -608,6 +630,7 @@ class CommentFeedback extends Component {
 							></li>
 							<li className="table" 
 								title="选择表格"
+								style={this.state.choiceType === "table_list" ? {background: "url(/img/icon-hover.png) 4px -175px,#ccc"} : null}
 								onClick={(ev) => {
 									this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
 	      								if(this.state.choiceType === "table_list") {
@@ -651,6 +674,7 @@ class CommentFeedback extends Component {
 							></li>
 							<li className="h1-tag" 
 								title="大标题"
+								style={this.state.choiceType === "h1_list" ? {background: "url(/img/icon-hover.png) 4px -247px,#ccc"} : null}
 								onClick={(ev) => {
 									this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
 	      								if(this.state.choiceType === "h1_list") {
@@ -678,6 +702,7 @@ class CommentFeedback extends Component {
 							</li>
 							<li className="code-block" 
 								title="代码高亮"
+								style={this.state.choiceType === "code_block_list" ? {background: "url(/img/icon-hover.png) 4px -341px,#ccc"} : null}
 								onClick={(ev)=> {
 									this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
 	      								if(this.state.choiceType === "code_block_list") {

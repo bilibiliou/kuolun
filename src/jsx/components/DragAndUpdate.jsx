@@ -44,7 +44,7 @@ class DragAndUpdate extends Component {
             return actions.AlertPlaneThunk("单次上传图片总量不能超过5MB");
         } else {
             function parseImageAndFetch () {
-                let value = fileList[0];
+                let value = fileList.shift();
                 fr.readAsDataURL(value.file);
 
                 fr.onloadend = (evt) => {
@@ -63,7 +63,7 @@ class DragAndUpdate extends Component {
                     })
 
                     promiseStack.push(promise);
-                    fileList.pop();
+                    
 
                     if(flag !== fileList.length) {
                         return parseImageAndFetch();

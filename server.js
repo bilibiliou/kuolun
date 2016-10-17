@@ -129,10 +129,10 @@ app.post("/delData", (req, res) => {
 // 存储被上传的图片
 app.post("/upLoadImage", (req, res) => {
   let reg = /^(\d+)data\:image\/(png|jpg|webp|gif|jpeg|svg)\;base64\,(.+)/,
-        match = req.body.match(reg),
-        order = match[1],
-        type  = match[2],
-        content = match[3];
+      match = req.body.match(reg),
+      order = match[1],
+      type  = match[2],
+      content = match[3];
 
     const saveImage = () => {
          let id = uuid.v1({

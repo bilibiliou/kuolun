@@ -31,7 +31,7 @@ webpackJsonp([0],[
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
-	module.exports = __webpack_require__(403);
+	module.exports = __webpack_require__(233);
 
 
 /***/ },
@@ -2168,47 +2168,47 @@ webpackJsonp([0],[
 
 	var _CommentFeedback2 = _interopRequireDefault(_CommentFeedback);
 
-	var _CommentFooter = __webpack_require__(391);
+	var _CommentFooter = __webpack_require__(219);
 
 	var _CommentFooter2 = _interopRequireDefault(_CommentFooter);
 
-	var _CommentHeader = __webpack_require__(392);
+	var _CommentHeader = __webpack_require__(220);
 
 	var _CommentHeader2 = _interopRequireDefault(_CommentHeader);
 
-	var _CommentItem = __webpack_require__(394);
+	var _CommentItem = __webpack_require__(224);
 
 	var _CommentItem2 = _interopRequireDefault(_CommentItem);
 
-	var _CommentList = __webpack_require__(395);
+	var _CommentList = __webpack_require__(225);
 
 	var _CommentList2 = _interopRequireDefault(_CommentList);
 
-	var _CommentPagination = __webpack_require__(396);
+	var _CommentPagination = __webpack_require__(226);
 
 	var _CommentPagination2 = _interopRequireDefault(_CommentPagination);
 
-	var _CommentWrap = __webpack_require__(397);
+	var _CommentWrap = __webpack_require__(227);
 
 	var _CommentWrap2 = _interopRequireDefault(_CommentWrap);
 
-	var _FeedBackMain = __webpack_require__(398);
+	var _FeedBackMain = __webpack_require__(228);
 
 	var _FeedBackMain2 = _interopRequireDefault(_FeedBackMain);
 
-	var _LoginTable = __webpack_require__(399);
+	var _LoginTable = __webpack_require__(229);
 
 	var _LoginTable2 = _interopRequireDefault(_LoginTable);
 
-	var _AlertPlane = __webpack_require__(400);
+	var _AlertPlane = __webpack_require__(230);
 
 	var _AlertPlane2 = _interopRequireDefault(_AlertPlane);
 
-	var _DropList = __webpack_require__(401);
+	var _DropList = __webpack_require__(231);
 
 	var _DropList2 = _interopRequireDefault(_DropList);
 
-	var _DragAndUpdate = __webpack_require__(402);
+	var _DragAndUpdate = __webpack_require__(232);
 
 	var _DragAndUpdate2 = _interopRequireDefault(_DragAndUpdate);
 
@@ -2801,21 +2801,21 @@ webpackJsonp([0],[
 
 	var _redux = __webpack_require__(180);
 
-	var _marked = __webpack_require__(219);
+	var _marked = __webpack_require__(237);
 
 	var _marked2 = _interopRequireDefault(_marked);
 
-	var _highlight = __webpack_require__(220);
+	var _highlight = __webpack_require__(238);
 
 	var _highlight2 = _interopRequireDefault(_highlight);
 
 	var _util = __webpack_require__(202);
 
-	var _expressions_list = __webpack_require__(388);
+	var _expressions_list = __webpack_require__(406);
 
 	var _expressions_list2 = _interopRequireDefault(_expressions_list);
 
-	var _CommentActions = __webpack_require__(389);
+	var _CommentActions = __webpack_require__(223);
 
 	var _LoginActions = __webpack_require__(208);
 
@@ -2889,14 +2889,17 @@ webpackJsonp([0],[
 			key: "FormatHTML",
 			value: function FormatHTML(value) {
 				var html = value.trim(),
-				    renderer = new _marked2.default.Renderer();
+				    renderer = new _marked2.default.Renderer(),
+				    expressions_reg = /\[\/([\u4e00-\u9fa5]+)\]/g;
 
+				// 使用 highlight.js
 				_marked2.default.setOptions({
 					highlight: function highlight(code) {
 						return _highlight2.default.highlightAuto(code).value;
 					}
 				});
 
+				// 处理大标题
 				renderer.heading = function (text, level) {
 					if (level === 1) {
 
@@ -2908,9 +2911,15 @@ webpackJsonp([0],[
 					}
 				};
 
+				// 处理A链接
 				renderer.link = function (url, level, text) {
 					return "<a href=\"" + url + "\" target=\"_blank\">" + text + "</a>";
 				};
+
+				// 处理标签链接
+				html = html.replace(expressions_reg, function (substr, $str) {
+					return "![" + $str + "](/expressions" + _expressions_list2.default[$str]["faceUrl"] + ")";
+				});
 
 				return (0, _marked2.default)(html, { renderer: renderer });
 			}
@@ -3061,53 +3070,81 @@ webpackJsonp([0],[
 				var tdSize = 31; //( x === y)
 				var tablePosition = (0, _util.getPostion)(this.refs["table-matrix"]);
 				var tableRow = [];
-				var tableCol = [];
 
 				var expressionsListColNum = 17; //每行10列
 				var expressionsListBox = [];
 
-				for (var i = 1, name, url, _tableCol = []; i <= _expressions_list2.default.length; i++) {
-					name = _expressions_list2.default[i - 1]["faceName"];
-					url = _expressions_list2.default[i - 1]["faceUrl"];
+				var name = void 0,
+				    url = void 0,
+				    tableCol = [],
+				    flag = 0,
+				    keys = Object.keys(_expressions_list2.default),
+				    len = keys.length;
 
-					_tableCol.push(_react2.default.createElement(
-						"td",
-						{ key: i },
-						_react2.default.createElement(
-							"a",
-							{ href: "javascript:;" },
-							_react2.default.createElement("img", { src: "/expressions" + url, title: name, alt: name })
-						)
-					));
+				var _iteratorNormalCompletion = true;
+				var _didIteratorError = false;
+				var _iteratorError = undefined;
 
-					if (i % expressionsListColNum === 0 || i === _expressions_list2.default.length) {
-						expressionsListBox.push(_react2.default.createElement(
-							"tr",
-							{ key: i / 10 },
-							_tableCol
+				try {
+					for (var _iterator = keys[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+						var _i4 = _step.value;
+
+						name = _i4;
+						url = _expressions_list2.default[_i4].faceUrl;
+						flag++;
+
+						tableCol.push(_react2.default.createElement(
+							"td",
+							{ key: flag },
+							_react2.default.createElement(
+								"a",
+								{ href: "javascript:;" },
+								_react2.default.createElement("img", { src: "/expressions" + url, title: name, alt: name })
+							)
 						));
-						_tableCol = [];
+
+						if (flag % expressionsListColNum === 0 || flag === len) {
+							expressionsListBox.push(_react2.default.createElement(
+								"tr",
+								{ key: flag / 10 },
+								tableCol
+							));
+							tableCol = [];
+						}
+					}
+				} catch (err) {
+					_didIteratorError = true;
+					_iteratorError = err;
+				} finally {
+					try {
+						if (!_iteratorNormalCompletion && _iterator.return) {
+							_iterator.return();
+						}
+					} finally {
+						if (_didIteratorError) {
+							throw _iteratorError;
+						}
 					}
 				}
 
-				for (var _i = 0; _i < tableSizeX; _i++) {
-					tableCol = [];
+				for (var i = 0, _tableCol = []; i < tableSizeX; i++) {
+					_tableCol = [];
 					for (var j = 0; j < tableSizeY; j++) {
-						if (_i + 1 <= this.state.cTableY && j + 1 <= this.state.cTableX) {
-							tableCol.push(_react2.default.createElement("td", {
+						if (i + 1 <= this.state.cTableY && j + 1 <= this.state.cTableX) {
+							_tableCol.push(_react2.default.createElement("td", {
 								style: {
 									background: "#f5f5f5"
 								},
 								key: j }));
 						} else {
-							tableCol.push(_react2.default.createElement("td", { key: j }));
+							_tableCol.push(_react2.default.createElement("td", { key: j }));
 						}
 					}
 
 					tableRow.push(_react2.default.createElement(
 						"tr",
-						{ key: _i },
-						tableCol
+						{ key: i },
+						_tableCol
 					));
 				}
 
@@ -3120,10 +3157,16 @@ webpackJsonp([0],[
 								"table",
 								{
 									onClick: function onClick(ev) {
-										var oTarget = ev.target;
-										if (oTarget.tagName.toLowerCase() === "img") {
+										var oTarget = ev.target,
+										    tagName = oTarget.tagName.toLowerCase();
+
+										if (tagName === "a") {
 											_this2.SyntaxsListHandle.call(_this2, ev, function (ev, editerWrap) {
-												editerWrap.value += "![" + oTarget.title + "](" + oTarget.src + ")";
+												editerWrap.value += "[/" + oTarget.children[0].title + "]";
+											});
+										} else if (tagName === "img") {
+											_this2.SyntaxsListHandle.call(_this2, ev, function (ev, editerWrap) {
+												editerWrap.value += "[/" + oTarget.title + "]";
 											});
 										}
 									}
@@ -3143,11 +3186,11 @@ webpackJsonp([0],[
 								onClick: function onClick(ev) {
 									if (ev.target.dataset.btnId !== undefined) {
 										var id = parseInt(ev.target.dataset.btnId),
-										    len = editerWrap.value.length;
+										    _len = editerWrap.value.length;
 
 										editerWrap.value += id != 0 ? "\n# 大标题 # [" + colors[id - 1][0] + "|" + colors[id - 1][1] + "] \n" : "\n# 大标题 \n";
 
-										editerWrap.setSelectionRange(len + 3, len + 6);
+										editerWrap.setSelectionRange(_len + 3, _len + 6);
 									}
 
 									editerWrap.focus();
@@ -3268,8 +3311,8 @@ webpackJsonp([0],[
 												return;
 											} else {
 												editerWrap.value += "\n```" + _this2.state.codeListBeChoice + "\n代码内容\n```\n";
-												var len = editerWrap.value.length;
-												editerWrap.setSelectionRange(len - 9, len - 5);
+												var _len2 = editerWrap.value.length;
+												editerWrap.setSelectionRange(_len2 - 9, _len2 - 5);
 												_this2.setState({
 													codeListBeChoice: "请选择代码种类"
 												});
@@ -3334,11 +3377,11 @@ webpackJsonp([0],[
 											    $y = _this2.state.cTableY,
 											    str = "";
 
-											for (var _i2 = 0; _i2 < $x; _i2++) {
-												str += "|   标题" + (_i2 + 1) + "   ";
+											for (var _i = 0; _i < $x; _i++) {
+												str += "|   标题" + (_i + 1) + "   ";
 											}
 											str += "|\n";
-											for (var _i3 = 0; _i3 < $x; _i3++) {
+											for (var _i2 = 0; _i2 < $x; _i2++) {
 												str += "| :---------: ";
 											}
 											str += "|\n";
@@ -3346,7 +3389,7 @@ webpackJsonp([0],[
 											var count = 1;
 
 											for (var _j = 0; _j < $y; _j++) {
-												for (var _i4 = 0; _i4 < $x; _i4++) {
+												for (var _i3 = 0; _i3 < $x; _i3++) {
 													str += "| 表格内容" + count + " ";
 													count++;
 												}
@@ -3381,6 +3424,7 @@ webpackJsonp([0],[
 							{ className: "syntaxs__list" },
 							_react2.default.createElement("li", { className: "emoji-list",
 								title: "表情列表",
+								style: this.state.choiceType === "expressions_list" ? { background: "url(/img/icon-hover.png) 5px -316px , #ccc" } : null,
 								onClick: function onClick(ev) {
 									_this2.SyntaxsListHandle.call(_this2, ev, function (ev, editerWrap) {
 										if (_this2.state.choiceType === "expressions_list") {
@@ -3418,6 +3462,7 @@ webpackJsonp([0],[
 							}),
 							_react2.default.createElement("li", { className: "a-link",
 								title: "A链接",
+								style: this.state.choiceType === "a_link_list" ? { background: "url(/img/icon-hover.png) 4px -103px,#ccc" } : null,
 								onClick: function onClick(ev) {
 									_this2.SyntaxsListHandle.call(_this2, ev, function (ev, editerWrap) {
 										if (_this2.state.choiceType === "a_link_list") {
@@ -3434,6 +3479,7 @@ webpackJsonp([0],[
 							}),
 							_react2.default.createElement("li", { className: "image",
 								title: "引入图片",
+								style: this.state.choiceType === "img_list" ? { background: "url(/img/icon-hover.png) 4px -151px,#ccc" } : null,
 								onClick: function onClick(ev) {
 									_this2.SyntaxsListHandle.call(_this2, ev, function (ev, editerWrap) {
 										if (_this2.state.choiceType === "img_list") {
@@ -3450,6 +3496,7 @@ webpackJsonp([0],[
 							}),
 							_react2.default.createElement("li", { className: "table",
 								title: "选择表格",
+								style: this.state.choiceType === "table_list" ? { background: "url(/img/icon-hover.png) 4px -175px,#ccc" } : null,
 								onClick: function onClick(ev) {
 									_this2.SyntaxsListHandle.call(_this2, ev, function (ev, editerWrap) {
 										if (_this2.state.choiceType === "table_list") {
@@ -3492,6 +3539,7 @@ webpackJsonp([0],[
 							}),
 							_react2.default.createElement("li", { className: "h1-tag",
 								title: "大标题",
+								style: this.state.choiceType === "h1_list" ? { background: "url(/img/icon-hover.png) 4px -247px,#ccc" } : null,
 								onClick: function onClick(ev) {
 									_this2.SyntaxsListHandle.call(_this2, ev, function (ev, editerWrap) {
 										if (_this2.state.choiceType === "h1_list") {
@@ -3518,6 +3566,7 @@ webpackJsonp([0],[
 							}),
 							_react2.default.createElement("li", { className: "code-block",
 								title: "代码高亮",
+								style: this.state.choiceType === "code_block_list" ? { background: "url(/img/icon-hover.png) 4px -341px,#ccc" } : null,
 								onClick: function onClick(ev) {
 									_this2.SyntaxsListHandle.call(_this2, ev, function (ev, editerWrap) {
 										if (_this2.state.choiceType === "code_block_list") {
@@ -3656,6 +3705,2651 @@ webpackJsonp([0],[
 
 /***/ },
 /* 219 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _router = __webpack_require__(206);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var CommentFooter = function (_Component) {
+		_inherits(CommentFooter, _Component);
+
+		function CommentFooter(props) {
+			_classCallCheck(this, CommentFooter);
+
+			return _possibleConstructorReturn(this, (CommentFooter.__proto__ || Object.getPrototypeOf(CommentFooter)).call(this, props));
+		}
+
+		_createClass(CommentFooter, [{
+			key: "render",
+			value: function render() {
+				return _react2.default.createElement(
+					"footer",
+					{ className: "comment__footer" },
+					_react2.default.createElement(_router.CommentPagination, null)
+				);
+			}
+		}]);
+
+		return CommentFooter;
+	}(_react.Component);
+
+	exports.default = CommentFooter;
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CommentFooter.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 220 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(173);
+
+	var _redux = __webpack_require__(180);
+
+	var _SortActions = __webpack_require__(221);
+
+	var _HandleDataActions = __webpack_require__(222);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var CommentHeader = function (_Component) {
+		_inherits(CommentHeader, _Component);
+
+		function CommentHeader(props) {
+			_classCallCheck(this, CommentHeader);
+
+			var _this = _possibleConstructorReturn(this, (CommentHeader.__proto__ || Object.getPrototypeOf(CommentHeader)).call(this, props));
+
+			_this.sortListHandle = _this.sortListHandle.bind(_this);
+			return _this;
+		}
+
+		_createClass(CommentHeader, [{
+			key: "sortListHandle",
+			value: function sortListHandle(St) {
+				var _props = this.props;
+				var SortState = _props.SortState;
+				var NowPage = _props.NowPage;
+				var actions = _props.actions;
+
+
+				if (SortState !== St) {
+					this.props.actions.ChangeSortStateTask(St);
+					actions.getDataesThunk(NowPage - 1, St);
+				}
+			}
+		}, {
+			key: "render",
+			value: function render() {
+				var _props2 = this.props;
+				var ItemDataes = _props2.ItemDataes;
+				var AllDataNum = _props2.AllDataNum;
+
+
+				return _react2.default.createElement(
+					"header",
+					{ className: "comment__header" },
+					_react2.default.createElement(
+						"p",
+						{ className: "comment__header__span" },
+						"评论列表 ( ",
+						_react2.default.createElement(
+							"span",
+							null,
+							AllDataNum
+						),
+						" )"
+					),
+					_react2.default.createElement(
+						"p",
+						{ className: "comment__header__btns" },
+						_react2.default.createElement(
+							"button",
+							{
+								onClick: this.sortListHandle.bind(this, "newest")
+							},
+							"最新"
+						),
+						_react2.default.createElement(
+							"button",
+							{
+								onClick: this.sortListHandle.bind(this, "hottest")
+							},
+							"最热"
+						)
+					)
+				);
+			}
+		}]);
+
+		return CommentHeader;
+	}(_react.Component);
+
+	exports.default = (0, _reactRedux.connect)(function (state) {
+		return {
+			NowPage: state.HandleDataReducer.NowPage,
+			SortState: state.SortReducer.SortState,
+			ItemDataes: state.CommentReducer.ItemDataes,
+			AllDataNum: state.HandleDataReducer.AllDataNum
+		};
+	}, function (dispatch) {
+		return {
+			actions: (0, _redux.bindActionCreators)({
+				ChangeSortStateTask: _SortActions.ChangeSortStateTask,
+				getDataesThunk: _HandleDataActions.getDataesThunk
+			}, dispatch)
+		};
+	})(CommentHeader);
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CommentHeader.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 221 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.ChangeSortStateTask = undefined;
+
+	var _constants = __webpack_require__(200);
+
+	var _reduxActions = __webpack_require__(209);
+
+	var ChangeSortStateTask = exports.ChangeSortStateTask = (0, _reduxActions.createAction)(_constants.Types.SORT_STATE_CHANGE, function (SortState) {
+	    return {
+	        SortState: SortState
+	    };
+	});
+
+/***/ },
+/* 222 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.getDataesThunk = exports.UpDateDataInfoTask = undefined;
+
+	var _constants = __webpack_require__(200);
+
+	var _reduxActions = __webpack_require__(209);
+
+	var _AlertPlaneActions = __webpack_require__(215);
+
+	var _CommentActions = __webpack_require__(223);
+
+	var UpDateDataInfoTask = exports.UpDateDataInfoTask = (0, _reduxActions.createAction)(_constants.Types.UPDATE_GLOBAL_DATA_INFO, function (AllDataNum, NowPage) {
+	    return {
+	        AllDataNum: AllDataNum,
+	        NowPage: NowPage
+	    };
+	});
+
+	var getDataesThunk = exports.getDataesThunk = function getDataesThunk(page, SortState) {
+	    return function (dispatch) {
+	        fetch("/resDataes", {
+	            method: "POST",
+	            headers: {
+	                "Content-Type": "application/x-www-form-urlencoded"
+	            },
+	            credentials: 'include',
+	            body: "whichpage=" + page + "&SortState=" + SortState
+	        }).then(function (res) {
+	            switch (true) {
+	                case res.ok:
+	                    return res.json();
+	                case res.status === 404:
+	                    return Promise.reject("404");
+	                case res.status === 500:
+	                    return Promise.reject("500");
+	            }
+	        }).catch(function (err) {
+	            switch (err) {
+	                case "404":
+	                    return (0, _AlertPlaneActions.AlertPlaneThunk)("404！ 网络不好？无法加载全部评论");
+	                case "500":
+	                    return (0, _AlertPlaneActions.AlertPlaneThunk)("服务器出错，请稍后再登录尝试");
+	            }
+	        }).then(function (value) {
+	            var Dataes = JSON.parse(value);
+
+	            dispatch(UpDateDataInfoTask(Dataes.allLen, page + 1));
+	            dispatch((0, _CommentActions.UpDateItemDataesTask)(Dataes.Data));
+	        });
+	    };
+	};
+
+/***/ },
+/* 223 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.VoteUpThunk = exports.DelThunk = exports.CommentThunk = exports.UpDateItemDataesTask = undefined;
+
+	var _constants = __webpack_require__(200);
+
+	var _reduxActions = __webpack_require__(209);
+
+	var _AlertPlaneActions = __webpack_require__(215);
+
+	var _HandleDataActions = __webpack_require__(222);
+
+	var UpDateItemDataesTask = exports.UpDateItemDataesTask = (0, _reduxActions.createAction)(_constants.Types.UPDATE_ITEM_DATAES, function (newDataes) {
+	    return {
+	        newDataes: newDataes
+	    };
+	});
+
+	// 每次进行操作完成后，需要更新数据栈
+	var CommentThunk = exports.CommentThunk = function CommentThunk(page, SortState, newContent) {
+	    var FBIndex = arguments.length <= 3 || arguments[3] === undefined ? -1 : arguments[3];
+
+	    return function (dispatch) {
+	        var data = JSON.stringify(newContent);
+	        fetch("/saveData", {
+	            method: "POST",
+	            headers: {
+	                "Content-Type": "application/json"
+	            },
+	            body: JSON.stringify({
+	                newContent: newContent,
+	                FBIndex: FBIndex
+	            })
+	        }).then(function (res) {
+	            switch (true) {
+	                case res.ok:
+	                    // 发送完后跳转到首页？
+	                    // switch(SortState) {
+	                    //     case "newest": 
+	                    //         dispatch(getDataesThunk(0, SortState));
+	                    //         break;
+
+	                    //     default:
+	                    //         dispatch(getDataesThunk(page, SortState));
+	                    // }
+	                    dispatch((0, _HandleDataActions.getDataesThunk)(page, SortState));
+	                    break;
+	                case res.status === 404:
+	                    return Promise.reject("404");
+	                case res.status === 500:
+	                    return Promise.reject("500");
+	                default:
+	                    return Promise.reject();
+	            }
+	        }).catch(function (HttpCode) {
+	            switch (HttpCode) {
+	                case 404:
+	                    return dispatch((0, _AlertPlaneActions.AlertPlaneThunk)("发布评论出错，请检查网络连接"));
+
+	                case 500:
+	                    return dispatch((0, _AlertPlaneActions.AlertPlaneThunk)("服务器出错，暂时无法进行评论"));
+
+	                default:
+	                    return dispatch((0, _AlertPlaneActions.AlertPlaneThunk)("未知错误！！！"));
+	            }
+	        });
+	    };
+	};
+
+	var DelThunk = exports.DelThunk = function DelThunk(page, SortState, index) {
+	    var ParentIndex = arguments.length <= 3 || arguments[3] === undefined ? -1 : arguments[3];
+
+	    return function (dispatch) {
+	        fetch("/delData", {
+	            method: "POST",
+	            headers: {
+	                "Content-Type": "application/x-www-form-urlencoded"
+	            },
+	            body: "index=" + index + "&ParentIndex=" + ParentIndex
+	        }).then(function (res) {
+	            switch (true) {
+	                case res.ok:
+	                    dispatch((0, _HandleDataActions.getDataesThunk)(page, SortState));
+	                    break;
+	                case res.status === 404:
+	                    return Promise.reject("404");
+	                case res.status === 500:
+	                    return Promise.reject("500");
+	            }
+	        }).catch(function (err) {
+	            switch (err) {
+	                case "404":
+	                    return (0, _AlertPlaneActions.AlertPlaneThunk)("404！ 网络不好？删除失败");
+	                case "500":
+	                    return (0, _AlertPlaneActions.AlertPlaneThunk)("服务器出错，删除失败，请稍后再登录尝试");
+	            }
+	        });
+	    };
+	};
+
+	var VoteUpThunk = exports.VoteUpThunk = function VoteUpThunk(index, failback) {
+	    return function (dispatch) {
+	        fetch("/VoteUpSomeItem", {
+	            method: "POST",
+	            headers: {
+	                "Content-Type": "application/x-www-form-urlencoded"
+	            },
+	            credentials: 'include',
+	            body: "index=" + index
+	        }).then(function (res) {
+	            if (!res.ok) {
+	                return Promise.reject();
+	            }
+	        }).catch(function () {
+	            failback();
+	            dispatch((0, _AlertPlaneActions.AlertPlaneThunk)("点赞操作出错，请重新尝试"));
+	        });
+	    };
+	};
+
+/***/ },
+/* 224 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(173);
+
+	var _redux = __webpack_require__(180);
+
+	var _CommentActions = __webpack_require__(223);
+
+	var _AlertPlaneActions = __webpack_require__(215);
+
+	var _util = __webpack_require__(202);
+
+	var _router = __webpack_require__(206);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var CommentItem = function (_Component) {
+		_inherits(CommentItem, _Component);
+
+		function CommentItem(props) {
+			_classCallCheck(this, CommentItem);
+
+			var _this = _possibleConstructorReturn(this, (CommentItem.__proto__ || Object.getPrototypeOf(CommentItem)).call(this, props));
+
+			_this.ToggleFeedbackShow = _this.ToggleFeedbackShow.bind(_this);
+			_this.DelSelf = _this.DelSelf.bind(_this);
+			_this.VoteUpHandle = _this.VoteUpHandle.bind(_this);
+
+			// 点赞功能 先从数据库获获取 加载页面后的点赞数，点击后
+			// 只在View 层做数据更新，不做总体的数据更新，并发送一个Ajax, 修改
+			// 数据库中的点赞数
+			// 将静态的props 数据转化为state 状态，便于更改
+			_this.state = {
+				feedContentboff: false,
+				feedWrapboff: false,
+				isVoted: _this.props.ItemData.isVoted,
+				vote_up: _this.props.ItemData.vote_up
+			};
+			return _this;
+		}
+
+		_createClass(CommentItem, [{
+			key: "componentWillReceiveProps",
+			value: function componentWillReceiveProps(nextProps) {
+				// 新数据更新后，重新设置state
+				this.setState({
+					isVoted: nextProps.ItemData.isVoted,
+					vote_up: nextProps.ItemData.vote_up
+				});
+			}
+		}, {
+			key: "DelSelf",
+			value: function DelSelf() {
+				var index = this.props.ItemData.index;
+				var _props = this.props;
+				var ItemDataes = _props.ItemDataes;
+				var actions = _props.actions;
+				var SortState = _props.SortState;
+				var NowPage = _props.NowPage;
+
+
+				actions.AlertPlaneThunk("您确定删除该评论？（其下的回复也会被删除!）", function () {
+					actions.DelThunk(NowPage - 1, SortState, index);
+				});
+			}
+		}, {
+			key: "ToggleFeedbackShow",
+			value: function ToggleFeedbackShow() {
+				var _state = this.state;
+				var feedContentboff = _state.feedContentboff;
+				var feedWrapboff = _state.feedWrapboff;
+
+
+				this.setState({
+					feedContentboff: !feedContentboff,
+					feedWrapboff: !feedWrapboff
+				});
+			}
+		}, {
+			key: "VoteUpHandle",
+			value: function VoteUpHandle() {
+				var _props2 = this.props;
+				var actions = _props2.actions;
+				var userInfo = _props2.userInfo;
+				var index = this.props.ItemData.index;
+
+
+				this.setState({
+					isVoted: true,
+					vote_up: this.state.vote_up + 1
+				});
+
+				actions.VoteUpThunk(index, function () {
+					this.setState({
+						isVoted: false,
+						vote_up: this.state.vote_up - 1
+					});
+				}.bind(this));
+			}
+		}, {
+			key: "render",
+			value: function render() {
+				var _props$ItemData = this.props.ItemData;
+				var index = _props$ItemData.index;
+				var avatar_url = _props$ItemData.avatar_url;
+				var author_name = _props$ItemData.author_name;
+				var author_email = _props$ItemData.author_email;
+				var publish_time = _props$ItemData.publish_time;
+				var publish_content = _props$ItemData.publish_content;
+				var commentAuthor = _props$ItemData.commentAuthor;
+				var FeedBack = _props$ItemData.FeedBack;
+				var _props3 = this.props;
+				var ItemDataes = _props3.ItemDataes;
+				var userInfo = _props3.userInfo;
+				var SelfIndex = _props3.SelfIndex;
+
+
+				var pt = (0, _util.formatDate)(publish_time),
+				    voteUpBox = void 0;
+
+				if (!userInfo.userEmail || this.state.isVoted || author_email === userInfo.userEmail) {
+					voteUpBox = _react2.default.createElement(
+						"section",
+						{
+							className: "comment__options__has-voted-up",
+							title: "您尚未登陆，或已经点过赞。自己不能帮自己点赞"
+						},
+						_react2.default.createElement(
+							"button",
+							null,
+							_react2.default.createElement(
+								"span",
+								{
+									className: "vote-up-counter"
+								},
+								this.state.vote_up
+							),
+							" 已赞"
+						)
+					);
+				} else {
+					voteUpBox = _react2.default.createElement(
+						"section",
+						{ className: "comment__options__vote-up", title: "点赞" },
+						_react2.default.createElement(
+							"button",
+							{
+								onClick: this.VoteUpHandle
+							},
+							_react2.default.createElement(
+								"span",
+								{
+									className: "vote-up-counter"
+								},
+								this.state.vote_up
+							),
+							" 赞"
+						)
+					);
+				}
+
+				return _react2.default.createElement(
+					"li",
+					{ className: "comment__item" },
+					_react2.default.createElement(
+						"section",
+						{ className: "comment__content" },
+						_react2.default.createElement(
+							"figure",
+							{ className: "comment__author--avatar" },
+							_react2.default.createElement("img", { src: avatar_url })
+						),
+						_react2.default.createElement(
+							"section",
+							{ className: "comment__content--main" },
+							_react2.default.createElement(
+								"p",
+								{ className: "comment__content--author" },
+								_react2.default.createElement(
+									"a",
+									{ href: "javascript:;" },
+									author_name
+								),
+								_react2.default.createElement(
+									"span",
+									null,
+									" (",
+									commentAuthor,
+									")"
+								)
+							),
+							_react2.default.createElement(
+								"p",
+								{ className: "comment__content--time" },
+								"发布于：",
+								pt
+							),
+							_react2.default.createElement("div", { className: "comment__content--content",
+								dangerouslySetInnerHTML: { __html: publish_content }
+							}),
+							_react2.default.createElement(
+								"footer",
+								{ className: "comment__content--options" },
+								_react2.default.createElement(
+									"section",
+									{ className: "comment__content--options__wrap" },
+									_react2.default.createElement(
+										"a",
+										{ className: "comment__content--options__callback",
+											href: "javascript:;",
+											onClick: this.ToggleFeedbackShow
+										},
+										_react2.default.createElement("i", null),
+										_react2.default.createElement(
+											"span",
+											null,
+											"回复 (",
+											FeedBack.length,
+											"条)"
+										)
+									),
+									userInfo.userEmail === author_email ? _react2.default.createElement(
+										"a",
+										{ className: "comment__content--options__del",
+											href: "javascript:;",
+											onClick: this.DelSelf
+										},
+										_react2.default.createElement("i", null),
+										_react2.default.createElement(
+											"span",
+											null,
+											"删除"
+										)
+									) : null
+								),
+								voteUpBox
+							)
+						),
+						this.state.feedContentboff ? _react2.default.createElement(
+							"section",
+							{ className: "feedback__content",
+								ref: "feedback-content"
+							},
+							ItemDataes[SelfIndex].FeedBack.map(function (value, idx) {
+								return _react2.default.createElement(_router.FeedBackMain, {
+									FeedBackData: value,
+									ParentIndexOnDb: index,
+									ParentIndex: SelfIndex,
+									key: idx
+								});
+							})
+						) : null,
+						this.state.feedWrapboff ? _react2.default.createElement(
+							"section",
+							{ className: "comment__feedback__wrap",
+								ref: "comment-feedback-wrap"
+							},
+							_react2.default.createElement(
+								"section",
+								{ className: "comment__feedback" },
+								_react2.default.createElement(
+									"h3",
+									null,
+									"分享您的思想和看法..."
+								),
+								_react2.default.createElement(_router.CommentFeedback, {
+									CommentFeedBackTask: true,
+									ParentIndex: SelfIndex,
+									ParentIndexOnDb: index
+								})
+							)
+						) : null
+					)
+				);
+			}
+		}]);
+
+		return CommentItem;
+	}(_react.Component);
+
+	// CommentItem.PropTypes
+
+	exports.default = (0, _reactRedux.connect)(function (state) {
+		return {
+			ItemDataes: state.CommentReducer.ItemDataes,
+			userInfo: state.LoginReducer.userInfo,
+			SortState: state.SortReducer.SortState,
+			NowPage: state.HandleDataReducer.NowPage
+		};
+	}, function (dispatch) {
+		return {
+			actions: (0, _redux.bindActionCreators)({
+				DelThunk: _CommentActions.DelThunk,
+				AlertPlaneThunk: _AlertPlaneActions.AlertPlaneThunk,
+				VoteUpThunk: _CommentActions.VoteUpThunk
+			}, dispatch)
+		};
+	})(CommentItem);
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CommentItem.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 225 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(173);
+
+	var _redux = __webpack_require__(180);
+
+	var _LoginActions = __webpack_require__(208);
+
+	var _HandleDataActions = __webpack_require__(222);
+
+	var _AlertPlaneActions = __webpack_require__(215);
+
+	var _router = __webpack_require__(206);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var CommentList = function (_Component) {
+		_inherits(CommentList, _Component);
+
+		function CommentList(props) {
+			_classCallCheck(this, CommentList);
+
+			return _possibleConstructorReturn(this, (CommentList.__proto__ || Object.getPrototypeOf(CommentList)).call(this, props));
+		}
+
+		_createClass(CommentList, [{
+			key: "componentWillMount",
+			value: function componentWillMount() {
+				var _props = this.props;
+				var actions = _props.actions;
+				var SortState = _props.SortState;
+
+				// 初始时候，更新登录状态
+
+				actions.checkLoginThunk();
+				// 初始时候请求数据，进行初始化
+				actions.getDataesThunk(0, SortState);
+			}
+		}, {
+			key: "render",
+			value: function render() {
+				var _props2 = this.props;
+				var ItemDataes = _props2.ItemDataes;
+				var SortState = _props2.SortState;
+				var NowPage = _props2.NowPage;
+				var actions = _props2.actions;
+				var AllDataNum = _props2.AllDataNum;
+
+
+				var box = void 0;
+
+				if (ItemDataes.length && AllDataNum) {
+					box = ItemDataes.map(function (ItemData, idx) {
+						return _react2.default.createElement(_router.CommentItem, {
+							ItemData: ItemData,
+							SelfIndex: idx,
+							key: idx
+						});
+					});
+				} else if (AllDataNum) {
+					box = _react2.default.createElement(
+						"li",
+						{ className: "no__comment__item" },
+						_react2.default.createElement(
+							"p",
+							null,
+							"该页评论已被删除，请切换其他页"
+						)
+					);
+				} else {
+					box = _react2.default.createElement(
+						"li",
+						{ className: "no__comment__item" },
+						_react2.default.createElement(
+							"p",
+							null,
+							"评论头条等你来抢！"
+						)
+					);
+				}
+
+				//评论头条等你来抢！
+				return _react2.default.createElement(
+					"section",
+					{ className: "comment__list" },
+					_react2.default.createElement(
+						"ul",
+						null,
+						box
+					)
+				);
+			}
+		}]);
+
+		return CommentList;
+	}(_react.Component);
+
+	CommentList.defaultProps = {
+		ItemDataes: []
+	};
+
+	exports.default = (0, _reactRedux.connect)(function (state) {
+		return {
+			NowPage: state.HandleDataReducer.NowPage,
+			ItemDataes: state.CommentReducer.ItemDataes,
+			AllDataNum: state.HandleDataReducer.AllDataNum,
+			SortState: state.SortReducer.SortState
+		};
+	}, function (dispatch) {
+		return {
+			actions: (0, _redux.bindActionCreators)({
+				getDataesThunk: _HandleDataActions.getDataesThunk,
+				AlertPlaneThunk: _AlertPlaneActions.AlertPlaneThunk,
+				checkLoginThunk: _LoginActions.checkLoginThunk
+			}, dispatch)
+		};
+	})(CommentList);
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CommentList.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 226 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(173);
+
+	var _redux = __webpack_require__(180);
+
+	var _HandleDataActions = __webpack_require__(222);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var CommentPagination = function (_Component) {
+		_inherits(CommentPagination, _Component);
+
+		function CommentPagination(props) {
+			_classCallCheck(this, CommentPagination);
+
+			var _this = _possibleConstructorReturn(this, (CommentPagination.__proto__ || Object.getPrototypeOf(CommentPagination)).call(this, props));
+
+			_this.pagination = _this.pagination.bind(_this);
+			return _this;
+		}
+
+		_createClass(CommentPagination, [{
+			key: "pagination",
+			value: function pagination() {
+				var _props = this.props;
+				var AllDataNum = _props.AllDataNum;
+				var PaginationNum = _props.PaginationNum;
+				var PaginationLimit = _props.PaginationLimit;
+				var NowPage = _props.NowPage;
+				var halfNum = ~~(PaginationLimit / 2);
+				var result = [];
+
+				switch (true) {
+					case PaginationNum < PaginationLimit:
+						for (var i = 1; i <= PaginationNum; i++) {
+							result.push(i);
+						}
+						return result;
+
+					case NowPage <= halfNum + 1:
+						for (var _i = 1; _i <= PaginationLimit; _i++) {
+							result.push(_i);
+						}
+
+						result.push("尾页");
+						return result;
+
+					case NowPage > halfNum + 1 && NowPage < PaginationNum - halfNum:
+						result.push("首页");
+
+						for (var _i2 = NowPage - halfNum; _i2 <= NowPage + halfNum; _i2++) {
+							result.push(_i2);
+						}
+
+						result.push("尾页");
+						return result;
+					case NowPage >= PaginationNum - halfNum:
+						result.push("首页");
+
+						for (var _i3 = PaginationNum - PaginationLimit + 1; _i3 <= PaginationNum; _i3++) {
+							result.push(_i3);
+						}
+
+						return result;
+				}
+			}
+		}, {
+			key: "render",
+			value: function render() {
+				var _this2 = this;
+
+				var ItemsMap = this.pagination();
+
+				return _react2.default.createElement(
+					"ol",
+					{ className: "comment__pagination" },
+					ItemsMap.map(function (value, idx) {
+						return _react2.default.createElement(PaginationsItem, _extends({
+							order: value,
+							key: idx,
+							active: _this2.props.NowPage === value ? 1 : 0
+
+						}, _this2.props));
+					})
+				);
+			}
+		}]);
+
+		return CommentPagination;
+	}(_react.Component);
+
+	var PaginationsItem = function (_Component2) {
+		_inherits(PaginationsItem, _Component2);
+
+		function PaginationsItem(props) {
+			_classCallCheck(this, PaginationsItem);
+
+			var _this3 = _possibleConstructorReturn(this, (PaginationsItem.__proto__ || Object.getPrototypeOf(PaginationsItem)).call(this, props));
+
+			_this3.handleChangePage.bind(_this3);
+			return _this3;
+		}
+
+		_createClass(PaginationsItem, [{
+			key: "handleChangePage",
+			value: function handleChangePage(order) {
+				var _props2 = this.props;
+				var actions = _props2.actions;
+				var AllDataNum = _props2.AllDataNum;
+				var PaginationNum = _props2.PaginationNum;
+				var SortState = _props2.SortState;
+
+
+				switch (true) {
+					case order === "首页":
+						actions.getDataesThunk(0, SortState);
+						break;
+					case order === "尾页":
+						actions.getDataesThunk(PaginationNum - 1, SortState);
+						break;
+					default:
+						actions.getDataesThunk(parseInt(order) - 1, SortState);
+				}
+			}
+		}, {
+			key: "render",
+			value: function render() {
+				var _props3 = this.props;
+				var order = _props3.order;
+				var active = _props3.active;
+
+
+				return _react2.default.createElement(
+					"li",
+					null,
+					_react2.default.createElement(
+						"div",
+						{
+							className: active && "active",
+
+							onClick: this.handleChangePage.bind(this, order)
+						},
+						order
+					)
+				);
+			}
+		}]);
+
+		return PaginationsItem;
+	}(_react.Component);
+
+	exports.default = (0, _reactRedux.connect)(function (state) {
+		return {
+			SortState: state.SortReducer.SortState,
+			AllDataNum: state.HandleDataReducer.AllDataNum, // 总数据的数目
+			NowPage: state.HandleDataReducer.NowPage, // 当前页数
+			PaginationNum: state.HandleDataReducer.PaginationNum, // 分页数
+			PaginationLimit: state.HandleDataReducer.PaginationLimit // 分页限制数 
+		};
+	}, function (dispatch) {
+		return {
+			actions: (0, _redux.bindActionCreators)({
+				getDataesThunk: _HandleDataActions.getDataesThunk
+			}, dispatch)
+		};
+	})(CommentPagination);
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CommentPagination.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 227 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _router = __webpack_require__(206);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var CommentWrap = function (_Component) {
+		_inherits(CommentWrap, _Component);
+
+		function CommentWrap(props) {
+			_classCallCheck(this, CommentWrap);
+
+			return _possibleConstructorReturn(this, (CommentWrap.__proto__ || Object.getPrototypeOf(CommentWrap)).call(this, props));
+		}
+
+		_createClass(CommentWrap, [{
+			key: "render",
+			value: function render() {
+				return _react2.default.createElement(
+					"section",
+					{ className: "comment__wrap" },
+					_react2.default.createElement(_router.CommentHeader, null),
+					_react2.default.createElement(_router.CommentList, null),
+					_react2.default.createElement(_router.CommentFooter, null),
+					_react2.default.createElement(_router.CommentEditer, null),
+					_react2.default.createElement(_router.LoginTable, null),
+					_react2.default.createElement(_router.AlertPlane, null)
+				);
+			}
+		}]);
+
+		return CommentWrap;
+	}(_react.Component);
+
+	exports.default = CommentWrap;
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CommentWrap.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 228 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(173);
+
+	var _redux = __webpack_require__(180);
+
+	var _CommentActions = __webpack_require__(223);
+
+	var _util = __webpack_require__(202);
+
+	var _router = __webpack_require__(206);
+
+	var _AlertPlaneActions = __webpack_require__(215);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var FeedBackMain = function (_Component) {
+		_inherits(FeedBackMain, _Component);
+
+		function FeedBackMain(props) {
+			_classCallCheck(this, FeedBackMain);
+
+			var _this = _possibleConstructorReturn(this, (FeedBackMain.__proto__ || Object.getPrototypeOf(FeedBackMain)).call(this, props));
+
+			_this.toggleFeedBackPlaneState = _this.toggleFeedBackPlaneState.bind(_this);
+			_this.DelSelf = _this.DelSelf.bind(_this);
+			_this.state = {
+				feedbackBoff: false
+			};
+			return _this;
+		}
+
+		_createClass(FeedBackMain, [{
+			key: "DelSelf",
+			value: function DelSelf() {
+				var _props = this.props;
+				var ParentIndexOnDb = _props.ParentIndexOnDb;
+				var actions = _props.actions;
+				var NowPage = _props.NowPage;
+				var SortState = _props.SortState;
+				var FeedBackIndex = this.props.FeedBackData.FeedBackIndex;
+
+
+				actions.AlertPlaneThunk("您确定删除该回复吗？", function () {
+					actions.DelThunk(NowPage - 1, SortState, FeedBackIndex, ParentIndexOnDb);
+				});
+			}
+		}, {
+			key: "toggleFeedBackPlaneState",
+			value: function toggleFeedBackPlaneState() {
+				this.setState({
+					feedbackBoff: !this.state.feedbackBoff
+				});
+			}
+		}, {
+			key: "render",
+			value: function render() {
+				var _props$FeedBackData = this.props.FeedBackData;
+				var FeedBackIndex = _props$FeedBackData.FeedBackIndex;
+				var avatar_url = _props$FeedBackData.avatar_url;
+				var author_name = _props$FeedBackData.author_name;
+				var author_email = _props$FeedBackData.author_email;
+				var publish_time = _props$FeedBackData.publish_time;
+				var publish_content = _props$FeedBackData.publish_content;
+				var commentAuthor = _props$FeedBackData.commentAuthor;
+				var vote_up = _props$FeedBackData.vote_up;
+				var ForBidFeedBack = _props$FeedBackData.ForBidFeedBack;
+				var BeFeedIndex = _props$FeedBackData.BeFeedIndex;
+				var _props2 = this.props;
+				var ItemDataes = _props2.ItemDataes;
+				var userInfo = _props2.userInfo;
+				var ParentIndex = _props2.ParentIndex;
+				var ParentIndexOnDb = _props2.ParentIndexOnDb;
+
+				var pt = (0, _util.formatDate)(publish_time);
+
+				return _react2.default.createElement(
+					"section",
+					{ className: "feedback__content--main" },
+					_react2.default.createElement(
+						"figure",
+						{ className: "feedback__content--avatar" },
+						_react2.default.createElement("img", { src: avatar_url })
+					),
+					_react2.default.createElement(
+						"section",
+						{ className: "feedback__wrap--content" },
+						_react2.default.createElement(
+							"p",
+							{ className: "feedback__content--author" },
+							_react2.default.createElement(
+								"a",
+								{ href: "javascript:;" },
+								author_name
+							),
+							_react2.default.createElement(
+								"span",
+								null,
+								" (",
+								commentAuthor,
+								")"
+							)
+						),
+						ForBidFeedBack ? _react2.default.createElement(
+							"p",
+							{ className: "sub__feedback" },
+							"回复：",
+							_react2.default.createElement(
+								"span",
+								null,
+								ItemDataes[ParentIndex].FeedBack[BeFeedIndex].author_name
+							)
+						) : null,
+						_react2.default.createElement(
+							"p",
+							{ className: "feedback__content--time" },
+							"发布于：",
+							pt
+						),
+						_react2.default.createElement("div", { className: "feedback__content--content",
+							dangerouslySetInnerHTML: { __html: publish_content }
+						}),
+						_react2.default.createElement(
+							"footer",
+							{ className: "feedback__content--options" },
+							_react2.default.createElement(
+								"section",
+								{ className: "feedback__content--options__wrap" },
+								!ForBidFeedBack && !(author_email === userInfo.userEmail) ? _react2.default.createElement(
+									"a",
+									{ className: "feedback__content--options__callback",
+										href: "javascript:;",
+										onClick: this.toggleFeedBackPlaneState
+									},
+									_react2.default.createElement("i", null),
+									_react2.default.createElement(
+										"span",
+										null,
+										"回复"
+									)
+								) : null,
+								userInfo.userEmail === author_email ? _react2.default.createElement(
+									"a",
+									{ className: "feedback__content--options__del",
+										href: "javascript:;",
+										onClick: this.DelSelf
+									},
+									_react2.default.createElement("i", null),
+									_react2.default.createElement(
+										"span",
+										null,
+										"删除"
+									)
+								) : null
+							)
+						)
+					),
+					this.state.feedbackBoff ? _react2.default.createElement(
+						"section",
+						{ className: "feedback__content",
+							ref: "feedback-content"
+						},
+						_react2.default.createElement(_router.CommentFeedback, {
+							CommentSubFeedBackTask: true,
+							ParentIndexOnDb: ParentIndexOnDb,
+							ParentIndex: ParentIndex,
+							BeFeedIndex: FeedBackIndex
+						})
+					) : null
+				);
+			}
+		}]);
+
+		return FeedBackMain;
+	}(_react.Component);
+
+	exports.default = (0, _reactRedux.connect)(function (state) {
+		return {
+			ItemDataes: state.CommentReducer.ItemDataes,
+			userInfo: state.LoginReducer.userInfo,
+			SortState: state.SortReducer.SortState,
+			NowPage: state.HandleDataReducer.NowPage
+		};
+	}, function (dispatch) {
+		return {
+			actions: (0, _redux.bindActionCreators)({
+				DelThunk: _CommentActions.DelThunk,
+				AlertPlaneThunk: _AlertPlaneActions.AlertPlaneThunk
+			}, dispatch)
+		};
+	})(FeedBackMain);
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "FeedBackMain.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 229 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(173);
+
+	var _redux = __webpack_require__(180);
+
+	var _LoginActions = __webpack_require__(208);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var LoginTable = function (_Component) {
+		_inherits(LoginTable, _Component);
+
+		function LoginTable(props) {
+			_classCallCheck(this, LoginTable);
+
+			var _this = _possibleConstructorReturn(this, (LoginTable.__proto__ || Object.getPrototypeOf(LoginTable)).call(this, props));
+
+			_this.state = {
+				userNameInfo: "",
+				userEmailInfo: ""
+			};
+
+			_this.nameLegal = false;
+			_this.emailLegal = false;
+			_this.toggleState = _this.toggleState.bind(_this);
+			_this.close = _this.close.bind(_this);
+			_this.sP = _this.sP.bind(_this);
+			_this.LoginIn = _this.LoginIn.bind(_this);
+			_this.fastLogin = _this.fastLogin.bind(_this);
+			_this.Validate = _this.Validate.bind(_this);
+			return _this;
+		}
+
+		_createClass(LoginTable, [{
+			key: "changeView",
+			value: function changeView(target) {
+				var oW = innerWidth,
+				    oH = innerHeight;
+
+				target.style.width = oW + "px";
+				target.style.height = oH + "px";
+			}
+		}, {
+			key: "componentDidMount",
+			value: function componentDidMount() {
+				var $self = this,
+				    target = $self.refs["login-table-bg"];
+
+				if (target) {
+					$self.changeView(target);
+				}
+			}
+		}, {
+			key: "componentDidUpdate",
+			value: function componentDidUpdate() {
+				var $self = this,
+				    target = $self.refs["login-table-bg"];
+
+				if (target) {
+					$self.changeView(target);
+				}
+			}
+		}, {
+			key: "toggleState",
+			value: function toggleState(ev) {
+				var target = ev.target,
+				    index = ~~target.dataset.index,
+				    stateBar = this.refs["state-bar"],
+				    touristLogin = this.refs["tourist-login"],
+				    snsLogin = this.refs["sns-login"];
+
+				if (index) {
+					stateBar.classList.add("state__bar--toggle");
+					snsLogin.classList.remove("none");
+					touristLogin.classList.add("none");
+				} else {
+					stateBar.classList.remove("state__bar--toggle");
+					snsLogin.classList.add("none");
+					touristLogin.classList.remove("none");
+				}
+			}
+		}, {
+			key: "close",
+			value: function close(ev) {
+				var _props$actions = this.props.actions;
+				var LoginTableStateTask = _props$actions.LoginTableStateTask;
+				var ChangeValidateTask = _props$actions.ChangeValidateTask;
+				var ChangeValidateInfoTask = _props$actions.ChangeValidateInfoTask;
+
+
+				LoginTableStateTask();
+
+				this.nameLegal = false;
+				this.emailLegal = false;
+
+				this.setState({
+					userNameInfo: "",
+					userEmailInfo: ""
+				});
+			}
+		}, {
+			key: "sP",
+			value: function sP(ev) {
+				ev.stopPropagation();
+			}
+		}, {
+			key: "LoginIn",
+			value: function LoginIn() {
+				var Name = this.refs["tourist-login-user-name"].value;
+				var Email = this.refs["tourist-login-user-email"].value;
+				var actions = this.props.actions;
+
+
+				if (this.nameLegal && this.emailLegal) {
+					actions.LoginInThunk({
+						userName: Name,
+						userEmail: Email,
+						commentAuthor: "游客",
+						userAvatar: "/img/default-avatar.png"
+					});
+
+					this.close();
+				} else {
+					return;
+				}
+			}
+		}, {
+			key: "Validate",
+			value: function Validate(type) {
+				var Name = this.refs["tourist-login-user-name"];
+				var Email = this.refs["tourist-login-user-email"];
+
+				var actions = this.props.actions;
+
+				var _state = this.state;
+				var userNameInfo = _state.userNameInfo;
+				var userEmailInfo = _state.userEmailInfo;
+
+
+				var rule = {
+					"username": {
+						regexp: /^\w{4,12}$/,
+						mes: {
+							tooLong: "昵称长度为 4到12位",
+							illegalChar: "只能由下划线数字和字母组成"
+						}
+					},
+
+					"email": {
+						regexp: /^\w+@\w+\.\w{2,4}$/,
+						mes: {
+							illegalChar: "非法的邮箱地址"
+						}
+					}
+				};
+
+				switch (type) {
+					case "name":
+						if (rule.username.regexp.test(Name.value)) {
+							this.nameLegal = true;
+
+							this.setState({
+								userNameInfo: ""
+							});
+						} else {
+							this.nameLegal = false;
+
+							if (Name.value.length < 4 || Name.value.length > 12) {
+								this.setState({
+									userNameInfo: rule.username.mes.tooLong
+								});
+							} else {
+								this.setState({
+									userNameInfo: rule.username.mes.illegalChar
+								});
+							}
+						}
+						break;
+
+					case "email":
+						if (rule.email.regexp.test(Email.value)) {
+							this.emailLegal = true;
+
+							this.setState({
+								userEmailInfo: ""
+							});
+						} else {
+							this.emailLegal = false;
+
+							this.setState({
+								userEmailInfo: rule.email.mes.illegalChar
+							});
+						}
+						break;
+				}
+			}
+		}, {
+			key: "fastLogin",
+			value: function fastLogin(ev, type) {
+				if (ev.keyCode === 13) {
+					this.Validate(type);
+					this.LoginIn();
+				}
+			}
+		}, {
+			key: "render",
+			value: function render() {
+				var _this2 = this;
+
+				var _props = this.props;
+				var loginTableState = _props.loginTableState;
+				var actions = _props.actions;
+
+
+				if (!loginTableState) {
+					return _react2.default.createElement(
+						"section",
+						{ ref: "login-table-bg",
+							className: "login__table__bg",
+							onClick: this.close
+						},
+						_react2.default.createElement(
+							"section",
+							{ className: "login__table",
+								onClick: this.sP
+							},
+							_react2.default.createElement(
+								"section",
+								{ className: "login__table__wrap" },
+								_react2.default.createElement(
+									"header",
+									{ className: "login__table__header" },
+									_react2.default.createElement(
+										"button",
+										{ "data-index": "0",
+											onClick: this.toggleState,
+											ref: "btn1"
+										},
+										"游客登录"
+									),
+									_react2.default.createElement(
+										"button",
+										{ "data-index": "1",
+											onClick: this.toggleState,
+											ref: "btn2"
+										},
+										"sns登录"
+									),
+									_react2.default.createElement("div", { ref: "state-bar", className: "state__bar" })
+								),
+								_react2.default.createElement(
+									"section",
+									{ className: "login__table__forms" },
+									_react2.default.createElement(
+										"form",
+										{ className: "tourist__login", ref: "tourist-login" },
+										_react2.default.createElement(
+											"div",
+											{ className: "input__wrap" },
+											_react2.default.createElement(
+												"p",
+												null,
+												"昵称:"
+											),
+											_react2.default.createElement("input", { type: "text",
+												className: "tourist__login--user-name",
+												onKeyDown: function onKeyDown(ev) {
+													_this2.fastLogin.call(_this2, ev, "name");
+												},
+												onBlur: this.Validate.bind(this, "name"),
+												ref: "tourist-login-user-name"
+											}),
+											_react2.default.createElement(
+												"label",
+												null,
+												this.state.userNameInfo
+											)
+										),
+										_react2.default.createElement(
+											"div",
+											{ className: "input__wrap" },
+											_react2.default.createElement(
+												"p",
+												null,
+												"邮箱："
+											),
+											_react2.default.createElement("input", { type: "text",
+												className: "tourist__login--email",
+												onKeyDown: function onKeyDown(ev) {
+													_this2.fastLogin.call(_this2, ev, "email");
+												},
+												onBlur: this.Validate.bind(this, "email"),
+												ref: "tourist-login-user-email"
+											}),
+											_react2.default.createElement(
+												"label",
+												null,
+												this.state.userEmailInfo
+											)
+										),
+										_react2.default.createElement("input", { type: "button",
+											className: "tourist__login--submit",
+											value: "登录",
+											onClick: this.LoginIn
+										})
+									),
+									_react2.default.createElement(
+										"form",
+										{ className: "sns__login none", action: "", ref: "sns-login" },
+										_react2.default.createElement("div", null),
+										_react2.default.createElement("div", null),
+										_react2.default.createElement("div", null),
+										_react2.default.createElement("div", null),
+										_react2.default.createElement("div", null),
+										_react2.default.createElement("div", null)
+									)
+								)
+							)
+						)
+					);
+				} else {
+					return null;
+				}
+			}
+		}]);
+
+		return LoginTable;
+	}(_react.Component);
+
+	LoginTable.defaultProps = {};
+
+	exports.default = (0, _reactRedux.connect)(function (state) {
+		return {
+			loginTableState: state.LoginReducer.loginTableState
+		};
+	}, function (dispatch) {
+		return {
+			actions: (0, _redux.bindActionCreators)({
+				LoginTableStateTask: _LoginActions.LoginTableStateTask,
+				LoginInThunk: _LoginActions.LoginInThunk
+			}, dispatch)
+		};
+	})(LoginTable);
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "LoginTable.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 230 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(173);
+
+	var _redux = __webpack_require__(180);
+
+	var _AlertPlaneActions = __webpack_require__(215);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var AlertPlane = function (_Component) {
+	    _inherits(AlertPlane, _Component);
+
+	    function AlertPlane(props) {
+	        _classCallCheck(this, AlertPlane);
+
+	        var _this = _possibleConstructorReturn(this, (AlertPlane.__proto__ || Object.getPrototypeOf(AlertPlane)).call(this, props));
+
+	        _this.sure = _this.sure.bind(_this);
+	        _this.cancel = _this.cancel.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(AlertPlane, [{
+	        key: "componentDidMount",
+	        value: function componentDidMount() {
+	            var $self = this,
+	                target = $self.refs["alert-wrap-bg"];
+
+	            if (target) {
+	                $self.changeView(target);
+	            }
+	        }
+	    }, {
+	        key: "componentDidUpdate",
+	        value: function componentDidUpdate() {
+	            var $self = this,
+	                target = $self.refs["alert-wrap-bg"];
+
+	            if (target) {
+	                $self.changeView(target);
+	            }
+	        }
+	    }, {
+	        key: "changeView",
+	        value: function changeView(target) {
+	            var oW = innerWidth,
+	                oH = innerHeight;
+
+	            target.style.width = oW + "px";
+	            target.style.height = oH + "px";
+	        }
+	    }, {
+	        key: "sure",
+	        value: function sure() {
+	            this.props.actions.TorFTask(1);
+	        }
+	    }, {
+	        key: "cancel",
+	        value: function cancel() {
+	            this.props.actions.TorFTask(0);
+	        }
+	    }, {
+	        key: "render",
+	        value: function render() {
+	            var AlertPlaneState = this.props.AlertPlaneState;
+
+
+	            return AlertPlaneState ? _react2.default.createElement(
+	                "section",
+	                {
+	                    className: "alert__wrap",
+	                    ref: "alert-wrap-bg"
+	                },
+	                _react2.default.createElement(
+	                    "div",
+	                    {
+	                        className: "alert__plane"
+	                    },
+	                    _react2.default.createElement("header", null),
+	                    _react2.default.createElement(
+	                        "p",
+	                        { className: "alert__plane--question" },
+	                        this.props.AlertPlanePrompt
+	                    ),
+	                    _react2.default.createElement(
+	                        "footer",
+	                        null,
+	                        _react2.default.createElement(
+	                            "label",
+	                            null,
+	                            _react2.default.createElement("i", { className: "alert__plane--btn_sure" }),
+	                            _react2.default.createElement(
+	                                "button",
+	                                {
+	                                    onClick: this.sure
+	                                },
+	                                "确定"
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            "label",
+	                            null,
+	                            _react2.default.createElement("i", { className: "alert__plane--btn_cancel" }),
+	                            _react2.default.createElement(
+	                                "button",
+	                                {
+	                                    onClick: this.cancel
+	                                },
+	                                "取消"
+	                            )
+	                        )
+	                    )
+	                )
+	            ) : null;
+	        }
+	    }]);
+
+	    return AlertPlane;
+	}(_react.Component);
+
+	exports.default = (0, _reactRedux.connect)(function (state) {
+	    return {
+	        AlertPlaneState: state.AlertPlaneReducer.AlertPlaneState,
+	        AlertPlanePrompt: state.AlertPlaneReducer.AlertPlanePrompt
+	    };
+	}, function (dispatch) {
+	    return {
+	        actions: (0, _redux.bindActionCreators)({
+	            AlertPlaneTask: _AlertPlaneActions.AlertPlaneTask,
+	            TorFTask: _AlertPlaneActions.TorFTask
+	        }, dispatch)
+	    };
+	})(AlertPlane);
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "AlertPlane.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 231 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _util = __webpack_require__(202);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var DropList = function (_Component) {
+	    _inherits(DropList, _Component);
+
+	    function DropList(props) {
+	        _classCallCheck(this, DropList);
+
+	        var _this = _possibleConstructorReturn(this, (DropList.__proto__ || Object.getPrototypeOf(DropList)).call(this, props));
+
+	        _this.state = {
+	            isDrop: 0,
+	            ListOffset: 0,
+	            BtnOffset: 0,
+	            dragListHeight: 0,
+	            dragBtnHeight: 0
+	        };
+	        return _this;
+	    }
+
+	    _createClass(DropList, [{
+	        key: "componentDidMount",
+	        value: function componentDidMount() {
+	            var Wrap = this.refs["wrap"],
+	                List = this.refs["list"],
+	                LH = this.props.dataList.length * 25 + 10,
+	                d = 120 * (LH - 120) / LH,
+	                BH = 120 - d;
+
+	            this.setState({
+	                dragListHeight: LH,
+	                dragBtnHeight: BH
+	            });
+	        }
+	    }, {
+	        key: "mdown",
+	        value: function mdown(ev, callback) {
+	            var $self = this,
+	                oTarget = ev.target,
+	                currentTop = oTarget.offsetTop,
+	                $top = ev.clientY - oTarget.offsetTop,
+	                $left = ev.clientY - oTarget.offsetLeft;
+
+	            var mmove = function mmove(ev) {
+	                var dragTop = ev.clientY - $top,
+	                    dragLeft = ev.clientX - $left;
+
+	                callback && callback([dragTop, dragLeft]);
+	            },
+	                mup = function mup() {
+	                document.removeEventListener("mousemove", mmove);
+	                oTarget.removeEventListener("mouseup", mup);
+	            };
+
+	            document.addEventListener("mousemove", mmove);
+	            document.addEventListener("mouseup", mup);
+	        }
+	    }, {
+	        key: "render",
+	        value: function render() {
+	            var _this2 = this;
+
+	            var dataList = this.props.dataList;
+
+	            return _react2.default.createElement(
+	                "div",
+	                { className: "drop__list",
+	                    onClick: function onClick() {
+
+	                        _this2.setState({
+	                            isDrop: _this2.state.isDrop ^= 1
+	                        });
+	                    },
+
+	                    onWheel: function onWheel(ev) {
+	                        var deltaY = ev.deltaY,
+	                            currentTop = _this2.state.BtnOffset,
+	                            speed = 5; // 滚动速度
+
+	                        currentTop = deltaY >= 0 ? currentTop + speed : currentTop - speed;
+
+	                        if (currentTop >= 120 - _this2.state.dragBtnHeight) {
+	                            currentTop = 120 - _this2.state.dragBtnHeight;
+	                        } else if (currentTop < 0) {
+	                            currentTop = 0;
+	                        }
+
+	                        _this2.setState({
+	                            ListOffset: -(currentTop * _this2.state.dragListHeight / 120),
+	                            BtnOffset: currentTop
+	                        });
+
+	                        ev.stopPropagation();
+	                        ev.preventDefault();
+	                    }
+	                },
+	                _react2.default.createElement("i", {
+	                    style: this.state.isDrop ? { transform: "rotate(180deg)" } : { transform: "rotate(0deg)" }
+	                }),
+	                _react2.default.createElement(
+	                    "p",
+	                    null,
+	                    this.props.initPrompt
+	                ),
+	                _react2.default.createElement(
+	                    "section",
+	                    { className: "drop__wrap",
+	                        style: this.state.isDrop ? { height: "120px" } : { height: "0px" }
+	                    },
+	                    _react2.default.createElement(
+	                        "ul",
+	                        {
+	                            style: { top: this.state.ListOffset },
+	                            ref: "list",
+	                            onClick: function onClick(ev) {
+	                                var codeTypeShowWrap = _this2.refs["code-type-show__wrap"],
+	                                    oTarget = ev.target;
+
+	                                if (oTarget.tagName.toLowerCase() === "li") {
+	                                    _this2.props.returnDataCallback(oTarget.innerHTML);
+	                                }
+	                            } },
+	                        dataList.map(function (value, idx) {
+	                            return _react2.default.createElement(
+	                                "li",
+	                                {
+	                                    key: idx
+	                                },
+	                                value
+	                            );
+	                        })
+	                    ),
+	                    _react2.default.createElement(
+	                        "div",
+	                        { className: "drag__wrap",
+	                            style: {
+	                                height: "120px",
+	                                width: "10px"
+	                            },
+	                            ref: "drag-wrap",
+	                            onClick: function onClick(ev) {
+	                                var dragWrap = _this2.refs["drag-wrap"],
+	                                    postionArr = (0, _util.getPostion)(dragWrap),
+	                                    d = ev.pageY - postionArr[1];
+
+	                                if (d >= 120 - _this2.state.dragBtnHeight) {
+	                                    d = 120 - _this2.state.dragBtnHeight;
+	                                } else if (d < 0) {
+	                                    d = 0;
+	                                }
+
+	                                _this2.setState({
+	                                    ListOffset: -(d * _this2.state.dragListHeight / 120),
+	                                    BtnOffset: d
+	                                });
+	                                ev.stopPropagation();
+	                            }
+	                        },
+	                        _react2.default.createElement("button", { className: "drag__btn",
+	                            style: {
+	                                height: this.state.dragBtnHeight,
+	                                top: this.state.BtnOffset
+	                            },
+	                            ref: "drag-btn",
+	                            onMouseDown: function onMouseDown(ev) {
+	                                _this2.mdown.call(_this2, ev, function (params) {
+	                                    var _params = _slicedToArray(params, 1);
+
+	                                    var dragTop = _params[0];
+	                                    var bOffset = dragTop;
+	                                    var lOffset = 0;
+
+	                                    if (dragTop >= 120 - _this2.state.dragBtnHeight) {
+	                                        bOffset = 120 - _this2.state.dragBtnHeight;
+	                                    } else if (dragTop < 0) {
+	                                        bOffset = 0;
+	                                    }
+
+	                                    _this2.setState({
+	                                        ListOffset: -(bOffset * _this2.state.dragListHeight / 120),
+	                                        BtnOffset: bOffset
+	                                    });
+	                                });
+	                                ev.stopPropagation();
+	                                return false;
+	                            },
+
+	                            onClick: function onClick(ev) {
+	                                ev.stopPropagation();
+	                            }
+	                        })
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return DropList;
+	}(_react.Component);
+
+	exports.default = DropList;
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "DropList.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 232 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(173);
+
+	var _redux = __webpack_require__(180);
+
+	var _util = __webpack_require__(202);
+
+	var _AlertPlaneActions = __webpack_require__(215);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var DragAndUpdate = function (_Component) {
+	    _inherits(DragAndUpdate, _Component);
+
+	    function DragAndUpdate(props) {
+	        _classCallCheck(this, DragAndUpdate);
+
+	        var _this = _possibleConstructorReturn(this, (DragAndUpdate.__proto__ || Object.getPrototypeOf(DragAndUpdate)).call(this, props));
+
+	        _this.state = {
+	            buttonbOff: 1
+	        };
+	        _this.handleUploadData = _this.handleUploadData.bind(_this);
+	        _this.handleDrag = _this.handleDrag.bind(_this);
+	        _this.handleFileChoose = _this.handleFileChoose.bind(_this);
+	        _this.handleClickUpload = _this.handleClickUpload.bind(_this);
+	        _this.clearDefault = _this.clearDefault.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(DragAndUpdate, [{
+	        key: "handleUploadData",
+	        value: function handleUploadData(fileList) {
+	            var _props = this.props;
+	            var actions = _props.actions;
+	            var callback = _props.callback;
+	            var fr = new FileReader();
+	            var promiseStack = [];
+	            var flag = 0;
+	            var allSize = 0;
+	            var SizeLimit = 5 * 1024 * 1024;
+
+	            fileList = fileList.map(function (value, idx) {
+	                if (!value.type) {
+	                    actions.AlertPlaneThunk("非图片类型文件禁止上传");
+	                    return null;
+	                }
+	                allSize += value.size;
+	                return {
+	                    size: (0, _util.MemoryHumanReadable)(value.size),
+	                    file: value
+	                };
+	            });
+
+	            if (allSize > SizeLimit) {
+	                return actions.AlertPlaneThunk("单次上传图片总量不能超过5MB");
+	            } else {
+	                (function () {
+	                    var parseImageAndFetch = function parseImageAndFetch() {
+	                        var value = fileList.shift();
+	                        fr.readAsDataURL(value.file);
+
+	                        fr.onloadend = function (evt) {
+	                            var promise = fetch("/upLoadImage", {
+	                                method: "POST",
+	                                headers: {
+	                                    "Charset": "utf-8",
+	                                    "Content-Type": "text/plain"
+	                                },
+	                                body: flag + evt.target.result
+	                            }).then(function (res) {
+	                                if (res.ok) {
+	                                    return res.json();
+	                                }
+	                            });
+
+	                            promiseStack.push(promise);
+
+	                            if (flag !== fileList.length) {
+	                                return parseImageAndFetch();
+	                            } else {
+	                                Promise.all(promiseStack).then(function (pics) {
+	                                    var datas = pics.sort(function (objA, objB) {
+	                                        return objA.order - objB.order;
+	                                    });
+	                                    callback && callback(datas);
+	                                }).catch(function (err) {
+	                                    throw err;
+	                                    actions.AlertPlaneThunk("上传图片失败");
+	                                });
+	                            }
+	                        };
+	                    };
+
+	                    parseImageAndFetch();
+	                })();
+	            }
+	        }
+	    }, {
+	        key: "handleDrag",
+	        value: function handleDrag(ev) {
+	            var dt = ev.dataTransfer,
+	                oDatas = Array.from(dt.files);
+
+	            this.clearDefault(ev);
+	            this.handleUploadData(oDatas);
+	        }
+	    }, {
+	        key: "handleFileChoose",
+	        value: function handleFileChoose() {
+	            var files = this.refs["file"].files;
+	            if (files.length) {
+	                this.handleUploadData(Array.from(files));
+	            }
+	            this.setState({
+	                buttonbOff: this.state.buttonbOff ^= 1
+	            });
+	        }
+	    }, {
+	        key: "handleClickUpload",
+	        value: function handleClickUpload(ev) {
+	            console.log(this.state.buttonbOff);
+	            if (this.state.buttonbOff) {
+	                this.setState({
+	                    buttonbOff: this.state.buttonbOff ^= 1
+	                });
+
+	                this.refs["file"].click();
+	            }
+
+	            this.clearDefault(ev);
+	        }
+	    }, {
+	        key: "clearDefault",
+	        value: function clearDefault(ev) {
+	            ev.stopPropagation();
+	            ev.preventDefault();
+	        }
+	    }, {
+	        key: "render",
+	        value: function render() {
+	            return _react2.default.createElement(
+	                "div",
+	                { className: "column-arrange" },
+	                _react2.default.createElement(
+	                    "figure",
+	                    { className: "drop__upload__area",
+	                        onDragEnter: this.clearDefault,
+	                        onDragOver: this.clearDefault,
+	                        onDrop: this.handleDrag
+	                    },
+	                    "拖拽上传图片"
+	                ),
+	                _react2.default.createElement("input", { type: "file",
+	                    accept: "image/*",
+	                    style: { display: "none" },
+	                    multiple: true,
+	                    ref: "file",
+	                    onChange: this.handleFileChoose
+	                }),
+	                _react2.default.createElement(
+	                    "button",
+	                    { className: "upload__btn",
+	                        onClick: this.handleClickUpload
+	                    },
+	                    "点击上传"
+	                ),
+	                _react2.default.createElement(
+	                    "p",
+	                    { style: { color: "red" } },
+	                    "（ps: 单次上传图片总量不能超过5MB！）"
+	                )
+	            );
+	        }
+	    }]);
+
+	    return DragAndUpdate;
+	}(_react.Component);
+
+	exports.default = (0, _reactRedux.connect)(function (state) {
+	    return {};
+	}, function (dispatch) {
+	    return {
+	        actions: (0, _redux.bindActionCreators)({
+	            AlertPlaneThunk: _AlertPlaneActions.AlertPlaneThunk
+	        }, dispatch)
+	    };
+	})(DragAndUpdate);
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "DragAndUpdate.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 233 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(234);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(236)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/autoprefixer-loader/index.js!./../../node_modules/less-loader/index.js!./app.less", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/autoprefixer-loader/index.js!./../../node_modules/less-loader/index.js!./app.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 234 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(235)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "@charset \"utf-8\";\n* {\n  box-sizing: border-box;\n  font-family: arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  font-size: 14px;\n  outline: none;\n}\nbody {\n  margin: 0;\n  padding: 0;\n  font-size: 0;\n}\na {\n  -webkit-transition: 5s;\n  transition: 5s;\n  text-decoration: none;\n}\nul,\nol {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\ntable {\n  border-collapse: collapse;\n}\nselect {\n  -webkit-appearance: none;\n     -moz-appearance: none;\n          appearance: none;\n}\nh1,\nh2,\nh3 {\n  margin-bottom: 1em;\n}\np,\npre {\n  margin: 0;\n}\nblockquote {\n  margin: 0;\n}\ninput[type=\"submit\"],\nbutton {\n  display: inline-block;\n  border-radius: 0;\n  border: none;\n  padding: 0;\n  background: none;\n  cursor: pointer;\n}\nfigure {\n  margin: 0;\n}\ni {\n  display: inline-block;\n}\n/*下拉组件*/\n.drop__list {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  width: 140px;\n  border: 1px solid #ccc;\n  cursor: pointer;\n  position: relative;\n  border-radius: 3px 3px 0px 0px;\n  color: #929699;\n  font-size: 0px;\n  margin-right: 20px;\n}\n.drop__list p {\n  width: 100px;\n  height: 20px;\n  margin: 3px 0 3px 5px;\n  font-size: 14px;\n}\n.drop__list i {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  top: 5px;\n  right: 5px;\n  content: \"\";\n  width: 16px;\n  height: 16px;\n  display: block;\n  background: url(\"/img/icon.png\") -30px 0px;\n}\n.drop__list .drop__wrap {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  top: 26px;\n  left: 0;\n  width: 100%;\n  border-radius: 0px 0px 3px 3px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  overflow: hidden;\n  border: 1px solid #ccc;\n  border-top: none;\n  z-index: 1234;\n  height: 0px;\n}\n.drop__list ul {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  padding: 5px 0;\n  overflow: hidden;\n  background: #E6E6E6;\n  font-size: 14px;\n}\n.drop__list ul li {\n  height: 25px;\n  line-height: 25px;\n  padding: 0px 5px;\n}\n.drop__list ul li:hover {\n  color: #fff;\n  background: #1C86D1;\n}\n.drag__wrap {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  top: 0;\n  right: 0;\n  background: #F5F5F5;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.drag__wrap .drag__btn {\n  border-radius: 3px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  min-height: 5px;\n  width: 100%;\n  border: 1px solid #979797;\n  background-color: rgba(0, 0, 0, 0.6);\n}\n.drag__wrap .drag__btn:hover {\n  border: 1px solid #636363;\n  background-color: rgba(0, 0, 0, 0.8);\n}\n.drag__wrap .drag__btn:active {\n  border: 1px solid #636363;\n  background-color: #000000;\n}\n.column-arrange {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.none {\n  display: none !important;\n}\n.b-c {\n  position: fixed;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  margin: auto;\n}\n.hidden {\n  height: 0 !important;\n}\n@-webkit-keyframes swing {\n  20%,\n  40%,\n  60%,\n  80%,\n  100% {\n    -webkit-transform-origin: topcenter;\n            transform-origin: topcenter;\n  }\n  20% {\n    -webkit-transform: rotate(15deg);\n            transform: rotate(15deg);\n  }\n  40% {\n    -webkit-transform: rotate(-10deg);\n            transform: rotate(-10deg);\n  }\n  60% {\n    -webkit-transform: rotate(5deg);\n            transform: rotate(5deg);\n  }\n  80% {\n    -webkit-transform: rotate(-5deg);\n            transform: rotate(-5deg);\n  }\n  100% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n  }\n}\n@keyframes swing {\n  20%,\n  40%,\n  60%,\n  80%,\n  100% {\n    -webkit-transform-origin: topcenter;\n            transform-origin: topcenter;\n  }\n  20% {\n    -webkit-transform: rotate(15deg);\n            transform: rotate(15deg);\n  }\n  40% {\n    -webkit-transform: rotate(-10deg);\n            transform: rotate(-10deg);\n  }\n  60% {\n    -webkit-transform: rotate(5deg);\n            transform: rotate(5deg);\n  }\n  80% {\n    -webkit-transform: rotate(-5deg);\n            transform: rotate(-5deg);\n  }\n  100% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n  }\n}\n@-webkit-keyframes masked {\n  0% {\n    background-position: 0 0;\n  }\n  100% {\n    background-position: -100% 0;\n  }\n}\n@keyframes masked {\n  0% {\n    background-position: 0 0;\n  }\n  100% {\n    background-position: -100% 0;\n  }\n}\n.comment__feedback__wrap {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  overflow: hidden;\n  background: #fbfbfb;\n  width: 100%;\n  margin-top: 20px;\n}\n.comment__feedback__box__syntaxs {\n  border-radius: 5px 5px 0 0;\n  border: 1px solid #272636;\n}\n.comment__feedback__box__syntaxs .syntaxs__list {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 32px;\n  -ms-flex-flow: row no-wrap;\n      flex-flow: row no-wrap;\n}\n.comment__feedback__box__syntaxs .syntaxs__list li {\n  width: 32px;\n  height: 32px;\n  margin: 0 4px;\n  background-image: url(\"/img/icon.png\");\n  cursor: pointer;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .bold {\n  background-position: 6px -79px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .bold:hover {\n  background: url(\"/img/icon-hover.png\") 6px -79px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .italic {\n  background-position: 8px -127px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .italic:hover {\n  background: url(\"/img/icon-hover.png\") 8px -127px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .a-link {\n  background-position: 4px -103px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .a-link:hover {\n  background: url(\"/img/icon-hover.png\") 4px -103px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .image {\n  background-position: 4px -151px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .image:hover {\n  background: url(\"/img/icon-hover.png\") 4px -151px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .table {\n  background-position: 4px -175px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .table:hover {\n  background: url(\"/img/icon-hover.png\") 4px -175px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .blockquote-block {\n  background-position: 4px -292px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .blockquote-block:hover {\n  background: url(\"/img/icon-hover.png\") 4px -292px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .u-list {\n  background-position: 2px -223px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .u-list:hover {\n  background: url(\"/img/icon-hover.png\") 2px -223px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .o-list {\n  background-position: 2px -199px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .o-list:hover {\n  background: url(\"/img/icon-hover.png\") 2px -199px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h1-tag {\n  background-position: 4px -247px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h1-tag:hover {\n  background: url(\"/img/icon-hover.png\") 4px -247px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h2-tag {\n  background-position: 4px -269px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h2-tag:hover {\n  background: url(\"/img/icon-hover.png\") 4px -269px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .code-block {\n  background-position: 4px -341px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .code-block:hover {\n  background: url(\"/img/icon-hover.png\") 4px -341px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .emoji-list {\n  background-position: 5px -316px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .emoji-list:hover {\n  background: url(\"/img/icon-hover.png\") 5px -316px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 5px;\n  border-top: 1px solid #272636;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list > div.choice-btn {\n  border-radius: 5px;\n  position: relative;\n  width: 32px;\n  height: 32px;\n  margin: 0 4px;\n  cursor: pointer;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list > div.choice-btn:hover {\n  box-shadow: 0 0 1px 1px #1C86D1;\n}\n.comment__feedback__box__syntaxs .drop__upload__area {\n  border-radius: 5px;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  position: relative;\n  width: 454px;\n  height: 80px;\n  margin: 15px 0;\n  border: 1px dashed #1C86D1;\n  text-align: center;\n  font: 300 30px/75px \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  cursor: default;\n}\n.comment__feedback__box__syntaxs .drop__upload__area::after,\n.comment__feedback__box__syntaxs .drop__upload__area::before {\n  content: '';\n  display: block;\n  z-index: -1;\n  color: #1C86D1;\n  box-shadow: inset 0 0 0 2px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  -webkit-animation: clip-me 6s linear infinite;\n          animation: clip-me 6s linear infinite;\n}\n.comment__feedback__box__syntaxs .drop__upload__area::before {\n  -webkit-animation-delay: -3s;\n          animation-delay: -3s;\n}\n@-webkit-keyframes clip-me {\n  0%,\n  100% {\n    clip: rect(0px, 454px, 4px, 0px);\n  }\n  25% {\n    clip: rect(0px, 4px, 80px, 0px);\n  }\n  50% {\n    clip: rect(76px, 454px, 80px, 0px);\n  }\n  75% {\n    clip: rect(0px, 454px, 80px, 450px);\n  }\n}\n@keyframes clip-me {\n  0%,\n  100% {\n    clip: rect(0px, 454px, 4px, 0px);\n  }\n  25% {\n    clip: rect(0px, 4px, 80px, 0px);\n  }\n  50% {\n    clip: rect(76px, 454px, 80px, 0px);\n  }\n  75% {\n    clip: rect(0px, 454px, 80px, 450px);\n  }\n}\n.comment__feedback__box__syntaxs .upload__btn {\n  border-radius: 5px;\n  width: 454px;\n  height: 40px;\n  background: #1C86D1;\n  color: #fff;\n  font-size: 18px;\n  margin-bottom: 10px;\n}\n.comment__feedback__box__syntaxs .upload__btn:active {\n  background: #3075DC;\n}\n.comment__feedback__box__syntaxs input[type=\"text\"] {\n  border-radius: 3px;\n  height: 30px;\n  border: 1px solid #1C86D1;\n  margin-right: 20px;\n  font-size: 14px;\n  text-indent: 5px;\n}\n.comment__feedback__box__syntaxs .insert {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  border-radius: 5px;\n  color: #272636;\n  border: 1px solid #1C86D1;\n  line-height: 30px;\n  width: 70px;\n  height: 30px;\n}\n.comment__feedback__box__syntaxs .insert:hover {\n  background: #1C86D1;\n  color: #fff;\n}\n.comment__feedback__box__syntaxs .table-size-matrix {\n  margin: 10px 0 10px 90px;\n}\n.comment__feedback__box__syntaxs .table-size-matrix tr,\n.comment__feedback__box__syntaxs .table-size-matrix td {\n  border: 1px solid #ccc;\n}\n.comment__feedback__box__syntaxs .table-size-matrix td {\n  padding: 15px;\n}\n.comment__feedback__box__syntaxs .table-matrix-dimension {\n  font-size: 18px;\n  text-decoration: underline;\n  margin: 0 20px;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap {\n  width: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  border-top: 1px solid #ccc;\n  border-left: 1px solid #ccc;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap td {\n  border-right: 1px solid #ccc;\n  border-bottom: 1px solid #ccc;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap td:hover {\n  background: #ccc;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap td a {\n  display: inline-block;\n  width: 32px;\n  height: 32px;\n  padding: 4px;\n}\n.comment__feedback__box__wrap {\n  position: relative;\n}\n.editor__resize__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.editor__resize {\n  display: inline-block;\n  width: 130px;\n  height: 8px;\n  cursor: row-resize;\n  margin-top: 2px;\n  border-top: 1px solid #ccc;\n  border-bottom: 1px solid #ccc;\n}\n.comment__feedback__box {\n  position: relative;\n  width: 100%;\n}\n.comment__feedback {\n  padding: 10px;\n  border-top: 1px solid #272636;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n}\n.comment__feedback h3 {\n  font: 200 24px/1 arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n}\n.login-infos {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  font-size: 16px;\n  padding-bottom: 10px;\n}\n.login-infos a {\n  color: #1C86D1;\n}\n.login-infos .init_prompt {\n  cursor: default;\n  color: rgba(0, 0, 0, 0.5);\n}\n.login-out__btn {\n  border-radius: 5px;\n  float: right;\n  width: 70px;\n  height: 25px;\n  background: #C81623;\n  color: #fff;\n}\n.login-out__btn:active {\n  background: #AA151F;\n}\n.login-in__btn {\n  border-radius: 5px;\n  float: right;\n  width: 70px;\n  height: 25px;\n  padding: 0 5px;\n  background: #1C86D1;\n  color: #fff;\n}\n.login-in__btn:active {\n  background: #3075DC;\n}\n.comment__feedback--section {\n  width: calc(100% - 74px);\n}\n.comment__feedback--edit {\n  border-radius: 0px 0px 5px 5px;\n  width: 100%;\n  min-height: 30px;\n  padding: 5px;\n  border: 1px solid #272636;\n  border-top: none;\n  font: 200 14px/1.5 arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  resize: none;\n  overflow: hidden;\n  white-space: pre-wrap;\n  -moz-tab-size: 4;\n    -o-tab-size: 4;\n       tab-size: 4;\n}\n.comment__feedback--btns {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  width: 100%;\n  margin-top: 10px;\n}\n.comment__feedback--btns button {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  border-radius: 5px;\n  line-height: 30px;\n  width: 70px;\n  height: 30px;\n}\n.feedback--btns__reset {\n  color: #C81623;\n  border: 1px solid #C81623;\n}\n.feedback--btns__reset:hover {\n  background: #C81623;\n  color: #fff;\n}\n.feedback--btns__comment {\n  margin-left: 10px;\n  color: #272636;\n  border: 1px solid #1C86D1;\n}\n.feedback--btns__comment:hover {\n  background: #1C86D1;\n  color: #fff;\n}\n.comment__feedback__mask {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  border-radius: 2px;\n  position: absolute;\n  top: 0;\n  left: 1px;\n  width: 604px;\n  height: 149px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  cursor: default;\n  background: #ccc;\n}\n.comment__feedback__mask p {\n  color: #fff;\n}\n.comment__feedback__mask--title {\n  font: 100 60px/60px \"\\5FAE\\8F6F\\96C5\\9ED1\";\n}\n.comment__feedback__mask--pinyin {\n  margin-top: 15px;\n  font: 100 20px/20px arial;\n}\n.clearfix::after {\n  content: \".\";\n  display: block;\n  height: 0;\n  visibility: hidden;\n  clear: both;\n}\n.demo {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  width: 900px;\n  margin: 50px auto 50px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  padding: 0 100px;\n}\n.comment__wrap {\n  width: 100%;\n}\n.comment__header {\n  border-radius: 5px;\n  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.6);\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -moz-justify-content: space-between;\n  height: 50px;\n  background: #1C86D1;\n  color: #fff;\n  font-size: 0;\n  padding: 5px 8px;\n}\n.comment__header::after {\n  content: \"\";\n  display: block;\n  position: absolute;\n  left: 41px;\n  bottom: -20px;\n  height: 0px;\n  border: 10px solid transparent;\n  border-top: 10px solid #1C86D1;\n}\n.comment__header .comment__header__span {\n  width: 150px;\n  height: 16px;\n  font: 200 16px/16px arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  margin-left: 10px;\n}\n.comment__header .comment__header__btns {\n  width: 80px;\n  height: 30px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.comment__header .comment__header__btns button {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  display: inline-block;\n  width: 40px;\n  height: 30px;\n  color: #fff;\n  font-size: 14px;\n}\n.comment__header .comment__header__btns button:hover {\n  color: #d32;\n}\n.comment__footer {\n  border-radius: 5px;\n  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.6);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  position: relative;\n  height: 70px;\n  background: #1C86D1;\n}\n.comment__footer::before {\n  content: \"\";\n  display: block;\n  position: absolute;\n  top: -20px;\n  left: 41px;\n  height: 0;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #1C86D1;\n}\n.comment__pagination {\n  border-radius: 5px;\n  box-shadow: 0 0 2px rgba(0, 0, 0, 0.7);\n  overflow: hidden;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 35px;\n}\n.comment__pagination li {\n  -webkit-transition: 0.3s;\n  transition: 0.3s;\n  width: 40px;\n  height: 100%;\n  color: #fff;\n  text-align: center;\n  cursor: pointer;\n}\n.comment__pagination li:hover {\n  color: #1C86D1;\n  background: #fff;\n}\n.comment__pagination li div {\n  padding: 10px 0;\n  height: 100%;\n  line-height: 15px;\n}\n.comment__pagination li > div.active {\n  color: #1C86D1;\n  background: #fff;\n  border-left: none !important;\n}\n.comment__pagination li:not(:nth-of-type(1)) div {\n  border-left: 1px solid rgba(0, 0, 0, 0.2);\n}\n.comment__list {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  margin: 0 0 0 50px;\n  border-left: 2px solid #1C86D1;\n}\n.no__comment__item {\n  padding: 20px;\n  text-align: center;\n}\n.no__comment__item p {\n  border-radius: 5px;\n  height: 70px;\n  font-size: 24px;\n  line-height: 70px;\n  color: rgba(0, 0, 0, 0.6);\n  border: 1px solid #272636;\n}\n.comment__item {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: relative;\n  padding: 20px;\n}\n.comment__item::after {\n  border-radius: 50%;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  left: -8px;\n  top: 40px;\n  content: \"\";\n  display: block;\n  background: #1C86D1;\n  width: 10px;\n  height: 10px;\n  border: 2px solid #fff;\n}\n.comment__item:hover::after {\n  background: #51CA65;\n}\n.comment__item:hover .comment__content {\n  -webkit-transform: translateX(15px);\n          transform: translateX(15px);\n}\n.comment__content {\n  border-radius: 5px;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n  padding: 10px;\n  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);\n}\n.comment__author--avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.comment__author--avatar > img:hover,\n.comment__author--avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.comment__content--main {\n  width: calc(100% - 74px);\n}\n.comment__content--author {\n  font-size: 18px;\n}\n.comment__content--author a {\n  color: #1C86D1;\n}\n.comment__content--time {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  font-size: 12px;\n  margin-top: 2px;\n  color: #ddd;\n  cursor: default;\n}\n.comment__content--time:hover {\n  color: #1C86D1;\n}\n.comment__content--content {\n  font-size: 0px;\n  line-height: 1.4;\n  padding: 24px 0 0 0px;\n  white-space: pre;\n}\n.comment__content--content h1.text-effect-basic {\n  text-fill-color: transparent;\n  -webkit-text-fill-color: transparent;\n  background-clip: text;\n  -webkit-background-clip: text;\n  background-size: 200% 200%;\n  -webkit-animation: masked 3s infinite linear;\n          animation: masked 3s infinite linear;\n}\n.comment__content--content h1 {\n  margin-top: 10px;\n  padding-bottom: 10px;\n  font-size: 25px;\n  color: #7c795d;\n  font-weight: normal;\n  line-height: 1.1;\n  border-bottom: 1px solid #7c795d;\n}\n.comment__content--content h2 {\n  margin: 5px 0;\n  height: 30px;\n  text-indent: 5px;\n  color: #7c795d;\n  font: 400 20px/30px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  border-left: 5px solid #1C86D1;\n}\n.comment__content--content pre,\n.comment__content--content p,\n.comment__content--content code {\n  -moz-tab-size: 2;\n    -o-tab-size: 2;\n       tab-size: 2;\n  white-space: pre-wrap;\n  word-break: break-all;\n}\n.comment__content--content p,\n.comment__content--content code {\n  font-size: 14px;\n}\n.comment__content--content strong {\n  font-size: 16px;\n}\n.comment__content--content a {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  color: #1C86D1;\n  margin: 0px 2px;\n}\n.comment__content--content a:hover {\n  color: #C91523;\n}\n.comment__content--content img {\n  max-width: 512px;\n  vertical-align: bottom;\n}\n.comment__content--content table {\n  border-radius: 5px;\n  margin: 20px 0;\n  padding: 8px;\n  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);\n  white-space: normal;\n  border-collapse: collapse;\n}\n.comment__content--content table tr {\n  border: 1px solid #000;\n}\n.comment__content--content table tr td,\n.comment__content--content table tr th {\n  font-size: 14px;\n  padding: 5px;\n  word-break: break-word;\n}\n.comment__content--content table tr td {\n  font-weight: 200;\n  border: 1px solid #000;\n}\n.comment__content--content blockquote {\n  border-radius: 5px;\n  position: relative;\n  background: #CCD0D5;\n  padding: 25px 10px 10px 30px;\n  overflow: hidden;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n}\n.comment__content--content blockquote::before {\n  position: absolute;\n  top: 0;\n  left: 0;\n  font-size: 14px;\n  background: -webkit-linear-gradient(112deg, transparent 50%, #1C86D1 50%);\n  background: linear-gradient(-22deg, transparent 50%, #1C86D1 50%);\n  width: 80px;\n  height: 30px;\n  display: block;\n  content: \"\\5F15\\8FF0\";\n  color: #fff;\n  padding: 3px 0 0 4px;\n}\n.comment__content--content pre {\n  border-radius: 5px;\n  overflow: hidden;\n  padding: 15px 0px 15px 8px;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n  margin: 15px 0;\n  background: #49483e;\n}\n.comment__content--content pre code {\n  color: #a6e22e;\n}\n.comment__content--content pre code .hljs-comment,\n.comment__content--content pre code .hljs-quote {\n  color: #999580;\n}\n.comment__content--content pre code .hljs-variable,\n.comment__content--content pre code .hljs-template-variable,\n.comment__content--content pre code .hljs-attr,\n.comment__content--content pre code .hljs-tag,\n.comment__content--content pre code .hljs-name,\n.comment__content--content pre code .hljs-regexp,\n.comment__content--content pre code .hljs-link,\n.comment__content--content pre code .hljs-name,\n.comment__content--content pre code .hljs-selector-id,\n.comment__content--content pre code .hljs-selector-class {\n  color: #f2777a;\n}\n.comment__content--content pre code .hljs-number,\n.comment__content--content pre code .hljs-meta,\n.comment__content--content pre code .hljs-built_in,\n.comment__content--content pre code .hljs-builtin-name,\n.comment__content--content pre code .hljs-literal,\n.comment__content--content pre code .hljs-type,\n.comment__content--content pre code .hljs-params {\n  color: #ae81ff;\n}\n.comment__content--content pre code .hljs-string,\n.comment__content--content pre code .hljs-symbol,\n.comment__content--content pre code .hljs-bullet {\n  color: #e6db74;\n}\n.comment__content--content pre code .hljs-title,\n.comment__content--content pre code .hljs-section {\n  color: #6684e1;\n}\n.comment__content--content pre code .hljs-keyword,\n.comment__content--content pre code .hljs-selector-tag {\n  color: #66D9EF;\n}\n.comment__content--content pre code .hljs {\n  display: block;\n  overflow-x: auto;\n  background: #20201d;\n  color: #a6a28c;\n  padding: 0.5em;\n}\n.comment__content--content pre code .hljs-emphasis {\n  font-style: italic;\n}\n.comment__content--content pre code .hljs-strong {\n  font-weight: bold;\n}\n.comment__content--content ol {\n  counter-reset: section;\n  padding: 10px 0 10px 20px;\n}\n.comment__content--content ol > li {\n  position: relative;\n  min-height: 20px;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  margin: 5px 0px;\n}\n.comment__content--content ol > li:before {\n  counter-increment: section;\n  content: counters(section, \"\") \".\";\n  display: inline-block;\n  position: absolute;\n  top: 0;\n  left: -20px;\n  font-size: 16px;\n  font-weight: bold;\n  font-style: italic;\n}\n.comment__content--content ol > li:nth-of-type(3n+1)::before {\n  color: #FE0002;\n}\n.comment__content--content ol > li:nth-of-type(3n+2)::before {\n  color: #F4F800;\n}\n.comment__content--content ol > li:nth-of-type(3n+3)::before {\n  color: #A3DF03;\n}\n.comment__content--content ul {\n  padding: 10px 0 10px 15px;\n}\n.comment__content--content ul > li {\n  position: relative;\n  margin-bottom: 10px;\n  line-height: 1.1;\n  min-height: 20px;\n  word-break: break-all;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n}\n.comment__content--content ul > li::before {\n  border-radius: 50%;\n  position: absolute;\n  top: 6px;\n  left: -13px;\n  content: \"\";\n  display: inline-block;\n  width: 8px;\n  height: 8px;\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #1C86D1 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #1C86D1 100%);\n}\n.comment__content--content ul > li:hover::before {\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #91E22E 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #91E22E 100%);\n}\n.comment__content--options {\n  padding-top: 15px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.comment__content--options__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-flex: 8;\n      -ms-flex-positive: 8;\n          flex-grow: 8;\n}\n.comment__content--options__wrap a {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.comment__content--options__wrap a i {\n  width: 16px;\n  height: 16px;\n  background-image: url(\"/img/icon.png\");\n}\n.comment__content--options__wrap a span {\n  font-size: 12px;\n  margin-left: 3px;\n  color: #272636;\n}\n.comment__content--options__wrap a:hover span {\n  color: #1C86D1;\n}\n.comment__content--options__wrap a:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.comment__content--options__callback i {\n  background-position: -5px 0px;\n}\n.comment__content--options__del {\n  margin-left: 8px;\n}\n.comment__content--options__del i {\n  background-position: -5px -16px;\n}\n.comment__options__vote-up {\n  text-align: right;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n.comment__options__vote-up button {\n  font-size: 18px;\n}\n.comment__options__vote-up button span {\n  font-size: 18px;\n}\n.comment__options__vote-up button:hover {\n  color: #1C86D1;\n}\n.comment__options__has-voted-up {\n  text-align: right;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n.comment__options__has-voted-up button {\n  font-size: 18px;\n  color: #C91523;\n  cursor: default;\n}\n.comment__options__has-voted-up button span {\n  font-size: 18px;\n}\n.feedback__content {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  overflow: hidden;\n  width: 100%;\n  margin: 20px 10px 10px 5px;\n}\n.feedback__content--main {\n  border-radius: 5px;\n  position: relative;\n  border: 1px solid #272636;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  padding: 5px;\n  margin: 20px 0 0;\n}\n.feedback__content--main::after,\n.feedback__content--main::before {\n  content: \"\";\n  height: 0;\n  position: absolute;\n  left: 30px;\n}\n.feedback__content--main::after {\n  top: -20px;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #272636;\n}\n.feedback__content--main::before {\n  z-index: 2;\n  top: -19px;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #fff;\n}\n.sub__feedback {\n  margin: 5px 0;\n}\n.sub__feedback span {\n  font-size: 18px;\n  color: #1C86D1;\n}\n.feedback__wrap--content {\n  width: calc(100% - 74px);\n}\n.feedback__content--avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.feedback__content--avatar > img:hover,\n.feedback__content--avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.feedback__wrap--content {\n  width: calc(100% - 74px);\n}\n.feedback__content--author {\n  font-size: 18px;\n}\n.feedback__content--author a {\n  color: #1C86D1;\n}\n.feedback__content--time {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  font-size: 12px;\n  margin-top: 2px;\n  color: #ddd;\n  cursor: default;\n}\n.feedback__content--time:hover {\n  color: #1C86D1;\n}\n.feedback__content--content {\n  font-size: 0px;\n  line-height: 1.4;\n  padding: 24px 0 0 0px;\n  white-space: pre;\n}\n.feedback__content--content h1.text-effect-basic {\n  text-fill-color: transparent;\n  -webkit-text-fill-color: transparent;\n  background-clip: text;\n  -webkit-background-clip: text;\n  background-size: 200% 200%;\n  -webkit-animation: masked 3s infinite linear;\n          animation: masked 3s infinite linear;\n}\n.feedback__content--content h1 {\n  margin-top: 10px;\n  padding-bottom: 10px;\n  font-size: 25px;\n  color: #7c795d;\n  font-weight: normal;\n  line-height: 1.1;\n  border-bottom: 1px solid #7c795d;\n}\n.feedback__content--content h2 {\n  margin: 5px 0;\n  height: 30px;\n  text-indent: 5px;\n  color: #7c795d;\n  font: 400 20px/30px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  border-left: 5px solid #1C86D1;\n}\n.feedback__content--content pre,\n.feedback__content--content p,\n.feedback__content--content code {\n  -moz-tab-size: 2;\n    -o-tab-size: 2;\n       tab-size: 2;\n  white-space: pre-wrap;\n  word-break: break-all;\n}\n.feedback__content--content p,\n.feedback__content--content code {\n  font-size: 14px;\n}\n.feedback__content--content strong {\n  font-size: 16px;\n}\n.feedback__content--content a {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  color: #1C86D1;\n  margin: 0px 2px;\n}\n.feedback__content--content a:hover {\n  color: #C91523;\n}\n.feedback__content--content img {\n  max-width: 512px;\n  vertical-align: bottom;\n}\n.feedback__content--content table {\n  border-radius: 5px;\n  margin: 20px 0;\n  padding: 8px;\n  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);\n  white-space: normal;\n  border-collapse: collapse;\n}\n.feedback__content--content table tr {\n  border: 1px solid #000;\n}\n.feedback__content--content table tr td,\n.feedback__content--content table tr th {\n  font-size: 14px;\n  padding: 5px;\n  word-break: break-word;\n}\n.feedback__content--content table tr td {\n  font-weight: 200;\n  border: 1px solid #000;\n}\n.feedback__content--content blockquote {\n  border-radius: 5px;\n  position: relative;\n  background: #CCD0D5;\n  padding: 25px 10px 10px 30px;\n  overflow: hidden;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n}\n.feedback__content--content blockquote::before {\n  position: absolute;\n  top: 0;\n  left: 0;\n  font-size: 14px;\n  background: -webkit-linear-gradient(112deg, transparent 50%, #1C86D1 50%);\n  background: linear-gradient(-22deg, transparent 50%, #1C86D1 50%);\n  width: 80px;\n  height: 30px;\n  display: block;\n  content: \"\\5F15\\8FF0\";\n  color: #fff;\n  padding: 3px 0 0 4px;\n}\n.feedback__content--content pre {\n  border-radius: 5px;\n  overflow: hidden;\n  padding: 15px 0px 15px 8px;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n  margin: 15px 0;\n  background: #49483e;\n}\n.feedback__content--content pre code {\n  color: #a6e22e;\n}\n.feedback__content--content pre code .hljs-comment,\n.feedback__content--content pre code .hljs-quote {\n  color: #999580;\n}\n.feedback__content--content pre code .hljs-variable,\n.feedback__content--content pre code .hljs-template-variable,\n.feedback__content--content pre code .hljs-attr,\n.feedback__content--content pre code .hljs-tag,\n.feedback__content--content pre code .hljs-name,\n.feedback__content--content pre code .hljs-regexp,\n.feedback__content--content pre code .hljs-link,\n.feedback__content--content pre code .hljs-name,\n.feedback__content--content pre code .hljs-selector-id,\n.feedback__content--content pre code .hljs-selector-class {\n  color: #f2777a;\n}\n.feedback__content--content pre code .hljs-number,\n.feedback__content--content pre code .hljs-meta,\n.feedback__content--content pre code .hljs-built_in,\n.feedback__content--content pre code .hljs-builtin-name,\n.feedback__content--content pre code .hljs-literal,\n.feedback__content--content pre code .hljs-type,\n.feedback__content--content pre code .hljs-params {\n  color: #ae81ff;\n}\n.feedback__content--content pre code .hljs-string,\n.feedback__content--content pre code .hljs-symbol,\n.feedback__content--content pre code .hljs-bullet {\n  color: #e6db74;\n}\n.feedback__content--content pre code .hljs-title,\n.feedback__content--content pre code .hljs-section {\n  color: #6684e1;\n}\n.feedback__content--content pre code .hljs-keyword,\n.feedback__content--content pre code .hljs-selector-tag {\n  color: #66D9EF;\n}\n.feedback__content--content pre code .hljs {\n  display: block;\n  overflow-x: auto;\n  background: #20201d;\n  color: #a6a28c;\n  padding: 0.5em;\n}\n.feedback__content--content pre code .hljs-emphasis {\n  font-style: italic;\n}\n.feedback__content--content pre code .hljs-strong {\n  font-weight: bold;\n}\n.feedback__content--content ol {\n  counter-reset: section;\n  padding: 10px 0 10px 20px;\n}\n.feedback__content--content ol > li {\n  position: relative;\n  min-height: 20px;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  margin: 5px 0px;\n}\n.feedback__content--content ol > li:before {\n  counter-increment: section;\n  content: counters(section, \"\") \".\";\n  display: inline-block;\n  position: absolute;\n  top: 0;\n  left: -20px;\n  font-size: 16px;\n  font-weight: bold;\n  font-style: italic;\n}\n.feedback__content--content ol > li:nth-of-type(3n+1)::before {\n  color: #FE0002;\n}\n.feedback__content--content ol > li:nth-of-type(3n+2)::before {\n  color: #F4F800;\n}\n.feedback__content--content ol > li:nth-of-type(3n+3)::before {\n  color: #A3DF03;\n}\n.feedback__content--content ul {\n  padding: 10px 0 10px 15px;\n}\n.feedback__content--content ul > li {\n  position: relative;\n  margin-bottom: 10px;\n  line-height: 1.1;\n  min-height: 20px;\n  word-break: break-all;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n}\n.feedback__content--content ul > li::before {\n  border-radius: 50%;\n  position: absolute;\n  top: 6px;\n  left: -13px;\n  content: \"\";\n  display: inline-block;\n  width: 8px;\n  height: 8px;\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #1C86D1 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #1C86D1 100%);\n}\n.feedback__content--content ul > li:hover::before {\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #91E22E 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #91E22E 100%);\n}\n.feedback__content--options {\n  padding-top: 15px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.feedback__content--options__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 8;\n      -ms-flex-positive: 8;\n          flex-grow: 8;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.feedback__content--options__wrap a {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.feedback__content--options__wrap a i {\n  width: 16px;\n  height: 16px;\n  background-image: url(\"/img/icon.png\");\n}\n.feedback__content--options__wrap a span {\n  font-size: 12px;\n  margin-left: 3px;\n  color: #272636;\n}\n.feedback__content--options__wrap a:hover span {\n  color: #1C86D1;\n}\n.feedback__content--options__wrap a:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.feedback__content--options__callback i {\n  background-position: -5px 0px;\n}\n.feedback__content--options__del {\n  margin-left: 8px;\n}\n.feedback__content--options__del i {\n  background-position: -5px -16px;\n}\n.feedback__options__vote-up {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  text-align: right;\n}\n.feedback__options__vote-up button {\n  font-size: 18px;\n}\n.feedback__options__vote-up button span {\n  font-size: 18px;\n}\n.feedback__options__vote-up button:hover {\n  color: #1C86D1;\n}\n.editer-wrap {\n  margin-top: 20px;\n}\n.editer-wrap .comment__feedback {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  width: 100%;\n  border-top: none;\n}\n.editer-wrap .editer-wrap__avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.editer-wrap .editer-wrap__avatar > img:hover,\n.editer-wrap .editer-wrap__avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.editer-wrap .editer-wrap__avatar img {\n  height: 100%;\n}\n.editer-wrap .comment__feedback--edit {\n  min-height: 150px;\n}\n.editer-wrap .comment__feddback--btns {\n  width: 100%;\n}\n.login__table__bg {\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 999998;\n  background: rgba(0, 0, 0, 0.4);\n}\n.login__table {\n  border-radius: 5px;\n  box-shadow: 0 0 10px #000000;\n  position: fixed;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  margin: auto;\n  width: 320px;\n  height: 340px;\n  border: 1px solid rgba(0, 0, 0, 0.3);\n  background: #fff;\n  z-index: 999999;\n}\n.login__table__wrap {\n  overflow: hidden;\n  padding: 0 10px;\n}\n.login__table__header {\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 40px;\n}\n.login__table__header button {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  line-height: 50px;\n}\n.state__bar {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  bottom: 0;\n  left: 32px;\n  width: 80px;\n  height: 2px;\n  background: #1C86D1;\n}\n.state__bar:hover {\n  color: #1C86D1;\n}\n.state__bar--toggle {\n  left: 186px;\n}\n.login__table__forms {\n  position: relative;\n  height: 300px;\n}\n.login__table__forms form {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  top: 0;\n  left: 0;\n}\n.tourist__login {\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  padding-top: 50px;\n}\n.input__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  padding: 5px 0;\n  line-height: 20px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  margin-bottom: 15px;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n}\n.input__wrap p {\n  width: 60px;\n}\n.input__wrap input[type=\"text\"] {\n  border-radius: 5px;\n  border: 1px solid #272636;\n  padding: 5px;\n  width: 180px;\n  height: 27px;\n}\n.input__wrap label {\n  display: inline-block;\n  width: 100%;\n  height: 20px;\n  font-size: 12px;\n  color: #B61D1D;\n  padding: 5px 30px 0 0;\n  text-align: right;\n}\ninput[type=\"button\"].tourist__login--submit {\n  border-radius: 5px;\n  width: 180px;\n  height: 35px;\n  color: #fff;\n  background: #1C86D1;\n  margin: 30px auto 0;\n  cursor: pointer;\n  border: 1px solid #ccc;\n}\ninput[type=\"button\"].tourist__login--submit:active {\n  background: #3075DC;\n}\n.sns__login {\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 20px;\n}\n.sns__login div {\n  width: 70px;\n  height: 70px;\n  background: red;\n}\n.alert__wrap {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 99999999;\n  background: rgba(0, 0, 0, 0.8);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  overflow: hidden;\n}\n.alert__plane {\n  width: 100%;\n  height: 0px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background: rgba(255, 255, 255, 0.65);\n  -webkit-animation: alert_plane_animate .5s;\n          animation: alert_plane_animate .5s;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n.alert__plane header {\n  width: 100%;\n  height: 8px;\n  background: -webkit-linear-gradient(left, #F00001 12.5%, transparent 0px), -webkit-linear-gradient(left, #FF7F00 25%, transparent 0px), -webkit-linear-gradient(left, #E1E23B 37.5%, transparent 0px), -webkit-linear-gradient(left, #007940 50%, transparent 0px), -webkit-linear-gradient(left, #4041FE 62.5%, transparent 0px), -webkit-linear-gradient(left, #A001C0 75%, transparent 0px), -webkit-linear-gradient(left, #F7941E 87.5%, transparent 0px), -webkit-linear-gradient(left, #9AC147 100%, transparent 0px);\n  background: linear-gradient(to right, #F00001 12.5%, transparent 0px), linear-gradient(to right, #FF7F00 25%, transparent 0px), linear-gradient(to right, #E1E23B 37.5%, transparent 0px), linear-gradient(to right, #007940 50%, transparent 0px), linear-gradient(to right, #4041FE 62.5%, transparent 0px), linear-gradient(to right, #A001C0 75%, transparent 0px), linear-gradient(to right, #F7941E 87.5%, transparent 0px), linear-gradient(to right, #9AC147 100%, transparent 0px);\n  background-repeat: no-repeat;\n}\n.alert__plane footer {\n  width: 100%;\n  height: 42px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.alert__plane footer label {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  height: 100%;\n  cursor: pointer;\n  line-height: 42px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.alert__plane footer label:hover button {\n  color: #1C86D1;\n}\n.alert__plane footer label:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.alert__plane footer label:hover i::before {\n  -webkit-transform: scale(1);\n          transform: scale(1);\n}\n.alert__plane footer i {\n  position: relative;\n  width: 20px;\n  height: 20px;\n  background-image: url(\"/img/icon.png\");\n}\n.alert__plane footer i::before {\n  border-radius: 50%;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  content: \"\";\n  display: block;\n  width: 20px;\n  height: 20px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  z-index: -1;\n  background: #1C86D1;\n  -webkit-transform: scale(0);\n          transform: scale(0);\n}\n.alert__plane footer .alert__plane--btn_sure {\n  background-position: -4px -59px;\n}\n.alert__plane footer .alert__plane--btn_cancel {\n  background-position: -4px -36px;\n}\n.alert__plane footer button {\n  font-size: 18px;\n}\n@-webkit-keyframes alert_plane_animate {\n  0% {\n    height: 0;\n  }\n  100% {\n    height: 280px;\n  }\n}\n@keyframes alert_plane_animate {\n  0% {\n    height: 0;\n  }\n  100% {\n    height: 280px;\n  }\n}\n.alert__plane--question {\n  width: 100%;\n  height: 230px;\n  padding-top: 50px;\n  text-align: center;\n  font-size: 30px;\n  font-weight: 100;\n  line-height: 1.2;\n  overflow: hidden;\n  color: rgba(0, 0, 0, 0.7);\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 235 */
+/***/ function(module, exports) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	// css base code, injected by the css-loader
+	module.exports = function() {
+		var list = [];
+
+		// return the list of modules as css string
+		list.toString = function toString() {
+			var result = [];
+			for(var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if(item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+
+		// import a list of modules into the list
+		list.i = function(modules, mediaQuery) {
+			if(typeof modules === "string")
+				modules = [[null, modules, ""]];
+			var alreadyImportedModules = {};
+			for(var i = 0; i < this.length; i++) {
+				var id = this[i][0];
+				if(typeof id === "number")
+					alreadyImportedModules[id] = true;
+			}
+			for(i = 0; i < modules.length; i++) {
+				var item = modules[i];
+				// skip already imported module
+				// this implementation is not 100% perfect for weird media query combinations
+				//  when a module is imported multiple times with different media queries.
+				//  I hope this will never occur (Hey this way we have smaller bundles)
+				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+					if(mediaQuery && !item[2]) {
+						item[2] = mediaQuery;
+					} else if(mediaQuery) {
+						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+					}
+					list.push(item);
+				}
+			}
+		};
+		return list;
+	};
+
+
+/***/ },
+/* 236 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	var stylesInDom = {},
+		memoize = function(fn) {
+			var memo;
+			return function () {
+				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+				return memo;
+			};
+		},
+		isOldIE = memoize(function() {
+			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
+		}),
+		getHeadElement = memoize(function () {
+			return document.head || document.getElementsByTagName("head")[0];
+		}),
+		singletonElement = null,
+		singletonCounter = 0,
+		styleElementsInsertedAtTop = [];
+
+	module.exports = function(list, options) {
+		if(false) {
+			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+		}
+
+		options = options || {};
+		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+		// tags it will allow on a page
+		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
+
+		// By default, add <style> tags to the bottom of <head>.
+		if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
+
+		var styles = listToStyles(list);
+		addStylesToDom(styles, options);
+
+		return function update(newList) {
+			var mayRemove = [];
+			for(var i = 0; i < styles.length; i++) {
+				var item = styles[i];
+				var domStyle = stylesInDom[item.id];
+				domStyle.refs--;
+				mayRemove.push(domStyle);
+			}
+			if(newList) {
+				var newStyles = listToStyles(newList);
+				addStylesToDom(newStyles, options);
+			}
+			for(var i = 0; i < mayRemove.length; i++) {
+				var domStyle = mayRemove[i];
+				if(domStyle.refs === 0) {
+					for(var j = 0; j < domStyle.parts.length; j++)
+						domStyle.parts[j]();
+					delete stylesInDom[domStyle.id];
+				}
+			}
+		};
+	}
+
+	function addStylesToDom(styles, options) {
+		for(var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+			if(domStyle) {
+				domStyle.refs++;
+				for(var j = 0; j < domStyle.parts.length; j++) {
+					domStyle.parts[j](item.parts[j]);
+				}
+				for(; j < item.parts.length; j++) {
+					domStyle.parts.push(addStyle(item.parts[j], options));
+				}
+			} else {
+				var parts = [];
+				for(var j = 0; j < item.parts.length; j++) {
+					parts.push(addStyle(item.parts[j], options));
+				}
+				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+			}
+		}
+	}
+
+	function listToStyles(list) {
+		var styles = [];
+		var newStyles = {};
+		for(var i = 0; i < list.length; i++) {
+			var item = list[i];
+			var id = item[0];
+			var css = item[1];
+			var media = item[2];
+			var sourceMap = item[3];
+			var part = {css: css, media: media, sourceMap: sourceMap};
+			if(!newStyles[id])
+				styles.push(newStyles[id] = {id: id, parts: [part]});
+			else
+				newStyles[id].parts.push(part);
+		}
+		return styles;
+	}
+
+	function insertStyleElement(options, styleElement) {
+		var head = getHeadElement();
+		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
+		if (options.insertAt === "top") {
+			if(!lastStyleElementInsertedAtTop) {
+				head.insertBefore(styleElement, head.firstChild);
+			} else if(lastStyleElementInsertedAtTop.nextSibling) {
+				head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
+			} else {
+				head.appendChild(styleElement);
+			}
+			styleElementsInsertedAtTop.push(styleElement);
+		} else if (options.insertAt === "bottom") {
+			head.appendChild(styleElement);
+		} else {
+			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
+		}
+	}
+
+	function removeStyleElement(styleElement) {
+		styleElement.parentNode.removeChild(styleElement);
+		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
+		if(idx >= 0) {
+			styleElementsInsertedAtTop.splice(idx, 1);
+		}
+	}
+
+	function createStyleElement(options) {
+		var styleElement = document.createElement("style");
+		styleElement.type = "text/css";
+		insertStyleElement(options, styleElement);
+		return styleElement;
+	}
+
+	function createLinkElement(options) {
+		var linkElement = document.createElement("link");
+		linkElement.rel = "stylesheet";
+		insertStyleElement(options, linkElement);
+		return linkElement;
+	}
+
+	function addStyle(obj, options) {
+		var styleElement, update, remove;
+
+		if (options.singleton) {
+			var styleIndex = singletonCounter++;
+			styleElement = singletonElement || (singletonElement = createStyleElement(options));
+			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
+			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
+		} else if(obj.sourceMap &&
+			typeof URL === "function" &&
+			typeof URL.createObjectURL === "function" &&
+			typeof URL.revokeObjectURL === "function" &&
+			typeof Blob === "function" &&
+			typeof btoa === "function") {
+			styleElement = createLinkElement(options);
+			update = updateLink.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+				if(styleElement.href)
+					URL.revokeObjectURL(styleElement.href);
+			};
+		} else {
+			styleElement = createStyleElement(options);
+			update = applyToTag.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+			};
+		}
+
+		update(obj);
+
+		return function updateStyle(newObj) {
+			if(newObj) {
+				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
+					return;
+				update(obj = newObj);
+			} else {
+				remove();
+			}
+		};
+	}
+
+	var replaceText = (function () {
+		var textStore = [];
+
+		return function (index, replacement) {
+			textStore[index] = replacement;
+			return textStore.filter(Boolean).join('\n');
+		};
+	})();
+
+	function applyToSingletonTag(styleElement, index, remove, obj) {
+		var css = remove ? "" : obj.css;
+
+		if (styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = replaceText(index, css);
+		} else {
+			var cssNode = document.createTextNode(css);
+			var childNodes = styleElement.childNodes;
+			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
+			if (childNodes.length) {
+				styleElement.insertBefore(cssNode, childNodes[index]);
+			} else {
+				styleElement.appendChild(cssNode);
+			}
+		}
+	}
+
+	function applyToTag(styleElement, obj) {
+		var css = obj.css;
+		var media = obj.media;
+
+		if(media) {
+			styleElement.setAttribute("media", media)
+		}
+
+		if(styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = css;
+		} else {
+			while(styleElement.firstChild) {
+				styleElement.removeChild(styleElement.firstChild);
+			}
+			styleElement.appendChild(document.createTextNode(css));
+		}
+	}
+
+	function updateLink(linkElement, obj) {
+		var css = obj.css;
+		var sourceMap = obj.sourceMap;
+
+		if(sourceMap) {
+			// http://stackoverflow.com/a/26603875
+			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+		}
+
+		var blob = new Blob([css], { type: "text/css" });
+
+		var oldSrc = linkElement.href;
+
+		linkElement.href = URL.createObjectURL(blob);
+
+		if(oldSrc)
+			URL.revokeObjectURL(oldSrc);
+	}
+
+
+/***/ },
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -4948,182 +7642,182 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 220 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var hljs = __webpack_require__(221);
+	var hljs = __webpack_require__(239);
 
-	hljs.registerLanguage('1c', __webpack_require__(222));
-	hljs.registerLanguage('abnf', __webpack_require__(223));
-	hljs.registerLanguage('accesslog', __webpack_require__(224));
-	hljs.registerLanguage('actionscript', __webpack_require__(225));
-	hljs.registerLanguage('ada', __webpack_require__(226));
-	hljs.registerLanguage('apache', __webpack_require__(227));
-	hljs.registerLanguage('applescript', __webpack_require__(228));
-	hljs.registerLanguage('cpp', __webpack_require__(229));
-	hljs.registerLanguage('arduino', __webpack_require__(230));
-	hljs.registerLanguage('armasm', __webpack_require__(231));
-	hljs.registerLanguage('xml', __webpack_require__(232));
-	hljs.registerLanguage('asciidoc', __webpack_require__(233));
-	hljs.registerLanguage('aspectj', __webpack_require__(234));
-	hljs.registerLanguage('autohotkey', __webpack_require__(235));
-	hljs.registerLanguage('autoit', __webpack_require__(236));
-	hljs.registerLanguage('avrasm', __webpack_require__(237));
-	hljs.registerLanguage('awk', __webpack_require__(238));
-	hljs.registerLanguage('axapta', __webpack_require__(239));
-	hljs.registerLanguage('bash', __webpack_require__(240));
-	hljs.registerLanguage('basic', __webpack_require__(241));
-	hljs.registerLanguage('bnf', __webpack_require__(242));
-	hljs.registerLanguage('brainfuck', __webpack_require__(243));
-	hljs.registerLanguage('cal', __webpack_require__(244));
-	hljs.registerLanguage('capnproto', __webpack_require__(245));
-	hljs.registerLanguage('ceylon', __webpack_require__(246));
-	hljs.registerLanguage('clojure', __webpack_require__(247));
-	hljs.registerLanguage('clojure-repl', __webpack_require__(248));
-	hljs.registerLanguage('cmake', __webpack_require__(249));
-	hljs.registerLanguage('coffeescript', __webpack_require__(250));
-	hljs.registerLanguage('coq', __webpack_require__(251));
-	hljs.registerLanguage('cos', __webpack_require__(252));
-	hljs.registerLanguage('crmsh', __webpack_require__(253));
-	hljs.registerLanguage('crystal', __webpack_require__(254));
-	hljs.registerLanguage('cs', __webpack_require__(255));
-	hljs.registerLanguage('csp', __webpack_require__(256));
-	hljs.registerLanguage('css', __webpack_require__(257));
-	hljs.registerLanguage('d', __webpack_require__(258));
-	hljs.registerLanguage('markdown', __webpack_require__(259));
-	hljs.registerLanguage('dart', __webpack_require__(260));
-	hljs.registerLanguage('delphi', __webpack_require__(261));
-	hljs.registerLanguage('diff', __webpack_require__(262));
-	hljs.registerLanguage('django', __webpack_require__(263));
-	hljs.registerLanguage('dns', __webpack_require__(264));
-	hljs.registerLanguage('dockerfile', __webpack_require__(265));
-	hljs.registerLanguage('dos', __webpack_require__(266));
-	hljs.registerLanguage('dsconfig', __webpack_require__(267));
-	hljs.registerLanguage('dts', __webpack_require__(268));
-	hljs.registerLanguage('dust', __webpack_require__(269));
-	hljs.registerLanguage('ebnf', __webpack_require__(270));
-	hljs.registerLanguage('elixir', __webpack_require__(271));
-	hljs.registerLanguage('elm', __webpack_require__(272));
-	hljs.registerLanguage('ruby', __webpack_require__(273));
-	hljs.registerLanguage('erb', __webpack_require__(274));
-	hljs.registerLanguage('erlang-repl', __webpack_require__(275));
-	hljs.registerLanguage('erlang', __webpack_require__(276));
-	hljs.registerLanguage('excel', __webpack_require__(277));
-	hljs.registerLanguage('fix', __webpack_require__(278));
-	hljs.registerLanguage('fortran', __webpack_require__(279));
-	hljs.registerLanguage('fsharp', __webpack_require__(280));
-	hljs.registerLanguage('gams', __webpack_require__(281));
-	hljs.registerLanguage('gauss', __webpack_require__(282));
-	hljs.registerLanguage('gcode', __webpack_require__(283));
-	hljs.registerLanguage('gherkin', __webpack_require__(284));
-	hljs.registerLanguage('glsl', __webpack_require__(285));
-	hljs.registerLanguage('go', __webpack_require__(286));
-	hljs.registerLanguage('golo', __webpack_require__(287));
-	hljs.registerLanguage('gradle', __webpack_require__(288));
-	hljs.registerLanguage('groovy', __webpack_require__(289));
-	hljs.registerLanguage('haml', __webpack_require__(290));
-	hljs.registerLanguage('handlebars', __webpack_require__(291));
-	hljs.registerLanguage('haskell', __webpack_require__(292));
-	hljs.registerLanguage('haxe', __webpack_require__(293));
-	hljs.registerLanguage('hsp', __webpack_require__(294));
-	hljs.registerLanguage('htmlbars', __webpack_require__(295));
-	hljs.registerLanguage('http', __webpack_require__(296));
-	hljs.registerLanguage('inform7', __webpack_require__(297));
-	hljs.registerLanguage('ini', __webpack_require__(298));
-	hljs.registerLanguage('irpf90', __webpack_require__(299));
-	hljs.registerLanguage('java', __webpack_require__(300));
-	hljs.registerLanguage('javascript', __webpack_require__(301));
-	hljs.registerLanguage('json', __webpack_require__(302));
-	hljs.registerLanguage('julia', __webpack_require__(303));
-	hljs.registerLanguage('kotlin', __webpack_require__(304));
-	hljs.registerLanguage('lasso', __webpack_require__(305));
-	hljs.registerLanguage('ldif', __webpack_require__(306));
-	hljs.registerLanguage('less', __webpack_require__(307));
-	hljs.registerLanguage('lisp', __webpack_require__(308));
-	hljs.registerLanguage('livecodeserver', __webpack_require__(309));
-	hljs.registerLanguage('livescript', __webpack_require__(310));
-	hljs.registerLanguage('lsl', __webpack_require__(311));
-	hljs.registerLanguage('lua', __webpack_require__(312));
-	hljs.registerLanguage('makefile', __webpack_require__(313));
-	hljs.registerLanguage('mathematica', __webpack_require__(314));
-	hljs.registerLanguage('matlab', __webpack_require__(315));
-	hljs.registerLanguage('maxima', __webpack_require__(316));
-	hljs.registerLanguage('mel', __webpack_require__(317));
-	hljs.registerLanguage('mercury', __webpack_require__(318));
-	hljs.registerLanguage('mipsasm', __webpack_require__(319));
-	hljs.registerLanguage('mizar', __webpack_require__(320));
-	hljs.registerLanguage('perl', __webpack_require__(321));
-	hljs.registerLanguage('mojolicious', __webpack_require__(322));
-	hljs.registerLanguage('monkey', __webpack_require__(323));
-	hljs.registerLanguage('moonscript', __webpack_require__(324));
-	hljs.registerLanguage('nginx', __webpack_require__(325));
-	hljs.registerLanguage('nimrod', __webpack_require__(326));
-	hljs.registerLanguage('nix', __webpack_require__(327));
-	hljs.registerLanguage('nsis', __webpack_require__(328));
-	hljs.registerLanguage('objectivec', __webpack_require__(329));
-	hljs.registerLanguage('ocaml', __webpack_require__(330));
-	hljs.registerLanguage('openscad', __webpack_require__(331));
-	hljs.registerLanguage('oxygene', __webpack_require__(332));
-	hljs.registerLanguage('parser3', __webpack_require__(333));
-	hljs.registerLanguage('pf', __webpack_require__(334));
-	hljs.registerLanguage('php', __webpack_require__(335));
-	hljs.registerLanguage('pony', __webpack_require__(336));
-	hljs.registerLanguage('powershell', __webpack_require__(337));
-	hljs.registerLanguage('processing', __webpack_require__(338));
-	hljs.registerLanguage('profile', __webpack_require__(339));
-	hljs.registerLanguage('prolog', __webpack_require__(340));
-	hljs.registerLanguage('protobuf', __webpack_require__(341));
-	hljs.registerLanguage('puppet', __webpack_require__(342));
-	hljs.registerLanguage('purebasic', __webpack_require__(343));
-	hljs.registerLanguage('python', __webpack_require__(344));
-	hljs.registerLanguage('q', __webpack_require__(345));
-	hljs.registerLanguage('qml', __webpack_require__(346));
-	hljs.registerLanguage('r', __webpack_require__(347));
-	hljs.registerLanguage('rib', __webpack_require__(348));
-	hljs.registerLanguage('roboconf', __webpack_require__(349));
-	hljs.registerLanguage('rsl', __webpack_require__(350));
-	hljs.registerLanguage('ruleslanguage', __webpack_require__(351));
-	hljs.registerLanguage('rust', __webpack_require__(352));
-	hljs.registerLanguage('scala', __webpack_require__(353));
-	hljs.registerLanguage('scheme', __webpack_require__(354));
-	hljs.registerLanguage('scilab', __webpack_require__(355));
-	hljs.registerLanguage('scss', __webpack_require__(356));
-	hljs.registerLanguage('smali', __webpack_require__(357));
-	hljs.registerLanguage('smalltalk', __webpack_require__(358));
-	hljs.registerLanguage('sml', __webpack_require__(359));
-	hljs.registerLanguage('sqf', __webpack_require__(360));
-	hljs.registerLanguage('sql', __webpack_require__(361));
-	hljs.registerLanguage('stan', __webpack_require__(362));
-	hljs.registerLanguage('stata', __webpack_require__(363));
-	hljs.registerLanguage('step21', __webpack_require__(364));
-	hljs.registerLanguage('stylus', __webpack_require__(365));
-	hljs.registerLanguage('subunit', __webpack_require__(366));
-	hljs.registerLanguage('swift', __webpack_require__(367));
-	hljs.registerLanguage('taggerscript', __webpack_require__(368));
-	hljs.registerLanguage('yaml', __webpack_require__(369));
-	hljs.registerLanguage('tap', __webpack_require__(370));
-	hljs.registerLanguage('tcl', __webpack_require__(371));
-	hljs.registerLanguage('tex', __webpack_require__(372));
-	hljs.registerLanguage('thrift', __webpack_require__(373));
-	hljs.registerLanguage('tp', __webpack_require__(374));
-	hljs.registerLanguage('twig', __webpack_require__(375));
-	hljs.registerLanguage('typescript', __webpack_require__(376));
-	hljs.registerLanguage('vala', __webpack_require__(377));
-	hljs.registerLanguage('vbnet', __webpack_require__(378));
-	hljs.registerLanguage('vbscript', __webpack_require__(379));
-	hljs.registerLanguage('vbscript-html', __webpack_require__(380));
-	hljs.registerLanguage('verilog', __webpack_require__(381));
-	hljs.registerLanguage('vhdl', __webpack_require__(382));
-	hljs.registerLanguage('vim', __webpack_require__(383));
-	hljs.registerLanguage('x86asm', __webpack_require__(384));
-	hljs.registerLanguage('xl', __webpack_require__(385));
-	hljs.registerLanguage('xquery', __webpack_require__(386));
-	hljs.registerLanguage('zephir', __webpack_require__(387));
+	hljs.registerLanguage('1c', __webpack_require__(240));
+	hljs.registerLanguage('abnf', __webpack_require__(241));
+	hljs.registerLanguage('accesslog', __webpack_require__(242));
+	hljs.registerLanguage('actionscript', __webpack_require__(243));
+	hljs.registerLanguage('ada', __webpack_require__(244));
+	hljs.registerLanguage('apache', __webpack_require__(245));
+	hljs.registerLanguage('applescript', __webpack_require__(246));
+	hljs.registerLanguage('cpp', __webpack_require__(247));
+	hljs.registerLanguage('arduino', __webpack_require__(248));
+	hljs.registerLanguage('armasm', __webpack_require__(249));
+	hljs.registerLanguage('xml', __webpack_require__(250));
+	hljs.registerLanguage('asciidoc', __webpack_require__(251));
+	hljs.registerLanguage('aspectj', __webpack_require__(252));
+	hljs.registerLanguage('autohotkey', __webpack_require__(253));
+	hljs.registerLanguage('autoit', __webpack_require__(254));
+	hljs.registerLanguage('avrasm', __webpack_require__(255));
+	hljs.registerLanguage('awk', __webpack_require__(256));
+	hljs.registerLanguage('axapta', __webpack_require__(257));
+	hljs.registerLanguage('bash', __webpack_require__(258));
+	hljs.registerLanguage('basic', __webpack_require__(259));
+	hljs.registerLanguage('bnf', __webpack_require__(260));
+	hljs.registerLanguage('brainfuck', __webpack_require__(261));
+	hljs.registerLanguage('cal', __webpack_require__(262));
+	hljs.registerLanguage('capnproto', __webpack_require__(263));
+	hljs.registerLanguage('ceylon', __webpack_require__(264));
+	hljs.registerLanguage('clojure', __webpack_require__(265));
+	hljs.registerLanguage('clojure-repl', __webpack_require__(266));
+	hljs.registerLanguage('cmake', __webpack_require__(267));
+	hljs.registerLanguage('coffeescript', __webpack_require__(268));
+	hljs.registerLanguage('coq', __webpack_require__(269));
+	hljs.registerLanguage('cos', __webpack_require__(270));
+	hljs.registerLanguage('crmsh', __webpack_require__(271));
+	hljs.registerLanguage('crystal', __webpack_require__(272));
+	hljs.registerLanguage('cs', __webpack_require__(273));
+	hljs.registerLanguage('csp', __webpack_require__(274));
+	hljs.registerLanguage('css', __webpack_require__(275));
+	hljs.registerLanguage('d', __webpack_require__(276));
+	hljs.registerLanguage('markdown', __webpack_require__(277));
+	hljs.registerLanguage('dart', __webpack_require__(278));
+	hljs.registerLanguage('delphi', __webpack_require__(279));
+	hljs.registerLanguage('diff', __webpack_require__(280));
+	hljs.registerLanguage('django', __webpack_require__(281));
+	hljs.registerLanguage('dns', __webpack_require__(282));
+	hljs.registerLanguage('dockerfile', __webpack_require__(283));
+	hljs.registerLanguage('dos', __webpack_require__(284));
+	hljs.registerLanguage('dsconfig', __webpack_require__(285));
+	hljs.registerLanguage('dts', __webpack_require__(286));
+	hljs.registerLanguage('dust', __webpack_require__(287));
+	hljs.registerLanguage('ebnf', __webpack_require__(288));
+	hljs.registerLanguage('elixir', __webpack_require__(289));
+	hljs.registerLanguage('elm', __webpack_require__(290));
+	hljs.registerLanguage('ruby', __webpack_require__(291));
+	hljs.registerLanguage('erb', __webpack_require__(292));
+	hljs.registerLanguage('erlang-repl', __webpack_require__(293));
+	hljs.registerLanguage('erlang', __webpack_require__(294));
+	hljs.registerLanguage('excel', __webpack_require__(295));
+	hljs.registerLanguage('fix', __webpack_require__(296));
+	hljs.registerLanguage('fortran', __webpack_require__(297));
+	hljs.registerLanguage('fsharp', __webpack_require__(298));
+	hljs.registerLanguage('gams', __webpack_require__(299));
+	hljs.registerLanguage('gauss', __webpack_require__(300));
+	hljs.registerLanguage('gcode', __webpack_require__(301));
+	hljs.registerLanguage('gherkin', __webpack_require__(302));
+	hljs.registerLanguage('glsl', __webpack_require__(303));
+	hljs.registerLanguage('go', __webpack_require__(304));
+	hljs.registerLanguage('golo', __webpack_require__(305));
+	hljs.registerLanguage('gradle', __webpack_require__(306));
+	hljs.registerLanguage('groovy', __webpack_require__(307));
+	hljs.registerLanguage('haml', __webpack_require__(308));
+	hljs.registerLanguage('handlebars', __webpack_require__(309));
+	hljs.registerLanguage('haskell', __webpack_require__(310));
+	hljs.registerLanguage('haxe', __webpack_require__(311));
+	hljs.registerLanguage('hsp', __webpack_require__(312));
+	hljs.registerLanguage('htmlbars', __webpack_require__(313));
+	hljs.registerLanguage('http', __webpack_require__(314));
+	hljs.registerLanguage('inform7', __webpack_require__(315));
+	hljs.registerLanguage('ini', __webpack_require__(316));
+	hljs.registerLanguage('irpf90', __webpack_require__(317));
+	hljs.registerLanguage('java', __webpack_require__(318));
+	hljs.registerLanguage('javascript', __webpack_require__(319));
+	hljs.registerLanguage('json', __webpack_require__(320));
+	hljs.registerLanguage('julia', __webpack_require__(321));
+	hljs.registerLanguage('kotlin', __webpack_require__(322));
+	hljs.registerLanguage('lasso', __webpack_require__(323));
+	hljs.registerLanguage('ldif', __webpack_require__(324));
+	hljs.registerLanguage('less', __webpack_require__(325));
+	hljs.registerLanguage('lisp', __webpack_require__(326));
+	hljs.registerLanguage('livecodeserver', __webpack_require__(327));
+	hljs.registerLanguage('livescript', __webpack_require__(328));
+	hljs.registerLanguage('lsl', __webpack_require__(329));
+	hljs.registerLanguage('lua', __webpack_require__(330));
+	hljs.registerLanguage('makefile', __webpack_require__(331));
+	hljs.registerLanguage('mathematica', __webpack_require__(332));
+	hljs.registerLanguage('matlab', __webpack_require__(333));
+	hljs.registerLanguage('maxima', __webpack_require__(334));
+	hljs.registerLanguage('mel', __webpack_require__(335));
+	hljs.registerLanguage('mercury', __webpack_require__(336));
+	hljs.registerLanguage('mipsasm', __webpack_require__(337));
+	hljs.registerLanguage('mizar', __webpack_require__(338));
+	hljs.registerLanguage('perl', __webpack_require__(339));
+	hljs.registerLanguage('mojolicious', __webpack_require__(340));
+	hljs.registerLanguage('monkey', __webpack_require__(341));
+	hljs.registerLanguage('moonscript', __webpack_require__(342));
+	hljs.registerLanguage('nginx', __webpack_require__(343));
+	hljs.registerLanguage('nimrod', __webpack_require__(344));
+	hljs.registerLanguage('nix', __webpack_require__(345));
+	hljs.registerLanguage('nsis', __webpack_require__(346));
+	hljs.registerLanguage('objectivec', __webpack_require__(347));
+	hljs.registerLanguage('ocaml', __webpack_require__(348));
+	hljs.registerLanguage('openscad', __webpack_require__(349));
+	hljs.registerLanguage('oxygene', __webpack_require__(350));
+	hljs.registerLanguage('parser3', __webpack_require__(351));
+	hljs.registerLanguage('pf', __webpack_require__(352));
+	hljs.registerLanguage('php', __webpack_require__(353));
+	hljs.registerLanguage('pony', __webpack_require__(354));
+	hljs.registerLanguage('powershell', __webpack_require__(355));
+	hljs.registerLanguage('processing', __webpack_require__(356));
+	hljs.registerLanguage('profile', __webpack_require__(357));
+	hljs.registerLanguage('prolog', __webpack_require__(358));
+	hljs.registerLanguage('protobuf', __webpack_require__(359));
+	hljs.registerLanguage('puppet', __webpack_require__(360));
+	hljs.registerLanguage('purebasic', __webpack_require__(361));
+	hljs.registerLanguage('python', __webpack_require__(362));
+	hljs.registerLanguage('q', __webpack_require__(363));
+	hljs.registerLanguage('qml', __webpack_require__(364));
+	hljs.registerLanguage('r', __webpack_require__(365));
+	hljs.registerLanguage('rib', __webpack_require__(366));
+	hljs.registerLanguage('roboconf', __webpack_require__(367));
+	hljs.registerLanguage('rsl', __webpack_require__(368));
+	hljs.registerLanguage('ruleslanguage', __webpack_require__(369));
+	hljs.registerLanguage('rust', __webpack_require__(370));
+	hljs.registerLanguage('scala', __webpack_require__(371));
+	hljs.registerLanguage('scheme', __webpack_require__(372));
+	hljs.registerLanguage('scilab', __webpack_require__(373));
+	hljs.registerLanguage('scss', __webpack_require__(374));
+	hljs.registerLanguage('smali', __webpack_require__(375));
+	hljs.registerLanguage('smalltalk', __webpack_require__(376));
+	hljs.registerLanguage('sml', __webpack_require__(377));
+	hljs.registerLanguage('sqf', __webpack_require__(378));
+	hljs.registerLanguage('sql', __webpack_require__(379));
+	hljs.registerLanguage('stan', __webpack_require__(380));
+	hljs.registerLanguage('stata', __webpack_require__(381));
+	hljs.registerLanguage('step21', __webpack_require__(382));
+	hljs.registerLanguage('stylus', __webpack_require__(383));
+	hljs.registerLanguage('subunit', __webpack_require__(384));
+	hljs.registerLanguage('swift', __webpack_require__(385));
+	hljs.registerLanguage('taggerscript', __webpack_require__(386));
+	hljs.registerLanguage('yaml', __webpack_require__(387));
+	hljs.registerLanguage('tap', __webpack_require__(388));
+	hljs.registerLanguage('tcl', __webpack_require__(389));
+	hljs.registerLanguage('tex', __webpack_require__(390));
+	hljs.registerLanguage('thrift', __webpack_require__(391));
+	hljs.registerLanguage('tp', __webpack_require__(392));
+	hljs.registerLanguage('twig', __webpack_require__(393));
+	hljs.registerLanguage('typescript', __webpack_require__(394));
+	hljs.registerLanguage('vala', __webpack_require__(395));
+	hljs.registerLanguage('vbnet', __webpack_require__(396));
+	hljs.registerLanguage('vbscript', __webpack_require__(397));
+	hljs.registerLanguage('vbscript-html', __webpack_require__(398));
+	hljs.registerLanguage('verilog', __webpack_require__(399));
+	hljs.registerLanguage('vhdl', __webpack_require__(400));
+	hljs.registerLanguage('vim', __webpack_require__(401));
+	hljs.registerLanguage('x86asm', __webpack_require__(402));
+	hljs.registerLanguage('xl', __webpack_require__(403));
+	hljs.registerLanguage('xquery', __webpack_require__(404));
+	hljs.registerLanguage('zephir', __webpack_require__(405));
 
 	module.exports = hljs;
 
 /***/ },
-/* 221 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -5947,7 +8641,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 222 */
+/* 240 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs){
@@ -6030,7 +8724,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 223 */
+/* 241 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -6105,7 +8799,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 224 */
+/* 242 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -6147,7 +8841,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 225 */
+/* 243 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -6225,7 +8919,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 226 */
+/* 244 */
 /***/ function(module, exports) {
 
 	module.exports = // We try to support full Ada2012
@@ -6402,7 +9096,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 227 */
+/* 245 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -6452,7 +9146,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 228 */
+/* 246 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -6542,7 +9236,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 229 */
+/* 247 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -6712,7 +9406,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 230 */
+/* 248 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -6816,7 +9510,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 231 */
+/* 249 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -6912,7 +9606,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 232 */
+/* 250 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -7019,7 +9713,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 233 */
+/* 251 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -7211,7 +9905,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 234 */
+/* 252 */
 /***/ function(module, exports) {
 
 	module.exports = function (hljs) {
@@ -7359,7 +10053,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 235 */
+/* 253 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -7411,7 +10105,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 236 */
+/* 254 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -7551,7 +10245,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 237 */
+/* 255 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -7617,7 +10311,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 238 */
+/* 256 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -7674,7 +10368,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 239 */
+/* 257 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -7709,7 +10403,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 240 */
+/* 258 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -7788,7 +10482,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 241 */
+/* 259 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -7843,7 +10537,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 242 */
+/* 260 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs){
@@ -7876,7 +10570,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 243 */
+/* 261 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs){
@@ -7917,7 +10611,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 244 */
+/* 262 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -8001,7 +10695,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 245 */
+/* 263 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -8054,7 +10748,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 246 */
+/* 264 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -8125,7 +10819,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 247 */
+/* 265 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -8224,7 +10918,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 248 */
+/* 266 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -8243,7 +10937,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 249 */
+/* 267 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -8285,7 +10979,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 250 */
+/* 268 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -8428,7 +11122,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 251 */
+/* 269 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -8499,7 +11193,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 252 */
+/* 270 */
 /***/ function(module, exports) {
 
 	module.exports = function cos (hljs) {
@@ -8627,7 +11321,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 253 */
+/* 271 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -8725,7 +11419,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 254 */
+/* 272 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -8906,7 +11600,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 255 */
+/* 273 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -9077,7 +11771,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 256 */
+/* 274 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -9103,7 +11797,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 257 */
+/* 275 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -9212,7 +11906,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 258 */
+/* 276 */
 /***/ function(module, exports) {
 
 	module.exports = /**
@@ -9474,7 +12168,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 259 */
+/* 277 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -9586,7 +12280,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 260 */
+/* 278 */
 /***/ function(module, exports) {
 
 	module.exports = function (hljs) {
@@ -9691,7 +12385,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 261 */
+/* 279 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -9767,7 +12461,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 262 */
+/* 280 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -9811,7 +12505,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 263 */
+/* 281 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -9879,7 +12573,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 264 */
+/* 282 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -9912,7 +12606,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 265 */
+/* 283 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -9938,7 +12632,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 266 */
+/* 284 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -9994,7 +12688,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 267 */
+/* 285 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -10045,7 +12739,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 268 */
+/* 286 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -10173,7 +12867,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 269 */
+/* 287 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -10209,7 +12903,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 270 */
+/* 288 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -10246,7 +12940,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 271 */
+/* 289 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -10347,7 +13041,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 272 */
+/* 290 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -10434,7 +13128,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 273 */
+/* 291 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -10614,7 +13308,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 274 */
+/* 292 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -10633,7 +13327,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 275 */
+/* 293 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -10683,7 +13377,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 276 */
+/* 294 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -10833,7 +13527,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 277 */
+/* 295 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -10885,7 +13579,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 278 */
+/* 296 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -10918,7 +13612,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 279 */
+/* 297 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -10993,7 +13687,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 280 */
+/* 298 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -11056,7 +13750,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 281 */
+/* 299 */
 /***/ function(module, exports) {
 
 	module.exports = function (hljs) {
@@ -11214,7 +13908,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 282 */
+/* 300 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -11440,7 +14134,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 283 */
+/* 301 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -11511,7 +14205,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 284 */
+/* 302 */
 /***/ function(module, exports) {
 
 	module.exports = function (hljs) {
@@ -11552,7 +14246,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 285 */
+/* 303 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -11673,7 +14367,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 286 */
+/* 304 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -11731,7 +14425,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 287 */
+/* 305 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -11758,7 +14452,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 288 */
+/* 306 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -11797,7 +14491,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 289 */
+/* 307 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -11895,7 +14589,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 290 */
+/* 308 */
 /***/ function(module, exports) {
 
 	module.exports = // TODO support filter tags like :javascript, support inline HTML
@@ -12006,7 +14700,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 291 */
+/* 309 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -12044,7 +14738,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 292 */
+/* 310 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -12170,7 +14864,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 293 */
+/* 311 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -12232,7 +14926,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 294 */
+/* 312 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -12282,7 +14976,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 295 */
+/* 313 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -12357,7 +15051,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 296 */
+/* 314 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -12402,7 +15096,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 297 */
+/* 315 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -12463,7 +15157,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 298 */
+/* 316 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -12533,7 +15227,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 299 */
+/* 317 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -12613,7 +15307,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 300 */
+/* 318 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -12724,7 +15418,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 301 */
+/* 319 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -12899,7 +15593,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 302 */
+/* 320 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -12940,7 +15634,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 303 */
+/* 321 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -13122,7 +15816,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 304 */
+/* 322 */
 /***/ function(module, exports) {
 
 	module.exports = function (hljs) {
@@ -13300,7 +15994,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 305 */
+/* 323 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -13467,7 +16161,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 306 */
+/* 324 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -13494,7 +16188,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 307 */
+/* 325 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -13638,7 +16332,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 308 */
+/* 326 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -13745,7 +16439,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 309 */
+/* 327 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -13906,7 +16600,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 310 */
+/* 328 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -14059,7 +16753,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 311 */
+/* 329 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -14146,7 +16840,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 312 */
+/* 330 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -14206,7 +16900,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 313 */
+/* 331 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -14255,7 +16949,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 314 */
+/* 332 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -14317,7 +17011,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 315 */
+/* 333 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -14409,7 +17103,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 316 */
+/* 334 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -14819,7 +17513,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 317 */
+/* 335 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -15048,7 +17742,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 318 */
+/* 336 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -15134,7 +17828,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 319 */
+/* 337 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -15224,7 +17918,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 320 */
+/* 338 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -15247,7 +17941,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 321 */
+/* 339 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -15408,7 +18102,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 322 */
+/* 340 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -15437,7 +18131,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 323 */
+/* 341 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -15516,7 +18210,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 324 */
+/* 342 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -15632,7 +18326,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 325 */
+/* 343 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -15729,7 +18423,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 326 */
+/* 344 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -15788,7 +18482,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 327 */
+/* 345 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -15841,7 +18535,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 328 */
+/* 346 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -15931,7 +18625,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 329 */
+/* 347 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -16026,7 +18720,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 330 */
+/* 348 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -16101,7 +18795,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 331 */
+/* 349 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -16162,7 +18856,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 332 */
+/* 350 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -16236,7 +18930,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 333 */
+/* 351 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -16288,7 +18982,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 334 */
+/* 352 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -16344,7 +19038,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 335 */
+/* 353 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -16475,7 +19169,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 336 */
+/* 354 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -16570,7 +19264,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 337 */
+/* 355 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -16655,7 +19349,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 338 */
+/* 356 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -16707,7 +19401,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 339 */
+/* 357 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -16741,7 +19435,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 340 */
+/* 358 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -16833,7 +19527,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 341 */
+/* 359 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -16873,7 +19567,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 342 */
+/* 360 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -16992,7 +19686,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 343 */
+/* 361 */
 /***/ function(module, exports) {
 
 	module.exports = // Base deafult colors in PB IDE: background: #FFFFDF; foreground: #000000;
@@ -17054,7 +19748,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 344 */
+/* 362 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -17150,7 +19844,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 345 */
+/* 363 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -17177,7 +19871,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 346 */
+/* 364 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -17350,7 +20044,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 347 */
+/* 365 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -17424,7 +20118,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 348 */
+/* 366 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -17455,7 +20149,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 349 */
+/* 367 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -17526,7 +20220,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 350 */
+/* 368 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -17566,7 +20260,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 351 */
+/* 369 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -17631,7 +20325,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 352 */
+/* 370 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -17739,7 +20433,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 353 */
+/* 371 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -17858,7 +20552,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 354 */
+/* 372 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -18003,7 +20697,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 355 */
+/* 373 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -18061,7 +20755,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 356 */
+/* 374 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -18163,7 +20857,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 357 */
+/* 375 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -18223,7 +20917,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 358 */
+/* 376 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -18277,7 +20971,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 359 */
+/* 377 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -18347,7 +21041,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 360 */
+/* 378 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -18812,7 +21506,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 361 */
+/* 379 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -18976,7 +21670,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 362 */
+/* 380 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -19063,7 +21757,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 363 */
+/* 381 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -19105,7 +21799,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 364 */
+/* 382 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -19156,7 +21850,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 365 */
+/* 383 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -19614,7 +22308,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 366 */
+/* 384 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -19652,7 +22346,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 367 */
+/* 385 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -19773,7 +22467,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 368 */
+/* 386 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -19821,7 +22515,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 369 */
+/* 387 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -19909,7 +22603,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 370 */
+/* 388 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -19949,7 +22643,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 371 */
+/* 389 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -20014,7 +22708,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 372 */
+/* 390 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -20080,7 +22774,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 373 */
+/* 391 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -20119,7 +22813,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 374 */
+/* 392 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -20207,7 +22901,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 375 */
+/* 393 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -20277,7 +22971,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 376 */
+/* 394 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -20390,7 +23084,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 377 */
+/* 395 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -20444,7 +23138,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 378 */
+/* 396 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -20504,7 +23198,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 379 */
+/* 397 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -20547,7 +23241,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 380 */
+/* 398 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -20563,7 +23257,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 381 */
+/* 399 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -20666,7 +23360,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 382 */
+/* 400 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -20731,7 +23425,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 383 */
+/* 401 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -20841,7 +23535,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 384 */
+/* 402 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -20981,7 +23675,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 385 */
+/* 403 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -21058,7 +23752,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 386 */
+/* 404 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -21133,7 +23827,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 387 */
+/* 405 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -21244,7 +23938,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 388 */
+/* 406 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21252,2655 +23946,71 @@ webpackJsonp([0],[
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var expressions_list = [{ faceName: 'weixiao', faceUrl: '/0_weixiao.gif' }, { faceName: 'piezui', faceUrl: '/1_piezui.gif' }, { faceName: 'se', faceUrl: '/2_se.gif' }, { faceName: 'fadai', faceUrl: '/3_fadai.gif' }, { faceName: 'deyi', faceUrl: '/4_deyi.gif' }, { faceName: 'liulei', faceUrl: '/5_liulei.gif' }, { faceName: 'haixiu', faceUrl: '/6_haixiu.gif' }, { faceName: 'bizui', faceUrl: '/7_bizui.gif' }, { faceName: 'daku', faceUrl: '/9_daku.gif' }, { faceName: 'ganga', faceUrl: '/10_ganga.gif' }, { faceName: 'fennu', faceUrl: '/11_fennu.gif' }, { faceName: 'tiaopi', faceUrl: '/12_tiaopi.gif' }, { faceName: 'ziya', faceUrl: '/13_ziya.gif' }, { faceName: 'jingya', faceUrl: '/14_jingya.gif' }, { faceName: 'nanguo', faceUrl: '/15_nanguo.gif' }, { faceName: 'ku', faceUrl: '/16_ku.gif' }, { faceName: 'lenghan', faceUrl: '/17_lenghan.gif' }, { faceName: 'zhuakuang', faceUrl: '/18_zhuakuang.gif' }, { faceName: 'tu', faceUrl: '/19_tu.gif' }, { faceName: 'touxiao', faceUrl: '/20_touxiao.gif' }, { faceName: 'keai', faceUrl: '/21_keai.gif' }, { faceName: 'baiyan', faceUrl: '/22_baiyan.gif' }, { faceName: 'aoman', faceUrl: '/23_aoman.gif' }, { faceName: 'jie', faceUrl: '/24_jie.gif' }, { faceName: 'kun', faceUrl: '/25_kun.gif' }, { faceName: 'jingkong', faceUrl: '/26_jingkong.gif' }, { faceName: 'liuhan', faceUrl: '/27_liuhan.gif' }, { faceName: 'hanxiao', faceUrl: '/28_hanxiao.gif' }, { faceName: 'dabing', faceUrl: '/29_dabing.gif' }, { faceName: 'fengdou', faceUrl: '/30_fengdou.gif' }, { faceName: 'zhouma', faceUrl: '/31_zhouma.gif' }, { faceName: 'yiwen', faceUrl: '/32_yiwen.gif' }, { faceName: 'xu', faceUrl: '/33_xu.gif' }, { faceName: 'yun', faceUrl: '/34_yun.gif' }, { faceName: 'zhemo', faceUrl: '/35_zhemo.gif' }, { faceName: 'shuai', faceUrl: '/36_shuai.gif' }, { faceName: 'kulou', faceUrl: '/37_kulou.gif' }, { faceName: 'qiaoda', faceUrl: '/38_qiaoda.gif' }, { faceName: 'zaijian', faceUrl: '/39_zaijian.gif' }, { faceName: 'chahan', faceUrl: '/40_chahan.gif' }, { faceName: 'koubi', faceUrl: '/41_koubi.gif' }, { faceName: 'guzhang', faceUrl: '/42_guzhang.gif' }, { faceName: 'qiudale', faceUrl: '/43_qiudale.gif' }, { faceName: 'huaixiao', faceUrl: '/44_huaixiao.gif' }, { faceName: 'zuohengheng', faceUrl: '/45_zuohengheng.gif' }, { faceName: 'youhengheng', faceUrl: '/46_youhengheng.gif' }, { faceName: 'haqian', faceUrl: '/47_haqian.gif' }, { faceName: 'bishi', faceUrl: '/48_bishi.gif' }, { faceName: 'weiqu', faceUrl: '/49_weiqu.gif' }, { faceName: 'kuaikule', faceUrl: '/50_kuaikule.gif' }, { faceName: 'yinxian', faceUrl: '/51_yinxian.gif' }, { faceName: 'qinqin', faceUrl: '/52_qinqin.gif' }, { faceName: 'xia', faceUrl: '/53_xia.gif' }, { faceName: 'kelian', faceUrl: '/54_kelian.gif' }, { faceName: 'caidao', faceUrl: '/55_caidao.gif' }, { faceName: 'xigua', faceUrl: '/56_xigua.gif' }, { faceName: 'pijiu', faceUrl: '/57_pijiu.gif' }, { faceName: 'lanqiu', faceUrl: '/58_lanqiu.gif' }, { faceName: 'pingpang', faceUrl: '/59_pingpang.gif' }, { faceName: 'yongbao', faceUrl: '/78_yongbao.gif' }, { faceName: 'woshou', faceUrl: '/81_woshou.gif' }];
+	var expressions_list = {
+	  '微笑': { faceUrl: '/0_weixiao.gif' },
+	  '撇嘴': { faceUrl: '/1_piezui.gif' },
+	  '色': { faceUrl: '/2_se.gif' },
+	  '发呆': { faceUrl: '/3_fadai.gif' },
+	  '得意': { faceUrl: '/4_deyi.gif' },
+	  '流泪': { faceUrl: '/5_liulei.gif' },
+	  '害羞': { faceUrl: '/6_haixiu.gif' },
+	  '闭嘴': { faceUrl: '/7_bizui.gif' },
+	  '大哭': { faceUrl: '/9_daku.gif' },
+	  '尴尬': { faceUrl: '/10_ganga.gif' },
+	  '愤怒': { faceUrl: '/11_fennu.gif' },
+	  '调皮': { faceUrl: '/12_tiaopi.gif' },
+	  '龇牙': { faceUrl: '/13_ziya.gif' },
+	  '惊讶': { faceUrl: '/14_jingya.gif' },
+	  '难过': { faceUrl: '/15_nanguo.gif' },
+	  '哭': { faceUrl: '/16_ku.gif' },
+	  '冷汗': { faceUrl: '/17_lenghan.gif' },
+	  '抓狂': { faceUrl: '/18_zhuakuang.gif' },
+	  '吐': { faceUrl: '/19_tu.gif' },
+	  '偷笑': { faceUrl: '/20_touxiao.gif' },
+	  '可爱': { faceUrl: '/21_keai.gif' },
+	  '白眼': { faceUrl: '/22_baiyan.gif' },
+	  '傲慢': { faceUrl: '/23_aoman.gif' },
+	  '饥饿': { faceUrl: '/24_jie.gif' },
+	  '困': { faceUrl: '/25_kun.gif' },
+	  '惊恐': { faceUrl: '/26_jingkong.gif' },
+	  '流汗': { faceUrl: '/27_liuhan.gif' },
+	  '憨笑': { faceUrl: '/28_hanxiao.gif' },
+	  '大兵': { faceUrl: '/29_dabing.gif' },
+	  '奋斗': { faceUrl: '/30_fendou.gif' },
+	  '咒骂': { faceUrl: '/31_zhouma.gif' },
+	  '疑问': { faceUrl: '/32_yiwen.gif' },
+	  '嘘': { faceUrl: '/33_xu.gif' },
+	  '晕': { faceUrl: '/34_yun.gif' },
+	  '折磨': { faceUrl: '/35_zhemo.gif' },
+	  '衰': { faceUrl: '/36_shuai.gif' },
+	  '骷髅': { faceUrl: '/37_kulou.gif' },
+	  '敲打': { faceUrl: '/38_qiaoda.gif' },
+	  '再见': { faceUrl: '/39_zaijian.gif' },
+	  '擦汗': { faceUrl: '/40_cahan.gif' },
+	  '抠鼻': { faceUrl: '/41_koubi.gif' },
+	  '鼓掌': { faceUrl: '/42_guzhang.gif' },
+	  '糗大了': { faceUrl: '/43_qiudale.gif' },
+	  '坏笑': { faceUrl: '/44_huaixiao.gif' },
+	  '左哼哼': { faceUrl: '/45_zuohengheng.gif' },
+	  '右哼哼': { faceUrl: '/46_youhengheng.gif' },
+	  '哈欠': { faceUrl: '/47_haqian.gif' },
+	  '鄙视': { faceUrl: '/48_bishi.gif' },
+	  '委屈': { faceUrl: '/49_weiqu.gif' },
+	  '快哭了': { faceUrl: '/50_kuaikule.gif' },
+	  '阴险': { faceUrl: '/51_yinxian.gif' },
+	  '亲亲': { faceUrl: '/52_qinqin.gif' },
+	  '吓': { faceUrl: '/53_xia.gif' },
+	  '可怜': { faceUrl: '/54_kelian.gif' },
+	  '菜刀': { faceUrl: '/55_caidao.gif' },
+	  '西瓜': { faceUrl: '/56_xigua.gif' },
+	  '啤酒': { faceUrl: '/57_pijiu.gif' },
+	  '篮球': { faceUrl: '/58_lanqiu.gif' },
+	  '乒乓': { faceUrl: '/59_pingpang.gif' },
+	  '拥抱': { faceUrl: '/78_yongbao.gif' },
+	  '握手': { faceUrl: '/81_woshou.gif' }
+	};
 
 	exports.default = expressions_list;
-
-/***/ },
-/* 389 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.VoteUpThunk = exports.DelThunk = exports.CommentThunk = exports.UpDateItemDataesTask = undefined;
-
-	var _constants = __webpack_require__(200);
-
-	var _reduxActions = __webpack_require__(209);
-
-	var _AlertPlaneActions = __webpack_require__(215);
-
-	var _HandleDataActions = __webpack_require__(390);
-
-	var UpDateItemDataesTask = exports.UpDateItemDataesTask = (0, _reduxActions.createAction)(_constants.Types.UPDATE_ITEM_DATAES, function (newDataes) {
-	    return {
-	        newDataes: newDataes
-	    };
-	});
-
-	// 每次进行操作完成后，需要更新数据栈
-	var CommentThunk = exports.CommentThunk = function CommentThunk(page, SortState, newContent) {
-	    var FBIndex = arguments.length <= 3 || arguments[3] === undefined ? -1 : arguments[3];
-
-	    return function (dispatch) {
-	        var data = JSON.stringify(newContent);
-	        fetch("/saveData", {
-	            method: "POST",
-	            headers: {
-	                "Content-Type": "application/json"
-	            },
-	            body: JSON.stringify({
-	                newContent: newContent,
-	                FBIndex: FBIndex
-	            })
-	        }).then(function (res) {
-	            switch (true) {
-	                case res.ok:
-	                    // 发送完后跳转到首页？
-	                    // switch(SortState) {
-	                    //     case "newest": 
-	                    //         dispatch(getDataesThunk(0, SortState));
-	                    //         break;
-
-	                    //     default:
-	                    //         dispatch(getDataesThunk(page, SortState));
-	                    // }
-	                    dispatch((0, _HandleDataActions.getDataesThunk)(page, SortState));
-	                    break;
-	                case res.status === 404:
-	                    return Promise.reject("404");
-	                case res.status === 500:
-	                    return Promise.reject("500");
-	                default:
-	                    return Promise.reject();
-	            }
-	        }).catch(function (HttpCode) {
-	            switch (HttpCode) {
-	                case 404:
-	                    return dispatch((0, _AlertPlaneActions.AlertPlaneThunk)("发布评论出错，请检查网络连接"));
-
-	                case 500:
-	                    return dispatch((0, _AlertPlaneActions.AlertPlaneThunk)("服务器出错，暂时无法进行评论"));
-
-	                default:
-	                    return dispatch((0, _AlertPlaneActions.AlertPlaneThunk)("未知错误！！！"));
-	            }
-	        });
-	    };
-	};
-
-	var DelThunk = exports.DelThunk = function DelThunk(page, SortState, index) {
-	    var ParentIndex = arguments.length <= 3 || arguments[3] === undefined ? -1 : arguments[3];
-
-	    return function (dispatch) {
-	        fetch("/delData", {
-	            method: "POST",
-	            headers: {
-	                "Content-Type": "application/x-www-form-urlencoded"
-	            },
-	            body: "index=" + index + "&ParentIndex=" + ParentIndex
-	        }).then(function (res) {
-	            switch (true) {
-	                case res.ok:
-	                    dispatch((0, _HandleDataActions.getDataesThunk)(page, SortState));
-	                    break;
-	                case res.status === 404:
-	                    return Promise.reject("404");
-	                case res.status === 500:
-	                    return Promise.reject("500");
-	            }
-	        }).catch(function (err) {
-	            switch (err) {
-	                case "404":
-	                    return (0, _AlertPlaneActions.AlertPlaneThunk)("404！ 网络不好？删除失败");
-	                case "500":
-	                    return (0, _AlertPlaneActions.AlertPlaneThunk)("服务器出错，删除失败，请稍后再登录尝试");
-	            }
-	        });
-	    };
-	};
-
-	var VoteUpThunk = exports.VoteUpThunk = function VoteUpThunk(index, failback) {
-	    return function (dispatch) {
-	        fetch("/VoteUpSomeItem", {
-	            method: "POST",
-	            headers: {
-	                "Content-Type": "application/x-www-form-urlencoded"
-	            },
-	            credentials: 'include',
-	            body: "index=" + index
-	        }).then(function (res) {
-	            if (!res.ok) {
-	                return Promise.reject();
-	            }
-	        }).catch(function () {
-	            failback();
-	            dispatch((0, _AlertPlaneActions.AlertPlaneThunk)("点赞操作出错，请重新尝试"));
-	        });
-	    };
-	};
-
-/***/ },
-/* 390 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.getDataesThunk = exports.UpDateDataInfoTask = undefined;
-
-	var _constants = __webpack_require__(200);
-
-	var _reduxActions = __webpack_require__(209);
-
-	var _AlertPlaneActions = __webpack_require__(215);
-
-	var _CommentActions = __webpack_require__(389);
-
-	var UpDateDataInfoTask = exports.UpDateDataInfoTask = (0, _reduxActions.createAction)(_constants.Types.UPDATE_GLOBAL_DATA_INFO, function (AllDataNum, NowPage) {
-	    return {
-	        AllDataNum: AllDataNum,
-	        NowPage: NowPage
-	    };
-	});
-
-	var getDataesThunk = exports.getDataesThunk = function getDataesThunk(page, SortState) {
-	    return function (dispatch) {
-	        fetch("/resDataes", {
-	            method: "POST",
-	            headers: {
-	                "Content-Type": "application/x-www-form-urlencoded"
-	            },
-	            credentials: 'include',
-	            body: "whichpage=" + page + "&SortState=" + SortState
-	        }).then(function (res) {
-	            switch (true) {
-	                case res.ok:
-	                    return res.json();
-	                case res.status === 404:
-	                    return Promise.reject("404");
-	                case res.status === 500:
-	                    return Promise.reject("500");
-	            }
-	        }).catch(function (err) {
-	            switch (err) {
-	                case "404":
-	                    return (0, _AlertPlaneActions.AlertPlaneThunk)("404！ 网络不好？无法加载全部评论");
-	                case "500":
-	                    return (0, _AlertPlaneActions.AlertPlaneThunk)("服务器出错，请稍后再登录尝试");
-	            }
-	        }).then(function (value) {
-	            var Dataes = JSON.parse(value);
-
-	            dispatch(UpDateDataInfoTask(Dataes.allLen, page + 1));
-	            dispatch((0, _CommentActions.UpDateItemDataesTask)(Dataes.Data));
-	        });
-	    };
-	};
-
-/***/ },
-/* 391 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _router = __webpack_require__(206);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var CommentFooter = function (_Component) {
-		_inherits(CommentFooter, _Component);
-
-		function CommentFooter(props) {
-			_classCallCheck(this, CommentFooter);
-
-			return _possibleConstructorReturn(this, (CommentFooter.__proto__ || Object.getPrototypeOf(CommentFooter)).call(this, props));
-		}
-
-		_createClass(CommentFooter, [{
-			key: "render",
-			value: function render() {
-				return _react2.default.createElement(
-					"footer",
-					{ className: "comment__footer" },
-					_react2.default.createElement(_router.CommentPagination, null)
-				);
-			}
-		}]);
-
-		return CommentFooter;
-	}(_react.Component);
-
-	exports.default = CommentFooter;
-
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CommentFooter.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
-/* 392 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(173);
-
-	var _redux = __webpack_require__(180);
-
-	var _SortActions = __webpack_require__(393);
-
-	var _HandleDataActions = __webpack_require__(390);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var CommentHeader = function (_Component) {
-		_inherits(CommentHeader, _Component);
-
-		function CommentHeader(props) {
-			_classCallCheck(this, CommentHeader);
-
-			var _this = _possibleConstructorReturn(this, (CommentHeader.__proto__ || Object.getPrototypeOf(CommentHeader)).call(this, props));
-
-			_this.sortListHandle = _this.sortListHandle.bind(_this);
-			return _this;
-		}
-
-		_createClass(CommentHeader, [{
-			key: "sortListHandle",
-			value: function sortListHandle(St) {
-				var _props = this.props;
-				var SortState = _props.SortState;
-				var NowPage = _props.NowPage;
-				var actions = _props.actions;
-
-
-				if (SortState !== St) {
-					this.props.actions.ChangeSortStateTask(St);
-					actions.getDataesThunk(NowPage - 1, St);
-				}
-			}
-		}, {
-			key: "render",
-			value: function render() {
-				var _props2 = this.props;
-				var ItemDataes = _props2.ItemDataes;
-				var AllDataNum = _props2.AllDataNum;
-
-
-				return _react2.default.createElement(
-					"header",
-					{ className: "comment__header" },
-					_react2.default.createElement(
-						"p",
-						{ className: "comment__header__span" },
-						"评论列表 ( ",
-						_react2.default.createElement(
-							"span",
-							null,
-							AllDataNum
-						),
-						" )"
-					),
-					_react2.default.createElement(
-						"p",
-						{ className: "comment__header__btns" },
-						_react2.default.createElement(
-							"button",
-							{
-								onClick: this.sortListHandle.bind(this, "newest")
-							},
-							"最新"
-						),
-						_react2.default.createElement(
-							"button",
-							{
-								onClick: this.sortListHandle.bind(this, "hottest")
-							},
-							"最热"
-						)
-					)
-				);
-			}
-		}]);
-
-		return CommentHeader;
-	}(_react.Component);
-
-	exports.default = (0, _reactRedux.connect)(function (state) {
-		return {
-			NowPage: state.HandleDataReducer.NowPage,
-			SortState: state.SortReducer.SortState,
-			ItemDataes: state.CommentReducer.ItemDataes,
-			AllDataNum: state.HandleDataReducer.AllDataNum
-		};
-	}, function (dispatch) {
-		return {
-			actions: (0, _redux.bindActionCreators)({
-				ChangeSortStateTask: _SortActions.ChangeSortStateTask,
-				getDataesThunk: _HandleDataActions.getDataesThunk
-			}, dispatch)
-		};
-	})(CommentHeader);
-
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CommentHeader.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
-/* 393 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.ChangeSortStateTask = undefined;
-
-	var _constants = __webpack_require__(200);
-
-	var _reduxActions = __webpack_require__(209);
-
-	var ChangeSortStateTask = exports.ChangeSortStateTask = (0, _reduxActions.createAction)(_constants.Types.SORT_STATE_CHANGE, function (SortState) {
-	    return {
-	        SortState: SortState
-	    };
-	});
-
-/***/ },
-/* 394 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(173);
-
-	var _redux = __webpack_require__(180);
-
-	var _CommentActions = __webpack_require__(389);
-
-	var _AlertPlaneActions = __webpack_require__(215);
-
-	var _util = __webpack_require__(202);
-
-	var _router = __webpack_require__(206);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var CommentItem = function (_Component) {
-		_inherits(CommentItem, _Component);
-
-		function CommentItem(props) {
-			_classCallCheck(this, CommentItem);
-
-			var _this = _possibleConstructorReturn(this, (CommentItem.__proto__ || Object.getPrototypeOf(CommentItem)).call(this, props));
-
-			_this.ToggleFeedbackShow = _this.ToggleFeedbackShow.bind(_this);
-			_this.DelSelf = _this.DelSelf.bind(_this);
-			_this.VoteUpHandle = _this.VoteUpHandle.bind(_this);
-
-			// 点赞功能 先从数据库获获取 加载页面后的点赞数，点击后
-			// 只在View 层做数据更新，不做总体的数据更新，并发送一个Ajax, 修改
-			// 数据库中的点赞数
-			// 将静态的props 数据转化为state 状态，便于更改
-			_this.state = {
-				feedContentboff: false,
-				feedWrapboff: false,
-				isVoted: _this.props.ItemData.isVoted,
-				vote_up: _this.props.ItemData.vote_up
-			};
-			return _this;
-		}
-
-		_createClass(CommentItem, [{
-			key: "componentWillReceiveProps",
-			value: function componentWillReceiveProps(nextProps) {
-				// 新数据更新后，重新设置state
-				this.setState({
-					isVoted: nextProps.ItemData.isVoted,
-					vote_up: nextProps.ItemData.vote_up
-				});
-			}
-		}, {
-			key: "DelSelf",
-			value: function DelSelf() {
-				var index = this.props.ItemData.index;
-				var _props = this.props;
-				var ItemDataes = _props.ItemDataes;
-				var actions = _props.actions;
-				var SortState = _props.SortState;
-				var NowPage = _props.NowPage;
-
-
-				actions.AlertPlaneThunk("您确定删除该评论？（其下的回复也会被删除!）", function () {
-					actions.DelThunk(NowPage - 1, SortState, index);
-				});
-			}
-		}, {
-			key: "ToggleFeedbackShow",
-			value: function ToggleFeedbackShow() {
-				var _state = this.state;
-				var feedContentboff = _state.feedContentboff;
-				var feedWrapboff = _state.feedWrapboff;
-
-
-				this.setState({
-					feedContentboff: !feedContentboff,
-					feedWrapboff: !feedWrapboff
-				});
-			}
-		}, {
-			key: "VoteUpHandle",
-			value: function VoteUpHandle() {
-				var _props2 = this.props;
-				var actions = _props2.actions;
-				var userInfo = _props2.userInfo;
-				var index = this.props.ItemData.index;
-
-
-				this.setState({
-					isVoted: true,
-					vote_up: this.state.vote_up + 1
-				});
-
-				actions.VoteUpThunk(index, function () {
-					this.setState({
-						isVoted: false,
-						vote_up: this.state.vote_up - 1
-					});
-				}.bind(this));
-			}
-		}, {
-			key: "render",
-			value: function render() {
-				var _props$ItemData = this.props.ItemData;
-				var index = _props$ItemData.index;
-				var avatar_url = _props$ItemData.avatar_url;
-				var author_name = _props$ItemData.author_name;
-				var author_email = _props$ItemData.author_email;
-				var publish_time = _props$ItemData.publish_time;
-				var publish_content = _props$ItemData.publish_content;
-				var commentAuthor = _props$ItemData.commentAuthor;
-				var FeedBack = _props$ItemData.FeedBack;
-				var _props3 = this.props;
-				var ItemDataes = _props3.ItemDataes;
-				var userInfo = _props3.userInfo;
-				var SelfIndex = _props3.SelfIndex;
-
-
-				var pt = (0, _util.formatDate)(publish_time),
-				    voteUpBox = void 0;
-
-				if (!userInfo.userEmail || this.state.isVoted || author_email === userInfo.userEmail) {
-					voteUpBox = _react2.default.createElement(
-						"section",
-						{
-							className: "comment__options__has-voted-up",
-							title: "您尚未登陆，或已经点过赞。自己不能帮自己点赞"
-						},
-						_react2.default.createElement(
-							"button",
-							null,
-							_react2.default.createElement(
-								"span",
-								{
-									className: "vote-up-counter"
-								},
-								this.state.vote_up
-							),
-							" 已赞"
-						)
-					);
-				} else {
-					voteUpBox = _react2.default.createElement(
-						"section",
-						{ className: "comment__options__vote-up", title: "点赞" },
-						_react2.default.createElement(
-							"button",
-							{
-								onClick: this.VoteUpHandle
-							},
-							_react2.default.createElement(
-								"span",
-								{
-									className: "vote-up-counter"
-								},
-								this.state.vote_up
-							),
-							" 赞"
-						)
-					);
-				}
-
-				return _react2.default.createElement(
-					"li",
-					{ className: "comment__item" },
-					_react2.default.createElement(
-						"section",
-						{ className: "comment__content" },
-						_react2.default.createElement(
-							"figure",
-							{ className: "comment__author--avatar" },
-							_react2.default.createElement("img", { src: avatar_url })
-						),
-						_react2.default.createElement(
-							"section",
-							{ className: "comment__content--main" },
-							_react2.default.createElement(
-								"p",
-								{ className: "comment__content--author" },
-								_react2.default.createElement(
-									"a",
-									{ href: "javascript:;" },
-									author_name
-								),
-								_react2.default.createElement(
-									"span",
-									null,
-									" (",
-									commentAuthor,
-									")"
-								)
-							),
-							_react2.default.createElement(
-								"p",
-								{ className: "comment__content--time" },
-								"发布于：",
-								pt
-							),
-							_react2.default.createElement("div", { className: "comment__content--content",
-								dangerouslySetInnerHTML: { __html: publish_content }
-							}),
-							_react2.default.createElement(
-								"footer",
-								{ className: "comment__content--options" },
-								_react2.default.createElement(
-									"section",
-									{ className: "comment__content--options__wrap" },
-									_react2.default.createElement(
-										"a",
-										{ className: "comment__content--options__callback",
-											href: "javascript:;",
-											onClick: this.ToggleFeedbackShow
-										},
-										_react2.default.createElement("i", null),
-										_react2.default.createElement(
-											"span",
-											null,
-											"回复 (",
-											FeedBack.length,
-											"条)"
-										)
-									),
-									userInfo.userEmail === author_email ? _react2.default.createElement(
-										"a",
-										{ className: "comment__content--options__del",
-											href: "javascript:;",
-											onClick: this.DelSelf
-										},
-										_react2.default.createElement("i", null),
-										_react2.default.createElement(
-											"span",
-											null,
-											"删除"
-										)
-									) : null
-								),
-								voteUpBox
-							)
-						),
-						this.state.feedContentboff ? _react2.default.createElement(
-							"section",
-							{ className: "feedback__content",
-								ref: "feedback-content"
-							},
-							ItemDataes[SelfIndex].FeedBack.map(function (value, idx) {
-								return _react2.default.createElement(_router.FeedBackMain, {
-									FeedBackData: value,
-									ParentIndexOnDb: index,
-									ParentIndex: SelfIndex,
-									key: idx
-								});
-							})
-						) : null,
-						this.state.feedWrapboff ? _react2.default.createElement(
-							"section",
-							{ className: "comment__feedback__wrap",
-								ref: "comment-feedback-wrap"
-							},
-							_react2.default.createElement(
-								"section",
-								{ className: "comment__feedback" },
-								_react2.default.createElement(
-									"h3",
-									null,
-									"分享您的思想和看法..."
-								),
-								_react2.default.createElement(_router.CommentFeedback, {
-									CommentFeedBackTask: true,
-									ParentIndex: SelfIndex,
-									ParentIndexOnDb: index
-								})
-							)
-						) : null
-					)
-				);
-			}
-		}]);
-
-		return CommentItem;
-	}(_react.Component);
-
-	// CommentItem.PropTypes
-
-	exports.default = (0, _reactRedux.connect)(function (state) {
-		return {
-			ItemDataes: state.CommentReducer.ItemDataes,
-			userInfo: state.LoginReducer.userInfo,
-			SortState: state.SortReducer.SortState,
-			NowPage: state.HandleDataReducer.NowPage
-		};
-	}, function (dispatch) {
-		return {
-			actions: (0, _redux.bindActionCreators)({
-				DelThunk: _CommentActions.DelThunk,
-				AlertPlaneThunk: _AlertPlaneActions.AlertPlaneThunk,
-				VoteUpThunk: _CommentActions.VoteUpThunk
-			}, dispatch)
-		};
-	})(CommentItem);
-
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CommentItem.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
-/* 395 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(173);
-
-	var _redux = __webpack_require__(180);
-
-	var _LoginActions = __webpack_require__(208);
-
-	var _HandleDataActions = __webpack_require__(390);
-
-	var _AlertPlaneActions = __webpack_require__(215);
-
-	var _router = __webpack_require__(206);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var CommentList = function (_Component) {
-		_inherits(CommentList, _Component);
-
-		function CommentList(props) {
-			_classCallCheck(this, CommentList);
-
-			return _possibleConstructorReturn(this, (CommentList.__proto__ || Object.getPrototypeOf(CommentList)).call(this, props));
-		}
-
-		_createClass(CommentList, [{
-			key: "componentWillMount",
-			value: function componentWillMount() {
-				var _props = this.props;
-				var actions = _props.actions;
-				var SortState = _props.SortState;
-
-				// 初始时候，更新登录状态
-
-				actions.checkLoginThunk();
-				// 初始时候请求数据，进行初始化
-				actions.getDataesThunk(0, SortState);
-			}
-		}, {
-			key: "render",
-			value: function render() {
-				var _props2 = this.props;
-				var ItemDataes = _props2.ItemDataes;
-				var SortState = _props2.SortState;
-				var NowPage = _props2.NowPage;
-				var actions = _props2.actions;
-				var AllDataNum = _props2.AllDataNum;
-
-
-				var box = void 0;
-
-				if (ItemDataes.length && AllDataNum) {
-					box = ItemDataes.map(function (ItemData, idx) {
-						return _react2.default.createElement(_router.CommentItem, {
-							ItemData: ItemData,
-							SelfIndex: idx,
-							key: idx
-						});
-					});
-				} else if (AllDataNum) {
-					box = _react2.default.createElement(
-						"li",
-						{ className: "no__comment__item" },
-						_react2.default.createElement(
-							"p",
-							null,
-							"该页评论已被删除，请切换其他页"
-						)
-					);
-				} else {
-					box = _react2.default.createElement(
-						"li",
-						{ className: "no__comment__item" },
-						_react2.default.createElement(
-							"p",
-							null,
-							"评论头条等你来抢！"
-						)
-					);
-				}
-
-				//评论头条等你来抢！
-				return _react2.default.createElement(
-					"section",
-					{ className: "comment__list" },
-					_react2.default.createElement(
-						"ul",
-						null,
-						box
-					)
-				);
-			}
-		}]);
-
-		return CommentList;
-	}(_react.Component);
-
-	CommentList.defaultProps = {
-		ItemDataes: []
-	};
-
-	exports.default = (0, _reactRedux.connect)(function (state) {
-		return {
-			NowPage: state.HandleDataReducer.NowPage,
-			ItemDataes: state.CommentReducer.ItemDataes,
-			AllDataNum: state.HandleDataReducer.AllDataNum,
-			SortState: state.SortReducer.SortState
-		};
-	}, function (dispatch) {
-		return {
-			actions: (0, _redux.bindActionCreators)({
-				getDataesThunk: _HandleDataActions.getDataesThunk,
-				AlertPlaneThunk: _AlertPlaneActions.AlertPlaneThunk,
-				checkLoginThunk: _LoginActions.checkLoginThunk
-			}, dispatch)
-		};
-	})(CommentList);
-
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CommentList.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
-/* 396 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(173);
-
-	var _redux = __webpack_require__(180);
-
-	var _HandleDataActions = __webpack_require__(390);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var CommentPagination = function (_Component) {
-		_inherits(CommentPagination, _Component);
-
-		function CommentPagination(props) {
-			_classCallCheck(this, CommentPagination);
-
-			var _this = _possibleConstructorReturn(this, (CommentPagination.__proto__ || Object.getPrototypeOf(CommentPagination)).call(this, props));
-
-			_this.pagination = _this.pagination.bind(_this);
-			return _this;
-		}
-
-		_createClass(CommentPagination, [{
-			key: "pagination",
-			value: function pagination() {
-				var _props = this.props;
-				var AllDataNum = _props.AllDataNum;
-				var PaginationNum = _props.PaginationNum;
-				var PaginationLimit = _props.PaginationLimit;
-				var NowPage = _props.NowPage;
-				var halfNum = ~~(PaginationLimit / 2);
-				var result = [];
-
-				switch (true) {
-					case PaginationNum < PaginationLimit:
-						for (var i = 1; i <= PaginationNum; i++) {
-							result.push(i);
-						}
-						return result;
-
-					case NowPage <= halfNum + 1:
-						for (var _i = 1; _i <= PaginationLimit; _i++) {
-							result.push(_i);
-						}
-
-						result.push("尾页");
-						return result;
-
-					case NowPage > halfNum + 1 && NowPage < PaginationNum - halfNum:
-						result.push("首页");
-
-						for (var _i2 = NowPage - halfNum; _i2 <= NowPage + halfNum; _i2++) {
-							result.push(_i2);
-						}
-
-						result.push("尾页");
-						return result;
-					case NowPage >= PaginationNum - halfNum:
-						result.push("首页");
-
-						for (var _i3 = PaginationNum - PaginationLimit + 1; _i3 <= PaginationNum; _i3++) {
-							result.push(_i3);
-						}
-
-						return result;
-				}
-			}
-		}, {
-			key: "render",
-			value: function render() {
-				var _this2 = this;
-
-				var ItemsMap = this.pagination();
-
-				return _react2.default.createElement(
-					"ol",
-					{ className: "comment__pagination" },
-					ItemsMap.map(function (value, idx) {
-						return _react2.default.createElement(PaginationsItem, _extends({
-							order: value,
-							key: idx,
-							active: _this2.props.NowPage === value ? 1 : 0
-
-						}, _this2.props));
-					})
-				);
-			}
-		}]);
-
-		return CommentPagination;
-	}(_react.Component);
-
-	var PaginationsItem = function (_Component2) {
-		_inherits(PaginationsItem, _Component2);
-
-		function PaginationsItem(props) {
-			_classCallCheck(this, PaginationsItem);
-
-			var _this3 = _possibleConstructorReturn(this, (PaginationsItem.__proto__ || Object.getPrototypeOf(PaginationsItem)).call(this, props));
-
-			_this3.handleChangePage.bind(_this3);
-			return _this3;
-		}
-
-		_createClass(PaginationsItem, [{
-			key: "handleChangePage",
-			value: function handleChangePage(order) {
-				var _props2 = this.props;
-				var actions = _props2.actions;
-				var AllDataNum = _props2.AllDataNum;
-				var PaginationNum = _props2.PaginationNum;
-				var SortState = _props2.SortState;
-
-
-				switch (true) {
-					case order === "首页":
-						actions.getDataesThunk(0, SortState);
-						break;
-					case order === "尾页":
-						actions.getDataesThunk(PaginationNum - 1, SortState);
-						break;
-					default:
-						actions.getDataesThunk(parseInt(order) - 1, SortState);
-				}
-			}
-		}, {
-			key: "render",
-			value: function render() {
-				var _props3 = this.props;
-				var order = _props3.order;
-				var active = _props3.active;
-
-
-				return _react2.default.createElement(
-					"li",
-					null,
-					_react2.default.createElement(
-						"div",
-						{
-							className: active && "active",
-
-							onClick: this.handleChangePage.bind(this, order)
-						},
-						order
-					)
-				);
-			}
-		}]);
-
-		return PaginationsItem;
-	}(_react.Component);
-
-	exports.default = (0, _reactRedux.connect)(function (state) {
-		return {
-			SortState: state.SortReducer.SortState,
-			AllDataNum: state.HandleDataReducer.AllDataNum, // 总数据的数目
-			NowPage: state.HandleDataReducer.NowPage, // 当前页数
-			PaginationNum: state.HandleDataReducer.PaginationNum, // 分页数
-			PaginationLimit: state.HandleDataReducer.PaginationLimit // 分页限制数 
-		};
-	}, function (dispatch) {
-		return {
-			actions: (0, _redux.bindActionCreators)({
-				getDataesThunk: _HandleDataActions.getDataesThunk
-			}, dispatch)
-		};
-	})(CommentPagination);
-
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CommentPagination.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
-/* 397 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _router = __webpack_require__(206);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var CommentWrap = function (_Component) {
-		_inherits(CommentWrap, _Component);
-
-		function CommentWrap(props) {
-			_classCallCheck(this, CommentWrap);
-
-			return _possibleConstructorReturn(this, (CommentWrap.__proto__ || Object.getPrototypeOf(CommentWrap)).call(this, props));
-		}
-
-		_createClass(CommentWrap, [{
-			key: "render",
-			value: function render() {
-				return _react2.default.createElement(
-					"section",
-					{ className: "comment__wrap" },
-					_react2.default.createElement(_router.CommentHeader, null),
-					_react2.default.createElement(_router.CommentList, null),
-					_react2.default.createElement(_router.CommentFooter, null),
-					_react2.default.createElement(_router.CommentEditer, null),
-					_react2.default.createElement(_router.LoginTable, null),
-					_react2.default.createElement(_router.AlertPlane, null)
-				);
-			}
-		}]);
-
-		return CommentWrap;
-	}(_react.Component);
-
-	exports.default = CommentWrap;
-
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CommentWrap.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
-/* 398 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(173);
-
-	var _redux = __webpack_require__(180);
-
-	var _CommentActions = __webpack_require__(389);
-
-	var _util = __webpack_require__(202);
-
-	var _router = __webpack_require__(206);
-
-	var _AlertPlaneActions = __webpack_require__(215);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var FeedBackMain = function (_Component) {
-		_inherits(FeedBackMain, _Component);
-
-		function FeedBackMain(props) {
-			_classCallCheck(this, FeedBackMain);
-
-			var _this = _possibleConstructorReturn(this, (FeedBackMain.__proto__ || Object.getPrototypeOf(FeedBackMain)).call(this, props));
-
-			_this.toggleFeedBackPlaneState = _this.toggleFeedBackPlaneState.bind(_this);
-			_this.DelSelf = _this.DelSelf.bind(_this);
-			_this.state = {
-				feedbackBoff: false
-			};
-			return _this;
-		}
-
-		_createClass(FeedBackMain, [{
-			key: "DelSelf",
-			value: function DelSelf() {
-				var _props = this.props;
-				var ParentIndexOnDb = _props.ParentIndexOnDb;
-				var actions = _props.actions;
-				var NowPage = _props.NowPage;
-				var SortState = _props.SortState;
-				var FeedBackIndex = this.props.FeedBackData.FeedBackIndex;
-
-
-				actions.AlertPlaneThunk("您确定删除该回复吗？", function () {
-					actions.DelThunk(NowPage - 1, SortState, FeedBackIndex, ParentIndexOnDb);
-				});
-			}
-		}, {
-			key: "toggleFeedBackPlaneState",
-			value: function toggleFeedBackPlaneState() {
-				this.setState({
-					feedbackBoff: !this.state.feedbackBoff
-				});
-			}
-		}, {
-			key: "render",
-			value: function render() {
-				var _props$FeedBackData = this.props.FeedBackData;
-				var FeedBackIndex = _props$FeedBackData.FeedBackIndex;
-				var avatar_url = _props$FeedBackData.avatar_url;
-				var author_name = _props$FeedBackData.author_name;
-				var author_email = _props$FeedBackData.author_email;
-				var publish_time = _props$FeedBackData.publish_time;
-				var publish_content = _props$FeedBackData.publish_content;
-				var commentAuthor = _props$FeedBackData.commentAuthor;
-				var vote_up = _props$FeedBackData.vote_up;
-				var ForBidFeedBack = _props$FeedBackData.ForBidFeedBack;
-				var BeFeedIndex = _props$FeedBackData.BeFeedIndex;
-				var _props2 = this.props;
-				var ItemDataes = _props2.ItemDataes;
-				var userInfo = _props2.userInfo;
-				var ParentIndex = _props2.ParentIndex;
-				var ParentIndexOnDb = _props2.ParentIndexOnDb;
-
-				var pt = (0, _util.formatDate)(publish_time);
-
-				return _react2.default.createElement(
-					"section",
-					{ className: "feedback__content--main" },
-					_react2.default.createElement(
-						"figure",
-						{ className: "feedback__content--avatar" },
-						_react2.default.createElement("img", { src: avatar_url })
-					),
-					_react2.default.createElement(
-						"section",
-						{ className: "feedback__wrap--content" },
-						_react2.default.createElement(
-							"p",
-							{ className: "feedback__content--author" },
-							_react2.default.createElement(
-								"a",
-								{ href: "javascript:;" },
-								author_name
-							),
-							_react2.default.createElement(
-								"span",
-								null,
-								" (",
-								commentAuthor,
-								")"
-							)
-						),
-						ForBidFeedBack ? _react2.default.createElement(
-							"p",
-							{ className: "sub__feedback" },
-							"回复：",
-							_react2.default.createElement(
-								"span",
-								null,
-								ItemDataes[ParentIndex].FeedBack[BeFeedIndex].author_name
-							)
-						) : null,
-						_react2.default.createElement(
-							"p",
-							{ className: "feedback__content--time" },
-							"发布于：",
-							pt
-						),
-						_react2.default.createElement("div", { className: "feedback__content--content",
-							dangerouslySetInnerHTML: { __html: publish_content }
-						}),
-						_react2.default.createElement(
-							"footer",
-							{ className: "feedback__content--options" },
-							_react2.default.createElement(
-								"section",
-								{ className: "feedback__content--options__wrap" },
-								!ForBidFeedBack && !(author_email === userInfo.userEmail) ? _react2.default.createElement(
-									"a",
-									{ className: "feedback__content--options__callback",
-										href: "javascript:;",
-										onClick: this.toggleFeedBackPlaneState
-									},
-									_react2.default.createElement("i", null),
-									_react2.default.createElement(
-										"span",
-										null,
-										"回复"
-									)
-								) : null,
-								userInfo.userEmail === author_email ? _react2.default.createElement(
-									"a",
-									{ className: "feedback__content--options__del",
-										href: "javascript:;",
-										onClick: this.DelSelf
-									},
-									_react2.default.createElement("i", null),
-									_react2.default.createElement(
-										"span",
-										null,
-										"删除"
-									)
-								) : null
-							)
-						)
-					),
-					this.state.feedbackBoff ? _react2.default.createElement(
-						"section",
-						{ className: "feedback__content",
-							ref: "feedback-content"
-						},
-						_react2.default.createElement(_router.CommentFeedback, {
-							CommentSubFeedBackTask: true,
-							ParentIndexOnDb: ParentIndexOnDb,
-							ParentIndex: ParentIndex,
-							BeFeedIndex: FeedBackIndex
-						})
-					) : null
-				);
-			}
-		}]);
-
-		return FeedBackMain;
-	}(_react.Component);
-
-	exports.default = (0, _reactRedux.connect)(function (state) {
-		return {
-			ItemDataes: state.CommentReducer.ItemDataes,
-			userInfo: state.LoginReducer.userInfo,
-			SortState: state.SortReducer.SortState,
-			NowPage: state.HandleDataReducer.NowPage
-		};
-	}, function (dispatch) {
-		return {
-			actions: (0, _redux.bindActionCreators)({
-				DelThunk: _CommentActions.DelThunk,
-				AlertPlaneThunk: _AlertPlaneActions.AlertPlaneThunk
-			}, dispatch)
-		};
-	})(FeedBackMain);
-
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "FeedBackMain.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
-/* 399 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(173);
-
-	var _redux = __webpack_require__(180);
-
-	var _LoginActions = __webpack_require__(208);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var LoginTable = function (_Component) {
-		_inherits(LoginTable, _Component);
-
-		function LoginTable(props) {
-			_classCallCheck(this, LoginTable);
-
-			var _this = _possibleConstructorReturn(this, (LoginTable.__proto__ || Object.getPrototypeOf(LoginTable)).call(this, props));
-
-			_this.state = {
-				userNameInfo: "",
-				userEmailInfo: ""
-			};
-
-			_this.nameLegal = false;
-			_this.emailLegal = false;
-			_this.toggleState = _this.toggleState.bind(_this);
-			_this.close = _this.close.bind(_this);
-			_this.sP = _this.sP.bind(_this);
-			_this.LoginIn = _this.LoginIn.bind(_this);
-			_this.fastLogin = _this.fastLogin.bind(_this);
-			_this.Validate = _this.Validate.bind(_this);
-			return _this;
-		}
-
-		_createClass(LoginTable, [{
-			key: "changeView",
-			value: function changeView(target) {
-				var oW = innerWidth,
-				    oH = innerHeight;
-
-				target.style.width = oW + "px";
-				target.style.height = oH + "px";
-			}
-		}, {
-			key: "componentDidMount",
-			value: function componentDidMount() {
-				var $self = this,
-				    target = $self.refs["login-table-bg"];
-
-				if (target) {
-					$self.changeView(target);
-				}
-			}
-		}, {
-			key: "componentDidUpdate",
-			value: function componentDidUpdate() {
-				var $self = this,
-				    target = $self.refs["login-table-bg"];
-
-				if (target) {
-					$self.changeView(target);
-				}
-			}
-		}, {
-			key: "toggleState",
-			value: function toggleState(ev) {
-				var target = ev.target,
-				    index = ~~target.dataset.index,
-				    stateBar = this.refs["state-bar"],
-				    touristLogin = this.refs["tourist-login"],
-				    snsLogin = this.refs["sns-login"];
-
-				if (index) {
-					stateBar.classList.add("state__bar--toggle");
-					snsLogin.classList.remove("none");
-					touristLogin.classList.add("none");
-				} else {
-					stateBar.classList.remove("state__bar--toggle");
-					snsLogin.classList.add("none");
-					touristLogin.classList.remove("none");
-				}
-			}
-		}, {
-			key: "close",
-			value: function close(ev) {
-				var _props$actions = this.props.actions;
-				var LoginTableStateTask = _props$actions.LoginTableStateTask;
-				var ChangeValidateTask = _props$actions.ChangeValidateTask;
-				var ChangeValidateInfoTask = _props$actions.ChangeValidateInfoTask;
-
-
-				LoginTableStateTask();
-
-				this.nameLegal = false;
-				this.emailLegal = false;
-
-				this.setState({
-					userNameInfo: "",
-					userEmailInfo: ""
-				});
-			}
-		}, {
-			key: "sP",
-			value: function sP(ev) {
-				ev.stopPropagation();
-			}
-		}, {
-			key: "LoginIn",
-			value: function LoginIn() {
-				var Name = this.refs["tourist-login-user-name"].value;
-				var Email = this.refs["tourist-login-user-email"].value;
-				var actions = this.props.actions;
-
-
-				if (this.nameLegal && this.emailLegal) {
-					actions.LoginInThunk({
-						userName: Name,
-						userEmail: Email,
-						commentAuthor: "游客",
-						userAvatar: "/img/default-avatar.png"
-					});
-
-					this.close();
-				} else {
-					return;
-				}
-			}
-		}, {
-			key: "Validate",
-			value: function Validate(type) {
-				var Name = this.refs["tourist-login-user-name"];
-				var Email = this.refs["tourist-login-user-email"];
-
-				var actions = this.props.actions;
-
-				var _state = this.state;
-				var userNameInfo = _state.userNameInfo;
-				var userEmailInfo = _state.userEmailInfo;
-
-
-				var rule = {
-					"username": {
-						regexp: /^\w{4,12}$/,
-						mes: {
-							tooLong: "昵称长度为 4到12位",
-							illegalChar: "只能由下划线数字和字母组成"
-						}
-					},
-
-					"email": {
-						regexp: /^\w+@\w+\.\w{2,4}$/,
-						mes: {
-							illegalChar: "非法的邮箱地址"
-						}
-					}
-				};
-
-				switch (type) {
-					case "name":
-						if (rule.username.regexp.test(Name.value)) {
-							this.nameLegal = true;
-
-							this.setState({
-								userNameInfo: ""
-							});
-						} else {
-							this.nameLegal = false;
-
-							if (Name.value.length < 4 || Name.value.length > 12) {
-								this.setState({
-									userNameInfo: rule.username.mes.tooLong
-								});
-							} else {
-								this.setState({
-									userNameInfo: rule.username.mes.illegalChar
-								});
-							}
-						}
-						break;
-
-					case "email":
-						if (rule.email.regexp.test(Email.value)) {
-							this.emailLegal = true;
-
-							this.setState({
-								userEmailInfo: ""
-							});
-						} else {
-							this.emailLegal = false;
-
-							this.setState({
-								userEmailInfo: rule.email.mes.illegalChar
-							});
-						}
-						break;
-				}
-			}
-		}, {
-			key: "fastLogin",
-			value: function fastLogin(ev, type) {
-				if (ev.keyCode === 13) {
-					this.Validate(type);
-					this.LoginIn();
-				}
-			}
-		}, {
-			key: "render",
-			value: function render() {
-				var _this2 = this;
-
-				var _props = this.props;
-				var loginTableState = _props.loginTableState;
-				var actions = _props.actions;
-
-
-				if (!loginTableState) {
-					return _react2.default.createElement(
-						"section",
-						{ ref: "login-table-bg",
-							className: "login__table__bg",
-							onClick: this.close
-						},
-						_react2.default.createElement(
-							"section",
-							{ className: "login__table",
-								onClick: this.sP
-							},
-							_react2.default.createElement(
-								"section",
-								{ className: "login__table__wrap" },
-								_react2.default.createElement(
-									"header",
-									{ className: "login__table__header" },
-									_react2.default.createElement(
-										"button",
-										{ "data-index": "0",
-											onClick: this.toggleState,
-											ref: "btn1"
-										},
-										"游客登录"
-									),
-									_react2.default.createElement(
-										"button",
-										{ "data-index": "1",
-											onClick: this.toggleState,
-											ref: "btn2"
-										},
-										"sns登录"
-									),
-									_react2.default.createElement("div", { ref: "state-bar", className: "state__bar" })
-								),
-								_react2.default.createElement(
-									"section",
-									{ className: "login__table__forms" },
-									_react2.default.createElement(
-										"form",
-										{ className: "tourist__login", ref: "tourist-login" },
-										_react2.default.createElement(
-											"div",
-											{ className: "input__wrap" },
-											_react2.default.createElement(
-												"p",
-												null,
-												"昵称:"
-											),
-											_react2.default.createElement("input", { type: "text",
-												className: "tourist__login--user-name",
-												onKeyDown: function onKeyDown(ev) {
-													_this2.fastLogin.call(_this2, ev, "name");
-												},
-												onBlur: this.Validate.bind(this, "name"),
-												ref: "tourist-login-user-name"
-											}),
-											_react2.default.createElement(
-												"label",
-												null,
-												this.state.userNameInfo
-											)
-										),
-										_react2.default.createElement(
-											"div",
-											{ className: "input__wrap" },
-											_react2.default.createElement(
-												"p",
-												null,
-												"邮箱："
-											),
-											_react2.default.createElement("input", { type: "text",
-												className: "tourist__login--email",
-												onKeyDown: function onKeyDown(ev) {
-													_this2.fastLogin.call(_this2, ev, "email");
-												},
-												onBlur: this.Validate.bind(this, "email"),
-												ref: "tourist-login-user-email"
-											}),
-											_react2.default.createElement(
-												"label",
-												null,
-												this.state.userEmailInfo
-											)
-										),
-										_react2.default.createElement("input", { type: "button",
-											className: "tourist__login--submit",
-											value: "登录",
-											onClick: this.LoginIn
-										})
-									),
-									_react2.default.createElement(
-										"form",
-										{ className: "sns__login none", action: "", ref: "sns-login" },
-										_react2.default.createElement("div", null),
-										_react2.default.createElement("div", null),
-										_react2.default.createElement("div", null),
-										_react2.default.createElement("div", null),
-										_react2.default.createElement("div", null),
-										_react2.default.createElement("div", null)
-									)
-								)
-							)
-						)
-					);
-				} else {
-					return null;
-				}
-			}
-		}]);
-
-		return LoginTable;
-	}(_react.Component);
-
-	LoginTable.defaultProps = {};
-
-	exports.default = (0, _reactRedux.connect)(function (state) {
-		return {
-			loginTableState: state.LoginReducer.loginTableState
-		};
-	}, function (dispatch) {
-		return {
-			actions: (0, _redux.bindActionCreators)({
-				LoginTableStateTask: _LoginActions.LoginTableStateTask,
-				LoginInThunk: _LoginActions.LoginInThunk
-			}, dispatch)
-		};
-	})(LoginTable);
-
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "LoginTable.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
-/* 400 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(173);
-
-	var _redux = __webpack_require__(180);
-
-	var _AlertPlaneActions = __webpack_require__(215);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var AlertPlane = function (_Component) {
-	    _inherits(AlertPlane, _Component);
-
-	    function AlertPlane(props) {
-	        _classCallCheck(this, AlertPlane);
-
-	        var _this = _possibleConstructorReturn(this, (AlertPlane.__proto__ || Object.getPrototypeOf(AlertPlane)).call(this, props));
-
-	        _this.sure = _this.sure.bind(_this);
-	        _this.cancel = _this.cancel.bind(_this);
-	        return _this;
-	    }
-
-	    _createClass(AlertPlane, [{
-	        key: "componentDidMount",
-	        value: function componentDidMount() {
-	            var $self = this,
-	                target = $self.refs["alert-wrap-bg"];
-
-	            if (target) {
-	                $self.changeView(target);
-	            }
-	        }
-	    }, {
-	        key: "componentDidUpdate",
-	        value: function componentDidUpdate() {
-	            var $self = this,
-	                target = $self.refs["alert-wrap-bg"];
-
-	            if (target) {
-	                $self.changeView(target);
-	            }
-	        }
-	    }, {
-	        key: "changeView",
-	        value: function changeView(target) {
-	            var oW = innerWidth,
-	                oH = innerHeight;
-
-	            target.style.width = oW + "px";
-	            target.style.height = oH + "px";
-	        }
-	    }, {
-	        key: "sure",
-	        value: function sure() {
-	            this.props.actions.TorFTask(1);
-	        }
-	    }, {
-	        key: "cancel",
-	        value: function cancel() {
-	            this.props.actions.TorFTask(0);
-	        }
-	    }, {
-	        key: "render",
-	        value: function render() {
-	            var AlertPlaneState = this.props.AlertPlaneState;
-
-
-	            return AlertPlaneState ? _react2.default.createElement(
-	                "section",
-	                {
-	                    className: "alert__wrap",
-	                    ref: "alert-wrap-bg"
-	                },
-	                _react2.default.createElement(
-	                    "div",
-	                    {
-	                        className: "alert__plane"
-	                    },
-	                    _react2.default.createElement("header", null),
-	                    _react2.default.createElement(
-	                        "p",
-	                        { className: "alert__plane--question" },
-	                        this.props.AlertPlanePrompt
-	                    ),
-	                    _react2.default.createElement(
-	                        "footer",
-	                        null,
-	                        _react2.default.createElement(
-	                            "label",
-	                            null,
-	                            _react2.default.createElement("i", { className: "alert__plane--btn_sure" }),
-	                            _react2.default.createElement(
-	                                "button",
-	                                {
-	                                    onClick: this.sure
-	                                },
-	                                "确定"
-	                            )
-	                        ),
-	                        _react2.default.createElement(
-	                            "label",
-	                            null,
-	                            _react2.default.createElement("i", { className: "alert__plane--btn_cancel" }),
-	                            _react2.default.createElement(
-	                                "button",
-	                                {
-	                                    onClick: this.cancel
-	                                },
-	                                "取消"
-	                            )
-	                        )
-	                    )
-	                )
-	            ) : null;
-	        }
-	    }]);
-
-	    return AlertPlane;
-	}(_react.Component);
-
-	exports.default = (0, _reactRedux.connect)(function (state) {
-	    return {
-	        AlertPlaneState: state.AlertPlaneReducer.AlertPlaneState,
-	        AlertPlanePrompt: state.AlertPlaneReducer.AlertPlanePrompt
-	    };
-	}, function (dispatch) {
-	    return {
-	        actions: (0, _redux.bindActionCreators)({
-	            AlertPlaneTask: _AlertPlaneActions.AlertPlaneTask,
-	            TorFTask: _AlertPlaneActions.TorFTask
-	        }, dispatch)
-	    };
-	})(AlertPlane);
-
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "AlertPlane.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
-/* 401 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _util = __webpack_require__(202);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var DropList = function (_Component) {
-	    _inherits(DropList, _Component);
-
-	    function DropList(props) {
-	        _classCallCheck(this, DropList);
-
-	        var _this = _possibleConstructorReturn(this, (DropList.__proto__ || Object.getPrototypeOf(DropList)).call(this, props));
-
-	        _this.state = {
-	            isDrop: 0,
-	            ListOffset: 0,
-	            BtnOffset: 0,
-	            dragListHeight: 0,
-	            dragBtnHeight: 0
-	        };
-	        return _this;
-	    }
-
-	    _createClass(DropList, [{
-	        key: "componentDidMount",
-	        value: function componentDidMount() {
-	            var Wrap = this.refs["wrap"],
-	                List = this.refs["list"],
-	                LH = this.props.dataList.length * 25 + 10,
-	                d = 120 * (LH - 120) / LH,
-	                BH = 120 - d;
-
-	            this.setState({
-	                dragListHeight: LH,
-	                dragBtnHeight: BH
-	            });
-	        }
-	    }, {
-	        key: "mdown",
-	        value: function mdown(ev, callback) {
-	            var $self = this,
-	                oTarget = ev.target,
-	                currentTop = oTarget.offsetTop,
-	                $top = ev.clientY - oTarget.offsetTop,
-	                $left = ev.clientY - oTarget.offsetLeft;
-
-	            var mmove = function mmove(ev) {
-	                var dragTop = ev.clientY - $top,
-	                    dragLeft = ev.clientX - $left;
-
-	                callback && callback([dragTop, dragLeft]);
-	            },
-	                mup = function mup() {
-	                document.removeEventListener("mousemove", mmove);
-	                oTarget.removeEventListener("mouseup", mup);
-	            };
-
-	            document.addEventListener("mousemove", mmove);
-	            document.addEventListener("mouseup", mup);
-	        }
-	    }, {
-	        key: "render",
-	        value: function render() {
-	            var _this2 = this;
-
-	            var dataList = this.props.dataList;
-
-	            return _react2.default.createElement(
-	                "div",
-	                { className: "drop__list",
-	                    onClick: function onClick() {
-
-	                        _this2.setState({
-	                            isDrop: _this2.state.isDrop ^= 1
-	                        });
-	                    },
-
-	                    onWheel: function onWheel(ev) {
-	                        var deltaY = ev.deltaY,
-	                            currentTop = _this2.state.BtnOffset,
-	                            speed = 5; // 滚动速度
-
-	                        currentTop = deltaY >= 0 ? currentTop + speed : currentTop - speed;
-
-	                        if (currentTop >= 120 - _this2.state.dragBtnHeight) {
-	                            currentTop = 120 - _this2.state.dragBtnHeight;
-	                        } else if (currentTop < 0) {
-	                            currentTop = 0;
-	                        }
-
-	                        _this2.setState({
-	                            ListOffset: -(currentTop * _this2.state.dragListHeight / 120),
-	                            BtnOffset: currentTop
-	                        });
-
-	                        ev.stopPropagation();
-	                        ev.preventDefault();
-	                    }
-	                },
-	                _react2.default.createElement("i", {
-	                    style: this.state.isDrop ? { transform: "rotate(180deg)" } : { transform: "rotate(0deg)" }
-	                }),
-	                _react2.default.createElement(
-	                    "p",
-	                    null,
-	                    this.props.initPrompt
-	                ),
-	                _react2.default.createElement(
-	                    "section",
-	                    { className: "drop__wrap",
-	                        style: this.state.isDrop ? { height: "120px" } : { height: "0px" }
-	                    },
-	                    _react2.default.createElement(
-	                        "ul",
-	                        {
-	                            style: { top: this.state.ListOffset },
-	                            ref: "list",
-	                            onClick: function onClick(ev) {
-	                                var codeTypeShowWrap = _this2.refs["code-type-show__wrap"],
-	                                    oTarget = ev.target;
-
-	                                if (oTarget.tagName.toLowerCase() === "li") {
-	                                    _this2.props.returnDataCallback(oTarget.innerHTML);
-	                                }
-	                            } },
-	                        dataList.map(function (value, idx) {
-	                            return _react2.default.createElement(
-	                                "li",
-	                                {
-	                                    key: idx
-	                                },
-	                                value
-	                            );
-	                        })
-	                    ),
-	                    _react2.default.createElement(
-	                        "div",
-	                        { className: "drag__wrap",
-	                            style: {
-	                                height: "120px",
-	                                width: "10px"
-	                            },
-	                            ref: "drag-wrap",
-	                            onClick: function onClick(ev) {
-	                                var dragWrap = _this2.refs["drag-wrap"],
-	                                    postionArr = (0, _util.getPostion)(dragWrap),
-	                                    d = ev.pageY - postionArr[1];
-
-	                                if (d >= 120 - _this2.state.dragBtnHeight) {
-	                                    d = 120 - _this2.state.dragBtnHeight;
-	                                } else if (d < 0) {
-	                                    d = 0;
-	                                }
-
-	                                _this2.setState({
-	                                    ListOffset: -(d * _this2.state.dragListHeight / 120),
-	                                    BtnOffset: d
-	                                });
-	                                ev.stopPropagation();
-	                            }
-	                        },
-	                        _react2.default.createElement("button", { className: "drag__btn",
-	                            style: {
-	                                height: this.state.dragBtnHeight,
-	                                top: this.state.BtnOffset
-	                            },
-	                            ref: "drag-btn",
-	                            onMouseDown: function onMouseDown(ev) {
-	                                _this2.mdown.call(_this2, ev, function (params) {
-	                                    var _params = _slicedToArray(params, 1);
-
-	                                    var dragTop = _params[0];
-	                                    var bOffset = dragTop;
-	                                    var lOffset = 0;
-
-	                                    if (dragTop >= 120 - _this2.state.dragBtnHeight) {
-	                                        bOffset = 120 - _this2.state.dragBtnHeight;
-	                                    } else if (dragTop < 0) {
-	                                        bOffset = 0;
-	                                    }
-
-	                                    _this2.setState({
-	                                        ListOffset: -(bOffset * _this2.state.dragListHeight / 120),
-	                                        BtnOffset: bOffset
-	                                    });
-	                                });
-	                                ev.stopPropagation();
-	                                return false;
-	                            },
-
-	                            onClick: function onClick(ev) {
-	                                ev.stopPropagation();
-	                            }
-	                        })
-	                    )
-	                )
-	            );
-	        }
-	    }]);
-
-	    return DropList;
-	}(_react.Component);
-
-	exports.default = DropList;
-
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "DropList.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
-/* 402 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(173);
-
-	var _redux = __webpack_require__(180);
-
-	var _util = __webpack_require__(202);
-
-	var _AlertPlaneActions = __webpack_require__(215);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var DragAndUpdate = function (_Component) {
-	    _inherits(DragAndUpdate, _Component);
-
-	    function DragAndUpdate(props) {
-	        _classCallCheck(this, DragAndUpdate);
-
-	        var _this = _possibleConstructorReturn(this, (DragAndUpdate.__proto__ || Object.getPrototypeOf(DragAndUpdate)).call(this, props));
-
-	        _this.state = {
-	            buttonbOff: 1
-	        };
-	        _this.handleUploadData = _this.handleUploadData.bind(_this);
-	        _this.handleDrag = _this.handleDrag.bind(_this);
-	        _this.handleFileChoose = _this.handleFileChoose.bind(_this);
-	        _this.handleClickUpload = _this.handleClickUpload.bind(_this);
-	        _this.clearDefault = _this.clearDefault.bind(_this);
-	        return _this;
-	    }
-
-	    _createClass(DragAndUpdate, [{
-	        key: "handleUploadData",
-	        value: function handleUploadData(fileList) {
-	            var _props = this.props;
-	            var actions = _props.actions;
-	            var callback = _props.callback;
-	            var fr = new FileReader();
-	            var promiseStack = [];
-	            var flag = 0;
-	            var allSize = 0;
-	            var SizeLimit = 5 * 1024 * 1024;
-
-	            fileList = fileList.map(function (value, idx) {
-	                if (!value.type) {
-	                    actions.AlertPlaneThunk("非图片类型文件禁止上传");
-	                    return null;
-	                }
-	                allSize += value.size;
-	                return {
-	                    size: (0, _util.MemoryHumanReadable)(value.size),
-	                    file: value
-	                };
-	            });
-
-	            if (allSize > SizeLimit) {
-	                return actions.AlertPlaneThunk("单次上传图片总量不能超过5MB");
-	            } else {
-	                (function () {
-	                    var parseImageAndFetch = function parseImageAndFetch() {
-	                        var value = fileList[0];
-	                        fr.readAsDataURL(value.file);
-
-	                        fr.onloadend = function (evt) {
-	                            var promise = fetch("/upLoadImage", {
-	                                method: "POST",
-	                                headers: {
-	                                    "Charset": "utf-8",
-	                                    "Content-Type": "text/plain"
-	                                },
-	                                body: flag + evt.target.result
-	                            }).then(function (res) {
-	                                if (res.ok) {
-	                                    return res.json();
-	                                }
-	                            });
-
-	                            promiseStack.push(promise);
-	                            fileList.pop();
-
-	                            if (flag !== fileList.length) {
-	                                return parseImageAndFetch();
-	                            } else {
-	                                Promise.all(promiseStack).then(function (pics) {
-	                                    var datas = pics.sort(function (objA, objB) {
-	                                        return objA.order - objB.order;
-	                                    });
-	                                    callback && callback(datas);
-	                                }).catch(function (err) {
-	                                    throw err;
-	                                    actions.AlertPlaneThunk("上传图片失败");
-	                                });
-	                            }
-	                        };
-	                    };
-
-	                    parseImageAndFetch();
-	                })();
-	            }
-	        }
-	    }, {
-	        key: "handleDrag",
-	        value: function handleDrag(ev) {
-	            var dt = ev.dataTransfer,
-	                oDatas = Array.from(dt.files);
-
-	            this.clearDefault(ev);
-	            this.handleUploadData(oDatas);
-	        }
-	    }, {
-	        key: "handleFileChoose",
-	        value: function handleFileChoose() {
-	            var files = this.refs["file"].files;
-	            if (files.length) {
-	                this.handleUploadData(Array.from(files));
-	            }
-	            this.setState({
-	                buttonbOff: this.state.buttonbOff ^= 1
-	            });
-	        }
-	    }, {
-	        key: "handleClickUpload",
-	        value: function handleClickUpload(ev) {
-	            console.log(this.state.buttonbOff);
-	            if (this.state.buttonbOff) {
-	                this.setState({
-	                    buttonbOff: this.state.buttonbOff ^= 1
-	                });
-
-	                this.refs["file"].click();
-	            }
-
-	            this.clearDefault(ev);
-	        }
-	    }, {
-	        key: "clearDefault",
-	        value: function clearDefault(ev) {
-	            ev.stopPropagation();
-	            ev.preventDefault();
-	        }
-	    }, {
-	        key: "render",
-	        value: function render() {
-	            return _react2.default.createElement(
-	                "div",
-	                { className: "column-arrange" },
-	                _react2.default.createElement(
-	                    "figure",
-	                    { className: "drop__upload__area",
-	                        onDragEnter: this.clearDefault,
-	                        onDragOver: this.clearDefault,
-	                        onDrop: this.handleDrag
-	                    },
-	                    "拖拽上传图片"
-	                ),
-	                _react2.default.createElement("input", { type: "file",
-	                    accept: "image/*",
-	                    style: { display: "none" },
-	                    multiple: true,
-	                    ref: "file",
-	                    onChange: this.handleFileChoose
-	                }),
-	                _react2.default.createElement(
-	                    "button",
-	                    { className: "upload__btn",
-	                        onClick: this.handleClickUpload
-	                    },
-	                    "点击上传"
-	                ),
-	                _react2.default.createElement(
-	                    "p",
-	                    { style: { color: "red" } },
-	                    "（ps: 单次上传图片总量不能超过5MB！）"
-	                )
-	            );
-	        }
-	    }]);
-
-	    return DragAndUpdate;
-	}(_react.Component);
-
-	exports.default = (0, _reactRedux.connect)(function (state) {
-	    return {};
-	}, function (dispatch) {
-	    return {
-	        actions: (0, _redux.bindActionCreators)({
-	            AlertPlaneThunk: _AlertPlaneActions.AlertPlaneThunk
-	        }, dispatch)
-	    };
-	})(DragAndUpdate);
-
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "DragAndUpdate.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
-/* 403 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(404);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(406)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/autoprefixer-loader/index.js!./../../node_modules/less-loader/index.js!./app.less", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/autoprefixer-loader/index.js!./../../node_modules/less-loader/index.js!./app.less");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 404 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(405)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "@charset \"utf-8\";\n* {\n  box-sizing: border-box;\n  font-family: arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  font-size: 14px;\n  outline: none;\n}\nbody {\n  margin: 0;\n  padding: 0;\n  font-size: 0;\n}\na {\n  -webkit-transition: 5s;\n  transition: 5s;\n  text-decoration: none;\n}\nul,\nol {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\ntable {\n  border-collapse: collapse;\n}\nselect {\n  -webkit-appearance: none;\n     -moz-appearance: none;\n          appearance: none;\n}\nh1,\nh2,\nh3 {\n  margin-bottom: 1em;\n}\np,\npre {\n  margin: 0;\n}\nblockquote {\n  margin: 0;\n}\ninput[type=\"submit\"],\nbutton {\n  display: inline-block;\n  border-radius: 0;\n  border: none;\n  padding: 0;\n  background: none;\n  cursor: pointer;\n}\nfigure {\n  margin: 0;\n}\ni {\n  display: inline-block;\n}\n/*下拉组件*/\n.drop__list {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  width: 140px;\n  border: 1px solid #ccc;\n  cursor: pointer;\n  position: relative;\n  border-radius: 3px 3px 0px 0px;\n  color: #929699;\n  font-size: 0px;\n  margin-right: 20px;\n}\n.drop__list p {\n  width: 100px;\n  height: 20px;\n  margin: 3px 0 3px 5px;\n  font-size: 14px;\n}\n.drop__list i {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  top: 5px;\n  right: 5px;\n  content: \"\";\n  width: 16px;\n  height: 16px;\n  display: block;\n  background: url(\"/img/icon.png\") -30px 0px;\n}\n.drop__list .drop__wrap {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  top: 26px;\n  left: 0;\n  width: 100%;\n  border-radius: 0px 0px 3px 3px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  overflow: hidden;\n  border: 1px solid #ccc;\n  border-top: none;\n  z-index: 1234;\n  height: 0px;\n}\n.drop__list ul {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  padding: 5px 0;\n  overflow: hidden;\n  background: #E6E6E6;\n  font-size: 14px;\n}\n.drop__list ul li {\n  height: 25px;\n  line-height: 25px;\n  padding: 0px 5px;\n}\n.drop__list ul li:hover {\n  color: #fff;\n  background: #1C86D1;\n}\n.drag__wrap {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  top: 0;\n  right: 0;\n  background: #F5F5F5;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.drag__wrap .drag__btn {\n  border-radius: 3px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  min-height: 5px;\n  width: 100%;\n  border: 1px solid #979797;\n  background-color: rgba(0, 0, 0, 0.6);\n}\n.drag__wrap .drag__btn:hover {\n  border: 1px solid #636363;\n  background-color: rgba(0, 0, 0, 0.8);\n}\n.drag__wrap .drag__btn:active {\n  border: 1px solid #636363;\n  background-color: #000000;\n}\n.column-arrange {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.none {\n  display: none !important;\n}\n.b-c {\n  position: fixed;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  margin: auto;\n}\n.hidden {\n  height: 0 !important;\n}\n@-webkit-keyframes swing {\n  20%,\n  40%,\n  60%,\n  80%,\n  100% {\n    -webkit-transform-origin: topcenter;\n            transform-origin: topcenter;\n  }\n  20% {\n    -webkit-transform: rotate(15deg);\n            transform: rotate(15deg);\n  }\n  40% {\n    -webkit-transform: rotate(-10deg);\n            transform: rotate(-10deg);\n  }\n  60% {\n    -webkit-transform: rotate(5deg);\n            transform: rotate(5deg);\n  }\n  80% {\n    -webkit-transform: rotate(-5deg);\n            transform: rotate(-5deg);\n  }\n  100% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n  }\n}\n@keyframes swing {\n  20%,\n  40%,\n  60%,\n  80%,\n  100% {\n    -webkit-transform-origin: topcenter;\n            transform-origin: topcenter;\n  }\n  20% {\n    -webkit-transform: rotate(15deg);\n            transform: rotate(15deg);\n  }\n  40% {\n    -webkit-transform: rotate(-10deg);\n            transform: rotate(-10deg);\n  }\n  60% {\n    -webkit-transform: rotate(5deg);\n            transform: rotate(5deg);\n  }\n  80% {\n    -webkit-transform: rotate(-5deg);\n            transform: rotate(-5deg);\n  }\n  100% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n  }\n}\n@-webkit-keyframes masked {\n  0% {\n    background-position: 0 0;\n  }\n  100% {\n    background-position: -100% 0;\n  }\n}\n@keyframes masked {\n  0% {\n    background-position: 0 0;\n  }\n  100% {\n    background-position: -100% 0;\n  }\n}\n.comment__feedback__wrap {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  overflow: hidden;\n  background: #fbfbfb;\n  width: 100%;\n  margin-top: 20px;\n}\n.comment__feedback__box__syntaxs {\n  border-radius: 5px 5px 0 0;\n  border: 1px solid #272636;\n}\n.comment__feedback__box__syntaxs .syntaxs__list {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 32px;\n  -ms-flex-flow: row no-wrap;\n      flex-flow: row no-wrap;\n}\n.comment__feedback__box__syntaxs .syntaxs__list li {\n  width: 32px;\n  height: 32px;\n  margin: 0 4px;\n  background-image: url(\"/img/icon.png\");\n  cursor: pointer;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .bold {\n  background-position: 6px -79px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .bold:hover {\n  background: url(\"/img/icon-hover.png\") 6px -79px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .italic {\n  background-position: 8px -127px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .italic:hover {\n  background: url(\"/img/icon-hover.png\") 8px -127px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .a-link {\n  background-position: 4px -103px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .a-link:hover {\n  background: url(\"/img/icon-hover.png\") 4px -103px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .image {\n  background-position: 4px -151px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .image:hover {\n  background: url(\"/img/icon-hover.png\") 4px -151px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .table {\n  background-position: 4px -175px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .table:hover {\n  background: url(\"/img/icon-hover.png\") 4px -175px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .blockquote-block {\n  background-position: 4px -292px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .blockquote-block:hover {\n  background: url(\"/img/icon-hover.png\") 4px -292px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .u-list {\n  background-position: 2px -223px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .u-list:hover {\n  background: url(\"/img/icon-hover.png\") 2px -223px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .o-list {\n  background-position: 2px -199px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .o-list:hover {\n  background: url(\"/img/icon-hover.png\") 2px -199px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h1-tag {\n  background-position: 4px -247px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h1-tag:hover {\n  background: url(\"/img/icon-hover.png\") 4px -247px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h2-tag {\n  background-position: 4px -269px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h2-tag:hover {\n  background: url(\"/img/icon-hover.png\") 4px -269px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .code-block {\n  background-position: 4px -341px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .code-block:hover {\n  background: url(\"/img/icon-hover.png\") 4px -341px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .emoji-list {\n  background-position: 5px -316px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .emoji-list:hover {\n  background: url(\"/img/icon-hover.png\") 5px -316px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 5px;\n  border-top: 1px solid #272636;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list > div.choice-btn {\n  border-radius: 5px;\n  position: relative;\n  width: 32px;\n  height: 32px;\n  margin: 0 4px;\n  cursor: pointer;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list > div.choice-btn:hover {\n  box-shadow: 0 0 1px 1px #1C86D1;\n}\n.comment__feedback__box__syntaxs .drop__upload__area {\n  border-radius: 5px;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  position: relative;\n  width: 454px;\n  height: 80px;\n  margin: 15px 0;\n  border: 1px dashed #1C86D1;\n  text-align: center;\n  font: 300 30px/75px \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  cursor: default;\n}\n.comment__feedback__box__syntaxs .drop__upload__area::after,\n.comment__feedback__box__syntaxs .drop__upload__area::before {\n  content: '';\n  display: block;\n  z-index: -1;\n  color: #1C86D1;\n  box-shadow: inset 0 0 0 2px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  -webkit-animation: clip-me 6s linear infinite;\n          animation: clip-me 6s linear infinite;\n}\n.comment__feedback__box__syntaxs .drop__upload__area::before {\n  -webkit-animation-delay: -3s;\n          animation-delay: -3s;\n}\n@-webkit-keyframes clip-me {\n  0%,\n  100% {\n    clip: rect(0px, 454px, 4px, 0px);\n  }\n  25% {\n    clip: rect(0px, 4px, 80px, 0px);\n  }\n  50% {\n    clip: rect(76px, 454px, 80px, 0px);\n  }\n  75% {\n    clip: rect(0px, 454px, 80px, 450px);\n  }\n}\n@keyframes clip-me {\n  0%,\n  100% {\n    clip: rect(0px, 454px, 4px, 0px);\n  }\n  25% {\n    clip: rect(0px, 4px, 80px, 0px);\n  }\n  50% {\n    clip: rect(76px, 454px, 80px, 0px);\n  }\n  75% {\n    clip: rect(0px, 454px, 80px, 450px);\n  }\n}\n.comment__feedback__box__syntaxs .upload__btn {\n  border-radius: 5px;\n  width: 454px;\n  height: 40px;\n  background: #1C86D1;\n  color: #fff;\n  font-size: 18px;\n  margin-bottom: 10px;\n}\n.comment__feedback__box__syntaxs .upload__btn:active {\n  background: #3075DC;\n}\n.comment__feedback__box__syntaxs input[type=\"text\"] {\n  border-radius: 3px;\n  height: 30px;\n  border: 1px solid #1C86D1;\n  margin-right: 20px;\n  font-size: 14px;\n  text-indent: 5px;\n}\n.comment__feedback__box__syntaxs .insert {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  border-radius: 5px;\n  color: #272636;\n  border: 1px solid #1C86D1;\n  line-height: 30px;\n  width: 70px;\n  height: 30px;\n}\n.comment__feedback__box__syntaxs .insert:hover {\n  background: #1C86D1;\n  color: #fff;\n}\n.comment__feedback__box__syntaxs .table-size-matrix {\n  margin: 10px 0 10px 90px;\n}\n.comment__feedback__box__syntaxs .table-size-matrix tr,\n.comment__feedback__box__syntaxs .table-size-matrix td {\n  border: 1px solid #ccc;\n}\n.comment__feedback__box__syntaxs .table-size-matrix td {\n  padding: 15px;\n}\n.comment__feedback__box__syntaxs .table-matrix-dimension {\n  font-size: 18px;\n  text-decoration: underline;\n  margin: 0 20px;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap {\n  width: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  border-top: 1px solid #ccc;\n  border-left: 1px solid #ccc;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap td {\n  border-right: 1px solid #ccc;\n  border-bottom: 1px solid #ccc;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap td:hover {\n  background: #ccc;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap td a {\n  display: inline-block;\n  width: 32px;\n  height: 32px;\n  padding: 4px;\n}\n.comment__feedback__box__wrap {\n  position: relative;\n}\n.editor__resize__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.editor__resize {\n  display: inline-block;\n  width: 130px;\n  height: 8px;\n  cursor: row-resize;\n  margin-top: 2px;\n  border-top: 1px solid #ccc;\n  border-bottom: 1px solid #ccc;\n}\n.comment__feedback__box {\n  position: relative;\n  width: 100%;\n}\n.comment__feedback {\n  padding: 10px;\n  border-top: 1px solid #272636;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n}\n.comment__feedback h3 {\n  font: 200 24px/1 arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n}\n.login-infos {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  font-size: 16px;\n  padding-bottom: 10px;\n}\n.login-infos a {\n  color: #1C86D1;\n}\n.login-infos .init_prompt {\n  cursor: default;\n  color: rgba(0, 0, 0, 0.5);\n}\n.login-out__btn {\n  border-radius: 5px;\n  float: right;\n  width: 70px;\n  height: 25px;\n  background: #C81623;\n  color: #fff;\n}\n.login-out__btn:active {\n  background: #AA151F;\n}\n.login-in__btn {\n  border-radius: 5px;\n  float: right;\n  width: 70px;\n  height: 25px;\n  padding: 0 5px;\n  background: #1C86D1;\n  color: #fff;\n}\n.login-in__btn:active {\n  background: #3075DC;\n}\n.comment__feedback--section {\n  width: calc(100% - 74px);\n}\n.comment__feedback--edit {\n  border-radius: 0px 0px 5px 5px;\n  width: 100%;\n  min-height: 30px;\n  padding: 5px;\n  border: 1px solid #272636;\n  border-top: none;\n  font: 200 14px/1.5 arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  resize: none;\n  overflow: hidden;\n  white-space: pre-wrap;\n  -moz-tab-size: 4;\n    -o-tab-size: 4;\n       tab-size: 4;\n}\n.comment__feedback--btns {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  width: 100%;\n  margin-top: 10px;\n}\n.comment__feedback--btns button {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  border-radius: 5px;\n  line-height: 30px;\n  width: 70px;\n  height: 30px;\n}\n.feedback--btns__reset {\n  color: #C81623;\n  border: 1px solid #C81623;\n}\n.feedback--btns__reset:hover {\n  background: #C81623;\n  color: #fff;\n}\n.feedback--btns__comment {\n  margin-left: 10px;\n  color: #272636;\n  border: 1px solid #1C86D1;\n}\n.feedback--btns__comment:hover {\n  background: #1C86D1;\n  color: #fff;\n}\n.comment__feedback__mask {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  border-radius: 2px;\n  position: absolute;\n  top: 0;\n  left: 1px;\n  width: 604px;\n  height: 149px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  cursor: default;\n  background: #ccc;\n}\n.comment__feedback__mask p {\n  color: #fff;\n}\n.comment__feedback__mask--title {\n  font: 100 60px/60px \"\\5FAE\\8F6F\\96C5\\9ED1\";\n}\n.comment__feedback__mask--pinyin {\n  margin-top: 15px;\n  font: 100 20px/20px arial;\n}\n.clearfix::after {\n  content: \".\";\n  display: block;\n  height: 0;\n  visibility: hidden;\n  clear: both;\n}\n.demo {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  width: 900px;\n  margin: 50px auto 50px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  padding: 0 100px;\n}\n.comment__wrap {\n  width: 100%;\n}\n.comment__header {\n  border-radius: 5px;\n  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.6);\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -moz-justify-content: space-between;\n  height: 50px;\n  background: #1C86D1;\n  color: #fff;\n  font-size: 0;\n  padding: 5px 8px;\n}\n.comment__header::after {\n  content: \"\";\n  display: block;\n  position: absolute;\n  left: 41px;\n  bottom: -20px;\n  height: 0px;\n  border: 10px solid transparent;\n  border-top: 10px solid #1C86D1;\n}\n.comment__header .comment__header__span {\n  width: 150px;\n  height: 16px;\n  font: 200 16px/16px arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  margin-left: 10px;\n}\n.comment__header .comment__header__btns {\n  width: 80px;\n  height: 30px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.comment__header .comment__header__btns button {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  display: inline-block;\n  width: 40px;\n  height: 30px;\n  color: #fff;\n  font-size: 14px;\n}\n.comment__header .comment__header__btns button:hover {\n  color: #d32;\n}\n.comment__footer {\n  border-radius: 5px;\n  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.6);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  position: relative;\n  height: 70px;\n  background: #1C86D1;\n}\n.comment__footer::before {\n  content: \"\";\n  display: block;\n  position: absolute;\n  top: -20px;\n  left: 41px;\n  height: 0;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #1C86D1;\n}\n.comment__pagination {\n  border-radius: 5px;\n  box-shadow: 0 0 2px rgba(0, 0, 0, 0.7);\n  overflow: hidden;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 35px;\n}\n.comment__pagination li {\n  -webkit-transition: 0.3s;\n  transition: 0.3s;\n  width: 40px;\n  height: 100%;\n  color: #fff;\n  text-align: center;\n  cursor: pointer;\n}\n.comment__pagination li:hover {\n  color: #1C86D1;\n  background: #fff;\n}\n.comment__pagination li div {\n  padding: 10px 0;\n  height: 100%;\n  line-height: 15px;\n}\n.comment__pagination li > div.active {\n  color: #1C86D1;\n  background: #fff;\n  border-left: none !important;\n}\n.comment__pagination li:not(:nth-of-type(1)) div {\n  border-left: 1px solid rgba(0, 0, 0, 0.2);\n}\n.comment__list {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  margin: 0 0 0 50px;\n  border-left: 2px solid #1C86D1;\n}\n.no__comment__item {\n  padding: 20px;\n  text-align: center;\n}\n.no__comment__item p {\n  border-radius: 5px;\n  height: 70px;\n  font-size: 24px;\n  line-height: 70px;\n  color: rgba(0, 0, 0, 0.6);\n  border: 1px solid #272636;\n}\n.comment__item {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: relative;\n  padding: 20px;\n}\n.comment__item::after {\n  border-radius: 50%;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  left: -8px;\n  top: 40px;\n  content: \"\";\n  display: block;\n  background: #1C86D1;\n  width: 10px;\n  height: 10px;\n  border: 2px solid #fff;\n}\n.comment__item:hover::after {\n  background: #51CA65;\n}\n.comment__item:hover .comment__content {\n  -webkit-transform: translateX(15px);\n          transform: translateX(15px);\n}\n.comment__content {\n  border-radius: 5px;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n  padding: 10px;\n  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);\n}\n.comment__author--avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.comment__author--avatar > img:hover,\n.comment__author--avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.comment__content--main {\n  width: calc(100% - 74px);\n}\n.comment__content--author {\n  font-size: 18px;\n}\n.comment__content--author a {\n  color: #1C86D1;\n}\n.comment__content--time {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  font-size: 12px;\n  margin-top: 2px;\n  color: #ddd;\n  cursor: default;\n}\n.comment__content--time:hover {\n  color: #1C86D1;\n}\n.comment__content--content {\n  font-size: 0px;\n  line-height: 1.4;\n  padding: 24px 0 0 0px;\n  white-space: pre;\n}\n.comment__content--content h1.text-effect-basic {\n  text-fill-color: transparent;\n  -webkit-text-fill-color: transparent;\n  background-clip: text;\n  -webkit-background-clip: text;\n  background-size: 200% 200%;\n  -webkit-animation: masked 3s infinite linear;\n          animation: masked 3s infinite linear;\n}\n.comment__content--content h1 {\n  margin-top: 10px;\n  padding-bottom: 10px;\n  font-size: 25px;\n  color: #7c795d;\n  font-weight: normal;\n  line-height: 1.1;\n  border-bottom: 1px solid #7c795d;\n}\n.comment__content--content h2 {\n  margin: 5px 0;\n  height: 30px;\n  text-indent: 5px;\n  color: #7c795d;\n  font: 400 20px/30px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  border-left: 5px solid #1C86D1;\n}\n.comment__content--content pre,\n.comment__content--content p,\n.comment__content--content code {\n  -moz-tab-size: 2;\n    -o-tab-size: 2;\n       tab-size: 2;\n  white-space: pre-wrap;\n  word-break: break-all;\n}\n.comment__content--content p,\n.comment__content--content code {\n  font-size: 14px;\n}\n.comment__content--content strong {\n  font-size: 16px;\n}\n.comment__content--content a {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  color: #1C86D1;\n  margin: 0px 2px;\n}\n.comment__content--content a:hover {\n  color: #C91523;\n}\n.comment__content--content img {\n  max-width: 512px;\n  vertical-align: bottom;\n}\n.comment__content--content table {\n  border-radius: 5px;\n  margin: 20px 0;\n  padding: 8px;\n  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);\n  white-space: normal;\n  border-collapse: collapse;\n}\n.comment__content--content table tr {\n  border: 1px solid #000;\n}\n.comment__content--content table tr td,\n.comment__content--content table tr th {\n  font-size: 14px;\n  padding: 5px;\n  word-break: break-word;\n}\n.comment__content--content table tr td {\n  font-weight: 200;\n  border: 1px solid #000;\n}\n.comment__content--content blockquote {\n  border-radius: 5px;\n  position: relative;\n  background: #CCD0D5;\n  padding: 25px 10px 10px 30px;\n  overflow: hidden;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n}\n.comment__content--content blockquote::before {\n  position: absolute;\n  top: 0;\n  left: 0;\n  font-size: 14px;\n  background: -webkit-linear-gradient(112deg, transparent 50%, #1C86D1 50%);\n  background: linear-gradient(-22deg, transparent 50%, #1C86D1 50%);\n  width: 80px;\n  height: 30px;\n  display: block;\n  content: \"\\5F15\\8FF0\";\n  color: #fff;\n  padding: 3px 0 0 4px;\n}\n.comment__content--content pre {\n  border-radius: 5px;\n  overflow: hidden;\n  padding: 15px 0px 15px 8px;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n  margin: 15px 0;\n  background: #49483e;\n}\n.comment__content--content pre code {\n  color: #a6e22e;\n}\n.comment__content--content pre code .hljs-comment,\n.comment__content--content pre code .hljs-quote {\n  color: #999580;\n}\n.comment__content--content pre code .hljs-variable,\n.comment__content--content pre code .hljs-template-variable,\n.comment__content--content pre code .hljs-attr,\n.comment__content--content pre code .hljs-tag,\n.comment__content--content pre code .hljs-name,\n.comment__content--content pre code .hljs-regexp,\n.comment__content--content pre code .hljs-link,\n.comment__content--content pre code .hljs-name,\n.comment__content--content pre code .hljs-selector-id,\n.comment__content--content pre code .hljs-selector-class {\n  color: #f2777a;\n}\n.comment__content--content pre code .hljs-number,\n.comment__content--content pre code .hljs-meta,\n.comment__content--content pre code .hljs-built_in,\n.comment__content--content pre code .hljs-builtin-name,\n.comment__content--content pre code .hljs-literal,\n.comment__content--content pre code .hljs-type,\n.comment__content--content pre code .hljs-params {\n  color: #ae81ff;\n}\n.comment__content--content pre code .hljs-string,\n.comment__content--content pre code .hljs-symbol,\n.comment__content--content pre code .hljs-bullet {\n  color: #e6db74;\n}\n.comment__content--content pre code .hljs-title,\n.comment__content--content pre code .hljs-section {\n  color: #6684e1;\n}\n.comment__content--content pre code .hljs-keyword,\n.comment__content--content pre code .hljs-selector-tag {\n  color: #66D9EF;\n}\n.comment__content--content pre code .hljs {\n  display: block;\n  overflow-x: auto;\n  background: #20201d;\n  color: #a6a28c;\n  padding: 0.5em;\n}\n.comment__content--content pre code .hljs-emphasis {\n  font-style: italic;\n}\n.comment__content--content pre code .hljs-strong {\n  font-weight: bold;\n}\n.comment__content--content ol {\n  counter-reset: section;\n  padding: 10px 0 10px 20px;\n}\n.comment__content--content ol > li {\n  position: relative;\n  min-height: 20px;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  margin: 5px 0px;\n}\n.comment__content--content ol > li:before {\n  counter-increment: section;\n  content: counters(section, \"\") \".\";\n  display: inline-block;\n  position: absolute;\n  top: 0;\n  left: -20px;\n  font-size: 16px;\n  font-weight: bold;\n  font-style: italic;\n}\n.comment__content--content ol > li:nth-of-type(3n+1)::before {\n  color: #FE0002;\n}\n.comment__content--content ol > li:nth-of-type(3n+2)::before {\n  color: #F4F800;\n}\n.comment__content--content ol > li:nth-of-type(3n+3)::before {\n  color: #A3DF03;\n}\n.comment__content--content ul {\n  padding: 10px 0 10px 15px;\n}\n.comment__content--content ul > li {\n  position: relative;\n  margin-bottom: 10px;\n  line-height: 1.1;\n  min-height: 20px;\n  word-break: break-all;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n}\n.comment__content--content ul > li::before {\n  border-radius: 50%;\n  position: absolute;\n  top: 6px;\n  left: -13px;\n  content: \"\";\n  display: inline-block;\n  width: 8px;\n  height: 8px;\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #1C86D1 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #1C86D1 100%);\n}\n.comment__content--content ul > li:hover::before {\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #91E22E 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #91E22E 100%);\n}\n.comment__content--options {\n  padding-top: 15px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.comment__content--options__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-flex: 8;\n      -ms-flex-positive: 8;\n          flex-grow: 8;\n}\n.comment__content--options__wrap a {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.comment__content--options__wrap a i {\n  width: 16px;\n  height: 16px;\n  background-image: url(\"/img/icon.png\");\n}\n.comment__content--options__wrap a span {\n  font-size: 12px;\n  margin-left: 3px;\n  color: #272636;\n}\n.comment__content--options__wrap a:hover span {\n  color: #1C86D1;\n}\n.comment__content--options__wrap a:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.comment__content--options__callback i {\n  background-position: -5px 0px;\n}\n.comment__content--options__del {\n  margin-left: 8px;\n}\n.comment__content--options__del i {\n  background-position: -5px -16px;\n}\n.comment__options__vote-up {\n  text-align: right;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n.comment__options__vote-up button {\n  font-size: 18px;\n}\n.comment__options__vote-up button span {\n  font-size: 18px;\n}\n.comment__options__vote-up button:hover {\n  color: #1C86D1;\n}\n.comment__options__has-voted-up {\n  text-align: right;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n.comment__options__has-voted-up button {\n  font-size: 18px;\n  color: #C91523;\n  cursor: default;\n}\n.comment__options__has-voted-up button span {\n  font-size: 18px;\n}\n.feedback__content {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  overflow: hidden;\n  width: 100%;\n  margin: 20px 10px 10px 5px;\n}\n.feedback__content--main {\n  border-radius: 5px;\n  position: relative;\n  border: 1px solid #272636;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  padding: 5px;\n  margin: 20px 0 0;\n}\n.feedback__content--main::after,\n.feedback__content--main::before {\n  content: \"\";\n  height: 0;\n  position: absolute;\n  left: 30px;\n}\n.feedback__content--main::after {\n  top: -20px;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #272636;\n}\n.feedback__content--main::before {\n  z-index: 2;\n  top: -19px;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #fff;\n}\n.sub__feedback {\n  margin: 5px 0;\n}\n.sub__feedback span {\n  font-size: 18px;\n  color: #1C86D1;\n}\n.feedback__wrap--content {\n  width: calc(100% - 74px);\n}\n.feedback__content--avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.feedback__content--avatar > img:hover,\n.feedback__content--avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.feedback__wrap--content {\n  width: calc(100% - 74px);\n}\n.feedback__content--author {\n  font-size: 18px;\n}\n.feedback__content--author a {\n  color: #1C86D1;\n}\n.feedback__content--time {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  font-size: 12px;\n  margin-top: 2px;\n  color: #ddd;\n  cursor: default;\n}\n.feedback__content--time:hover {\n  color: #1C86D1;\n}\n.feedback__content--content {\n  font-size: 0px;\n  line-height: 1.4;\n  padding: 24px 0 0 0px;\n  white-space: pre;\n}\n.feedback__content--content h1.text-effect-basic {\n  text-fill-color: transparent;\n  -webkit-text-fill-color: transparent;\n  background-clip: text;\n  -webkit-background-clip: text;\n  background-size: 200% 200%;\n  -webkit-animation: masked 3s infinite linear;\n          animation: masked 3s infinite linear;\n}\n.feedback__content--content h1 {\n  margin-top: 10px;\n  padding-bottom: 10px;\n  font-size: 25px;\n  color: #7c795d;\n  font-weight: normal;\n  line-height: 1.1;\n  border-bottom: 1px solid #7c795d;\n}\n.feedback__content--content h2 {\n  margin: 5px 0;\n  height: 30px;\n  text-indent: 5px;\n  color: #7c795d;\n  font: 400 20px/30px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  border-left: 5px solid #1C86D1;\n}\n.feedback__content--content pre,\n.feedback__content--content p,\n.feedback__content--content code {\n  -moz-tab-size: 2;\n    -o-tab-size: 2;\n       tab-size: 2;\n  white-space: pre-wrap;\n  word-break: break-all;\n}\n.feedback__content--content p,\n.feedback__content--content code {\n  font-size: 14px;\n}\n.feedback__content--content strong {\n  font-size: 16px;\n}\n.feedback__content--content a {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  color: #1C86D1;\n  margin: 0px 2px;\n}\n.feedback__content--content a:hover {\n  color: #C91523;\n}\n.feedback__content--content img {\n  max-width: 512px;\n  vertical-align: bottom;\n}\n.feedback__content--content table {\n  border-radius: 5px;\n  margin: 20px 0;\n  padding: 8px;\n  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);\n  white-space: normal;\n  border-collapse: collapse;\n}\n.feedback__content--content table tr {\n  border: 1px solid #000;\n}\n.feedback__content--content table tr td,\n.feedback__content--content table tr th {\n  font-size: 14px;\n  padding: 5px;\n  word-break: break-word;\n}\n.feedback__content--content table tr td {\n  font-weight: 200;\n  border: 1px solid #000;\n}\n.feedback__content--content blockquote {\n  border-radius: 5px;\n  position: relative;\n  background: #CCD0D5;\n  padding: 25px 10px 10px 30px;\n  overflow: hidden;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n}\n.feedback__content--content blockquote::before {\n  position: absolute;\n  top: 0;\n  left: 0;\n  font-size: 14px;\n  background: -webkit-linear-gradient(112deg, transparent 50%, #1C86D1 50%);\n  background: linear-gradient(-22deg, transparent 50%, #1C86D1 50%);\n  width: 80px;\n  height: 30px;\n  display: block;\n  content: \"\\5F15\\8FF0\";\n  color: #fff;\n  padding: 3px 0 0 4px;\n}\n.feedback__content--content pre {\n  border-radius: 5px;\n  overflow: hidden;\n  padding: 15px 0px 15px 8px;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n  margin: 15px 0;\n  background: #49483e;\n}\n.feedback__content--content pre code {\n  color: #a6e22e;\n}\n.feedback__content--content pre code .hljs-comment,\n.feedback__content--content pre code .hljs-quote {\n  color: #999580;\n}\n.feedback__content--content pre code .hljs-variable,\n.feedback__content--content pre code .hljs-template-variable,\n.feedback__content--content pre code .hljs-attr,\n.feedback__content--content pre code .hljs-tag,\n.feedback__content--content pre code .hljs-name,\n.feedback__content--content pre code .hljs-regexp,\n.feedback__content--content pre code .hljs-link,\n.feedback__content--content pre code .hljs-name,\n.feedback__content--content pre code .hljs-selector-id,\n.feedback__content--content pre code .hljs-selector-class {\n  color: #f2777a;\n}\n.feedback__content--content pre code .hljs-number,\n.feedback__content--content pre code .hljs-meta,\n.feedback__content--content pre code .hljs-built_in,\n.feedback__content--content pre code .hljs-builtin-name,\n.feedback__content--content pre code .hljs-literal,\n.feedback__content--content pre code .hljs-type,\n.feedback__content--content pre code .hljs-params {\n  color: #ae81ff;\n}\n.feedback__content--content pre code .hljs-string,\n.feedback__content--content pre code .hljs-symbol,\n.feedback__content--content pre code .hljs-bullet {\n  color: #e6db74;\n}\n.feedback__content--content pre code .hljs-title,\n.feedback__content--content pre code .hljs-section {\n  color: #6684e1;\n}\n.feedback__content--content pre code .hljs-keyword,\n.feedback__content--content pre code .hljs-selector-tag {\n  color: #66D9EF;\n}\n.feedback__content--content pre code .hljs {\n  display: block;\n  overflow-x: auto;\n  background: #20201d;\n  color: #a6a28c;\n  padding: 0.5em;\n}\n.feedback__content--content pre code .hljs-emphasis {\n  font-style: italic;\n}\n.feedback__content--content pre code .hljs-strong {\n  font-weight: bold;\n}\n.feedback__content--content ol {\n  counter-reset: section;\n  padding: 10px 0 10px 20px;\n}\n.feedback__content--content ol > li {\n  position: relative;\n  min-height: 20px;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  margin: 5px 0px;\n}\n.feedback__content--content ol > li:before {\n  counter-increment: section;\n  content: counters(section, \"\") \".\";\n  display: inline-block;\n  position: absolute;\n  top: 0;\n  left: -20px;\n  font-size: 16px;\n  font-weight: bold;\n  font-style: italic;\n}\n.feedback__content--content ol > li:nth-of-type(3n+1)::before {\n  color: #FE0002;\n}\n.feedback__content--content ol > li:nth-of-type(3n+2)::before {\n  color: #F4F800;\n}\n.feedback__content--content ol > li:nth-of-type(3n+3)::before {\n  color: #A3DF03;\n}\n.feedback__content--content ul {\n  padding: 10px 0 10px 15px;\n}\n.feedback__content--content ul > li {\n  position: relative;\n  margin-bottom: 10px;\n  line-height: 1.1;\n  min-height: 20px;\n  word-break: break-all;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n}\n.feedback__content--content ul > li::before {\n  border-radius: 50%;\n  position: absolute;\n  top: 6px;\n  left: -13px;\n  content: \"\";\n  display: inline-block;\n  width: 8px;\n  height: 8px;\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #1C86D1 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #1C86D1 100%);\n}\n.feedback__content--content ul > li:hover::before {\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #91E22E 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #91E22E 100%);\n}\n.feedback__content--options {\n  padding-top: 15px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.feedback__content--options__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 8;\n      -ms-flex-positive: 8;\n          flex-grow: 8;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.feedback__content--options__wrap a {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.feedback__content--options__wrap a i {\n  width: 16px;\n  height: 16px;\n  background-image: url(\"/img/icon.png\");\n}\n.feedback__content--options__wrap a span {\n  font-size: 12px;\n  margin-left: 3px;\n  color: #272636;\n}\n.feedback__content--options__wrap a:hover span {\n  color: #1C86D1;\n}\n.feedback__content--options__wrap a:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.feedback__content--options__callback i {\n  background-position: -5px 0px;\n}\n.feedback__content--options__del {\n  margin-left: 8px;\n}\n.feedback__content--options__del i {\n  background-position: -5px -16px;\n}\n.feedback__options__vote-up {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  text-align: right;\n}\n.feedback__options__vote-up button {\n  font-size: 18px;\n}\n.feedback__options__vote-up button span {\n  font-size: 18px;\n}\n.feedback__options__vote-up button:hover {\n  color: #1C86D1;\n}\n.editer-wrap {\n  margin-top: 20px;\n}\n.editer-wrap .comment__feedback {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  width: 100%;\n  border-top: none;\n}\n.editer-wrap .editer-wrap__avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.editer-wrap .editer-wrap__avatar > img:hover,\n.editer-wrap .editer-wrap__avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.editer-wrap .editer-wrap__avatar img {\n  height: 100%;\n}\n.editer-wrap .comment__feedback--edit {\n  min-height: 150px;\n}\n.editer-wrap .comment__feddback--btns {\n  width: 100%;\n}\n.login__table__bg {\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 999998;\n  background: rgba(0, 0, 0, 0.4);\n}\n.login__table {\n  border-radius: 5px;\n  box-shadow: 0 0 10px #000000;\n  position: fixed;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  margin: auto;\n  width: 320px;\n  height: 340px;\n  border: 1px solid rgba(0, 0, 0, 0.3);\n  background: #fff;\n  z-index: 999999;\n}\n.login__table__wrap {\n  overflow: hidden;\n  padding: 0 10px;\n}\n.login__table__header {\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 40px;\n}\n.login__table__header button {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  line-height: 50px;\n}\n.state__bar {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  bottom: 0;\n  left: 32px;\n  width: 80px;\n  height: 2px;\n  background: #1C86D1;\n}\n.state__bar:hover {\n  color: #1C86D1;\n}\n.state__bar--toggle {\n  left: 186px;\n}\n.login__table__forms {\n  position: relative;\n  height: 300px;\n}\n.login__table__forms form {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  top: 0;\n  left: 0;\n}\n.tourist__login {\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  padding-top: 50px;\n}\n.input__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  padding: 5px 0;\n  line-height: 20px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  margin-bottom: 15px;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n}\n.input__wrap p {\n  width: 60px;\n}\n.input__wrap input[type=\"text\"] {\n  border-radius: 5px;\n  border: 1px solid #272636;\n  padding: 5px;\n  width: 180px;\n  height: 27px;\n}\n.input__wrap label {\n  display: inline-block;\n  width: 100%;\n  height: 20px;\n  font-size: 12px;\n  color: #B61D1D;\n  padding: 5px 30px 0 0;\n  text-align: right;\n}\ninput[type=\"button\"].tourist__login--submit {\n  border-radius: 5px;\n  width: 180px;\n  height: 35px;\n  color: #fff;\n  background: #1C86D1;\n  margin: 30px auto 0;\n  cursor: pointer;\n  border: 1px solid #ccc;\n}\ninput[type=\"button\"].tourist__login--submit:active {\n  background: #3075DC;\n}\n.sns__login {\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 20px;\n}\n.sns__login div {\n  width: 70px;\n  height: 70px;\n  background: red;\n}\n.alert__wrap {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 99999999;\n  background: rgba(0, 0, 0, 0.8);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  overflow: hidden;\n}\n.alert__plane {\n  width: 100%;\n  height: 0px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background: rgba(255, 255, 255, 0.65);\n  -webkit-animation: alert_plane_animate .5s;\n          animation: alert_plane_animate .5s;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n.alert__plane header {\n  width: 100%;\n  height: 8px;\n  background: -webkit-linear-gradient(left, #F00001 12.5%, transparent 0px), -webkit-linear-gradient(left, #FF7F00 25%, transparent 0px), -webkit-linear-gradient(left, #E1E23B 37.5%, transparent 0px), -webkit-linear-gradient(left, #007940 50%, transparent 0px), -webkit-linear-gradient(left, #4041FE 62.5%, transparent 0px), -webkit-linear-gradient(left, #A001C0 75%, transparent 0px), -webkit-linear-gradient(left, #F7941E 87.5%, transparent 0px), -webkit-linear-gradient(left, #9AC147 100%, transparent 0px);\n  background: linear-gradient(to right, #F00001 12.5%, transparent 0px), linear-gradient(to right, #FF7F00 25%, transparent 0px), linear-gradient(to right, #E1E23B 37.5%, transparent 0px), linear-gradient(to right, #007940 50%, transparent 0px), linear-gradient(to right, #4041FE 62.5%, transparent 0px), linear-gradient(to right, #A001C0 75%, transparent 0px), linear-gradient(to right, #F7941E 87.5%, transparent 0px), linear-gradient(to right, #9AC147 100%, transparent 0px);\n  background-repeat: no-repeat;\n}\n.alert__plane footer {\n  width: 100%;\n  height: 42px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.alert__plane footer label {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  height: 100%;\n  cursor: pointer;\n  line-height: 42px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.alert__plane footer label:hover button {\n  color: #1C86D1;\n}\n.alert__plane footer label:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.alert__plane footer label:hover i::before {\n  -webkit-transform: scale(1);\n          transform: scale(1);\n}\n.alert__plane footer i {\n  position: relative;\n  width: 20px;\n  height: 20px;\n  background-image: url(\"/img/icon.png\");\n}\n.alert__plane footer i::before {\n  border-radius: 50%;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  content: \"\";\n  display: block;\n  width: 20px;\n  height: 20px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  z-index: -1;\n  background: #1C86D1;\n  -webkit-transform: scale(0);\n          transform: scale(0);\n}\n.alert__plane footer .alert__plane--btn_sure {\n  background-position: -4px -59px;\n}\n.alert__plane footer .alert__plane--btn_cancel {\n  background-position: -4px -36px;\n}\n.alert__plane footer button {\n  font-size: 18px;\n}\n@-webkit-keyframes alert_plane_animate {\n  0% {\n    height: 0;\n  }\n  100% {\n    height: 280px;\n  }\n}\n@keyframes alert_plane_animate {\n  0% {\n    height: 0;\n  }\n  100% {\n    height: 280px;\n  }\n}\n.alert__plane--question {\n  width: 100%;\n  height: 230px;\n  padding-top: 50px;\n  text-align: center;\n  font-size: 30px;\n  font-weight: 100;\n  line-height: 1.2;\n  overflow: hidden;\n  color: rgba(0, 0, 0, 0.7);\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 405 */
-/***/ function(module, exports) {
-
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	// css base code, injected by the css-loader
-	module.exports = function() {
-		var list = [];
-
-		// return the list of modules as css string
-		list.toString = function toString() {
-			var result = [];
-			for(var i = 0; i < this.length; i++) {
-				var item = this[i];
-				if(item[2]) {
-					result.push("@media " + item[2] + "{" + item[1] + "}");
-				} else {
-					result.push(item[1]);
-				}
-			}
-			return result.join("");
-		};
-
-		// import a list of modules into the list
-		list.i = function(modules, mediaQuery) {
-			if(typeof modules === "string")
-				modules = [[null, modules, ""]];
-			var alreadyImportedModules = {};
-			for(var i = 0; i < this.length; i++) {
-				var id = this[i][0];
-				if(typeof id === "number")
-					alreadyImportedModules[id] = true;
-			}
-			for(i = 0; i < modules.length; i++) {
-				var item = modules[i];
-				// skip already imported module
-				// this implementation is not 100% perfect for weird media query combinations
-				//  when a module is imported multiple times with different media queries.
-				//  I hope this will never occur (Hey this way we have smaller bundles)
-				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-					if(mediaQuery && !item[2]) {
-						item[2] = mediaQuery;
-					} else if(mediaQuery) {
-						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-					}
-					list.push(item);
-				}
-			}
-		};
-		return list;
-	};
-
-
-/***/ },
-/* 406 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	var stylesInDom = {},
-		memoize = function(fn) {
-			var memo;
-			return function () {
-				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-				return memo;
-			};
-		},
-		isOldIE = memoize(function() {
-			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
-		}),
-		getHeadElement = memoize(function () {
-			return document.head || document.getElementsByTagName("head")[0];
-		}),
-		singletonElement = null,
-		singletonCounter = 0,
-		styleElementsInsertedAtTop = [];
-
-	module.exports = function(list, options) {
-		if(false) {
-			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-		}
-
-		options = options || {};
-		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-		// tags it will allow on a page
-		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
-
-		// By default, add <style> tags to the bottom of <head>.
-		if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
-
-		var styles = listToStyles(list);
-		addStylesToDom(styles, options);
-
-		return function update(newList) {
-			var mayRemove = [];
-			for(var i = 0; i < styles.length; i++) {
-				var item = styles[i];
-				var domStyle = stylesInDom[item.id];
-				domStyle.refs--;
-				mayRemove.push(domStyle);
-			}
-			if(newList) {
-				var newStyles = listToStyles(newList);
-				addStylesToDom(newStyles, options);
-			}
-			for(var i = 0; i < mayRemove.length; i++) {
-				var domStyle = mayRemove[i];
-				if(domStyle.refs === 0) {
-					for(var j = 0; j < domStyle.parts.length; j++)
-						domStyle.parts[j]();
-					delete stylesInDom[domStyle.id];
-				}
-			}
-		};
-	}
-
-	function addStylesToDom(styles, options) {
-		for(var i = 0; i < styles.length; i++) {
-			var item = styles[i];
-			var domStyle = stylesInDom[item.id];
-			if(domStyle) {
-				domStyle.refs++;
-				for(var j = 0; j < domStyle.parts.length; j++) {
-					domStyle.parts[j](item.parts[j]);
-				}
-				for(; j < item.parts.length; j++) {
-					domStyle.parts.push(addStyle(item.parts[j], options));
-				}
-			} else {
-				var parts = [];
-				for(var j = 0; j < item.parts.length; j++) {
-					parts.push(addStyle(item.parts[j], options));
-				}
-				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
-			}
-		}
-	}
-
-	function listToStyles(list) {
-		var styles = [];
-		var newStyles = {};
-		for(var i = 0; i < list.length; i++) {
-			var item = list[i];
-			var id = item[0];
-			var css = item[1];
-			var media = item[2];
-			var sourceMap = item[3];
-			var part = {css: css, media: media, sourceMap: sourceMap};
-			if(!newStyles[id])
-				styles.push(newStyles[id] = {id: id, parts: [part]});
-			else
-				newStyles[id].parts.push(part);
-		}
-		return styles;
-	}
-
-	function insertStyleElement(options, styleElement) {
-		var head = getHeadElement();
-		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
-		if (options.insertAt === "top") {
-			if(!lastStyleElementInsertedAtTop) {
-				head.insertBefore(styleElement, head.firstChild);
-			} else if(lastStyleElementInsertedAtTop.nextSibling) {
-				head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
-			} else {
-				head.appendChild(styleElement);
-			}
-			styleElementsInsertedAtTop.push(styleElement);
-		} else if (options.insertAt === "bottom") {
-			head.appendChild(styleElement);
-		} else {
-			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
-		}
-	}
-
-	function removeStyleElement(styleElement) {
-		styleElement.parentNode.removeChild(styleElement);
-		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
-		if(idx >= 0) {
-			styleElementsInsertedAtTop.splice(idx, 1);
-		}
-	}
-
-	function createStyleElement(options) {
-		var styleElement = document.createElement("style");
-		styleElement.type = "text/css";
-		insertStyleElement(options, styleElement);
-		return styleElement;
-	}
-
-	function createLinkElement(options) {
-		var linkElement = document.createElement("link");
-		linkElement.rel = "stylesheet";
-		insertStyleElement(options, linkElement);
-		return linkElement;
-	}
-
-	function addStyle(obj, options) {
-		var styleElement, update, remove;
-
-		if (options.singleton) {
-			var styleIndex = singletonCounter++;
-			styleElement = singletonElement || (singletonElement = createStyleElement(options));
-			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
-			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
-		} else if(obj.sourceMap &&
-			typeof URL === "function" &&
-			typeof URL.createObjectURL === "function" &&
-			typeof URL.revokeObjectURL === "function" &&
-			typeof Blob === "function" &&
-			typeof btoa === "function") {
-			styleElement = createLinkElement(options);
-			update = updateLink.bind(null, styleElement);
-			remove = function() {
-				removeStyleElement(styleElement);
-				if(styleElement.href)
-					URL.revokeObjectURL(styleElement.href);
-			};
-		} else {
-			styleElement = createStyleElement(options);
-			update = applyToTag.bind(null, styleElement);
-			remove = function() {
-				removeStyleElement(styleElement);
-			};
-		}
-
-		update(obj);
-
-		return function updateStyle(newObj) {
-			if(newObj) {
-				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
-					return;
-				update(obj = newObj);
-			} else {
-				remove();
-			}
-		};
-	}
-
-	var replaceText = (function () {
-		var textStore = [];
-
-		return function (index, replacement) {
-			textStore[index] = replacement;
-			return textStore.filter(Boolean).join('\n');
-		};
-	})();
-
-	function applyToSingletonTag(styleElement, index, remove, obj) {
-		var css = remove ? "" : obj.css;
-
-		if (styleElement.styleSheet) {
-			styleElement.styleSheet.cssText = replaceText(index, css);
-		} else {
-			var cssNode = document.createTextNode(css);
-			var childNodes = styleElement.childNodes;
-			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
-			if (childNodes.length) {
-				styleElement.insertBefore(cssNode, childNodes[index]);
-			} else {
-				styleElement.appendChild(cssNode);
-			}
-		}
-	}
-
-	function applyToTag(styleElement, obj) {
-		var css = obj.css;
-		var media = obj.media;
-
-		if(media) {
-			styleElement.setAttribute("media", media)
-		}
-
-		if(styleElement.styleSheet) {
-			styleElement.styleSheet.cssText = css;
-		} else {
-			while(styleElement.firstChild) {
-				styleElement.removeChild(styleElement.firstChild);
-			}
-			styleElement.appendChild(document.createTextNode(css));
-		}
-	}
-
-	function updateLink(linkElement, obj) {
-		var css = obj.css;
-		var sourceMap = obj.sourceMap;
-
-		if(sourceMap) {
-			// http://stackoverflow.com/a/26603875
-			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
-		}
-
-		var blob = new Blob([css], { type: "text/css" });
-
-		var oldSrc = linkElement.href;
-
-		linkElement.href = URL.createObjectURL(blob);
-
-		if(oldSrc)
-			URL.revokeObjectURL(oldSrc);
-	}
-
 
 /***/ }
 ]);

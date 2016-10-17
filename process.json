@@ -1,18 +1,6 @@
 {
     "apps": [
-    // {
-    //     "name": "webpack",
-    //     "script": "npm",  // linux 下需要添加 sudo webpack --colors -w
-    //     "args": "run dev",
-    //     "env": {
-    //         "NODE_ENV": "prod"
-    //     }
-    // },
     {
-        "name": "mongodb",
-        "script": "mongod",
-        "args": "--dbpath d:mongodb/data/db"
-    },{
         "name": "server",
         "script": "./server.js",
         // "watch": true,
