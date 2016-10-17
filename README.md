@@ -42,7 +42,7 @@ git clone https://github.com/NumerHero/kuolun.git
 
 ## 插入表情
 
-![shotpic](http://numerhero.github.io/assets/download/kuolun/comment_expressions)
+![shotpic](http://numerhero.github.io/assets/download/kuolun/comment_expressions.gif)
 
 # 数据库
 

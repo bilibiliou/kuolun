@@ -1,6 +1,6 @@
 {
   "name": "kuolun",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "a comment system was built by es6 + react + gulp + webpack + mongodb",
   "main": "server.js",
   "scripts": {
