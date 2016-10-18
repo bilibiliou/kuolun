@@ -107,7 +107,7 @@ The MIT License (MIT)
 Copyright (c) 2016 Kuo Lun (阔论-评论系统)
 
 Author: Owen(欧阳湘粤) 
-Email: <469564715@qq.com>
+Email: <469564715@qq.com> <blackcodero@gmail.com>
 Github: github.com/numerhero
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

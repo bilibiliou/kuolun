@@ -311,6 +311,7 @@ class CommentFeedback extends Component {
 				choice_list = (
 					<div className="syntaxs__sub-list">
 						<table 
+							
 							onClick={(ev) => {
 								let oTarget = ev.target,
 									tagName = oTarget.tagName.toLowerCase()
