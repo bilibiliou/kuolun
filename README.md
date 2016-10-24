@@ -52,13 +52,13 @@ git clone https://github.com/NumerHero/kuolun.git
 
 # 使用
 
-1. 打开mongodb
+1.打开mongodb
 
 ```
 mongod --dbpath your data storage location
 ```
 
-2. 在package.json 中设置监听端口 默认为5000
+2.在package.json 中设置监听端口 默认为5000
 
 ```
 "scripts": {
@@ -75,7 +75,7 @@ mongod --dbpath your data storage location
 }
 ```
 
-3. 开启server 
+3.开启server 
 
 ```
 npm run server

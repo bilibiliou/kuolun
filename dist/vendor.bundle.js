@@ -4,7 +4,7 @@
  * Copyright (c) 2016 Kuo Lun (阔论-评论系统)
  * 
  * Author: Owen 
- * Email: <469564715@qq.com>
+ * Email: <469564715@qq.com> <blackcodero@gmail.com>
  * Github: github.com/numerhero
  * 
  * 
