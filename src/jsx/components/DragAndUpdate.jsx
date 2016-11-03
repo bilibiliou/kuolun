@@ -103,7 +103,6 @@ class DragAndUpdate extends Component {
     }
 
     handleClickUpload (ev) {
-        console.log(this.state.buttonbOff)
         if (this.state.buttonbOff) {
             this.setState({
                 buttonbOff: this.state.buttonbOff ^= 1
