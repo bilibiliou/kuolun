@@ -2855,7 +2855,10 @@ webpackJsonp([0],[
 				codeListBeChoice: "请选择代码种类",
 				tableChoiceLock: 0,
 				cTableX: 1,
-				cTableY: 1
+				cTableY: 1,
+				localMediaStream: null,
+				DIYSnap: "0秒",
+				snapLock: true
 			};
 
 			_this.reSet = _this.reSet.bind(_this);
@@ -2864,6 +2867,8 @@ webpackJsonp([0],[
 			_this.handleBandState = _this.handleBandState.bind(_this);
 			_this.mdown = _this.mdown.bind(_this);
 			_this.SyntaxsListHandle = _this.SyntaxsListHandle.bind(_this);
+			_this.snap = _this.snap.bind(_this);
+			_this.uploadSnap = _this.uploadSnap.bind(_this);
 			return _this;
 		}
 
@@ -3010,7 +3015,6 @@ webpackJsonp([0],[
 							commentContent["index"] = AllDataNum;
 							commentContent["FeedBack"] = [];
 
-							// arr.push(commentContent);
 							actions.CommentThunk(NowPage - 1, SortState, commentContent);
 							break;
 
@@ -3020,7 +3024,6 @@ webpackJsonp([0],[
 							commentContent["FeedBackIndex"] = ItemDataes[ParentIndex].FeedBack.length;
 							commentContent["BeFeedIndex"] = BeFeedIndex;
 
-							// arr[ParentIndex].FeedBack.push(commentContent);
 							actions.CommentThunk(NowPage - 1, SortState, commentContent, ParentIndexOnDb);
 							break;
 					}
@@ -3054,9 +3057,111 @@ webpackJsonp([0],[
 				document.addEventListener("mouseup", mup);
 			}
 		}, {
+			key: "openVideo",
+			value: function openVideo() {
+				var _this2 = this;
+
+				var oV = this.refs["snap-video"];
+
+				navigator.mediaDevices.getUserMedia = navigator.mediaDevices.getUserMedia || navigator.mediaDevices.webkitGetUserMedia || navigator.mediaDevices.mozGetUserMedia || navigator.mediaDevices.msGetUserMedia;
+
+				navigator.mediaDevices.getUserMedia({
+					video: {
+						width: { max: 430 },
+						height: { max: 254 }
+					}
+				}).then(function (stream) {
+					oV.src = window.URL.createObjectURL(stream);
+					_this2.setState({
+						localMediaStream: stream
+					});
+
+					var sCanvas = _this2.refs["snap_canvas"],
+					    ctx = sCanvas.getContext("2d");
+
+					var oImg = new Image();
+					oImg.src = "img/snap-ok.png";
+
+					oImg.onload = function () {
+						ctx.drawImage(oImg, 0, 0, 430, 254);
+					};
+				}).catch(function (err) {
+					console.error(err);
+
+					var sCanvas = _this2.refs["snap_canvas"],
+					    ctx = sCanvas.getContext("2d");
+
+					var oImg = new Image();
+					oImg.src = "img/snap-error.png";
+
+					oImg.onload = function () {
+						ctx.drawImage(oImg, 0, 0, 430, 254);
+					};
+				});
+			}
+		}, {
+			key: "snap",
+			value: function snap(ev) {
+				var _this3 = this;
+
+				var sCanvas = this.refs["snap_canvas"],
+				    sCtx = sCanvas.getContext("2d"),
+				    lms = this.state.localMediaStream,
+				    oV = this.refs["snap-video"],
+				    se = ~~this.state.DIYSnap.replace(/秒$/, "") * 1000,
+				    lock = this.state.snapLock;
+
+				if (lms && lock) {
+					this.setState({
+						snapLock: false
+					});
+					setTimeout(function () {
+						sCtx.clearRect(0, 0, 430, 254);
+						sCtx.drawImage(oV, 0, 0);
+						_this3.setState({
+							snapLock: true
+						});
+					}, se);
+				}
+			}
+		}, {
+			key: "uploadSnap",
+			value: function uploadSnap() {
+				var _this4 = this;
+
+				var sCanvas = this.refs["snap_canvas"],
+				    lms = this.state.localMediaStream,
+				    data = sCanvas.toDataURL("image/png");
+
+				if (!lms) {
+					this.props.actions.AlertPlaneThunk("摄像头被禁止，请允许允许摄像头");
+					this.openVideo();
+				}
+
+				fetch("/upLoadImage", {
+					method: "POST",
+					headers: {
+						"Charset": "utf-8",
+						"Content-Type": "text/plain"
+					},
+					body: "0" + data
+				}).then(function (res) {
+					if (res.ok) {
+						_this4.props.actions.AlertPlaneThunk("图片已上传成功");
+						return res.json();
+					}
+				}).catch(function (err) {
+					console.error(err);
+					_this4.props.actions.AlertPlaneThunk("图片上传失败，请检查网络连接");
+				}).then(function (data) {
+					var editerWrap = _this4.refs["editer-wrap"];
+					editerWrap.value += "![自拍](" + data.url + ")";
+				});
+			}
+		}, {
 			key: "render",
 			value: function render() {
-				var _this2 = this;
+				var _this5 = this;
 
 				var _props2 = this.props;
 				var actions = _props2.actions;
@@ -3156,17 +3261,16 @@ webpackJsonp([0],[
 							_react2.default.createElement(
 								"table",
 								{
-
 									onClick: function onClick(ev) {
 										var oTarget = ev.target,
 										    tagName = oTarget.tagName.toLowerCase();
 
 										if (tagName === "a") {
-											_this2.SyntaxsListHandle.call(_this2, ev, function (ev, editerWrap) {
+											_this5.SyntaxsListHandle.call(_this5, ev, function (ev, editerWrap) {
 												editerWrap.value += "[/" + oTarget.children[0].title + "]";
 											});
 										} else if (tagName === "img") {
-											_this2.SyntaxsListHandle.call(_this2, ev, function (ev, editerWrap) {
+											_this5.SyntaxsListHandle.call(_this5, ev, function (ev, editerWrap) {
 												editerWrap.value += "[/" + oTarget.title + "]";
 											});
 										}
@@ -3236,10 +3340,10 @@ webpackJsonp([0],[
 										{
 											className: "insert",
 											onClick: function onClick(ev) {
-												var altInput = _this2.refs["alt-input"],
-												    imgUrlInput = _this2.refs["img-url-input"];
+												var altInput = _this5.refs["alt-input"],
+												    imgUrlInput = _this5.refs["img-url-input"];
 
-												_this2.SyntaxsListHandle.call(_this2, ev, function (ev, editerWrap) {
+												_this5.SyntaxsListHandle.call(_this5, ev, function (ev, editerWrap) {
 													editerWrap.value += "![" + altInput.value + "](" + imgUrlInput.value + ")";
 												});
 
@@ -3252,7 +3356,7 @@ webpackJsonp([0],[
 								),
 								_react2.default.createElement(_router.DragAndUpdate, {
 									callback: function callback(datas) {
-										_this2.handleBandState(0);
+										_this5.handleBandState(0);
 										editerWrap.focus();
 										datas.forEach(function (value) {
 											editerWrap.value += "![pic](" + value.url + ") \n";
@@ -3272,10 +3376,10 @@ webpackJsonp([0],[
 								{
 									className: "insert",
 									onClick: function onClick(ev) {
-										var LinkNameInput = _this2.refs["link-name-input"],
-										    LinkUrlInput = _this2.refs["link-url-input"];
+										var LinkNameInput = _this5.refs["link-name-input"],
+										    LinkUrlInput = _this5.refs["link-url-input"];
 
-										_this2.SyntaxsListHandle.call(_this2, ev, function (ev, editerWrap) {
+										_this5.SyntaxsListHandle.call(_this5, ev, function (ev, editerWrap) {
 											editerWrap.value += "[" + LinkNameInput.value + "](" + LinkUrlInput.value + ")";
 										});
 
@@ -3295,7 +3399,7 @@ webpackJsonp([0],[
 								dataList: codeTypeList,
 								initPrompt: this.state.codeListBeChoice,
 								returnDataCallback: function returnDataCallback(data) {
-									_this2.setState({
+									_this5.setState({
 										codeListBeChoice: data
 									});
 								}
@@ -3306,15 +3410,15 @@ webpackJsonp([0],[
 									className: "insert",
 
 									onClick: function onClick(ev) {
-										var codeTypeSelection = _this2.refs["code-type-selection"];
-										_this2.SyntaxsListHandle.call(_this2, ev, function (ev, editerWrap) {
-											if (_this2.state.codeListBeChoice === "请选择代码种类") {
+										var codeTypeSelection = _this5.refs["code-type-selection"];
+										_this5.SyntaxsListHandle.call(_this5, ev, function (ev, editerWrap) {
+											if (_this5.state.codeListBeChoice === "请选择代码种类") {
 												return;
 											} else {
-												editerWrap.value += "\n```" + _this2.state.codeListBeChoice + "\n代码内容\n```\n";
+												editerWrap.value += "\n```" + _this5.state.codeListBeChoice + "\n代码内容\n```\n";
 												var _len2 = editerWrap.value.length;
 												editerWrap.setSelectionRange(_len2 - 9, _len2 - 5);
-												_this2.setState({
+												_this5.setState({
 													codeListBeChoice: "请选择代码种类"
 												});
 											}
@@ -3334,7 +3438,7 @@ webpackJsonp([0],[
 								{ className: "table-size-matrix",
 									ref: "table-matrix",
 									onMouseMove: function onMouseMove(ev) {
-										if (!_this2.state.tableChoiceLock) {
+										if (!_this5.state.tableChoiceLock) {
 											var $cX = ev.pageX,
 											    $cY = ev.pageY,
 											    $dX = $cX - tablePosition[0],
@@ -3343,15 +3447,15 @@ webpackJsonp([0],[
 											    YNum = Math.ceil($dY / tdSize);
 											XNum < 1 && (XNum = 1);
 											YNum < 1 && (YNum = 1);
-											_this2.setState({
+											_this5.setState({
 												cTableX: XNum,
 												cTableY: YNum
 											});
 										}
 									},
 									onClick: function onClick() {
-										_this2.setState({
-											tableChoiceLock: _this2.state.tableChoiceLock ^= 1
+										_this5.setState({
+											tableChoiceLock: _this5.state.tableChoiceLock ^= 1
 										});
 									}
 								},
@@ -3373,9 +3477,9 @@ webpackJsonp([0],[
 								"button",
 								{ className: "insert",
 									onClick: function onClick(ev) {
-										_this2.SyntaxsListHandle.call(_this2, ev, function (ev, editerWrap) {
-											var $x = _this2.state.cTableX,
-											    $y = _this2.state.cTableY,
+										_this5.SyntaxsListHandle.call(_this5, ev, function (ev, editerWrap) {
+											var $x = _this5.state.cTableX,
+											    $y = _this5.state.cTableY,
 											    str = "";
 
 											for (var _i = 0; _i < $x; _i++) {
@@ -3398,7 +3502,7 @@ webpackJsonp([0],[
 											}
 
 											editerWrap.value += str;
-											_this2.setState({
+											_this5.setState({
 												tableChoiceLock: 0,
 												cTableX: 1,
 												cTableY: 1
@@ -3407,6 +3511,23 @@ webpackJsonp([0],[
 									}
 								},
 								"插入表格"
+							)
+						);
+						break;
+
+					case "snap-block_list":
+						choice_list = _react2.default.createElement(
+							"div",
+							{ className: "syntaxs__sub-list" },
+							_react2.default.createElement(
+								"section",
+								{ className: "snap_wrap" },
+								_react2.default.createElement("canvas", { id: "snap_canvas", ref: "snap_canvas", width: "430", height: "254" }),
+								_react2.default.createElement(
+									"button",
+									{ className: "upload__btn", onClick: this.uploadSnap },
+									"上传图片"
+								)
 							)
 						);
 						break;
@@ -3427,13 +3548,13 @@ webpackJsonp([0],[
 								title: "表情列表",
 								style: this.state.choiceType === "expressions_list" ? { background: "url(/img/icon-hover.png) 5px -316px , #ccc" } : null,
 								onClick: function onClick(ev) {
-									_this2.SyntaxsListHandle.call(_this2, ev, function (ev, editerWrap) {
-										if (_this2.state.choiceType === "expressions_list") {
-											_this2.setState({
+									_this5.SyntaxsListHandle.call(_this5, ev, function (ev, editerWrap) {
+										if (_this5.state.choiceType === "expressions_list") {
+											_this5.setState({
 												choiceType: ""
 											});
 										} else {
-											_this2.setState({
+											_this5.setState({
 												choiceType: "expressions_list"
 											});
 										}
@@ -3444,7 +3565,7 @@ webpackJsonp([0],[
 							_react2.default.createElement("li", { className: "bold",
 								title: "加粗",
 								onClick: function onClick(ev) {
-									_this2.SyntaxsListHandle.call(null, ev, function (ev, editerWrap) {
+									_this5.SyntaxsListHandle.call(null, ev, function (ev, editerWrap) {
 										editerWrap.value += "** 加粗文本 **";
 										var len = editerWrap.value.length;
 										editerWrap.setSelectionRange(len - 7, len - 3);
@@ -3454,7 +3575,7 @@ webpackJsonp([0],[
 							_react2.default.createElement("li", { className: "italic",
 								title: "斜体",
 								onClick: function onClick(ev) {
-									_this2.SyntaxsListHandle.call(null, ev, function (ev, editerWrap) {
+									_this5.SyntaxsListHandle.call(null, ev, function (ev, editerWrap) {
 										editerWrap.value += "_ 斜体文本 _";
 										var len = editerWrap.value.length;
 										editerWrap.setSelectionRange(len - 6, len - 2);
@@ -3465,13 +3586,13 @@ webpackJsonp([0],[
 								title: "A链接",
 								style: this.state.choiceType === "a_link_list" ? { background: "url(/img/icon-hover.png) 4px -103px,#ccc" } : null,
 								onClick: function onClick(ev) {
-									_this2.SyntaxsListHandle.call(_this2, ev, function (ev, editerWrap) {
-										if (_this2.state.choiceType === "a_link_list") {
-											_this2.setState({
+									_this5.SyntaxsListHandle.call(_this5, ev, function (ev, editerWrap) {
+										if (_this5.state.choiceType === "a_link_list") {
+											_this5.setState({
 												choiceType: ""
 											});
 										} else {
-											_this2.setState({
+											_this5.setState({
 												choiceType: "a_link_list"
 											});
 										}
@@ -3482,13 +3603,13 @@ webpackJsonp([0],[
 								title: "引入图片",
 								style: this.state.choiceType === "img_list" ? { background: "url(/img/icon-hover.png) 4px -151px,#ccc" } : null,
 								onClick: function onClick(ev) {
-									_this2.SyntaxsListHandle.call(_this2, ev, function (ev, editerWrap) {
-										if (_this2.state.choiceType === "img_list") {
-											_this2.setState({
+									_this5.SyntaxsListHandle.call(_this5, ev, function (ev, editerWrap) {
+										if (_this5.state.choiceType === "img_list") {
+											_this5.setState({
 												choiceType: ""
 											});
 										} else {
-											_this2.setState({
+											_this5.setState({
 												choiceType: "img_list"
 											});
 										}
@@ -3499,13 +3620,13 @@ webpackJsonp([0],[
 								title: "选择表格",
 								style: this.state.choiceType === "table_list" ? { background: "url(/img/icon-hover.png) 4px -175px,#ccc" } : null,
 								onClick: function onClick(ev) {
-									_this2.SyntaxsListHandle.call(_this2, ev, function (ev, editerWrap) {
-										if (_this2.state.choiceType === "table_list") {
-											_this2.setState({
+									_this5.SyntaxsListHandle.call(_this5, ev, function (ev, editerWrap) {
+										if (_this5.state.choiceType === "table_list") {
+											_this5.setState({
 												choiceType: ""
 											});
 										} else {
-											_this2.setState({
+											_this5.setState({
 												choiceType: "table_list"
 											});
 										}
@@ -3515,7 +3636,7 @@ webpackJsonp([0],[
 							_react2.default.createElement("li", { className: "blockquote-block",
 								title: "引用",
 								onClick: function onClick(ev) {
-									_this2.SyntaxsListHandle.call(null, ev, function (ev, editerWrap) {
+									_this5.SyntaxsListHandle.call(null, ev, function (ev, editerWrap) {
 										editerWrap.value += "> 引用内容";
 										var len = editerWrap.value.length;
 										editerWrap.setSelectionRange(len - 4, len);
@@ -3525,7 +3646,7 @@ webpackJsonp([0],[
 							_react2.default.createElement("li", { className: "o-list",
 								title: "有序列表",
 								onClick: function onClick(ev) {
-									_this2.SyntaxsListHandle.call(null, ev, function (ev, editerWrap) {
+									_this5.SyntaxsListHandle.call(null, ev, function (ev, editerWrap) {
 										editerWrap.value += "\n1. 例1\n2. 例2\n3. 例3";
 									});
 								}
@@ -3533,7 +3654,7 @@ webpackJsonp([0],[
 							_react2.default.createElement("li", { className: "u-list",
 								title: "无序列表",
 								onClick: function onClick(ev) {
-									_this2.SyntaxsListHandle.call(_this2, ev, function (ev, editerWrap) {
+									_this5.SyntaxsListHandle.call(_this5, ev, function (ev, editerWrap) {
 										editerWrap.value += "\n* 例1\n* 例2\n* 例3";
 									});
 								}
@@ -3542,13 +3663,13 @@ webpackJsonp([0],[
 								title: "大标题",
 								style: this.state.choiceType === "h1_list" ? { background: "url(/img/icon-hover.png) 4px -247px,#ccc" } : null,
 								onClick: function onClick(ev) {
-									_this2.SyntaxsListHandle.call(_this2, ev, function (ev, editerWrap) {
-										if (_this2.state.choiceType === "h1_list") {
-											_this2.setState({
+									_this5.SyntaxsListHandle.call(_this5, ev, function (ev, editerWrap) {
+										if (_this5.state.choiceType === "h1_list") {
+											_this5.setState({
 												choiceType: ""
 											});
 										} else {
-											_this2.setState({
+											_this5.setState({
 												choiceType: "h1_list"
 											});
 										}
@@ -3558,7 +3679,7 @@ webpackJsonp([0],[
 							_react2.default.createElement("li", { className: "h2-tag",
 								title: "小标题",
 								onClick: function onClick(ev) {
-									_this2.SyntaxsListHandle.call(null, ev, function (ev, editerWrap) {
+									_this5.SyntaxsListHandle.call(null, ev, function (ev, editerWrap) {
 										var len = editerWrap.value.length;
 										editerWrap.value += "\n## 小标题\n";
 										editerWrap.setSelectionRange(len + 4, len + 7);
@@ -3569,19 +3690,79 @@ webpackJsonp([0],[
 								title: "代码高亮",
 								style: this.state.choiceType === "code_block_list" ? { background: "url(/img/icon-hover.png) 4px -341px,#ccc" } : null,
 								onClick: function onClick(ev) {
-									_this2.SyntaxsListHandle.call(_this2, ev, function (ev, editerWrap) {
-										if (_this2.state.choiceType === "code_block_list") {
-											_this2.setState({
+									_this5.SyntaxsListHandle.call(_this5, ev, function (ev, editerWrap) {
+										if (_this5.state.choiceType === "code_block_list") {
+											_this5.setState({
 												choiceType: ""
 											});
 										} else {
-											_this2.setState({
+											_this5.setState({
 												choiceType: "code_block_list"
 											});
 										}
 									});
 								}
-							})
+							}),
+							_react2.default.createElement(
+								"li",
+								{ className: "snap-block",
+									title: "自拍上传",
+									style: this.state.choiceType === "snap-block_list" ? { background: "url(/img/icon-hover.png) 4px -365px,#ccc" } : null,
+									onClick: function onClick(ev) {
+										_this5.SyntaxsListHandle.call(_this5, ev, function (ev, editerWrap) {
+											if (_this5.state.choiceType === "snap-block_list") {
+												_this5.setState({
+													choiceType: ""
+												});
+											} else {
+												_this5.setState({
+													choiceType: "snap-block_list"
+												});
+
+												_this5.openVideo();
+											}
+										});
+									}
+								},
+								_react2.default.createElement(
+									"figure",
+									{ className: "snap_video_wrap", title: "正在使用摄像头自拍",
+										onClick: function onClick(ev) {
+											ev.stopPropagation();
+											ev.preventDefault();
+										},
+										style: this.state.choiceType === "snap-block_list" ? {
+											transform: "scale(1,1)"
+										} : null
+									},
+									_react2.default.createElement("video", { autoPlay: true, width: "430", height: "254", ref: "snap-video" }),
+									_react2.default.createElement(
+										"section",
+										{ className: "snap_options" },
+										_react2.default.createElement(
+											"button",
+											{ className: "insert snap-btn",
+												onClick: this.snap
+											},
+											"拍照"
+										),
+										_react2.default.createElement(
+											"span",
+											{ style: { color: "#fff" } },
+											"延时自拍："
+										),
+										_react2.default.createElement(_router.DropList, {
+											dataList: ["0秒", "3秒", "5秒", "10秒", "12秒"],
+											initPrompt: this.state.DIYSnap,
+											returnDataCallback: function returnDataCallback(data) {
+												_this5.setState({
+													DIYSnap: data
+												});
+											}
+										})
+									)
+								)
+							)
 						),
 						choice_list
 					),
@@ -3611,20 +3792,20 @@ webpackJsonp([0],[
 								title: "拖拽改变评论框大小",
 								draggable: false,
 								onMouseDown: function onMouseDown(ev) {
-									_this2.mdown.call(_this2, ev, function (params) {
+									_this5.mdown.call(_this5, ev, function (params) {
 										var _params = _slicedToArray(params, 2);
 
 										var dragTop = _params[0];
 										var dragLeft = _params[1];
 
 
-										if (_this2.props.MainFeedBackBox && dragTop <= 150) {
+										if (_this5.props.MainFeedBackBox && dragTop <= 150) {
 											dragTop = 150;
 										} else if (dragTop <= 30) {
 											dragTop = 30;
 										}
 
-										_this2.setState({
+										_this5.setState({
 											editerHeight: dragTop
 										});
 									});
@@ -3635,8 +3816,8 @@ webpackJsonp([0],[
 							"div",
 							{ className: "comment__feedback__mask",
 								onClick: function onClick() {
-									var editerWrap = _this2.refs["editer-wrap"];
-									_this2.handleBandState(0);
+									var editerWrap = _this5.refs["editer-wrap"];
+									_this5.handleBandState(0);
 									editerWrap.focus();
 								},
 
@@ -23595,7 +23776,6 @@ webpackJsonp([0],[
 	    }, {
 	        key: "handleClickUpload",
 	        value: function handleClickUpload(ev) {
-	            console.log(this.state.buttonbOff);
 	            if (this.state.buttonbOff) {
 	                this.setState({
 	                    buttonbOff: this.state.buttonbOff ^= 1
@@ -23700,7 +23880,7 @@ webpackJsonp([0],[
 
 
 	// module
-	exports.push([module.id, "@charset \"utf-8\";\n* {\n  box-sizing: border-box;\n  font-family: arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  font-size: 14px;\n  outline: none;\n}\nbody {\n  margin: 0;\n  padding: 0;\n  font-size: 0;\n}\na {\n  -webkit-transition: 5s;\n  transition: 5s;\n  text-decoration: none;\n}\nul,\nol {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\ntable {\n  border-collapse: collapse;\n}\nselect {\n  -webkit-appearance: none;\n     -moz-appearance: none;\n          appearance: none;\n}\nh1,\nh2,\nh3 {\n  margin-bottom: 1em;\n}\np,\npre {\n  margin: 0;\n}\nblockquote {\n  margin: 0;\n}\ninput[type=\"submit\"],\nbutton {\n  display: inline-block;\n  border-radius: 0;\n  border: none;\n  padding: 0;\n  background: none;\n  cursor: pointer;\n}\nfigure {\n  margin: 0;\n}\ni {\n  display: inline-block;\n}\n/*下拉组件*/\n.drop__list {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  width: 140px;\n  border: 1px solid #ccc;\n  cursor: pointer;\n  position: relative;\n  border-radius: 3px 3px 0px 0px;\n  color: #929699;\n  font-size: 0px;\n  margin-right: 20px;\n}\n.drop__list p {\n  width: 100px;\n  height: 20px;\n  margin: 3px 0 3px 5px;\n  font-size: 14px;\n}\n.drop__list i {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  top: 5px;\n  right: 5px;\n  content: \"\";\n  width: 16px;\n  height: 16px;\n  display: block;\n  background: url(\"/img/icon.png\") -30px 0px;\n}\n.drop__list .drop__wrap {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  top: 26px;\n  left: 0;\n  width: 100%;\n  border-radius: 0px 0px 3px 3px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  overflow: hidden;\n  border: 1px solid #ccc;\n  border-top: none;\n  z-index: 1234;\n  height: 0px;\n}\n.drop__list ul {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  padding: 5px 0;\n  overflow: hidden;\n  background: #E6E6E6;\n  font-size: 14px;\n}\n.drop__list ul li {\n  height: 25px;\n  line-height: 25px;\n  padding: 0px 5px;\n}\n.drop__list ul li:hover {\n  color: #fff;\n  background: #1C86D1;\n}\n.drag__wrap {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  top: 0;\n  right: 0;\n  background: #F5F5F5;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.drag__wrap .drag__btn {\n  border-radius: 3px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  min-height: 5px;\n  width: 100%;\n  border: 1px solid #979797;\n  background-color: rgba(0, 0, 0, 0.6);\n}\n.drag__wrap .drag__btn:hover {\n  border: 1px solid #636363;\n  background-color: rgba(0, 0, 0, 0.8);\n}\n.drag__wrap .drag__btn:active {\n  border: 1px solid #636363;\n  background-color: #000000;\n}\n.column-arrange {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.none {\n  display: none !important;\n}\n.b-c {\n  position: fixed;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  margin: auto;\n}\n.hidden {\n  height: 0 !important;\n}\n@-webkit-keyframes swing {\n  20%,\n  40%,\n  60%,\n  80%,\n  100% {\n    -webkit-transform-origin: topcenter;\n            transform-origin: topcenter;\n  }\n  20% {\n    -webkit-transform: rotate(15deg);\n            transform: rotate(15deg);\n  }\n  40% {\n    -webkit-transform: rotate(-10deg);\n            transform: rotate(-10deg);\n  }\n  60% {\n    -webkit-transform: rotate(5deg);\n            transform: rotate(5deg);\n  }\n  80% {\n    -webkit-transform: rotate(-5deg);\n            transform: rotate(-5deg);\n  }\n  100% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n  }\n}\n@keyframes swing {\n  20%,\n  40%,\n  60%,\n  80%,\n  100% {\n    -webkit-transform-origin: topcenter;\n            transform-origin: topcenter;\n  }\n  20% {\n    -webkit-transform: rotate(15deg);\n            transform: rotate(15deg);\n  }\n  40% {\n    -webkit-transform: rotate(-10deg);\n            transform: rotate(-10deg);\n  }\n  60% {\n    -webkit-transform: rotate(5deg);\n            transform: rotate(5deg);\n  }\n  80% {\n    -webkit-transform: rotate(-5deg);\n            transform: rotate(-5deg);\n  }\n  100% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n  }\n}\n@-webkit-keyframes masked {\n  0% {\n    background-position: 0 0;\n  }\n  100% {\n    background-position: -100% 0;\n  }\n}\n@keyframes masked {\n  0% {\n    background-position: 0 0;\n  }\n  100% {\n    background-position: -100% 0;\n  }\n}\n.comment__feedback__wrap {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  overflow: hidden;\n  background: #fbfbfb;\n  width: 100%;\n  margin-top: 20px;\n}\n.comment__feedback__box__syntaxs {\n  border-radius: 5px 5px 0 0;\n  border: 1px solid #272636;\n}\n.comment__feedback__box__syntaxs .syntaxs__list {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 32px;\n  -ms-flex-flow: row no-wrap;\n      flex-flow: row no-wrap;\n}\n.comment__feedback__box__syntaxs .syntaxs__list li {\n  width: 32px;\n  height: 32px;\n  margin: 0 4px;\n  background-image: url(\"/img/icon.png\");\n  cursor: pointer;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .bold {\n  background-position: 6px -79px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .bold:hover {\n  background: url(\"/img/icon-hover.png\") 6px -79px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .italic {\n  background-position: 8px -127px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .italic:hover {\n  background: url(\"/img/icon-hover.png\") 8px -127px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .a-link {\n  background-position: 4px -103px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .a-link:hover {\n  background: url(\"/img/icon-hover.png\") 4px -103px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .image {\n  background-position: 4px -151px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .image:hover {\n  background: url(\"/img/icon-hover.png\") 4px -151px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .table {\n  background-position: 4px -175px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .table:hover {\n  background: url(\"/img/icon-hover.png\") 4px -175px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .blockquote-block {\n  background-position: 4px -292px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .blockquote-block:hover {\n  background: url(\"/img/icon-hover.png\") 4px -292px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .u-list {\n  background-position: 2px -223px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .u-list:hover {\n  background: url(\"/img/icon-hover.png\") 2px -223px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .o-list {\n  background-position: 2px -199px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .o-list:hover {\n  background: url(\"/img/icon-hover.png\") 2px -199px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h1-tag {\n  background-position: 4px -247px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h1-tag:hover {\n  background: url(\"/img/icon-hover.png\") 4px -247px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h2-tag {\n  background-position: 4px -269px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h2-tag:hover {\n  background: url(\"/img/icon-hover.png\") 4px -269px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .code-block {\n  background-position: 4px -341px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .code-block:hover {\n  background: url(\"/img/icon-hover.png\") 4px -341px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .emoji-list {\n  background-position: 5px -316px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .emoji-list:hover {\n  background: url(\"/img/icon-hover.png\") 5px -316px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 5px;\n  border-top: 1px solid #272636;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list > div.choice-btn {\n  border-radius: 5px;\n  position: relative;\n  width: 32px;\n  height: 32px;\n  margin: 0 4px;\n  cursor: pointer;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list > div.choice-btn:hover {\n  box-shadow: 0 0 1px 1px #1C86D1;\n}\n.comment__feedback__box__syntaxs .drop__upload__area {\n  border-radius: 5px;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  position: relative;\n  width: 454px;\n  height: 80px;\n  margin: 15px 0;\n  border: 1px dashed #1C86D1;\n  text-align: center;\n  font: 300 30px/75px \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  cursor: default;\n}\n.comment__feedback__box__syntaxs .drop__upload__area::after,\n.comment__feedback__box__syntaxs .drop__upload__area::before {\n  content: '';\n  display: block;\n  z-index: -1;\n  color: #1C86D1;\n  box-shadow: inset 0 0 0 2px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  -webkit-animation: clip-me 6s linear infinite;\n          animation: clip-me 6s linear infinite;\n}\n.comment__feedback__box__syntaxs .drop__upload__area::before {\n  -webkit-animation-delay: -3s;\n          animation-delay: -3s;\n}\n@-webkit-keyframes clip-me {\n  0%,\n  100% {\n    clip: rect(0px, 454px, 4px, 0px);\n  }\n  25% {\n    clip: rect(0px, 4px, 80px, 0px);\n  }\n  50% {\n    clip: rect(76px, 454px, 80px, 0px);\n  }\n  75% {\n    clip: rect(0px, 454px, 80px, 450px);\n  }\n}\n@keyframes clip-me {\n  0%,\n  100% {\n    clip: rect(0px, 454px, 4px, 0px);\n  }\n  25% {\n    clip: rect(0px, 4px, 80px, 0px);\n  }\n  50% {\n    clip: rect(76px, 454px, 80px, 0px);\n  }\n  75% {\n    clip: rect(0px, 454px, 80px, 450px);\n  }\n}\n.comment__feedback__box__syntaxs .upload__btn {\n  border-radius: 5px;\n  width: 454px;\n  height: 40px;\n  background: #1C86D1;\n  color: #fff;\n  font-size: 18px;\n  margin-bottom: 10px;\n}\n.comment__feedback__box__syntaxs .upload__btn:active {\n  background: #3075DC;\n}\n.comment__feedback__box__syntaxs input[type=\"text\"] {\n  border-radius: 3px;\n  height: 30px;\n  border: 1px solid #1C86D1;\n  margin-right: 20px;\n  font-size: 14px;\n  text-indent: 5px;\n}\n.comment__feedback__box__syntaxs .insert {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  border-radius: 5px;\n  color: #272636;\n  border: 1px solid #1C86D1;\n  line-height: 30px;\n  width: 70px;\n  height: 30px;\n}\n.comment__feedback__box__syntaxs .insert:hover {\n  background: #1C86D1;\n  color: #fff;\n}\n.comment__feedback__box__syntaxs .table-size-matrix {\n  margin: 10px 0 10px 90px;\n}\n.comment__feedback__box__syntaxs .table-size-matrix tr,\n.comment__feedback__box__syntaxs .table-size-matrix td {\n  border: 1px solid #ccc;\n}\n.comment__feedback__box__syntaxs .table-size-matrix td {\n  padding: 15px;\n}\n.comment__feedback__box__syntaxs .table-matrix-dimension {\n  font-size: 18px;\n  text-decoration: underline;\n  margin: 0 20px;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap {\n  width: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  border-top: 1px solid #ccc;\n  border-left: 1px solid #ccc;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap td {\n  border-right: 1px solid #ccc;\n  border-bottom: 1px solid #ccc;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap td:hover {\n  background: #ccc;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap td a {\n  display: inline-block;\n  width: 32px;\n  height: 32px;\n  padding: 4px;\n}\n.comment__feedback__box__wrap {\n  position: relative;\n}\n.editor__resize__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.editor__resize {\n  display: inline-block;\n  width: 130px;\n  height: 8px;\n  cursor: row-resize;\n  margin-top: 2px;\n  border-top: 1px solid #ccc;\n  border-bottom: 1px solid #ccc;\n}\n.comment__feedback__box {\n  position: relative;\n  width: 100%;\n}\n.comment__feedback {\n  padding: 10px;\n  border-top: 1px solid #272636;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n}\n.comment__feedback h3 {\n  font: 200 24px/1 arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n}\n.login-infos {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  font-size: 16px;\n  padding-bottom: 10px;\n}\n.login-infos a {\n  color: #1C86D1;\n}\n.login-infos .init_prompt {\n  cursor: default;\n  color: rgba(0, 0, 0, 0.5);\n}\n.login-out__btn {\n  border-radius: 5px;\n  float: right;\n  width: 70px;\n  height: 25px;\n  background: #C81623;\n  color: #fff;\n}\n.login-out__btn:active {\n  background: #AA151F;\n}\n.login-in__btn {\n  border-radius: 5px;\n  float: right;\n  width: 70px;\n  height: 25px;\n  padding: 0 5px;\n  background: #1C86D1;\n  color: #fff;\n}\n.login-in__btn:active {\n  background: #3075DC;\n}\n.comment__feedback--section {\n  width: calc(100% - 74px);\n}\n.comment__feedback--edit {\n  border-radius: 0px 0px 5px 5px;\n  width: 100%;\n  min-height: 30px;\n  padding: 5px;\n  border: 1px solid #272636;\n  border-top: none;\n  font: 200 14px/1.5 arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  resize: none;\n  overflow: hidden;\n  white-space: pre-wrap;\n  -moz-tab-size: 4;\n    -o-tab-size: 4;\n       tab-size: 4;\n}\n.comment__feedback--btns {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  width: 100%;\n  margin-top: 10px;\n}\n.comment__feedback--btns button {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  border-radius: 5px;\n  line-height: 30px;\n  width: 70px;\n  height: 30px;\n}\n.feedback--btns__reset {\n  color: #C81623;\n  border: 1px solid #C81623;\n}\n.feedback--btns__reset:hover {\n  background: #C81623;\n  color: #fff;\n}\n.feedback--btns__comment {\n  margin-left: 10px;\n  color: #272636;\n  border: 1px solid #1C86D1;\n}\n.feedback--btns__comment:hover {\n  background: #1C86D1;\n  color: #fff;\n}\n.comment__feedback__mask {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  border-radius: 2px;\n  position: absolute;\n  top: 0;\n  left: 1px;\n  width: 604px;\n  height: 149px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  cursor: default;\n  background: #ccc;\n}\n.comment__feedback__mask p {\n  color: #fff;\n}\n.comment__feedback__mask--title {\n  font: 100 60px/60px \"\\5FAE\\8F6F\\96C5\\9ED1\";\n}\n.comment__feedback__mask--pinyin {\n  margin-top: 15px;\n  font: 100 20px/20px arial;\n}\n.clearfix::after {\n  content: \".\";\n  display: block;\n  height: 0;\n  visibility: hidden;\n  clear: both;\n}\n.demo {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  width: 900px;\n  margin: 50px auto 50px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  padding: 0 100px;\n}\n.comment__wrap {\n  width: 100%;\n}\n.comment__header {\n  border-radius: 5px;\n  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.6);\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -moz-justify-content: space-between;\n  height: 50px;\n  background: #1C86D1;\n  color: #fff;\n  font-size: 0;\n  padding: 5px 8px;\n}\n.comment__header::after {\n  content: \"\";\n  display: block;\n  position: absolute;\n  left: 41px;\n  bottom: -20px;\n  height: 0px;\n  border: 10px solid transparent;\n  border-top: 10px solid #1C86D1;\n}\n.comment__header .comment__header__span {\n  width: 150px;\n  height: 16px;\n  font: 200 16px/16px arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  margin-left: 10px;\n}\n.comment__header .comment__header__btns {\n  width: 80px;\n  height: 30px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.comment__header .comment__header__btns button {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  display: inline-block;\n  width: 40px;\n  height: 30px;\n  color: #fff;\n  font-size: 14px;\n}\n.comment__header .comment__header__btns button:hover {\n  color: #d32;\n}\n.comment__footer {\n  border-radius: 5px;\n  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.6);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  position: relative;\n  height: 70px;\n  background: #1C86D1;\n}\n.comment__footer::before {\n  content: \"\";\n  display: block;\n  position: absolute;\n  top: -20px;\n  left: 41px;\n  height: 0;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #1C86D1;\n}\n.comment__pagination {\n  border-radius: 5px;\n  box-shadow: 0 0 2px rgba(0, 0, 0, 0.7);\n  overflow: hidden;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 35px;\n}\n.comment__pagination li {\n  -webkit-transition: 0.3s;\n  transition: 0.3s;\n  width: 40px;\n  height: 100%;\n  color: #fff;\n  text-align: center;\n  cursor: pointer;\n}\n.comment__pagination li:hover {\n  color: #1C86D1;\n  background: #fff;\n}\n.comment__pagination li div {\n  padding: 10px 0;\n  height: 100%;\n  line-height: 15px;\n}\n.comment__pagination li > div.active {\n  color: #1C86D1;\n  background: #fff;\n  border-left: none !important;\n}\n.comment__pagination li:not(:nth-of-type(1)) div {\n  border-left: 1px solid rgba(0, 0, 0, 0.2);\n}\n.comment__list {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  margin: 0 0 0 50px;\n  border-left: 2px solid #1C86D1;\n}\n.no__comment__item {\n  padding: 20px;\n  text-align: center;\n}\n.no__comment__item p {\n  border-radius: 5px;\n  height: 70px;\n  font-size: 24px;\n  line-height: 70px;\n  color: rgba(0, 0, 0, 0.6);\n  border: 1px solid #272636;\n}\n.comment__item {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: relative;\n  padding: 20px;\n}\n.comment__item::after {\n  border-radius: 50%;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  left: -8px;\n  top: 40px;\n  content: \"\";\n  display: block;\n  background: #1C86D1;\n  width: 10px;\n  height: 10px;\n  border: 2px solid #fff;\n}\n.comment__item:hover::after {\n  background: #51CA65;\n}\n.comment__item:hover .comment__content {\n  -webkit-transform: translateX(15px);\n          transform: translateX(15px);\n}\n.comment__content {\n  border-radius: 5px;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n  padding: 10px;\n  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);\n}\n.comment__author--avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.comment__author--avatar > img:hover,\n.comment__author--avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.comment__content--main {\n  width: calc(100% - 74px);\n}\n.comment__content--author {\n  font-size: 18px;\n}\n.comment__content--author a {\n  color: #1C86D1;\n}\n.comment__content--time {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  font-size: 12px;\n  margin-top: 2px;\n  color: #ddd;\n  cursor: default;\n}\n.comment__content--time:hover {\n  color: #1C86D1;\n}\n.comment__content--content {\n  font-size: 0px;\n  line-height: 1.4;\n  padding: 24px 0 0 0px;\n  white-space: pre;\n}\n.comment__content--content h1.text-effect-basic {\n  text-fill-color: transparent;\n  -webkit-text-fill-color: transparent;\n  background-clip: text;\n  -webkit-background-clip: text;\n  background-size: 200% 200%;\n  -webkit-animation: masked 3s infinite linear;\n          animation: masked 3s infinite linear;\n}\n.comment__content--content h1 {\n  margin-top: 10px;\n  padding-bottom: 10px;\n  font-size: 25px;\n  color: #7c795d;\n  font-weight: normal;\n  line-height: 1.1;\n  border-bottom: 1px solid #7c795d;\n}\n.comment__content--content h2 {\n  margin: 5px 0;\n  height: 30px;\n  text-indent: 5px;\n  color: #7c795d;\n  font: 400 20px/30px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  border-left: 5px solid #1C86D1;\n}\n.comment__content--content pre,\n.comment__content--content p,\n.comment__content--content code {\n  -moz-tab-size: 2;\n    -o-tab-size: 2;\n       tab-size: 2;\n  white-space: pre-wrap;\n  word-break: break-all;\n}\n.comment__content--content p,\n.comment__content--content code {\n  font-size: 14px;\n}\n.comment__content--content strong {\n  font-size: 16px;\n}\n.comment__content--content a {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  color: #1C86D1;\n  margin: 0px 2px;\n}\n.comment__content--content a:hover {\n  color: #C91523;\n}\n.comment__content--content img {\n  max-width: 512px;\n  vertical-align: bottom;\n}\n.comment__content--content table {\n  border-radius: 5px;\n  margin: 20px 0;\n  padding: 8px;\n  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);\n  white-space: normal;\n  border-collapse: collapse;\n}\n.comment__content--content table tr {\n  border: 1px solid #000;\n}\n.comment__content--content table tr td,\n.comment__content--content table tr th {\n  font-size: 14px;\n  padding: 5px;\n  word-break: break-word;\n}\n.comment__content--content table tr td {\n  font-weight: 200;\n  border: 1px solid #000;\n}\n.comment__content--content blockquote {\n  border-radius: 5px;\n  position: relative;\n  background: #CCD0D5;\n  padding: 25px 10px 10px 30px;\n  overflow: hidden;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n}\n.comment__content--content blockquote::before {\n  position: absolute;\n  top: 0;\n  left: 0;\n  font-size: 14px;\n  background: -webkit-linear-gradient(112deg, transparent 50%, #1C86D1 50%);\n  background: linear-gradient(-22deg, transparent 50%, #1C86D1 50%);\n  width: 80px;\n  height: 30px;\n  display: block;\n  content: \"\\5F15\\8FF0\";\n  color: #fff;\n  padding: 3px 0 0 4px;\n}\n.comment__content--content pre {\n  border-radius: 5px;\n  overflow: hidden;\n  padding: 15px 0px 15px 8px;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n  margin: 15px 0;\n  background: #49483e;\n}\n.comment__content--content pre code {\n  color: #a6e22e;\n}\n.comment__content--content pre code .hljs-comment,\n.comment__content--content pre code .hljs-quote {\n  color: #999580;\n}\n.comment__content--content pre code .hljs-variable,\n.comment__content--content pre code .hljs-template-variable,\n.comment__content--content pre code .hljs-attr,\n.comment__content--content pre code .hljs-tag,\n.comment__content--content pre code .hljs-name,\n.comment__content--content pre code .hljs-regexp,\n.comment__content--content pre code .hljs-link,\n.comment__content--content pre code .hljs-name,\n.comment__content--content pre code .hljs-selector-id,\n.comment__content--content pre code .hljs-selector-class {\n  color: #f2777a;\n}\n.comment__content--content pre code .hljs-number,\n.comment__content--content pre code .hljs-meta,\n.comment__content--content pre code .hljs-built_in,\n.comment__content--content pre code .hljs-builtin-name,\n.comment__content--content pre code .hljs-literal,\n.comment__content--content pre code .hljs-type,\n.comment__content--content pre code .hljs-params {\n  color: #ae81ff;\n}\n.comment__content--content pre code .hljs-string,\n.comment__content--content pre code .hljs-symbol,\n.comment__content--content pre code .hljs-bullet {\n  color: #e6db74;\n}\n.comment__content--content pre code .hljs-title,\n.comment__content--content pre code .hljs-section {\n  color: #6684e1;\n}\n.comment__content--content pre code .hljs-keyword,\n.comment__content--content pre code .hljs-selector-tag {\n  color: #66D9EF;\n}\n.comment__content--content pre code .hljs {\n  display: block;\n  overflow-x: auto;\n  background: #20201d;\n  color: #a6a28c;\n  padding: 0.5em;\n}\n.comment__content--content pre code .hljs-emphasis {\n  font-style: italic;\n}\n.comment__content--content pre code .hljs-strong {\n  font-weight: bold;\n}\n.comment__content--content ol {\n  counter-reset: section;\n  padding: 10px 0 10px 20px;\n}\n.comment__content--content ol > li {\n  position: relative;\n  min-height: 20px;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  margin: 5px 0px;\n}\n.comment__content--content ol > li:before {\n  counter-increment: section;\n  content: counters(section, \"\") \".\";\n  display: inline-block;\n  position: absolute;\n  top: 0;\n  left: -20px;\n  font-size: 16px;\n  font-weight: bold;\n  font-style: italic;\n}\n.comment__content--content ol > li:nth-of-type(3n+1)::before {\n  color: #FE0002;\n}\n.comment__content--content ol > li:nth-of-type(3n+2)::before {\n  color: #F4F800;\n}\n.comment__content--content ol > li:nth-of-type(3n+3)::before {\n  color: #A3DF03;\n}\n.comment__content--content ul {\n  padding: 10px 0 10px 15px;\n}\n.comment__content--content ul > li {\n  position: relative;\n  margin-bottom: 10px;\n  line-height: 1.1;\n  min-height: 20px;\n  word-break: break-all;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n}\n.comment__content--content ul > li::before {\n  border-radius: 50%;\n  position: absolute;\n  top: 6px;\n  left: -13px;\n  content: \"\";\n  display: inline-block;\n  width: 8px;\n  height: 8px;\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #1C86D1 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #1C86D1 100%);\n}\n.comment__content--content ul > li:hover::before {\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #91E22E 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #91E22E 100%);\n}\n.comment__content--options {\n  padding-top: 15px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.comment__content--options__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-flex: 8;\n      -ms-flex-positive: 8;\n          flex-grow: 8;\n}\n.comment__content--options__wrap a {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.comment__content--options__wrap a i {\n  width: 16px;\n  height: 16px;\n  background-image: url(\"/img/icon.png\");\n}\n.comment__content--options__wrap a span {\n  font-size: 12px;\n  margin-left: 3px;\n  color: #272636;\n}\n.comment__content--options__wrap a:hover span {\n  color: #1C86D1;\n}\n.comment__content--options__wrap a:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.comment__content--options__callback i {\n  background-position: -5px 0px;\n}\n.comment__content--options__del {\n  margin-left: 8px;\n}\n.comment__content--options__del i {\n  background-position: -5px -16px;\n}\n.comment__options__vote-up {\n  text-align: right;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n.comment__options__vote-up button {\n  font-size: 18px;\n}\n.comment__options__vote-up button span {\n  font-size: 18px;\n}\n.comment__options__vote-up button:hover {\n  color: #1C86D1;\n}\n.comment__options__has-voted-up {\n  text-align: right;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n.comment__options__has-voted-up button {\n  font-size: 18px;\n  color: #C91523;\n  cursor: default;\n}\n.comment__options__has-voted-up button span {\n  font-size: 18px;\n}\n.feedback__content {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  overflow: hidden;\n  width: 100%;\n  margin: 20px 10px 10px 5px;\n}\n.feedback__content--main {\n  border-radius: 5px;\n  position: relative;\n  border: 1px solid #272636;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  padding: 5px;\n  margin: 20px 0 0;\n}\n.feedback__content--main::after,\n.feedback__content--main::before {\n  content: \"\";\n  height: 0;\n  position: absolute;\n  left: 30px;\n}\n.feedback__content--main::after {\n  top: -20px;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #272636;\n}\n.feedback__content--main::before {\n  z-index: 2;\n  top: -19px;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #fff;\n}\n.sub__feedback {\n  margin: 5px 0;\n}\n.sub__feedback span {\n  font-size: 18px;\n  color: #1C86D1;\n}\n.feedback__wrap--content {\n  width: calc(100% - 74px);\n}\n.feedback__content--avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.feedback__content--avatar > img:hover,\n.feedback__content--avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.feedback__wrap--content {\n  width: calc(100% - 74px);\n}\n.feedback__content--author {\n  font-size: 18px;\n}\n.feedback__content--author a {\n  color: #1C86D1;\n}\n.feedback__content--time {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  font-size: 12px;\n  margin-top: 2px;\n  color: #ddd;\n  cursor: default;\n}\n.feedback__content--time:hover {\n  color: #1C86D1;\n}\n.feedback__content--content {\n  font-size: 0px;\n  line-height: 1.4;\n  padding: 24px 0 0 0px;\n  white-space: pre;\n}\n.feedback__content--content h1.text-effect-basic {\n  text-fill-color: transparent;\n  -webkit-text-fill-color: transparent;\n  background-clip: text;\n  -webkit-background-clip: text;\n  background-size: 200% 200%;\n  -webkit-animation: masked 3s infinite linear;\n          animation: masked 3s infinite linear;\n}\n.feedback__content--content h1 {\n  margin-top: 10px;\n  padding-bottom: 10px;\n  font-size: 25px;\n  color: #7c795d;\n  font-weight: normal;\n  line-height: 1.1;\n  border-bottom: 1px solid #7c795d;\n}\n.feedback__content--content h2 {\n  margin: 5px 0;\n  height: 30px;\n  text-indent: 5px;\n  color: #7c795d;\n  font: 400 20px/30px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  border-left: 5px solid #1C86D1;\n}\n.feedback__content--content pre,\n.feedback__content--content p,\n.feedback__content--content code {\n  -moz-tab-size: 2;\n    -o-tab-size: 2;\n       tab-size: 2;\n  white-space: pre-wrap;\n  word-break: break-all;\n}\n.feedback__content--content p,\n.feedback__content--content code {\n  font-size: 14px;\n}\n.feedback__content--content strong {\n  font-size: 16px;\n}\n.feedback__content--content a {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  color: #1C86D1;\n  margin: 0px 2px;\n}\n.feedback__content--content a:hover {\n  color: #C91523;\n}\n.feedback__content--content img {\n  max-width: 512px;\n  vertical-align: bottom;\n}\n.feedback__content--content table {\n  border-radius: 5px;\n  margin: 20px 0;\n  padding: 8px;\n  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);\n  white-space: normal;\n  border-collapse: collapse;\n}\n.feedback__content--content table tr {\n  border: 1px solid #000;\n}\n.feedback__content--content table tr td,\n.feedback__content--content table tr th {\n  font-size: 14px;\n  padding: 5px;\n  word-break: break-word;\n}\n.feedback__content--content table tr td {\n  font-weight: 200;\n  border: 1px solid #000;\n}\n.feedback__content--content blockquote {\n  border-radius: 5px;\n  position: relative;\n  background: #CCD0D5;\n  padding: 25px 10px 10px 30px;\n  overflow: hidden;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n}\n.feedback__content--content blockquote::before {\n  position: absolute;\n  top: 0;\n  left: 0;\n  font-size: 14px;\n  background: -webkit-linear-gradient(112deg, transparent 50%, #1C86D1 50%);\n  background: linear-gradient(-22deg, transparent 50%, #1C86D1 50%);\n  width: 80px;\n  height: 30px;\n  display: block;\n  content: \"\\5F15\\8FF0\";\n  color: #fff;\n  padding: 3px 0 0 4px;\n}\n.feedback__content--content pre {\n  border-radius: 5px;\n  overflow: hidden;\n  padding: 15px 0px 15px 8px;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n  margin: 15px 0;\n  background: #49483e;\n}\n.feedback__content--content pre code {\n  color: #a6e22e;\n}\n.feedback__content--content pre code .hljs-comment,\n.feedback__content--content pre code .hljs-quote {\n  color: #999580;\n}\n.feedback__content--content pre code .hljs-variable,\n.feedback__content--content pre code .hljs-template-variable,\n.feedback__content--content pre code .hljs-attr,\n.feedback__content--content pre code .hljs-tag,\n.feedback__content--content pre code .hljs-name,\n.feedback__content--content pre code .hljs-regexp,\n.feedback__content--content pre code .hljs-link,\n.feedback__content--content pre code .hljs-name,\n.feedback__content--content pre code .hljs-selector-id,\n.feedback__content--content pre code .hljs-selector-class {\n  color: #f2777a;\n}\n.feedback__content--content pre code .hljs-number,\n.feedback__content--content pre code .hljs-meta,\n.feedback__content--content pre code .hljs-built_in,\n.feedback__content--content pre code .hljs-builtin-name,\n.feedback__content--content pre code .hljs-literal,\n.feedback__content--content pre code .hljs-type,\n.feedback__content--content pre code .hljs-params {\n  color: #ae81ff;\n}\n.feedback__content--content pre code .hljs-string,\n.feedback__content--content pre code .hljs-symbol,\n.feedback__content--content pre code .hljs-bullet {\n  color: #e6db74;\n}\n.feedback__content--content pre code .hljs-title,\n.feedback__content--content pre code .hljs-section {\n  color: #6684e1;\n}\n.feedback__content--content pre code .hljs-keyword,\n.feedback__content--content pre code .hljs-selector-tag {\n  color: #66D9EF;\n}\n.feedback__content--content pre code .hljs {\n  display: block;\n  overflow-x: auto;\n  background: #20201d;\n  color: #a6a28c;\n  padding: 0.5em;\n}\n.feedback__content--content pre code .hljs-emphasis {\n  font-style: italic;\n}\n.feedback__content--content pre code .hljs-strong {\n  font-weight: bold;\n}\n.feedback__content--content ol {\n  counter-reset: section;\n  padding: 10px 0 10px 20px;\n}\n.feedback__content--content ol > li {\n  position: relative;\n  min-height: 20px;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  margin: 5px 0px;\n}\n.feedback__content--content ol > li:before {\n  counter-increment: section;\n  content: counters(section, \"\") \".\";\n  display: inline-block;\n  position: absolute;\n  top: 0;\n  left: -20px;\n  font-size: 16px;\n  font-weight: bold;\n  font-style: italic;\n}\n.feedback__content--content ol > li:nth-of-type(3n+1)::before {\n  color: #FE0002;\n}\n.feedback__content--content ol > li:nth-of-type(3n+2)::before {\n  color: #F4F800;\n}\n.feedback__content--content ol > li:nth-of-type(3n+3)::before {\n  color: #A3DF03;\n}\n.feedback__content--content ul {\n  padding: 10px 0 10px 15px;\n}\n.feedback__content--content ul > li {\n  position: relative;\n  margin-bottom: 10px;\n  line-height: 1.1;\n  min-height: 20px;\n  word-break: break-all;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n}\n.feedback__content--content ul > li::before {\n  border-radius: 50%;\n  position: absolute;\n  top: 6px;\n  left: -13px;\n  content: \"\";\n  display: inline-block;\n  width: 8px;\n  height: 8px;\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #1C86D1 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #1C86D1 100%);\n}\n.feedback__content--content ul > li:hover::before {\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #91E22E 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #91E22E 100%);\n}\n.feedback__content--options {\n  padding-top: 15px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.feedback__content--options__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 8;\n      -ms-flex-positive: 8;\n          flex-grow: 8;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.feedback__content--options__wrap a {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.feedback__content--options__wrap a i {\n  width: 16px;\n  height: 16px;\n  background-image: url(\"/img/icon.png\");\n}\n.feedback__content--options__wrap a span {\n  font-size: 12px;\n  margin-left: 3px;\n  color: #272636;\n}\n.feedback__content--options__wrap a:hover span {\n  color: #1C86D1;\n}\n.feedback__content--options__wrap a:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.feedback__content--options__callback i {\n  background-position: -5px 0px;\n}\n.feedback__content--options__del {\n  margin-left: 8px;\n}\n.feedback__content--options__del i {\n  background-position: -5px -16px;\n}\n.feedback__options__vote-up {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  text-align: right;\n}\n.feedback__options__vote-up button {\n  font-size: 18px;\n}\n.feedback__options__vote-up button span {\n  font-size: 18px;\n}\n.feedback__options__vote-up button:hover {\n  color: #1C86D1;\n}\n.editer-wrap {\n  margin-top: 20px;\n}\n.editer-wrap .comment__feedback {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  width: 100%;\n  border-top: none;\n}\n.editer-wrap .editer-wrap__avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.editer-wrap .editer-wrap__avatar > img:hover,\n.editer-wrap .editer-wrap__avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.editer-wrap .editer-wrap__avatar img {\n  height: 100%;\n}\n.editer-wrap .comment__feedback--edit {\n  min-height: 150px;\n}\n.editer-wrap .comment__feddback--btns {\n  width: 100%;\n}\n.login__table__bg {\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 999998;\n  background: rgba(0, 0, 0, 0.4);\n}\n.login__table {\n  border-radius: 5px;\n  box-shadow: 0 0 10px #000000;\n  position: fixed;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  margin: auto;\n  width: 320px;\n  height: 340px;\n  border: 1px solid rgba(0, 0, 0, 0.3);\n  background: #fff;\n  z-index: 999999;\n}\n.login__table__wrap {\n  overflow: hidden;\n  padding: 0 10px;\n}\n.login__table__header {\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 40px;\n}\n.login__table__header button {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  line-height: 50px;\n}\n.state__bar {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  bottom: 0;\n  left: 32px;\n  width: 80px;\n  height: 2px;\n  background: #1C86D1;\n}\n.state__bar:hover {\n  color: #1C86D1;\n}\n.state__bar--toggle {\n  left: 186px;\n}\n.login__table__forms {\n  position: relative;\n  height: 300px;\n}\n.login__table__forms form {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  top: 0;\n  left: 0;\n}\n.tourist__login {\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  padding-top: 50px;\n}\n.input__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  padding: 5px 0;\n  line-height: 20px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  margin-bottom: 15px;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n}\n.input__wrap p {\n  width: 60px;\n}\n.input__wrap input[type=\"text\"] {\n  border-radius: 5px;\n  border: 1px solid #272636;\n  padding: 5px;\n  width: 180px;\n  height: 27px;\n}\n.input__wrap label {\n  display: inline-block;\n  width: 100%;\n  height: 20px;\n  font-size: 12px;\n  color: #B61D1D;\n  padding: 5px 30px 0 0;\n  text-align: right;\n}\ninput[type=\"button\"].tourist__login--submit {\n  border-radius: 5px;\n  width: 180px;\n  height: 35px;\n  color: #fff;\n  background: #1C86D1;\n  margin: 30px auto 0;\n  cursor: pointer;\n  border: 1px solid #ccc;\n}\ninput[type=\"button\"].tourist__login--submit:active {\n  background: #3075DC;\n}\n.sns__login {\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 20px;\n}\n.sns__login div {\n  width: 70px;\n  height: 70px;\n  background: red;\n}\n.alert__wrap {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 99999999;\n  background: rgba(0, 0, 0, 0.8);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  overflow: hidden;\n}\n.alert__plane {\n  width: 100%;\n  height: 0px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background: rgba(255, 255, 255, 0.65);\n  -webkit-animation: alert_plane_animate .5s;\n          animation: alert_plane_animate .5s;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n.alert__plane header {\n  width: 100%;\n  height: 8px;\n  background: -webkit-linear-gradient(left, #F00001 12.5%, transparent 0px), -webkit-linear-gradient(left, #FF7F00 25%, transparent 0px), -webkit-linear-gradient(left, #E1E23B 37.5%, transparent 0px), -webkit-linear-gradient(left, #007940 50%, transparent 0px), -webkit-linear-gradient(left, #4041FE 62.5%, transparent 0px), -webkit-linear-gradient(left, #A001C0 75%, transparent 0px), -webkit-linear-gradient(left, #F7941E 87.5%, transparent 0px), -webkit-linear-gradient(left, #9AC147 100%, transparent 0px);\n  background: linear-gradient(to right, #F00001 12.5%, transparent 0px), linear-gradient(to right, #FF7F00 25%, transparent 0px), linear-gradient(to right, #E1E23B 37.5%, transparent 0px), linear-gradient(to right, #007940 50%, transparent 0px), linear-gradient(to right, #4041FE 62.5%, transparent 0px), linear-gradient(to right, #A001C0 75%, transparent 0px), linear-gradient(to right, #F7941E 87.5%, transparent 0px), linear-gradient(to right, #9AC147 100%, transparent 0px);\n  background-repeat: no-repeat;\n}\n.alert__plane footer {\n  width: 100%;\n  height: 42px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.alert__plane footer label {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  height: 100%;\n  cursor: pointer;\n  line-height: 42px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.alert__plane footer label:hover button {\n  color: #1C86D1;\n}\n.alert__plane footer label:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.alert__plane footer label:hover i::before {\n  -webkit-transform: scale(1);\n          transform: scale(1);\n}\n.alert__plane footer i {\n  position: relative;\n  width: 20px;\n  height: 20px;\n  background-image: url(\"/img/icon.png\");\n}\n.alert__plane footer i::before {\n  border-radius: 50%;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  content: \"\";\n  display: block;\n  width: 20px;\n  height: 20px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  z-index: -1;\n  background: #1C86D1;\n  -webkit-transform: scale(0);\n          transform: scale(0);\n}\n.alert__plane footer .alert__plane--btn_sure {\n  background-position: -4px -59px;\n}\n.alert__plane footer .alert__plane--btn_cancel {\n  background-position: -4px -36px;\n}\n.alert__plane footer button {\n  font-size: 18px;\n}\n@-webkit-keyframes alert_plane_animate {\n  0% {\n    height: 0;\n  }\n  100% {\n    height: 280px;\n  }\n}\n@keyframes alert_plane_animate {\n  0% {\n    height: 0;\n  }\n  100% {\n    height: 280px;\n  }\n}\n.alert__plane--question {\n  width: 100%;\n  height: 230px;\n  padding-top: 50px;\n  text-align: center;\n  font-size: 30px;\n  font-weight: 100;\n  line-height: 1.2;\n  overflow: hidden;\n  color: rgba(0, 0, 0, 0.7);\n}\n", ""]);
+	exports.push([module.id, "@charset \"utf-8\";\n* {\n  box-sizing: border-box;\n  font-family: arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  font-size: 14px;\n  outline: none;\n}\nbody {\n  margin: 0;\n  padding: 0;\n  font-size: 0;\n}\na {\n  -webkit-transition: 5s;\n  transition: 5s;\n  text-decoration: none;\n}\nul,\nol {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\ntable {\n  border-collapse: collapse;\n}\nselect {\n  -webkit-appearance: none;\n     -moz-appearance: none;\n          appearance: none;\n}\nh1,\nh2,\nh3 {\n  margin-bottom: 1em;\n}\np,\npre {\n  margin: 0;\n}\nblockquote {\n  margin: 0;\n}\ninput[type=\"submit\"],\nbutton {\n  display: inline-block;\n  border-radius: 0;\n  border: none;\n  padding: 0;\n  background: none;\n  cursor: pointer;\n}\nfigure {\n  margin: 0;\n}\ni {\n  display: inline-block;\n}\n/*下拉组件*/\n.drop__list {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  width: 140px;\n  height: 28px;\n  border: 1px solid #ccc;\n  cursor: pointer;\n  position: relative;\n  border-radius: 3px 3px 0px 0px;\n  color: #929699;\n  font-size: 0px;\n  margin-right: 20px;\n}\n.drop__list p {\n  width: 100px;\n  height: 20px;\n  margin: 3px 0 3px 5px;\n  font-size: 14px;\n}\n.drop__list i {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  top: 5px;\n  right: 5px;\n  content: \"\";\n  width: 16px;\n  height: 16px;\n  display: block;\n  background: url(\"/img/icon.png\") -30px 0px;\n}\n.drop__list .drop__wrap {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  top: 26px;\n  left: 0;\n  width: 100%;\n  border-radius: 0px 0px 3px 3px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  overflow: hidden;\n  border: 1px solid #ccc;\n  border-top: none;\n  z-index: 1234;\n  height: 0px;\n}\n.drop__list ul {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  padding: 5px 0;\n  overflow: hidden;\n  background: #E6E6E6;\n  font-size: 14px;\n}\n.drop__list ul li {\n  height: 25px;\n  line-height: 25px;\n  padding: 0px 5px;\n}\n.drop__list ul li:hover {\n  color: #fff;\n  background: #1C86D1;\n}\n.drag__wrap {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  top: 0;\n  right: 0;\n  background: #F5F5F5;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.drag__wrap .drag__btn {\n  border-radius: 3px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  min-height: 5px;\n  width: 100%;\n  border: 1px solid #979797;\n  background-color: rgba(0, 0, 0, 0.6);\n}\n.drag__wrap .drag__btn:hover {\n  border: 1px solid #636363;\n  background-color: rgba(0, 0, 0, 0.8);\n}\n.drag__wrap .drag__btn:active {\n  border: 1px solid #636363;\n  background-color: #000000;\n}\n.column-arrange {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.none {\n  display: none !important;\n}\n.b-c {\n  position: fixed;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  margin: auto;\n}\n.hidden {\n  height: 0 !important;\n}\n@-webkit-keyframes swing {\n  20%,\n  40%,\n  60%,\n  80%,\n  100% {\n    -webkit-transform-origin: topcenter;\n            transform-origin: topcenter;\n  }\n  20% {\n    -webkit-transform: rotate(15deg);\n            transform: rotate(15deg);\n  }\n  40% {\n    -webkit-transform: rotate(-10deg);\n            transform: rotate(-10deg);\n  }\n  60% {\n    -webkit-transform: rotate(5deg);\n            transform: rotate(5deg);\n  }\n  80% {\n    -webkit-transform: rotate(-5deg);\n            transform: rotate(-5deg);\n  }\n  100% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n  }\n}\n@keyframes swing {\n  20%,\n  40%,\n  60%,\n  80%,\n  100% {\n    -webkit-transform-origin: topcenter;\n            transform-origin: topcenter;\n  }\n  20% {\n    -webkit-transform: rotate(15deg);\n            transform: rotate(15deg);\n  }\n  40% {\n    -webkit-transform: rotate(-10deg);\n            transform: rotate(-10deg);\n  }\n  60% {\n    -webkit-transform: rotate(5deg);\n            transform: rotate(5deg);\n  }\n  80% {\n    -webkit-transform: rotate(-5deg);\n            transform: rotate(-5deg);\n  }\n  100% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n  }\n}\n@-webkit-keyframes masked {\n  0% {\n    background-position: 0 0;\n  }\n  100% {\n    background-position: -100% 0;\n  }\n}\n@keyframes masked {\n  0% {\n    background-position: 0 0;\n  }\n  100% {\n    background-position: -100% 0;\n  }\n}\n.comment__feedback__wrap {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  background: #fbfbfb;\n  width: 100%;\n  margin-top: 20px;\n}\n.comment__feedback__box__syntaxs {\n  border-radius: 5px 5px 0 0;\n  border: 1px solid #272636;\n}\n.comment__feedback__box__syntaxs .syntaxs__list {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 32px;\n  -ms-flex-flow: row no-wrap;\n      flex-flow: row no-wrap;\n}\n.comment__feedback__box__syntaxs .syntaxs__list > li {\n  width: 32px;\n  height: 32px;\n  margin: 0 4px;\n  background-image: url(\"/img/icon.png\");\n  cursor: pointer;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .bold {\n  background-position: 6px -79px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .bold:hover {\n  background: url(\"/img/icon-hover.png\") 6px -79px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .italic {\n  background-position: 8px -127px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .italic:hover {\n  background: url(\"/img/icon-hover.png\") 8px -127px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .a-link {\n  background-position: 4px -103px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .a-link:hover {\n  background: url(\"/img/icon-hover.png\") 4px -103px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .image {\n  background-position: 4px -151px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .image:hover {\n  background: url(\"/img/icon-hover.png\") 4px -151px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .table {\n  background-position: 4px -175px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .table:hover {\n  background: url(\"/img/icon-hover.png\") 4px -175px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .blockquote-block {\n  background-position: 4px -292px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .blockquote-block:hover {\n  background: url(\"/img/icon-hover.png\") 4px -292px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .u-list {\n  background-position: 2px -223px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .u-list:hover {\n  background: url(\"/img/icon-hover.png\") 2px -223px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .o-list {\n  background-position: 2px -199px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .o-list:hover {\n  background: url(\"/img/icon-hover.png\") 2px -199px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h1-tag {\n  background-position: 4px -247px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h1-tag:hover {\n  background: url(\"/img/icon-hover.png\") 4px -247px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h2-tag {\n  background-position: 4px -269px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h2-tag:hover {\n  background: url(\"/img/icon-hover.png\") 4px -269px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .code-block {\n  background-position: 4px -341px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .code-block:hover {\n  background: url(\"/img/icon-hover.png\") 4px -341px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .snap-block {\n  position: relative;\n  background-position: 4px -365px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .snap-block:hover {\n  background: url(\"/img/icon-hover.png\") 4px -365px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .snap-block .snap_video_wrap {\n  border-radius: 5px;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  top: -318px;\n  left: -225px;\n  width: 450px;\n  height: 300px;\n  padding: 10px 10px 0 10px;\n  background: rgba(0, 0, 0, 0.3);\n  -webkit-transform: scale(0, 0);\n          transform: scale(0, 0);\n  -webkit-transform-origin: 54% 108%;\n          transform-origin: 54% 108%;\n  cursor: default;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .snap-block .snap_video_wrap::before {\n  display: block;\n  content: \"\";\n  position: absolute;\n  bottom: -32px;\n  left: 225px;\n  border: 16px solid transparent;\n  border-top: 16px solid rgba(0, 0, 0, 0.3);\n}\n.comment__feedback__box__syntaxs .syntaxs__list .snap-block .snap_options {\n  width: 100%;\n  height: 30px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .snap-block .snap_options .drop__list p {\n  color: #fff;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .snap-block .snap-btn {\n  margin: 0 10px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .emoji-list {\n  background-position: 5px -316px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .emoji-list:hover {\n  background: url(\"/img/icon-hover.png\") 5px -316px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 5px;\n  border-top: 1px solid #272636;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list > div.choice-btn {\n  border-radius: 5px;\n  position: relative;\n  width: 32px;\n  height: 32px;\n  margin: 0 4px;\n  cursor: pointer;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list > div.choice-btn:hover {\n  box-shadow: 0 0 1px 1px #1C86D1;\n}\n.comment__feedback__box__syntaxs .drop__upload__area {\n  border-radius: 5px;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  position: relative;\n  width: 454px;\n  height: 80px;\n  margin: 15px 0;\n  border: 1px dashed #1C86D1;\n  text-align: center;\n  font: 300 30px/75px \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  cursor: default;\n}\n.comment__feedback__box__syntaxs .drop__upload__area::after,\n.comment__feedback__box__syntaxs .drop__upload__area::before {\n  content: '';\n  display: block;\n  z-index: -1;\n  color: #1C86D1;\n  box-shadow: inset 0 0 0 2px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  -webkit-animation: clip-me 6s linear infinite;\n          animation: clip-me 6s linear infinite;\n}\n.comment__feedback__box__syntaxs .drop__upload__area::before {\n  -webkit-animation-delay: -3s;\n          animation-delay: -3s;\n}\n@-webkit-keyframes clip-me {\n  0%,\n  100% {\n    clip: rect(0px, 454px, 4px, 0px);\n  }\n  25% {\n    clip: rect(0px, 4px, 80px, 0px);\n  }\n  50% {\n    clip: rect(76px, 454px, 80px, 0px);\n  }\n  75% {\n    clip: rect(0px, 454px, 80px, 450px);\n  }\n}\n@keyframes clip-me {\n  0%,\n  100% {\n    clip: rect(0px, 454px, 4px, 0px);\n  }\n  25% {\n    clip: rect(0px, 4px, 80px, 0px);\n  }\n  50% {\n    clip: rect(76px, 454px, 80px, 0px);\n  }\n  75% {\n    clip: rect(0px, 454px, 80px, 450px);\n  }\n}\n.comment__feedback__box__syntaxs .upload__btn {\n  border-radius: 5px;\n  width: 454px;\n  height: 40px;\n  background: #1C86D1;\n  color: #fff;\n  font-size: 18px;\n  margin-bottom: 10px;\n}\n.comment__feedback__box__syntaxs .upload__btn:active {\n  background: #3075DC;\n}\n.comment__feedback__box__syntaxs input[type=\"text\"] {\n  border-radius: 3px;\n  height: 30px;\n  border: 1px solid #1C86D1;\n  margin-right: 20px;\n  font-size: 14px;\n  text-indent: 5px;\n}\n.comment__feedback__box__syntaxs .insert {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  border-radius: 5px;\n  color: #272636;\n  border: 1px solid #1C86D1;\n  line-height: 30px;\n  width: 70px;\n  height: 30px;\n}\n.comment__feedback__box__syntaxs .insert:hover {\n  background: #1C86D1;\n  color: #fff;\n}\n.comment__feedback__box__syntaxs .table-size-matrix {\n  margin: 10px 0 10px 90px;\n}\n.comment__feedback__box__syntaxs .table-size-matrix tr,\n.comment__feedback__box__syntaxs .table-size-matrix td {\n  border: 1px solid #ccc;\n}\n.comment__feedback__box__syntaxs .table-size-matrix td {\n  padding: 15px;\n}\n.comment__feedback__box__syntaxs .table-matrix-dimension {\n  font-size: 18px;\n  text-decoration: underline;\n  margin: 0 20px;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap {\n  width: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  border-top: 1px solid #ccc;\n  border-left: 1px solid #ccc;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap td {\n  border-right: 1px solid #ccc;\n  border-bottom: 1px solid #ccc;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap td:hover {\n  background: #ccc;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap td a {\n  display: inline-block;\n  width: 32px;\n  height: 32px;\n  padding: 4px;\n}\n.comment__feedback__box__syntaxs #snap_canvas {\n  margin-bottom: 10px;\n}\n.comment__feedback__box__syntaxs .snap_wrap {\n  width: 430px;\n  margin: 20px auto;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.comment__feedback__box__wrap {\n  position: relative;\n}\n.editor__resize__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.editor__resize {\n  display: inline-block;\n  width: 130px;\n  height: 8px;\n  cursor: row-resize;\n  margin-top: 2px;\n  border-top: 1px solid #ccc;\n  border-bottom: 1px solid #ccc;\n}\n.comment__feedback__box {\n  position: relative;\n  width: 100%;\n}\n.comment__feedback {\n  padding: 10px;\n  border-top: 1px solid #272636;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n}\n.comment__feedback h3 {\n  font: 200 24px/1 arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n}\n.login-infos {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  font-size: 16px;\n  padding-bottom: 10px;\n}\n.login-infos a {\n  color: #1C86D1;\n}\n.login-infos .init_prompt {\n  cursor: default;\n  color: rgba(0, 0, 0, 0.5);\n}\n.login-out__btn {\n  border-radius: 5px;\n  float: right;\n  width: 70px;\n  height: 25px;\n  background: #C81623;\n  color: #fff;\n}\n.login-out__btn:active {\n  background: #AA151F;\n}\n.login-in__btn {\n  border-radius: 5px;\n  float: right;\n  width: 70px;\n  height: 25px;\n  padding: 0 5px;\n  background: #1C86D1;\n  color: #fff;\n}\n.login-in__btn:active {\n  background: #3075DC;\n}\n.comment__feedback--section {\n  width: calc(100% - 74px);\n}\n.comment__feedback--edit {\n  border-radius: 0px 0px 5px 5px;\n  width: 100%;\n  min-height: 30px;\n  padding: 5px;\n  border: 1px solid #272636;\n  border-top: none;\n  font: 200 14px/1.5 arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  resize: none;\n  overflow: hidden;\n  white-space: pre-wrap;\n  -moz-tab-size: 4;\n    -o-tab-size: 4;\n       tab-size: 4;\n}\n.comment__feedback--btns {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  width: 100%;\n  margin-top: 10px;\n}\n.comment__feedback--btns button {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  border-radius: 5px;\n  line-height: 30px;\n  width: 70px;\n  height: 30px;\n}\n.feedback--btns__reset {\n  color: #C81623;\n  border: 1px solid #C81623;\n}\n.feedback--btns__reset:hover {\n  background: #C81623;\n  color: #fff;\n}\n.feedback--btns__comment {\n  margin-left: 10px;\n  color: #272636;\n  border: 1px solid #1C86D1;\n}\n.feedback--btns__comment:hover {\n  background: #1C86D1;\n  color: #fff;\n}\n.comment__feedback__mask {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  border-radius: 2px;\n  position: absolute;\n  top: 0;\n  left: 1px;\n  width: 604px;\n  height: 149px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  cursor: default;\n  background: #ccc;\n}\n.comment__feedback__mask p {\n  color: #fff;\n}\n.comment__feedback__mask--title {\n  font: 100 60px/60px \"\\5FAE\\8F6F\\96C5\\9ED1\";\n}\n.comment__feedback__mask--pinyin {\n  margin-top: 15px;\n  font: 100 20px/20px arial;\n}\n.clearfix::after {\n  content: \".\";\n  display: block;\n  height: 0;\n  visibility: hidden;\n  clear: both;\n}\n.demo {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  width: 900px;\n  margin: 50px auto 50px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  padding: 0 100px;\n}\n.comment__wrap {\n  width: 100%;\n}\n.comment__header {\n  border-radius: 5px;\n  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.6);\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -moz-justify-content: space-between;\n  height: 50px;\n  background: #1C86D1;\n  color: #fff;\n  font-size: 0;\n  padding: 5px 8px;\n}\n.comment__header::after {\n  content: \"\";\n  display: block;\n  position: absolute;\n  left: 41px;\n  bottom: -20px;\n  height: 0px;\n  border: 10px solid transparent;\n  border-top: 10px solid #1C86D1;\n}\n.comment__header .comment__header__span {\n  width: 150px;\n  height: 16px;\n  font: 200 16px/16px arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  margin-left: 10px;\n}\n.comment__header .comment__header__btns {\n  width: 80px;\n  height: 30px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.comment__header .comment__header__btns button {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  display: inline-block;\n  width: 40px;\n  height: 30px;\n  color: #fff;\n  font-size: 14px;\n}\n.comment__header .comment__header__btns button:hover {\n  color: #d32;\n}\n.comment__footer {\n  border-radius: 5px;\n  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.6);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  position: relative;\n  height: 70px;\n  background: #1C86D1;\n}\n.comment__footer::before {\n  content: \"\";\n  display: block;\n  position: absolute;\n  top: -20px;\n  left: 41px;\n  height: 0;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #1C86D1;\n}\n.comment__pagination {\n  border-radius: 5px;\n  box-shadow: 0 0 2px rgba(0, 0, 0, 0.7);\n  overflow: hidden;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 35px;\n}\n.comment__pagination li {\n  -webkit-transition: 0.3s;\n  transition: 0.3s;\n  width: 40px;\n  height: 100%;\n  color: #fff;\n  text-align: center;\n  cursor: pointer;\n}\n.comment__pagination li:hover {\n  color: #1C86D1;\n  background: #fff;\n}\n.comment__pagination li div {\n  padding: 10px 0;\n  height: 100%;\n  line-height: 15px;\n}\n.comment__pagination li > div.active {\n  color: #1C86D1;\n  background: #fff;\n  border-left: none !important;\n}\n.comment__pagination li:not(:nth-of-type(1)) div {\n  border-left: 1px solid rgba(0, 0, 0, 0.2);\n}\n.comment__list {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  margin: 0 0 0 50px;\n  border-left: 2px solid #1C86D1;\n}\n.no__comment__item {\n  padding: 20px;\n  text-align: center;\n}\n.no__comment__item p {\n  border-radius: 5px;\n  height: 70px;\n  font-size: 24px;\n  line-height: 70px;\n  color: rgba(0, 0, 0, 0.6);\n  border: 1px solid #272636;\n}\n.comment__item {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: relative;\n  padding: 20px;\n}\n.comment__item::after {\n  border-radius: 50%;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  left: -8px;\n  top: 40px;\n  content: \"\";\n  display: block;\n  background: #1C86D1;\n  width: 10px;\n  height: 10px;\n  border: 2px solid #fff;\n}\n.comment__item:hover::after {\n  background: #51CA65;\n}\n.comment__item:hover .comment__content {\n  -webkit-transform: translateX(15px);\n          transform: translateX(15px);\n}\n.comment__content {\n  border-radius: 5px;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n  padding: 10px;\n  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);\n}\n.comment__author--avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.comment__author--avatar > img:hover,\n.comment__author--avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.comment__content--main {\n  width: calc(100% - 74px);\n}\n.comment__content--author {\n  font-size: 18px;\n}\n.comment__content--author a {\n  color: #1C86D1;\n}\n.comment__content--time {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  font-size: 12px;\n  margin-top: 2px;\n  color: #ddd;\n  cursor: default;\n}\n.comment__content--time:hover {\n  color: #1C86D1;\n}\n.comment__content--content {\n  font-size: 0px;\n  line-height: 1.4;\n  padding: 24px 0 0 0px;\n  white-space: pre;\n}\n.comment__content--content h1.text-effect-basic {\n  text-fill-color: transparent;\n  -webkit-text-fill-color: transparent;\n  background-clip: text;\n  -webkit-background-clip: text;\n  background-size: 200% 200%;\n  -webkit-animation: masked 3s infinite linear;\n          animation: masked 3s infinite linear;\n}\n.comment__content--content h1 {\n  margin-top: 10px;\n  padding-bottom: 10px;\n  font-size: 25px;\n  color: #7c795d;\n  font-weight: normal;\n  line-height: 1.1;\n  border-bottom: 1px solid #7c795d;\n}\n.comment__content--content h2 {\n  margin: 5px 0;\n  height: 30px;\n  text-indent: 5px;\n  color: #7c795d;\n  font: 400 20px/30px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  border-left: 5px solid #1C86D1;\n}\n.comment__content--content pre,\n.comment__content--content p,\n.comment__content--content code {\n  -moz-tab-size: 2;\n    -o-tab-size: 2;\n       tab-size: 2;\n  white-space: pre-wrap;\n  word-break: break-all;\n}\n.comment__content--content p,\n.comment__content--content code {\n  font-size: 14px;\n}\n.comment__content--content strong {\n  font-size: 16px;\n}\n.comment__content--content a {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  color: #1C86D1;\n  margin: 0px 2px;\n}\n.comment__content--content a:hover {\n  color: #C91523;\n}\n.comment__content--content img {\n  max-width: 512px;\n  vertical-align: bottom;\n}\n.comment__content--content table {\n  border-radius: 5px;\n  margin: 20px 0;\n  padding: 8px;\n  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);\n  white-space: normal;\n  border-collapse: collapse;\n}\n.comment__content--content table tr {\n  border: 1px solid #000;\n}\n.comment__content--content table tr td,\n.comment__content--content table tr th {\n  font-size: 14px;\n  padding: 5px;\n  word-break: break-word;\n}\n.comment__content--content table tr td {\n  font-weight: 200;\n  border: 1px solid #000;\n}\n.comment__content--content blockquote {\n  border-radius: 5px;\n  position: relative;\n  background: #CCD0D5;\n  padding: 25px 10px 10px 30px;\n  overflow: hidden;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n}\n.comment__content--content blockquote::before {\n  position: absolute;\n  top: 0;\n  left: 0;\n  font-size: 14px;\n  background: -webkit-linear-gradient(112deg, transparent 50%, #1C86D1 50%);\n  background: linear-gradient(-22deg, transparent 50%, #1C86D1 50%);\n  width: 80px;\n  height: 30px;\n  display: block;\n  content: \"\\5F15\\8FF0\";\n  color: #fff;\n  padding: 3px 0 0 4px;\n}\n.comment__content--content pre {\n  border-radius: 5px;\n  overflow: hidden;\n  padding: 15px 0px 15px 8px;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n  margin: 15px 0;\n  background: #49483e;\n}\n.comment__content--content pre code {\n  color: #a6e22e;\n}\n.comment__content--content pre code .hljs-comment,\n.comment__content--content pre code .hljs-quote {\n  color: #999580;\n}\n.comment__content--content pre code .hljs-variable,\n.comment__content--content pre code .hljs-template-variable,\n.comment__content--content pre code .hljs-attr,\n.comment__content--content pre code .hljs-tag,\n.comment__content--content pre code .hljs-name,\n.comment__content--content pre code .hljs-regexp,\n.comment__content--content pre code .hljs-link,\n.comment__content--content pre code .hljs-name,\n.comment__content--content pre code .hljs-selector-id,\n.comment__content--content pre code .hljs-selector-class {\n  color: #f2777a;\n}\n.comment__content--content pre code .hljs-number,\n.comment__content--content pre code .hljs-meta,\n.comment__content--content pre code .hljs-built_in,\n.comment__content--content pre code .hljs-builtin-name,\n.comment__content--content pre code .hljs-literal,\n.comment__content--content pre code .hljs-type,\n.comment__content--content pre code .hljs-params {\n  color: #ae81ff;\n}\n.comment__content--content pre code .hljs-string,\n.comment__content--content pre code .hljs-symbol,\n.comment__content--content pre code .hljs-bullet {\n  color: #e6db74;\n}\n.comment__content--content pre code .hljs-title,\n.comment__content--content pre code .hljs-section {\n  color: #6684e1;\n}\n.comment__content--content pre code .hljs-keyword,\n.comment__content--content pre code .hljs-selector-tag {\n  color: #66D9EF;\n}\n.comment__content--content pre code .hljs {\n  display: block;\n  overflow-x: auto;\n  background: #20201d;\n  color: #a6a28c;\n  padding: 0.5em;\n}\n.comment__content--content pre code .hljs-emphasis {\n  font-style: italic;\n}\n.comment__content--content pre code .hljs-strong {\n  font-weight: bold;\n}\n.comment__content--content ol {\n  counter-reset: section;\n  padding: 10px 0 10px 20px;\n}\n.comment__content--content ol > li {\n  position: relative;\n  min-height: 20px;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  margin: 5px 0px;\n}\n.comment__content--content ol > li:before {\n  counter-increment: section;\n  content: counters(section, \"\") \".\";\n  display: inline-block;\n  position: absolute;\n  top: 0;\n  left: -20px;\n  font-size: 16px;\n  font-weight: bold;\n  font-style: italic;\n}\n.comment__content--content ol > li:nth-of-type(3n+1)::before {\n  color: #FE0002;\n}\n.comment__content--content ol > li:nth-of-type(3n+2)::before {\n  color: #F4F800;\n}\n.comment__content--content ol > li:nth-of-type(3n+3)::before {\n  color: #A3DF03;\n}\n.comment__content--content ul {\n  padding: 10px 0 10px 15px;\n}\n.comment__content--content ul > li {\n  position: relative;\n  margin-bottom: 10px;\n  line-height: 1.1;\n  min-height: 20px;\n  word-break: break-all;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n}\n.comment__content--content ul > li::before {\n  border-radius: 50%;\n  position: absolute;\n  top: 6px;\n  left: -13px;\n  content: \"\";\n  display: inline-block;\n  width: 8px;\n  height: 8px;\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #1C86D1 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #1C86D1 100%);\n}\n.comment__content--content ul > li:hover::before {\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #91E22E 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #91E22E 100%);\n}\n.comment__content--options {\n  padding-top: 15px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.comment__content--options__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-flex: 8;\n      -ms-flex-positive: 8;\n          flex-grow: 8;\n}\n.comment__content--options__wrap a {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.comment__content--options__wrap a i {\n  width: 16px;\n  height: 16px;\n  background-image: url(\"/img/icon.png\");\n}\n.comment__content--options__wrap a span {\n  font-size: 12px;\n  margin-left: 3px;\n  color: #272636;\n}\n.comment__content--options__wrap a:hover span {\n  color: #1C86D1;\n}\n.comment__content--options__wrap a:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.comment__content--options__callback i {\n  background-position: -5px 0px;\n}\n.comment__content--options__del {\n  margin-left: 8px;\n}\n.comment__content--options__del i {\n  background-position: -5px -16px;\n}\n.comment__options__vote-up {\n  text-align: right;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n.comment__options__vote-up button {\n  font-size: 18px;\n}\n.comment__options__vote-up button span {\n  font-size: 18px;\n}\n.comment__options__vote-up button:hover {\n  color: #1C86D1;\n}\n.comment__options__has-voted-up {\n  text-align: right;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n.comment__options__has-voted-up button {\n  font-size: 18px;\n  color: #C91523;\n  cursor: default;\n}\n.comment__options__has-voted-up button span {\n  font-size: 18px;\n}\n.feedback__content {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  width: 100%;\n  margin: 20px 10px 10px 5px;\n}\n.feedback__content--main {\n  border-radius: 5px;\n  position: relative;\n  border: 1px solid #272636;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  padding: 5px;\n  margin: 20px 0 0;\n}\n.feedback__content--main::after,\n.feedback__content--main::before {\n  content: \"\";\n  height: 0;\n  position: absolute;\n  left: 30px;\n}\n.feedback__content--main::after {\n  top: -20px;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #272636;\n}\n.feedback__content--main::before {\n  z-index: 2;\n  top: -19px;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #fff;\n}\n.sub__feedback {\n  margin: 5px 0;\n}\n.sub__feedback span {\n  font-size: 18px;\n  color: #1C86D1;\n}\n.feedback__wrap--content {\n  width: calc(100% - 74px);\n}\n.feedback__content--avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.feedback__content--avatar > img:hover,\n.feedback__content--avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.feedback__wrap--content {\n  width: calc(100% - 74px);\n}\n.feedback__content--author {\n  font-size: 18px;\n}\n.feedback__content--author a {\n  color: #1C86D1;\n}\n.feedback__content--time {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  font-size: 12px;\n  margin-top: 2px;\n  color: #ddd;\n  cursor: default;\n}\n.feedback__content--time:hover {\n  color: #1C86D1;\n}\n.feedback__content--content {\n  font-size: 0px;\n  line-height: 1.4;\n  padding: 24px 0 0 0px;\n  white-space: pre;\n}\n.feedback__content--content h1.text-effect-basic {\n  text-fill-color: transparent;\n  -webkit-text-fill-color: transparent;\n  background-clip: text;\n  -webkit-background-clip: text;\n  background-size: 200% 200%;\n  -webkit-animation: masked 3s infinite linear;\n          animation: masked 3s infinite linear;\n}\n.feedback__content--content h1 {\n  margin-top: 10px;\n  padding-bottom: 10px;\n  font-size: 25px;\n  color: #7c795d;\n  font-weight: normal;\n  line-height: 1.1;\n  border-bottom: 1px solid #7c795d;\n}\n.feedback__content--content h2 {\n  margin: 5px 0;\n  height: 30px;\n  text-indent: 5px;\n  color: #7c795d;\n  font: 400 20px/30px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  border-left: 5px solid #1C86D1;\n}\n.feedback__content--content pre,\n.feedback__content--content p,\n.feedback__content--content code {\n  -moz-tab-size: 2;\n    -o-tab-size: 2;\n       tab-size: 2;\n  white-space: pre-wrap;\n  word-break: break-all;\n}\n.feedback__content--content p,\n.feedback__content--content code {\n  font-size: 14px;\n}\n.feedback__content--content strong {\n  font-size: 16px;\n}\n.feedback__content--content a {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  color: #1C86D1;\n  margin: 0px 2px;\n}\n.feedback__content--content a:hover {\n  color: #C91523;\n}\n.feedback__content--content img {\n  max-width: 512px;\n  vertical-align: bottom;\n}\n.feedback__content--content table {\n  border-radius: 5px;\n  margin: 20px 0;\n  padding: 8px;\n  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);\n  white-space: normal;\n  border-collapse: collapse;\n}\n.feedback__content--content table tr {\n  border: 1px solid #000;\n}\n.feedback__content--content table tr td,\n.feedback__content--content table tr th {\n  font-size: 14px;\n  padding: 5px;\n  word-break: break-word;\n}\n.feedback__content--content table tr td {\n  font-weight: 200;\n  border: 1px solid #000;\n}\n.feedback__content--content blockquote {\n  border-radius: 5px;\n  position: relative;\n  background: #CCD0D5;\n  padding: 25px 10px 10px 30px;\n  overflow: hidden;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n}\n.feedback__content--content blockquote::before {\n  position: absolute;\n  top: 0;\n  left: 0;\n  font-size: 14px;\n  background: -webkit-linear-gradient(112deg, transparent 50%, #1C86D1 50%);\n  background: linear-gradient(-22deg, transparent 50%, #1C86D1 50%);\n  width: 80px;\n  height: 30px;\n  display: block;\n  content: \"\\5F15\\8FF0\";\n  color: #fff;\n  padding: 3px 0 0 4px;\n}\n.feedback__content--content pre {\n  border-radius: 5px;\n  overflow: hidden;\n  padding: 15px 0px 15px 8px;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n  margin: 15px 0;\n  background: #49483e;\n}\n.feedback__content--content pre code {\n  color: #a6e22e;\n}\n.feedback__content--content pre code .hljs-comment,\n.feedback__content--content pre code .hljs-quote {\n  color: #999580;\n}\n.feedback__content--content pre code .hljs-variable,\n.feedback__content--content pre code .hljs-template-variable,\n.feedback__content--content pre code .hljs-attr,\n.feedback__content--content pre code .hljs-tag,\n.feedback__content--content pre code .hljs-name,\n.feedback__content--content pre code .hljs-regexp,\n.feedback__content--content pre code .hljs-link,\n.feedback__content--content pre code .hljs-name,\n.feedback__content--content pre code .hljs-selector-id,\n.feedback__content--content pre code .hljs-selector-class {\n  color: #f2777a;\n}\n.feedback__content--content pre code .hljs-number,\n.feedback__content--content pre code .hljs-meta,\n.feedback__content--content pre code .hljs-built_in,\n.feedback__content--content pre code .hljs-builtin-name,\n.feedback__content--content pre code .hljs-literal,\n.feedback__content--content pre code .hljs-type,\n.feedback__content--content pre code .hljs-params {\n  color: #ae81ff;\n}\n.feedback__content--content pre code .hljs-string,\n.feedback__content--content pre code .hljs-symbol,\n.feedback__content--content pre code .hljs-bullet {\n  color: #e6db74;\n}\n.feedback__content--content pre code .hljs-title,\n.feedback__content--content pre code .hljs-section {\n  color: #6684e1;\n}\n.feedback__content--content pre code .hljs-keyword,\n.feedback__content--content pre code .hljs-selector-tag {\n  color: #66D9EF;\n}\n.feedback__content--content pre code .hljs {\n  display: block;\n  overflow-x: auto;\n  background: #20201d;\n  color: #a6a28c;\n  padding: 0.5em;\n}\n.feedback__content--content pre code .hljs-emphasis {\n  font-style: italic;\n}\n.feedback__content--content pre code .hljs-strong {\n  font-weight: bold;\n}\n.feedback__content--content ol {\n  counter-reset: section;\n  padding: 10px 0 10px 20px;\n}\n.feedback__content--content ol > li {\n  position: relative;\n  min-height: 20px;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  margin: 5px 0px;\n}\n.feedback__content--content ol > li:before {\n  counter-increment: section;\n  content: counters(section, \"\") \".\";\n  display: inline-block;\n  position: absolute;\n  top: 0;\n  left: -20px;\n  font-size: 16px;\n  font-weight: bold;\n  font-style: italic;\n}\n.feedback__content--content ol > li:nth-of-type(3n+1)::before {\n  color: #FE0002;\n}\n.feedback__content--content ol > li:nth-of-type(3n+2)::before {\n  color: #F4F800;\n}\n.feedback__content--content ol > li:nth-of-type(3n+3)::before {\n  color: #A3DF03;\n}\n.feedback__content--content ul {\n  padding: 10px 0 10px 15px;\n}\n.feedback__content--content ul > li {\n  position: relative;\n  margin-bottom: 10px;\n  line-height: 1.1;\n  min-height: 20px;\n  word-break: break-all;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n}\n.feedback__content--content ul > li::before {\n  border-radius: 50%;\n  position: absolute;\n  top: 6px;\n  left: -13px;\n  content: \"\";\n  display: inline-block;\n  width: 8px;\n  height: 8px;\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #1C86D1 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #1C86D1 100%);\n}\n.feedback__content--content ul > li:hover::before {\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #91E22E 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #91E22E 100%);\n}\n.feedback__content--options {\n  padding-top: 15px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.feedback__content--options__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 8;\n      -ms-flex-positive: 8;\n          flex-grow: 8;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.feedback__content--options__wrap a {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.feedback__content--options__wrap a i {\n  width: 16px;\n  height: 16px;\n  background-image: url(\"/img/icon.png\");\n}\n.feedback__content--options__wrap a span {\n  font-size: 12px;\n  margin-left: 3px;\n  color: #272636;\n}\n.feedback__content--options__wrap a:hover span {\n  color: #1C86D1;\n}\n.feedback__content--options__wrap a:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.feedback__content--options__callback i {\n  background-position: -5px 0px;\n}\n.feedback__content--options__del {\n  margin-left: 8px;\n}\n.feedback__content--options__del i {\n  background-position: -5px -16px;\n}\n.feedback__options__vote-up {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  text-align: right;\n}\n.feedback__options__vote-up button {\n  font-size: 18px;\n}\n.feedback__options__vote-up button span {\n  font-size: 18px;\n}\n.feedback__options__vote-up button:hover {\n  color: #1C86D1;\n}\n.editer-wrap {\n  margin-top: 20px;\n}\n.editer-wrap .comment__feedback {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  width: 100%;\n  border-top: none;\n}\n.editer-wrap .editer-wrap__avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.editer-wrap .editer-wrap__avatar > img:hover,\n.editer-wrap .editer-wrap__avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.editer-wrap .editer-wrap__avatar img {\n  height: 100%;\n}\n.editer-wrap .comment__feedback--edit {\n  min-height: 150px;\n}\n.editer-wrap .comment__feddback--btns {\n  width: 100%;\n}\n.login__table__bg {\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 999998;\n  background: rgba(0, 0, 0, 0.4);\n}\n.login__table {\n  border-radius: 5px;\n  box-shadow: 0 0 10px #000000;\n  position: fixed;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  margin: auto;\n  width: 320px;\n  height: 340px;\n  border: 1px solid rgba(0, 0, 0, 0.3);\n  background: #fff;\n  z-index: 999999;\n}\n.login__table__wrap {\n  overflow: hidden;\n  padding: 0 10px;\n}\n.login__table__header {\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 40px;\n}\n.login__table__header button {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  line-height: 50px;\n}\n.state__bar {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  bottom: 0;\n  left: 32px;\n  width: 80px;\n  height: 2px;\n  background: #1C86D1;\n}\n.state__bar:hover {\n  color: #1C86D1;\n}\n.state__bar--toggle {\n  left: 186px;\n}\n.login__table__forms {\n  position: relative;\n  height: 300px;\n}\n.login__table__forms form {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  top: 0;\n  left: 0;\n}\n.tourist__login {\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  padding-top: 50px;\n}\n.input__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  padding: 5px 0;\n  line-height: 20px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  margin-bottom: 15px;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n}\n.input__wrap p {\n  width: 60px;\n}\n.input__wrap input[type=\"text\"] {\n  border-radius: 5px;\n  border: 1px solid #272636;\n  padding: 5px;\n  width: 180px;\n  height: 27px;\n}\n.input__wrap label {\n  display: inline-block;\n  width: 100%;\n  height: 20px;\n  font-size: 12px;\n  color: #B61D1D;\n  padding: 5px 30px 0 0;\n  text-align: right;\n}\ninput[type=\"button\"].tourist__login--submit {\n  border-radius: 5px;\n  width: 180px;\n  height: 35px;\n  color: #fff;\n  background: #1C86D1;\n  margin: 30px auto 0;\n  cursor: pointer;\n  border: 1px solid #ccc;\n}\ninput[type=\"button\"].tourist__login--submit:active {\n  background: #3075DC;\n}\n.sns__login {\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 20px;\n}\n.sns__login div {\n  width: 70px;\n  height: 70px;\n  background: red;\n}\n.alert__wrap {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 99999999;\n  background: rgba(0, 0, 0, 0.8);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  overflow: hidden;\n}\n.alert__plane {\n  width: 100%;\n  height: 0px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background: rgba(255, 255, 255, 0.65);\n  -webkit-animation: alert_plane_animate .5s;\n          animation: alert_plane_animate .5s;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n.alert__plane header {\n  width: 100%;\n  height: 8px;\n  background: -webkit-linear-gradient(left, #F00001 12.5%, transparent 0px), -webkit-linear-gradient(left, #FF7F00 25%, transparent 0px), -webkit-linear-gradient(left, #E1E23B 37.5%, transparent 0px), -webkit-linear-gradient(left, #007940 50%, transparent 0px), -webkit-linear-gradient(left, #4041FE 62.5%, transparent 0px), -webkit-linear-gradient(left, #A001C0 75%, transparent 0px), -webkit-linear-gradient(left, #F7941E 87.5%, transparent 0px), -webkit-linear-gradient(left, #9AC147 100%, transparent 0px);\n  background: linear-gradient(to right, #F00001 12.5%, transparent 0px), linear-gradient(to right, #FF7F00 25%, transparent 0px), linear-gradient(to right, #E1E23B 37.5%, transparent 0px), linear-gradient(to right, #007940 50%, transparent 0px), linear-gradient(to right, #4041FE 62.5%, transparent 0px), linear-gradient(to right, #A001C0 75%, transparent 0px), linear-gradient(to right, #F7941E 87.5%, transparent 0px), linear-gradient(to right, #9AC147 100%, transparent 0px);\n  background-repeat: no-repeat;\n}\n.alert__plane footer {\n  width: 100%;\n  height: 42px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.alert__plane footer label {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  height: 100%;\n  cursor: pointer;\n  line-height: 42px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.alert__plane footer label:hover button {\n  color: #1C86D1;\n}\n.alert__plane footer label:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.alert__plane footer label:hover i::before {\n  -webkit-transform: scale(1);\n          transform: scale(1);\n}\n.alert__plane footer i {\n  position: relative;\n  width: 20px;\n  height: 20px;\n  background-image: url(\"/img/icon.png\");\n}\n.alert__plane footer i::before {\n  border-radius: 50%;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  content: \"\";\n  display: block;\n  width: 20px;\n  height: 20px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  z-index: -1;\n  background: #1C86D1;\n  -webkit-transform: scale(0);\n          transform: scale(0);\n}\n.alert__plane footer .alert__plane--btn_sure {\n  background-position: -4px -59px;\n}\n.alert__plane footer .alert__plane--btn_cancel {\n  background-position: -4px -36px;\n}\n.alert__plane footer button {\n  font-size: 18px;\n}\n@-webkit-keyframes alert_plane_animate {\n  0% {\n    height: 0;\n  }\n  100% {\n    height: 280px;\n  }\n}\n@keyframes alert_plane_animate {\n  0% {\n    height: 0;\n  }\n  100% {\n    height: 280px;\n  }\n}\n.alert__plane--question {\n  width: 100%;\n  height: 230px;\n  padding-top: 50px;\n  text-align: center;\n  font-size: 30px;\n  font-weight: 100;\n  line-height: 1.2;\n  overflow: hidden;\n  color: rgba(0, 0, 0, 0.7);\n}\n", ""]);
 
 	// exports
 

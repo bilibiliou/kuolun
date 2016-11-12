@@ -44,6 +44,12 @@ git clone https://github.com/NumerHero/kuolun.git
 
 ![shotpic](http://numerhero.github.io/assets/download/kuolun/comment_expressions.gif)
 
+## 自拍上传
+
+![shotpic](http://numerhero.github.io/assets/download/kuolun/snap-show.gif)
+
+注：gif 经过压缩，所以视频质量并不清晰
+
 # 数据库
 
 使用 mongodb 存储
@@ -95,9 +101,9 @@ npm run dev
 
 # 有待完成
 
-1. 定位功能
-2. 拍照上传功能
-3. sns 服务功能
+<input type="checkbox" disabled  >1. 定位功能
+<input type="checkbox" disabled checked > 2. 拍照上传功能
+<input type="checkbox" disabled  > 3. sns 服务功能
 
 
 # 协议（licence）

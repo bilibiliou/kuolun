@@ -29,7 +29,10 @@ class CommentFeedback extends Component {
 			codeListBeChoice: "请选择代码种类",
 			tableChoiceLock: 0,
 			cTableX: 1,
-			cTableY: 1
+			cTableY: 1,
+			localMediaStream: null,
+			DIYSnap: "0秒",
+			snapLock: true
 		}
 
 		this.reSet = this.reSet.bind(this);
@@ -38,6 +41,8 @@ class CommentFeedback extends Component {
 		this.handleBandState = this.handleBandState.bind(this);
 		this.mdown = this.mdown.bind(this);
 		this.SyntaxsListHandle = this.SyntaxsListHandle.bind(this);
+		this.snap = this.snap.bind(this);
+		this.uploadSnap = this.uploadSnap.bind(this);
 	}
 
 	editDefalut (ev) {
@@ -188,7 +193,6 @@ class CommentFeedback extends Component {
 					commentContent["index"] =  AllDataNum;
 					commentContent["FeedBack"] = [];
 
-					// arr.push(commentContent);
 					actions.CommentThunk(NowPage - 1, SortState, commentContent);
 					break;
 
@@ -198,7 +202,6 @@ class CommentFeedback extends Component {
 					commentContent["FeedBackIndex"] =  ItemDataes[ParentIndex].FeedBack.length
 					commentContent["BeFeedIndex"] = BeFeedIndex;
 
-					// arr[ParentIndex].FeedBack.push(commentContent);
 					actions.CommentThunk(NowPage - 1, SortState, commentContent, ParentIndexOnDb);
 					break;
 			}
@@ -233,6 +236,105 @@ class CommentFeedback extends Component {
 
 		document.addEventListener("mousemove", mmove)
 		document.addEventListener("mouseup", mup);
+	}
+
+	openVideo () {
+		let oV = this.refs["snap-video"]
+
+		navigator.mediaDevices.getUserMedia = navigator.mediaDevices.getUserMedia || 
+       navigator.mediaDevices.webkitGetUserMedia ||
+       navigator.mediaDevices.mozGetUserMedia || 
+       navigator.mediaDevices.msGetUserMedia;
+
+    navigator.mediaDevices.getUserMedia({
+        video: {
+        	width: {max: 430},
+        	height: {max: 254}
+        }
+    })
+    .then((stream) => {
+    	oV.src =  window.URL.createObjectURL(stream);
+    	this.setState({
+    		localMediaStream: stream
+    	})
+
+    	let sCanvas = this.refs["snap_canvas"],
+					ctx = sCanvas.getContext("2d")
+
+    	let oImg = new Image()
+    	oImg.src = "img/snap-ok.png";
+
+    	oImg.onload = () => {
+    		ctx.drawImage(oImg,0,0,430,254);
+    	}
+    })
+    .catch((err) => {
+    	console.error(err);
+
+    	let sCanvas = this.refs["snap_canvas"],
+					ctx = sCanvas.getContext("2d")
+    	
+    	let oImg = new Image()
+    	oImg.src = "img/snap-error.png";
+
+    	oImg.onload = () => {
+    		ctx.drawImage(oImg,0,0,430,254);
+    	}
+    })
+	}
+
+	snap (ev) {
+		let sCanvas = this.refs["snap_canvas"],
+				sCtx = sCanvas.getContext("2d"),
+				lms = this.state.localMediaStream,
+				oV = this.refs["snap-video"],
+				se = ~~this.state.DIYSnap.replace(/秒$/,"") * 1000,
+				lock = this.state.snapLock;
+
+		if (lms && lock) {
+			this.setState({
+				snapLock: false
+			})
+			setTimeout(() => {
+				sCtx.clearRect(0,0,430,254)
+				sCtx.drawImage(oV, 0,0);
+				this.setState({
+					snapLock: true
+				})
+			},se)
+		}
+	}
+
+	uploadSnap () {
+		let sCanvas = this.refs["snap_canvas"],
+				lms = this.state.localMediaStream,
+				data = sCanvas.toDataURL("image/png");
+
+		if(!lms) {
+    	this.props.actions.AlertPlaneThunk("摄像头被禁止，请允许允许摄像头");
+    	this.openVideo();
+		}
+
+		fetch("/upLoadImage", {
+			method: "POST",
+      headers: {
+          "Charset": "utf-8",
+          "Content-Type": "text/plain"
+      },
+      body: "0" + data
+		}).then((res) => {
+        if (res.ok) {
+           this.props.actions.AlertPlaneThunk("图片已上传成功");
+           return res.json();
+        }
+    }).catch((err) => {
+    	console.error(err);
+    	this.props.actions.AlertPlaneThunk("图片上传失败，请检查网络连接");
+    })
+    .then((data) => {
+    	let editerWrap = this.refs["editer-wrap"]
+    	editerWrap.value += `![自拍](${data.url})`;
+    })
 	}
 
 	render () {
@@ -311,7 +413,6 @@ class CommentFeedback extends Component {
 				choice_list = (
 					<div className="syntaxs__sub-list">
 						<table 
-							
 							onClick={(ev) => {
 								let oTarget = ev.target,
 									tagName = oTarget.tagName.toLowerCase()
@@ -455,24 +556,24 @@ class CommentFeedback extends Component {
 						/>
 
 						<button 
-			                className="insert"
-			                
-			                onClick={(ev) => {
-			                    let codeTypeSelection = this.refs["code-type-selection"];
-			                    this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
-			                        if (this.state.codeListBeChoice === "请选择代码种类") {
-			                            return;
-			                        } else {
-			                            editerWrap.value += "\n```"+this.state.codeListBeChoice+"\n代码内容\n```\n";
-			                            let len = editerWrap.value.length;
-			                            editerWrap.setSelectionRange(len-9,len-5)
-			                            this.setState({
-			                                codeListBeChoice: "请选择代码种类"
-			                            })
-			                        }
-			                    })
-			                }}
-			            >插入代码</button>
+              className="insert"
+              
+              onClick={(ev) => {
+                  let codeTypeSelection = this.refs["code-type-selection"];
+                  this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
+                      if (this.state.codeListBeChoice === "请选择代码种类") {
+                          return;
+                      } else {
+                          editerWrap.value += "\n```"+this.state.codeListBeChoice+"\n代码内容\n```\n";
+                          let len = editerWrap.value.length;
+                          editerWrap.setSelectionRange(len-9,len-5)
+                          this.setState({
+                              codeListBeChoice: "请选择代码种类"
+                          })
+                      }
+                  })
+              }}
+          >插入代码</button>
 					</div>
 				)
 				break; 
@@ -546,6 +647,17 @@ class CommentFeedback extends Component {
 					</div>
 				)
 				break;
+
+				case "snap-block_list":
+					choice_list = (
+					<div className="syntaxs__sub-list">
+						<section className="snap_wrap">
+							<canvas id="snap_canvas" ref="snap_canvas" width="430" height="254"></canvas>
+							<button className="upload__btn" onClick={this.uploadSnap}>上传图片</button>
+						</section>
+					</div>
+					)
+					break;
 			default: 
 				choice_list = null
 		}
@@ -617,15 +729,15 @@ class CommentFeedback extends Component {
 								style={this.state.choiceType === "img_list" ? {background: "url(/img/icon-hover.png) 4px -151px,#ccc"} : null}
 								onClick={(ev) => {
 									this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
-	      								if(this.state.choiceType === "img_list") {
+	      							if(this.state.choiceType === "img_list") {
 	      									this.setState({
-												choiceType: ""
-											})
+														choiceType: ""
+													})
 	      								} else {
 	      									this.setState({
 												choiceType: "img_list"
 											})	
-	      								}					
+	      						}					
 									})
 								}}
 							></li>
@@ -636,12 +748,12 @@ class CommentFeedback extends Component {
 									this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
 	      								if(this.state.choiceType === "table_list") {
 	      									this.setState({
-												choiceType: ""
-											})
+														choiceType: ""
+													})
 	      								} else {
 	      									this.setState({
-												choiceType: "table_list"
-											})	
+														choiceType: "table_list"
+													})	
 	      								}					
 									})
 								}}
@@ -706,18 +818,69 @@ class CommentFeedback extends Component {
 								style={this.state.choiceType === "code_block_list" ? {background: "url(/img/icon-hover.png) 4px -341px,#ccc"} : null}
 								onClick={(ev)=> {
 									this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
-	      								if(this.state.choiceType === "code_block_list") {
-	      									this.setState({
+    								if(this.state.choiceType === "code_block_list") {
+      								this.setState({
 												choiceType: ""
 											})
-	      								} else {
+    								} else {
 	      									this.setState({
 												choiceType: "code_block_list"
 											})	
-	      								}					
+    								}					
 									})
 								}}
 							>
+							</li>
+							<li className="snap-block" 
+								title="自拍上传"
+								style={this.state.choiceType === "snap-block_list" ? {background: "url(/img/icon-hover.png) 4px -365px,#ccc"} : null}
+								onClick={(ev)=> {
+									this.SyntaxsListHandle.call(this, ev, (ev, editerWrap) => {
+    								if(this.state.choiceType === "snap-block_list") {
+    									this.setState({
+												choiceType: ""
+											})
+    								} else {
+    									this.setState({
+												choiceType: "snap-block_list"
+											})
+
+    									this.openVideo();
+    								}					
+									})
+								}}
+							>
+									
+								<figure className="snap_video_wrap" title="正在使用摄像头自拍"
+									onClick={(ev)=>{
+										ev.stopPropagation();
+										ev.preventDefault();
+									}}
+									style={
+										this.state.choiceType === "snap-block_list" ? {
+											transform: "scale(1,1)"
+										} : null
+									}
+								>
+									<video autoPlay width="430" height="254" ref="snap-video"></video>
+									<section className="snap_options">
+										<button className="insert snap-btn"
+												onClick={this.snap}
+											>拍照</button>
+
+											<span style={{color: "#fff"}}>延时自拍：</span>
+											<DropList 
+												dataList={["0秒","3秒","5秒","10秒","12秒"]}
+												initPrompt={this.state.DIYSnap}
+												returnDataCallback={(data)=> {
+													this.setState({
+														DIYSnap: data
+													})
+												}}
+											/>
+									</section>
+									
+								</figure>
 							</li>
 						</ul>
 						
