@@ -81,7 +81,9 @@ mongod --dbpath your data storage location
 }
 ```
 
-3.开启server 
+3.修改server.js  中 Session 地址
+
+4.开启server 
 
 ```
 npm run server
@@ -93,18 +95,56 @@ npm run server
 pm2 start process.json
 ```
 
-如需开发， 可以 开启 webpack watch 
+# 建立HTTPS连接
+
+首先生成证书和密钥
+
+```
+openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365
+```
+
+其中
+
+req 尝试请求该证书
+-x509 告诉电脑这是一个自签名的证书，不需要去请求某个证书颁布者的确认
+rsa 编码方式，密钥为2048位
+-keyout 和 -out 配对 命名文件
+-days 证书有效时间
+
+可能会遇到
+
+```
+Error: error:0906A068:PEM routines:PEM_do_header:bad password read
+```
+
+网上的解决方案是将密码去掉
+
+```
+openssl rsa -in key.pem -out newkey.pem && mv newkey.pem key.pem
+```
+
+# 开发
+
+如需开发， 可以调用命令 
 
 ```
 npm run dev
 ```
 
+# 更新
+
+v1.0.7 
+
+    1. 被组里同学用XSS玩坏了,使用[Js-Xss](https://github.com/leizongmin/js-xss) 做防Xss攻击
+    2. 发现线上开发机不被允许调用摄像头，新增HTTPS连接
+    3. 建立webpack_dll 减轻开发时的时间成本
+    4. 使用cross-env 设置环境变量
+    
 # 有待完成
 
 <input type="checkbox" disabled  >1. 定位功能
 <input type="checkbox" disabled checked > 2. 拍照上传功能
 <input type="checkbox" disabled  > 3. sns 服务功能
-
 
 # 协议（licence）
 

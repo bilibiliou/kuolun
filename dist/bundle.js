@@ -26,19 +26,61 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-webpackJsonp([0],[
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
-	module.exports = __webpack_require__(403);
+	module.exports = __webpack_require__(220);
 
 
 /***/ },
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
 	"use strict";
 
@@ -46,13 +88,13 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(35);
+	var _reactDom = __webpack_require__(4);
 
-	var _reactRedux = __webpack_require__(173);
+	var _reactRedux = __webpack_require__(5);
 
-	var _configure = __webpack_require__(196);
+	var _configure = __webpack_require__(6);
 
-	var _router = __webpack_require__(206);
+	var _router = __webpack_require__(17);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -69,1756 +111,34 @@ webpackJsonp([0],[
 	  return console.log(">>>>>>　页面渲染已经完成　<<<<<<");
 	});
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "app.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "app.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 2 */,
-/* 3 */,
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */,
-/* 20 */,
-/* 21 */,
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */,
-/* 27 */,
-/* 28 */,
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */,
-/* 47 */,
-/* 48 */,
-/* 49 */,
-/* 50 */,
-/* 51 */,
-/* 52 */,
-/* 53 */,
-/* 54 */,
-/* 55 */,
-/* 56 */,
-/* 57 */,
-/* 58 */,
-/* 59 */,
-/* 60 */,
-/* 61 */,
-/* 62 */,
-/* 63 */,
-/* 64 */,
-/* 65 */,
-/* 66 */,
-/* 67 */,
-/* 68 */,
-/* 69 */,
-/* 70 */,
-/* 71 */,
-/* 72 */,
-/* 73 */,
-/* 74 */,
-/* 75 */,
-/* 76 */,
-/* 77 */,
-/* 78 */,
-/* 79 */,
-/* 80 */,
-/* 81 */,
-/* 82 */,
-/* 83 */,
-/* 84 */,
-/* 85 */,
-/* 86 */,
-/* 87 */,
-/* 88 */,
-/* 89 */,
-/* 90 */,
-/* 91 */,
-/* 92 */,
-/* 93 */,
-/* 94 */,
-/* 95 */,
-/* 96 */,
-/* 97 */,
-/* 98 */,
-/* 99 */,
-/* 100 */,
-/* 101 */,
-/* 102 */,
-/* 103 */,
-/* 104 */,
-/* 105 */,
-/* 106 */,
-/* 107 */,
-/* 108 */,
-/* 109 */,
-/* 110 */,
-/* 111 */,
-/* 112 */,
-/* 113 */,
-/* 114 */,
-/* 115 */,
-/* 116 */,
-/* 117 */,
-/* 118 */,
-/* 119 */,
-/* 120 */,
-/* 121 */,
-/* 122 */,
-/* 123 */,
-/* 124 */,
-/* 125 */,
-/* 126 */,
-/* 127 */,
-/* 128 */,
-/* 129 */,
-/* 130 */,
-/* 131 */,
-/* 132 */,
-/* 133 */,
-/* 134 */,
-/* 135 */,
-/* 136 */,
-/* 137 */,
-/* 138 */,
-/* 139 */,
-/* 140 */,
-/* 141 */,
-/* 142 */,
-/* 143 */,
-/* 144 */,
-/* 145 */,
-/* 146 */,
-/* 147 */,
-/* 148 */,
-/* 149 */,
-/* 150 */,
-/* 151 */,
-/* 152 */,
-/* 153 */,
-/* 154 */,
-/* 155 */,
-/* 156 */,
-/* 157 */,
-/* 158 */,
-/* 159 */,
-/* 160 */,
-/* 161 */,
-/* 162 */,
-/* 163 */,
-/* 164 */,
-/* 165 */,
-/* 166 */,
-/* 167 */,
-/* 168 */,
-/* 169 */,
-/* 170 */,
-/* 171 */,
-/* 172 */,
-/* 173 */
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-
-	exports.__esModule = true;
-	exports.connect = exports.Provider = undefined;
-
-	var _Provider = __webpack_require__(174);
-
-	var _Provider2 = _interopRequireDefault(_Provider);
-
-	var _connect = __webpack_require__(177);
-
-	var _connect2 = _interopRequireDefault(_connect);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-	exports.Provider = _Provider2["default"];
-	exports.connect = _connect2["default"];
+	module.exports = (__webpack_require__(3))(1);
 
 /***/ },
-/* 174 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
-
-	exports.__esModule = true;
-	exports["default"] = undefined;
-
-	var _react = __webpack_require__(2);
-
-	var _storeShape = __webpack_require__(175);
-
-	var _storeShape2 = _interopRequireDefault(_storeShape);
-
-	var _warning = __webpack_require__(176);
-
-	var _warning2 = _interopRequireDefault(_warning);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var didWarnAboutReceivingStore = false;
-	function warnAboutReceivingStore() {
-	  if (didWarnAboutReceivingStore) {
-	    return;
-	  }
-	  didWarnAboutReceivingStore = true;
-
-	  (0, _warning2["default"])('<Provider> does not support changing `store` on the fly. ' + 'It is most likely that you see this error because you updated to ' + 'Redux 2.x and React Redux 2.x which no longer hot reload reducers ' + 'automatically. See https://github.com/reactjs/react-redux/releases/' + 'tag/v2.0.0 for the migration instructions.');
-	}
-
-	var Provider = function (_Component) {
-	  _inherits(Provider, _Component);
-
-	  Provider.prototype.getChildContext = function getChildContext() {
-	    return { store: this.store };
-	  };
-
-	  function Provider(props, context) {
-	    _classCallCheck(this, Provider);
-
-	    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
-
-	    _this.store = props.store;
-	    return _this;
-	  }
-
-	  Provider.prototype.render = function render() {
-	    var children = this.props.children;
-
-	    return _react.Children.only(children);
-	  };
-
-	  return Provider;
-	}(_react.Component);
-
-	exports["default"] = Provider;
-
-	if (process.env.NODE_ENV !== 'production') {
-	  Provider.prototype.componentWillReceiveProps = function (nextProps) {
-	    var store = this.store;
-	    var nextStore = nextProps.store;
-
-	    if (store !== nextStore) {
-	      warnAboutReceivingStore();
-	    }
-	  };
-	}
-
-	Provider.propTypes = {
-	  store: _storeShape2["default"].isRequired,
-	  children: _react.PropTypes.element.isRequired
-	};
-	Provider.childContextTypes = {
-	  store: _storeShape2["default"].isRequired
-	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
-
-/***/ },
-/* 175 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	exports.__esModule = true;
-
-	var _react = __webpack_require__(2);
-
-	exports["default"] = _react.PropTypes.shape({
-	  subscribe: _react.PropTypes.func.isRequired,
-	  dispatch: _react.PropTypes.func.isRequired,
-	  getState: _react.PropTypes.func.isRequired
-	});
-
-/***/ },
-/* 176 */
+/* 3 */
 /***/ function(module, exports) {
 
-	'use strict';
-
-	exports.__esModule = true;
-	exports["default"] = warning;
-	/**
-	 * Prints a warning in the console if it exists.
-	 *
-	 * @param {String} message The warning message.
-	 * @returns {void}
-	 */
-	function warning(message) {
-	  /* eslint-disable no-console */
-	  if (typeof console !== 'undefined' && typeof console.error === 'function') {
-	    console.error(message);
-	  }
-	  /* eslint-enable no-console */
-	  try {
-	    // This error was thrown as a convenience so that you can use this stack
-	    // to find the callsite that caused this warning to fire.
-	    throw new Error(message);
-	    /* eslint-disable no-empty */
-	  } catch (e) {}
-	  /* eslint-enable no-empty */
-	}
+	module.exports = vendor;
 
 /***/ },
-/* 177 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	exports.__esModule = true;
-	exports["default"] = connect;
-
-	var _react = __webpack_require__(2);
-
-	var _storeShape = __webpack_require__(175);
-
-	var _storeShape2 = _interopRequireDefault(_storeShape);
-
-	var _shallowEqual = __webpack_require__(178);
-
-	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
-
-	var _wrapActionCreators = __webpack_require__(179);
-
-	var _wrapActionCreators2 = _interopRequireDefault(_wrapActionCreators);
-
-	var _warning = __webpack_require__(176);
-
-	var _warning2 = _interopRequireDefault(_warning);
-
-	var _isPlainObject = __webpack_require__(182);
-
-	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
-
-	var _hoistNonReactStatics = __webpack_require__(194);
-
-	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
-
-	var _invariant = __webpack_require__(195);
-
-	var _invariant2 = _interopRequireDefault(_invariant);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var defaultMapStateToProps = function defaultMapStateToProps(state) {
-	  return {};
-	}; // eslint-disable-line no-unused-vars
-	var defaultMapDispatchToProps = function defaultMapDispatchToProps(dispatch) {
-	  return { dispatch: dispatch };
-	};
-	var defaultMergeProps = function defaultMergeProps(stateProps, dispatchProps, parentProps) {
-	  return _extends({}, parentProps, stateProps, dispatchProps);
-	};
-
-	function getDisplayName(WrappedComponent) {
-	  return WrappedComponent.displayName || WrappedComponent.name || 'Component';
-	}
-
-	var errorObject = { value: null };
-	function tryCatch(fn, ctx) {
-	  try {
-	    return fn.apply(ctx);
-	  } catch (e) {
-	    errorObject.value = e;
-	    return errorObject;
-	  }
-	}
-
-	// Helps track hot reloading.
-	var nextVersion = 0;
-
-	function connect(mapStateToProps, mapDispatchToProps, mergeProps) {
-	  var options = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
-
-	  var shouldSubscribe = Boolean(mapStateToProps);
-	  var mapState = mapStateToProps || defaultMapStateToProps;
-
-	  var mapDispatch = undefined;
-	  if (typeof mapDispatchToProps === 'function') {
-	    mapDispatch = mapDispatchToProps;
-	  } else if (!mapDispatchToProps) {
-	    mapDispatch = defaultMapDispatchToProps;
-	  } else {
-	    mapDispatch = (0, _wrapActionCreators2["default"])(mapDispatchToProps);
-	  }
-
-	  var finalMergeProps = mergeProps || defaultMergeProps;
-	  var _options$pure = options.pure;
-	  var pure = _options$pure === undefined ? true : _options$pure;
-	  var _options$withRef = options.withRef;
-	  var withRef = _options$withRef === undefined ? false : _options$withRef;
-
-	  var checkMergedEquals = pure && finalMergeProps !== defaultMergeProps;
-
-	  // Helps track hot reloading.
-	  var version = nextVersion++;
-
-	  return function wrapWithConnect(WrappedComponent) {
-	    var connectDisplayName = 'Connect(' + getDisplayName(WrappedComponent) + ')';
-
-	    function checkStateShape(props, methodName) {
-	      if (!(0, _isPlainObject2["default"])(props)) {
-	        (0, _warning2["default"])(methodName + '() in ' + connectDisplayName + ' must return a plain object. ' + ('Instead received ' + props + '.'));
-	      }
-	    }
-
-	    function computeMergedProps(stateProps, dispatchProps, parentProps) {
-	      var mergedProps = finalMergeProps(stateProps, dispatchProps, parentProps);
-	      if (process.env.NODE_ENV !== 'production') {
-	        checkStateShape(mergedProps, 'mergeProps');
-	      }
-	      return mergedProps;
-	    }
-
-	    var Connect = function (_Component) {
-	      _inherits(Connect, _Component);
-
-	      Connect.prototype.shouldComponentUpdate = function shouldComponentUpdate() {
-	        return !pure || this.haveOwnPropsChanged || this.hasStoreStateChanged;
-	      };
-
-	      function Connect(props, context) {
-	        _classCallCheck(this, Connect);
-
-	        var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
-
-	        _this.version = version;
-	        _this.store = props.store || context.store;
-
-	        (0, _invariant2["default"])(_this.store, 'Could not find "store" in either the context or ' + ('props of "' + connectDisplayName + '". ') + 'Either wrap the root component in a <Provider>, ' + ('or explicitly pass "store" as a prop to "' + connectDisplayName + '".'));
-
-	        var storeState = _this.store.getState();
-	        _this.state = { storeState: storeState };
-	        _this.clearCache();
-	        return _this;
-	      }
-
-	      Connect.prototype.computeStateProps = function computeStateProps(store, props) {
-	        if (!this.finalMapStateToProps) {
-	          return this.configureFinalMapState(store, props);
-	        }
-
-	        var state = store.getState();
-	        var stateProps = this.doStatePropsDependOnOwnProps ? this.finalMapStateToProps(state, props) : this.finalMapStateToProps(state);
-
-	        if (process.env.NODE_ENV !== 'production') {
-	          checkStateShape(stateProps, 'mapStateToProps');
-	        }
-	        return stateProps;
-	      };
-
-	      Connect.prototype.configureFinalMapState = function configureFinalMapState(store, props) {
-	        var mappedState = mapState(store.getState(), props);
-	        var isFactory = typeof mappedState === 'function';
-
-	        this.finalMapStateToProps = isFactory ? mappedState : mapState;
-	        this.doStatePropsDependOnOwnProps = this.finalMapStateToProps.length !== 1;
-
-	        if (isFactory) {
-	          return this.computeStateProps(store, props);
-	        }
-
-	        if (process.env.NODE_ENV !== 'production') {
-	          checkStateShape(mappedState, 'mapStateToProps');
-	        }
-	        return mappedState;
-	      };
-
-	      Connect.prototype.computeDispatchProps = function computeDispatchProps(store, props) {
-	        if (!this.finalMapDispatchToProps) {
-	          return this.configureFinalMapDispatch(store, props);
-	        }
-
-	        var dispatch = store.dispatch;
-
-	        var dispatchProps = this.doDispatchPropsDependOnOwnProps ? this.finalMapDispatchToProps(dispatch, props) : this.finalMapDispatchToProps(dispatch);
-
-	        if (process.env.NODE_ENV !== 'production') {
-	          checkStateShape(dispatchProps, 'mapDispatchToProps');
-	        }
-	        return dispatchProps;
-	      };
-
-	      Connect.prototype.configureFinalMapDispatch = function configureFinalMapDispatch(store, props) {
-	        var mappedDispatch = mapDispatch(store.dispatch, props);
-	        var isFactory = typeof mappedDispatch === 'function';
-
-	        this.finalMapDispatchToProps = isFactory ? mappedDispatch : mapDispatch;
-	        this.doDispatchPropsDependOnOwnProps = this.finalMapDispatchToProps.length !== 1;
-
-	        if (isFactory) {
-	          return this.computeDispatchProps(store, props);
-	        }
-
-	        if (process.env.NODE_ENV !== 'production') {
-	          checkStateShape(mappedDispatch, 'mapDispatchToProps');
-	        }
-	        return mappedDispatch;
-	      };
-
-	      Connect.prototype.updateStatePropsIfNeeded = function updateStatePropsIfNeeded() {
-	        var nextStateProps = this.computeStateProps(this.store, this.props);
-	        if (this.stateProps && (0, _shallowEqual2["default"])(nextStateProps, this.stateProps)) {
-	          return false;
-	        }
-
-	        this.stateProps = nextStateProps;
-	        return true;
-	      };
-
-	      Connect.prototype.updateDispatchPropsIfNeeded = function updateDispatchPropsIfNeeded() {
-	        var nextDispatchProps = this.computeDispatchProps(this.store, this.props);
-	        if (this.dispatchProps && (0, _shallowEqual2["default"])(nextDispatchProps, this.dispatchProps)) {
-	          return false;
-	        }
-
-	        this.dispatchProps = nextDispatchProps;
-	        return true;
-	      };
-
-	      Connect.prototype.updateMergedPropsIfNeeded = function updateMergedPropsIfNeeded() {
-	        var nextMergedProps = computeMergedProps(this.stateProps, this.dispatchProps, this.props);
-	        if (this.mergedProps && checkMergedEquals && (0, _shallowEqual2["default"])(nextMergedProps, this.mergedProps)) {
-	          return false;
-	        }
-
-	        this.mergedProps = nextMergedProps;
-	        return true;
-	      };
-
-	      Connect.prototype.isSubscribed = function isSubscribed() {
-	        return typeof this.unsubscribe === 'function';
-	      };
-
-	      Connect.prototype.trySubscribe = function trySubscribe() {
-	        if (shouldSubscribe && !this.unsubscribe) {
-	          this.unsubscribe = this.store.subscribe(this.handleChange.bind(this));
-	          this.handleChange();
-	        }
-	      };
-
-	      Connect.prototype.tryUnsubscribe = function tryUnsubscribe() {
-	        if (this.unsubscribe) {
-	          this.unsubscribe();
-	          this.unsubscribe = null;
-	        }
-	      };
-
-	      Connect.prototype.componentDidMount = function componentDidMount() {
-	        this.trySubscribe();
-	      };
-
-	      Connect.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-	        if (!pure || !(0, _shallowEqual2["default"])(nextProps, this.props)) {
-	          this.haveOwnPropsChanged = true;
-	        }
-	      };
-
-	      Connect.prototype.componentWillUnmount = function componentWillUnmount() {
-	        this.tryUnsubscribe();
-	        this.clearCache();
-	      };
-
-	      Connect.prototype.clearCache = function clearCache() {
-	        this.dispatchProps = null;
-	        this.stateProps = null;
-	        this.mergedProps = null;
-	        this.haveOwnPropsChanged = true;
-	        this.hasStoreStateChanged = true;
-	        this.haveStatePropsBeenPrecalculated = false;
-	        this.statePropsPrecalculationError = null;
-	        this.renderedElement = null;
-	        this.finalMapDispatchToProps = null;
-	        this.finalMapStateToProps = null;
-	      };
-
-	      Connect.prototype.handleChange = function handleChange() {
-	        if (!this.unsubscribe) {
-	          return;
-	        }
-
-	        var storeState = this.store.getState();
-	        var prevStoreState = this.state.storeState;
-	        if (pure && prevStoreState === storeState) {
-	          return;
-	        }
-
-	        if (pure && !this.doStatePropsDependOnOwnProps) {
-	          var haveStatePropsChanged = tryCatch(this.updateStatePropsIfNeeded, this);
-	          if (!haveStatePropsChanged) {
-	            return;
-	          }
-	          if (haveStatePropsChanged === errorObject) {
-	            this.statePropsPrecalculationError = errorObject.value;
-	          }
-	          this.haveStatePropsBeenPrecalculated = true;
-	        }
-
-	        this.hasStoreStateChanged = true;
-	        this.setState({ storeState: storeState });
-	      };
-
-	      Connect.prototype.getWrappedInstance = function getWrappedInstance() {
-	        (0, _invariant2["default"])(withRef, 'To access the wrapped instance, you need to specify ' + '{ withRef: true } as the fourth argument of the connect() call.');
-
-	        return this.refs.wrappedInstance;
-	      };
-
-	      Connect.prototype.render = function render() {
-	        var haveOwnPropsChanged = this.haveOwnPropsChanged;
-	        var hasStoreStateChanged = this.hasStoreStateChanged;
-	        var haveStatePropsBeenPrecalculated = this.haveStatePropsBeenPrecalculated;
-	        var statePropsPrecalculationError = this.statePropsPrecalculationError;
-	        var renderedElement = this.renderedElement;
-
-	        this.haveOwnPropsChanged = false;
-	        this.hasStoreStateChanged = false;
-	        this.haveStatePropsBeenPrecalculated = false;
-	        this.statePropsPrecalculationError = null;
-
-	        if (statePropsPrecalculationError) {
-	          throw statePropsPrecalculationError;
-	        }
-
-	        var shouldUpdateStateProps = true;
-	        var shouldUpdateDispatchProps = true;
-	        if (pure && renderedElement) {
-	          shouldUpdateStateProps = hasStoreStateChanged || haveOwnPropsChanged && this.doStatePropsDependOnOwnProps;
-	          shouldUpdateDispatchProps = haveOwnPropsChanged && this.doDispatchPropsDependOnOwnProps;
-	        }
-
-	        var haveStatePropsChanged = false;
-	        var haveDispatchPropsChanged = false;
-	        if (haveStatePropsBeenPrecalculated) {
-	          haveStatePropsChanged = true;
-	        } else if (shouldUpdateStateProps) {
-	          haveStatePropsChanged = this.updateStatePropsIfNeeded();
-	        }
-	        if (shouldUpdateDispatchProps) {
-	          haveDispatchPropsChanged = this.updateDispatchPropsIfNeeded();
-	        }
-
-	        var haveMergedPropsChanged = true;
-	        if (haveStatePropsChanged || haveDispatchPropsChanged || haveOwnPropsChanged) {
-	          haveMergedPropsChanged = this.updateMergedPropsIfNeeded();
-	        } else {
-	          haveMergedPropsChanged = false;
-	        }
-
-	        if (!haveMergedPropsChanged && renderedElement) {
-	          return renderedElement;
-	        }
-
-	        if (withRef) {
-	          this.renderedElement = (0, _react.createElement)(WrappedComponent, _extends({}, this.mergedProps, {
-	            ref: 'wrappedInstance'
-	          }));
-	        } else {
-	          this.renderedElement = (0, _react.createElement)(WrappedComponent, this.mergedProps);
-	        }
-
-	        return this.renderedElement;
-	      };
-
-	      return Connect;
-	    }(_react.Component);
-
-	    Connect.displayName = connectDisplayName;
-	    Connect.WrappedComponent = WrappedComponent;
-	    Connect.contextTypes = {
-	      store: _storeShape2["default"]
-	    };
-	    Connect.propTypes = {
-	      store: _storeShape2["default"]
-	    };
-
-	    if (process.env.NODE_ENV !== 'production') {
-	      Connect.prototype.componentWillUpdate = function componentWillUpdate() {
-	        if (this.version === version) {
-	          return;
-	        }
-
-	        // We are hot reloading!
-	        this.version = version;
-	        this.trySubscribe();
-	        this.clearCache();
-	      };
-	    }
-
-	    return (0, _hoistNonReactStatics2["default"])(Connect, WrappedComponent);
-	  };
-	}
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+	module.exports = (__webpack_require__(3))(32);
 
 /***/ },
-/* 178 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	exports.__esModule = true;
-	exports["default"] = shallowEqual;
-	function shallowEqual(objA, objB) {
-	  if (objA === objB) {
-	    return true;
-	  }
-
-	  var keysA = Object.keys(objA);
-	  var keysB = Object.keys(objB);
-
-	  if (keysA.length !== keysB.length) {
-	    return false;
-	  }
-
-	  // Test for A's keys different from B.
-	  var hasOwn = Object.prototype.hasOwnProperty;
-	  for (var i = 0; i < keysA.length; i++) {
-	    if (!hasOwn.call(objB, keysA[i]) || objA[keysA[i]] !== objB[keysA[i]]) {
-	      return false;
-	    }
-	  }
-
-	  return true;
-	}
-
-/***/ },
-/* 179 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-
-	exports.__esModule = true;
-	exports["default"] = wrapActionCreators;
-
-	var _redux = __webpack_require__(180);
-
-	function wrapActionCreators(actionCreators) {
-	  return function (dispatch) {
-	    return (0, _redux.bindActionCreators)(actionCreators, dispatch);
-	  };
-	}
+	module.exports = (__webpack_require__(3))(178);
 
 /***/ },
-/* 180 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
-
-	exports.__esModule = true;
-	exports.compose = exports.applyMiddleware = exports.bindActionCreators = exports.combineReducers = exports.createStore = undefined;
-
-	var _createStore = __webpack_require__(181);
-
-	var _createStore2 = _interopRequireDefault(_createStore);
-
-	var _combineReducers = __webpack_require__(189);
-
-	var _combineReducers2 = _interopRequireDefault(_combineReducers);
-
-	var _bindActionCreators = __webpack_require__(191);
-
-	var _bindActionCreators2 = _interopRequireDefault(_bindActionCreators);
-
-	var _applyMiddleware = __webpack_require__(192);
-
-	var _applyMiddleware2 = _interopRequireDefault(_applyMiddleware);
-
-	var _compose = __webpack_require__(193);
-
-	var _compose2 = _interopRequireDefault(_compose);
-
-	var _warning = __webpack_require__(190);
-
-	var _warning2 = _interopRequireDefault(_warning);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	/*
-	* This is a dummy function to check if the function name has been altered by minification.
-	* If the function has been minified and NODE_ENV !== 'production', warn the user.
-	*/
-	function isCrushed() {}
-
-	if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' && isCrushed.name !== 'isCrushed') {
-	  (0, _warning2['default'])('You are currently using minified code outside of NODE_ENV === \'production\'. ' + 'This means that you are running a slower development build of Redux. ' + 'You can use loose-envify (https://github.com/zertosh/loose-envify) for browserify ' + 'or DefinePlugin for webpack (http://stackoverflow.com/questions/30030031) ' + 'to ensure you have the correct code for your production build.');
-	}
-
-	exports.createStore = _createStore2['default'];
-	exports.combineReducers = _combineReducers2['default'];
-	exports.bindActionCreators = _bindActionCreators2['default'];
-	exports.applyMiddleware = _applyMiddleware2['default'];
-	exports.compose = _compose2['default'];
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
-
-/***/ },
-/* 181 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	exports.__esModule = true;
-	exports.ActionTypes = undefined;
-	exports['default'] = createStore;
-
-	var _isPlainObject = __webpack_require__(182);
-
-	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
-
-	var _symbolObservable = __webpack_require__(186);
-
-	var _symbolObservable2 = _interopRequireDefault(_symbolObservable);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	/**
-	 * These are private action types reserved by Redux.
-	 * For any unknown actions, you must return the current state.
-	 * If the current state is undefined, you must return the initial state.
-	 * Do not reference these action types directly in your code.
-	 */
-	var ActionTypes = exports.ActionTypes = {
-	  INIT: '@@redux/INIT'
-	};
-
-	/**
-	 * Creates a Redux store that holds the state tree.
-	 * The only way to change the data in the store is to call `dispatch()` on it.
-	 *
-	 * There should only be a single store in your app. To specify how different
-	 * parts of the state tree respond to actions, you may combine several reducers
-	 * into a single reducer function by using `combineReducers`.
-	 *
-	 * @param {Function} reducer A function that returns the next state tree, given
-	 * the current state tree and the action to handle.
-	 *
-	 * @param {any} [preloadedState] The initial state. You may optionally specify it
-	 * to hydrate the state from the server in universal apps, or to restore a
-	 * previously serialized user session.
-	 * If you use `combineReducers` to produce the root reducer function, this must be
-	 * an object with the same shape as `combineReducers` keys.
-	 *
-	 * @param {Function} enhancer The store enhancer. You may optionally specify it
-	 * to enhance the store with third-party capabilities such as middleware,
-	 * time travel, persistence, etc. The only store enhancer that ships with Redux
-	 * is `applyMiddleware()`.
-	 *
-	 * @returns {Store} A Redux store that lets you read the state, dispatch actions
-	 * and subscribe to changes.
-	 */
-	function createStore(reducer, preloadedState, enhancer) {
-	  var _ref2;
-
-	  if (typeof preloadedState === 'function' && typeof enhancer === 'undefined') {
-	    enhancer = preloadedState;
-	    preloadedState = undefined;
-	  }
-
-	  if (typeof enhancer !== 'undefined') {
-	    if (typeof enhancer !== 'function') {
-	      throw new Error('Expected the enhancer to be a function.');
-	    }
-
-	    return enhancer(createStore)(reducer, preloadedState);
-	  }
-
-	  if (typeof reducer !== 'function') {
-	    throw new Error('Expected the reducer to be a function.');
-	  }
-
-	  var currentReducer = reducer;
-	  var currentState = preloadedState;
-	  var currentListeners = [];
-	  var nextListeners = currentListeners;
-	  var isDispatching = false;
-
-	  function ensureCanMutateNextListeners() {
-	    if (nextListeners === currentListeners) {
-	      nextListeners = currentListeners.slice();
-	    }
-	  }
-
-	  /**
-	   * Reads the state tree managed by the store.
-	   *
-	   * @returns {any} The current state tree of your application.
-	   */
-	  function getState() {
-	    return currentState;
-	  }
-
-	  /**
-	   * Adds a change listener. It will be called any time an action is dispatched,
-	   * and some part of the state tree may potentially have changed. You may then
-	   * call `getState()` to read the current state tree inside the callback.
-	   *
-	   * You may call `dispatch()` from a change listener, with the following
-	   * caveats:
-	   *
-	   * 1. The subscriptions are snapshotted just before every `dispatch()` call.
-	   * If you subscribe or unsubscribe while the listeners are being invoked, this
-	   * will not have any effect on the `dispatch()` that is currently in progress.
-	   * However, the next `dispatch()` call, whether nested or not, will use a more
-	   * recent snapshot of the subscription list.
-	   *
-	   * 2. The listener should not expect to see all state changes, as the state
-	   * might have been updated multiple times during a nested `dispatch()` before
-	   * the listener is called. It is, however, guaranteed that all subscribers
-	   * registered before the `dispatch()` started will be called with the latest
-	   * state by the time it exits.
-	   *
-	   * @param {Function} listener A callback to be invoked on every dispatch.
-	   * @returns {Function} A function to remove this change listener.
-	   */
-	  function subscribe(listener) {
-	    if (typeof listener !== 'function') {
-	      throw new Error('Expected listener to be a function.');
-	    }
-
-	    var isSubscribed = true;
-
-	    ensureCanMutateNextListeners();
-	    nextListeners.push(listener);
-
-	    return function unsubscribe() {
-	      if (!isSubscribed) {
-	        return;
-	      }
-
-	      isSubscribed = false;
-
-	      ensureCanMutateNextListeners();
-	      var index = nextListeners.indexOf(listener);
-	      nextListeners.splice(index, 1);
-	    };
-	  }
-
-	  /**
-	   * Dispatches an action. It is the only way to trigger a state change.
-	   *
-	   * The `reducer` function, used to create the store, will be called with the
-	   * current state tree and the given `action`. Its return value will
-	   * be considered the **next** state of the tree, and the change listeners
-	   * will be notified.
-	   *
-	   * The base implementation only supports plain object actions. If you want to
-	   * dispatch a Promise, an Observable, a thunk, or something else, you need to
-	   * wrap your store creating function into the corresponding middleware. For
-	   * example, see the documentation for the `redux-thunk` package. Even the
-	   * middleware will eventually dispatch plain object actions using this method.
-	   *
-	   * @param {Object} action A plain object representing “what changed”. It is
-	   * a good idea to keep actions serializable so you can record and replay user
-	   * sessions, or use the time travelling `redux-devtools`. An action must have
-	   * a `type` property which may not be `undefined`. It is a good idea to use
-	   * string constants for action types.
-	   *
-	   * @returns {Object} For convenience, the same action object you dispatched.
-	   *
-	   * Note that, if you use a custom middleware, it may wrap `dispatch()` to
-	   * return something else (for example, a Promise you can await).
-	   */
-	  function dispatch(action) {
-	    if (!(0, _isPlainObject2['default'])(action)) {
-	      throw new Error('Actions must be plain objects. ' + 'Use custom middleware for async actions.');
-	    }
-
-	    if (typeof action.type === 'undefined') {
-	      throw new Error('Actions may not have an undefined "type" property. ' + 'Have you misspelled a constant?');
-	    }
-
-	    if (isDispatching) {
-	      throw new Error('Reducers may not dispatch actions.');
-	    }
-
-	    try {
-	      isDispatching = true;
-	      currentState = currentReducer(currentState, action);
-	    } finally {
-	      isDispatching = false;
-	    }
-
-	    var listeners = currentListeners = nextListeners;
-	    for (var i = 0; i < listeners.length; i++) {
-	      listeners[i]();
-	    }
-
-	    return action;
-	  }
-
-	  /**
-	   * Replaces the reducer currently used by the store to calculate the state.
-	   *
-	   * You might need this if your app implements code splitting and you want to
-	   * load some of the reducers dynamically. You might also need this if you
-	   * implement a hot reloading mechanism for Redux.
-	   *
-	   * @param {Function} nextReducer The reducer for the store to use instead.
-	   * @returns {void}
-	   */
-	  function replaceReducer(nextReducer) {
-	    if (typeof nextReducer !== 'function') {
-	      throw new Error('Expected the nextReducer to be a function.');
-	    }
-
-	    currentReducer = nextReducer;
-	    dispatch({ type: ActionTypes.INIT });
-	  }
-
-	  /**
-	   * Interoperability point for observable/reactive libraries.
-	   * @returns {observable} A minimal observable of state changes.
-	   * For more information, see the observable proposal:
-	   * https://github.com/zenparsing/es-observable
-	   */
-	  function observable() {
-	    var _ref;
-
-	    var outerSubscribe = subscribe;
-	    return _ref = {
-	      /**
-	       * The minimal observable subscription method.
-	       * @param {Object} observer Any object that can be used as an observer.
-	       * The observer object should have a `next` method.
-	       * @returns {subscription} An object with an `unsubscribe` method that can
-	       * be used to unsubscribe the observable from the store, and prevent further
-	       * emission of values from the observable.
-	       */
-	      subscribe: function subscribe(observer) {
-	        if (typeof observer !== 'object') {
-	          throw new TypeError('Expected the observer to be an object.');
-	        }
-
-	        function observeState() {
-	          if (observer.next) {
-	            observer.next(getState());
-	          }
-	        }
-
-	        observeState();
-	        var unsubscribe = outerSubscribe(observeState);
-	        return { unsubscribe: unsubscribe };
-	      }
-	    }, _ref[_symbolObservable2['default']] = function () {
-	      return this;
-	    }, _ref;
-	  }
-
-	  // When a store is created, an "INIT" action is dispatched so that every
-	  // reducer returns their initial state. This effectively populates
-	  // the initial state tree.
-	  dispatch({ type: ActionTypes.INIT });
-
-	  return _ref2 = {
-	    dispatch: dispatch,
-	    subscribe: subscribe,
-	    getState: getState,
-	    replaceReducer: replaceReducer
-	  }, _ref2[_symbolObservable2['default']] = observable, _ref2;
-	}
-
-/***/ },
-/* 182 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var getPrototype = __webpack_require__(183),
-	    isObjectLike = __webpack_require__(185);
-
-	/** `Object#toString` result references. */
-	var objectTag = '[object Object]';
-
-	/** Used for built-in method references. */
-	var funcProto = Function.prototype,
-	    objectProto = Object.prototype;
-
-	/** Used to resolve the decompiled source of functions. */
-	var funcToString = funcProto.toString;
-
-	/** Used to check objects for own properties. */
-	var hasOwnProperty = objectProto.hasOwnProperty;
-
-	/** Used to infer the `Object` constructor. */
-	var objectCtorString = funcToString.call(Object);
-
-	/**
-	 * Used to resolve the
-	 * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
-	 * of values.
-	 */
-	var objectToString = objectProto.toString;
-
-	/**
-	 * Checks if `value` is a plain object, that is, an object created by the
-	 * `Object` constructor or one with a `[[Prototype]]` of `null`.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 0.8.0
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a plain object, else `false`.
-	 * @example
-	 *
-	 * function Foo() {
-	 *   this.a = 1;
-	 * }
-	 *
-	 * _.isPlainObject(new Foo);
-	 * // => false
-	 *
-	 * _.isPlainObject([1, 2, 3]);
-	 * // => false
-	 *
-	 * _.isPlainObject({ 'x': 0, 'y': 0 });
-	 * // => true
-	 *
-	 * _.isPlainObject(Object.create(null));
-	 * // => true
-	 */
-	function isPlainObject(value) {
-	  if (!isObjectLike(value) || objectToString.call(value) != objectTag) {
-	    return false;
-	  }
-	  var proto = getPrototype(value);
-	  if (proto === null) {
-	    return true;
-	  }
-	  var Ctor = hasOwnProperty.call(proto, 'constructor') && proto.constructor;
-	  return (typeof Ctor == 'function' &&
-	    Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString);
-	}
-
-	module.exports = isPlainObject;
-
-
-/***/ },
-/* 183 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var overArg = __webpack_require__(184);
-
-	/** Built-in value references. */
-	var getPrototype = overArg(Object.getPrototypeOf, Object);
-
-	module.exports = getPrototype;
-
-
-/***/ },
-/* 184 */
-/***/ function(module, exports) {
-
-	/**
-	 * Creates a unary function that invokes `func` with its argument transformed.
-	 *
-	 * @private
-	 * @param {Function} func The function to wrap.
-	 * @param {Function} transform The argument transform.
-	 * @returns {Function} Returns the new function.
-	 */
-	function overArg(func, transform) {
-	  return function(arg) {
-	    return func(transform(arg));
-	  };
-	}
-
-	module.exports = overArg;
-
-
-/***/ },
-/* 185 */
-/***/ function(module, exports) {
-
-	/**
-	 * Checks if `value` is object-like. A value is object-like if it's not `null`
-	 * and has a `typeof` result of "object".
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 4.0.0
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
-	 * @example
-	 *
-	 * _.isObjectLike({});
-	 * // => true
-	 *
-	 * _.isObjectLike([1, 2, 3]);
-	 * // => true
-	 *
-	 * _.isObjectLike(_.noop);
-	 * // => false
-	 *
-	 * _.isObjectLike(null);
-	 * // => false
-	 */
-	function isObjectLike(value) {
-	  return value != null && typeof value == 'object';
-	}
-
-	module.exports = isObjectLike;
-
-
-/***/ },
-/* 186 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(187);
-
-
-/***/ },
-/* 187 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _ponyfill = __webpack_require__(188);
-
-	var _ponyfill2 = _interopRequireDefault(_ponyfill);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	var root = undefined; /* global window */
-
-	if (typeof global !== 'undefined') {
-		root = global;
-	} else if (typeof window !== 'undefined') {
-		root = window;
-	}
-
-	var result = (0, _ponyfill2['default'])(root);
-	exports['default'] = result;
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-/* 188 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports['default'] = symbolObservablePonyfill;
-	function symbolObservablePonyfill(root) {
-		var result;
-		var _Symbol = root.Symbol;
-
-		if (typeof _Symbol === 'function') {
-			if (_Symbol.observable) {
-				result = _Symbol.observable;
-			} else {
-				result = _Symbol('observable');
-				_Symbol.observable = result;
-			}
-		} else {
-			result = '@@observable';
-		}
-
-		return result;
-	};
-
-/***/ },
-/* 189 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
-
-	exports.__esModule = true;
-	exports['default'] = combineReducers;
-
-	var _createStore = __webpack_require__(181);
-
-	var _isPlainObject = __webpack_require__(182);
-
-	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
-
-	var _warning = __webpack_require__(190);
-
-	var _warning2 = _interopRequireDefault(_warning);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	function getUndefinedStateErrorMessage(key, action) {
-	  var actionType = action && action.type;
-	  var actionName = actionType && '"' + actionType.toString() + '"' || 'an action';
-
-	  return 'Given action ' + actionName + ', reducer "' + key + '" returned undefined. ' + 'To ignore an action, you must explicitly return the previous state.';
-	}
-
-	function getUnexpectedStateShapeWarningMessage(inputState, reducers, action, unexpectedKeyCache) {
-	  var reducerKeys = Object.keys(reducers);
-	  var argumentName = action && action.type === _createStore.ActionTypes.INIT ? 'preloadedState argument passed to createStore' : 'previous state received by the reducer';
-
-	  if (reducerKeys.length === 0) {
-	    return 'Store does not have a valid reducer. Make sure the argument passed ' + 'to combineReducers is an object whose values are reducers.';
-	  }
-
-	  if (!(0, _isPlainObject2['default'])(inputState)) {
-	    return 'The ' + argumentName + ' has unexpected type of "' + {}.toString.call(inputState).match(/\s([a-z|A-Z]+)/)[1] + '". Expected argument to be an object with the following ' + ('keys: "' + reducerKeys.join('", "') + '"');
-	  }
-
-	  var unexpectedKeys = Object.keys(inputState).filter(function (key) {
-	    return !reducers.hasOwnProperty(key) && !unexpectedKeyCache[key];
-	  });
-
-	  unexpectedKeys.forEach(function (key) {
-	    unexpectedKeyCache[key] = true;
-	  });
-
-	  if (unexpectedKeys.length > 0) {
-	    return 'Unexpected ' + (unexpectedKeys.length > 1 ? 'keys' : 'key') + ' ' + ('"' + unexpectedKeys.join('", "') + '" found in ' + argumentName + '. ') + 'Expected to find one of the known reducer keys instead: ' + ('"' + reducerKeys.join('", "') + '". Unexpected keys will be ignored.');
-	  }
-	}
-
-	function assertReducerSanity(reducers) {
-	  Object.keys(reducers).forEach(function (key) {
-	    var reducer = reducers[key];
-	    var initialState = reducer(undefined, { type: _createStore.ActionTypes.INIT });
-
-	    if (typeof initialState === 'undefined') {
-	      throw new Error('Reducer "' + key + '" returned undefined during initialization. ' + 'If the state passed to the reducer is undefined, you must ' + 'explicitly return the initial state. The initial state may ' + 'not be undefined.');
-	    }
-
-	    var type = '@@redux/PROBE_UNKNOWN_ACTION_' + Math.random().toString(36).substring(7).split('').join('.');
-	    if (typeof reducer(undefined, { type: type }) === 'undefined') {
-	      throw new Error('Reducer "' + key + '" returned undefined when probed with a random type. ' + ('Don\'t try to handle ' + _createStore.ActionTypes.INIT + ' or other actions in "redux/*" ') + 'namespace. They are considered private. Instead, you must return the ' + 'current state for any unknown actions, unless it is undefined, ' + 'in which case you must return the initial state, regardless of the ' + 'action type. The initial state may not be undefined.');
-	    }
-	  });
-	}
-
-	/**
-	 * Turns an object whose values are different reducer functions, into a single
-	 * reducer function. It will call every child reducer, and gather their results
-	 * into a single state object, whose keys correspond to the keys of the passed
-	 * reducer functions.
-	 *
-	 * @param {Object} reducers An object whose values correspond to different
-	 * reducer functions that need to be combined into one. One handy way to obtain
-	 * it is to use ES6 `import * as reducers` syntax. The reducers may never return
-	 * undefined for any action. Instead, they should return their initial state
-	 * if the state passed to them was undefined, and the current state for any
-	 * unrecognized action.
-	 *
-	 * @returns {Function} A reducer function that invokes every reducer inside the
-	 * passed object, and builds a state object with the same shape.
-	 */
-	function combineReducers(reducers) {
-	  var reducerKeys = Object.keys(reducers);
-	  var finalReducers = {};
-	  for (var i = 0; i < reducerKeys.length; i++) {
-	    var key = reducerKeys[i];
-
-	    if (process.env.NODE_ENV !== 'production') {
-	      if (typeof reducers[key] === 'undefined') {
-	        (0, _warning2['default'])('No reducer provided for key "' + key + '"');
-	      }
-	    }
-
-	    if (typeof reducers[key] === 'function') {
-	      finalReducers[key] = reducers[key];
-	    }
-	  }
-	  var finalReducerKeys = Object.keys(finalReducers);
-
-	  if (process.env.NODE_ENV !== 'production') {
-	    var unexpectedKeyCache = {};
-	  }
-
-	  var sanityError;
-	  try {
-	    assertReducerSanity(finalReducers);
-	  } catch (e) {
-	    sanityError = e;
-	  }
-
-	  return function combination() {
-	    var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	    var action = arguments[1];
-
-	    if (sanityError) {
-	      throw sanityError;
-	    }
-
-	    if (process.env.NODE_ENV !== 'production') {
-	      var warningMessage = getUnexpectedStateShapeWarningMessage(state, finalReducers, action, unexpectedKeyCache);
-	      if (warningMessage) {
-	        (0, _warning2['default'])(warningMessage);
-	      }
-	    }
-
-	    var hasChanged = false;
-	    var nextState = {};
-	    for (var i = 0; i < finalReducerKeys.length; i++) {
-	      var key = finalReducerKeys[i];
-	      var reducer = finalReducers[key];
-	      var previousStateForKey = state[key];
-	      var nextStateForKey = reducer(previousStateForKey, action);
-	      if (typeof nextStateForKey === 'undefined') {
-	        var errorMessage = getUndefinedStateErrorMessage(key, action);
-	        throw new Error(errorMessage);
-	      }
-	      nextState[key] = nextStateForKey;
-	      hasChanged = hasChanged || nextStateForKey !== previousStateForKey;
-	    }
-	    return hasChanged ? nextState : state;
-	  };
-	}
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
-
-/***/ },
-/* 190 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	exports.__esModule = true;
-	exports['default'] = warning;
-	/**
-	 * Prints a warning in the console if it exists.
-	 *
-	 * @param {String} message The warning message.
-	 * @returns {void}
-	 */
-	function warning(message) {
-	  /* eslint-disable no-console */
-	  if (typeof console !== 'undefined' && typeof console.error === 'function') {
-	    console.error(message);
-	  }
-	  /* eslint-enable no-console */
-	  try {
-	    // This error was thrown as a convenience so that if you enable
-	    // "break on all exceptions" in your console,
-	    // it would pause the execution at this line.
-	    throw new Error(message);
-	    /* eslint-disable no-empty */
-	  } catch (e) {}
-	  /* eslint-enable no-empty */
-	}
-
-/***/ },
-/* 191 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	exports.__esModule = true;
-	exports['default'] = bindActionCreators;
-	function bindActionCreator(actionCreator, dispatch) {
-	  return function () {
-	    return dispatch(actionCreator.apply(undefined, arguments));
-	  };
-	}
-
-	/**
-	 * Turns an object whose values are action creators, into an object with the
-	 * same keys, but with every function wrapped into a `dispatch` call so they
-	 * may be invoked directly. This is just a convenience method, as you can call
-	 * `store.dispatch(MyActionCreators.doSomething())` yourself just fine.
-	 *
-	 * For convenience, you can also pass a single function as the first argument,
-	 * and get a function in return.
-	 *
-	 * @param {Function|Object} actionCreators An object whose values are action
-	 * creator functions. One handy way to obtain it is to use ES6 `import * as`
-	 * syntax. You may also pass a single function.
-	 *
-	 * @param {Function} dispatch The `dispatch` function available on your Redux
-	 * store.
-	 *
-	 * @returns {Function|Object} The object mimicking the original object, but with
-	 * every action creator wrapped into the `dispatch` call. If you passed a
-	 * function as `actionCreators`, the return value will also be a single
-	 * function.
-	 */
-	function bindActionCreators(actionCreators, dispatch) {
-	  if (typeof actionCreators === 'function') {
-	    return bindActionCreator(actionCreators, dispatch);
-	  }
-
-	  if (typeof actionCreators !== 'object' || actionCreators === null) {
-	    throw new Error('bindActionCreators expected an object or a function, instead received ' + (actionCreators === null ? 'null' : typeof actionCreators) + '. ' + 'Did you write "import ActionCreators from" instead of "import * as ActionCreators from"?');
-	  }
-
-	  var keys = Object.keys(actionCreators);
-	  var boundActionCreators = {};
-	  for (var i = 0; i < keys.length; i++) {
-	    var key = keys[i];
-	    var actionCreator = actionCreators[key];
-	    if (typeof actionCreator === 'function') {
-	      boundActionCreators[key] = bindActionCreator(actionCreator, dispatch);
-	    }
-	  }
-	  return boundActionCreators;
-	}
-
-/***/ },
-/* 192 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	exports.__esModule = true;
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	exports['default'] = applyMiddleware;
-
-	var _compose = __webpack_require__(193);
-
-	var _compose2 = _interopRequireDefault(_compose);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	/**
-	 * Creates a store enhancer that applies middleware to the dispatch method
-	 * of the Redux store. This is handy for a variety of tasks, such as expressing
-	 * asynchronous actions in a concise manner, or logging every action payload.
-	 *
-	 * See `redux-thunk` package as an example of the Redux middleware.
-	 *
-	 * Because middleware is potentially asynchronous, this should be the first
-	 * store enhancer in the composition chain.
-	 *
-	 * Note that each middleware will be given the `dispatch` and `getState` functions
-	 * as named arguments.
-	 *
-	 * @param {...Function} middlewares The middleware chain to be applied.
-	 * @returns {Function} A store enhancer applying the middleware.
-	 */
-	function applyMiddleware() {
-	  for (var _len = arguments.length, middlewares = Array(_len), _key = 0; _key < _len; _key++) {
-	    middlewares[_key] = arguments[_key];
-	  }
-
-	  return function (createStore) {
-	    return function (reducer, preloadedState, enhancer) {
-	      var store = createStore(reducer, preloadedState, enhancer);
-	      var _dispatch = store.dispatch;
-	      var chain = [];
-
-	      var middlewareAPI = {
-	        getState: store.getState,
-	        dispatch: function dispatch(action) {
-	          return _dispatch(action);
-	        }
-	      };
-	      chain = middlewares.map(function (middleware) {
-	        return middleware(middlewareAPI);
-	      });
-	      _dispatch = _compose2['default'].apply(undefined, chain)(store.dispatch);
-
-	      return _extends({}, store, {
-	        dispatch: _dispatch
-	      });
-	    };
-	  };
-	}
-
-/***/ },
-/* 193 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	exports.__esModule = true;
-	exports["default"] = compose;
-	/**
-	 * Composes single-argument functions from right to left. The rightmost
-	 * function can take multiple arguments as it provides the signature for
-	 * the resulting composite function.
-	 *
-	 * @param {...Function} funcs The functions to compose.
-	 * @returns {Function} A function obtained by composing the argument functions
-	 * from right to left. For example, compose(f, g, h) is identical to doing
-	 * (...args) => f(g(h(...args))).
-	 */
-
-	function compose() {
-	  for (var _len = arguments.length, funcs = Array(_len), _key = 0; _key < _len; _key++) {
-	    funcs[_key] = arguments[_key];
-	  }
-
-	  if (funcs.length === 0) {
-	    return function (arg) {
-	      return arg;
-	    };
-	  }
-
-	  if (funcs.length === 1) {
-	    return funcs[0];
-	  }
-
-	  var last = funcs[funcs.length - 1];
-	  var rest = funcs.slice(0, -1);
-	  return function () {
-	    return rest.reduceRight(function (composed, f) {
-	      return f(composed);
-	    }, last.apply(undefined, arguments));
-	  };
-	}
-
-/***/ },
-/* 194 */
-/***/ function(module, exports) {
-
-	/**
-	 * Copyright 2015, Yahoo! Inc.
-	 * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
-	 */
-	'use strict';
-
-	var REACT_STATICS = {
-	    childContextTypes: true,
-	    contextTypes: true,
-	    defaultProps: true,
-	    displayName: true,
-	    getDefaultProps: true,
-	    mixins: true,
-	    propTypes: true,
-	    type: true
-	};
-
-	var KNOWN_STATICS = {
-	    name: true,
-	    length: true,
-	    prototype: true,
-	    caller: true,
-	    arguments: true,
-	    arity: true
-	};
-
-	var isGetOwnPropertySymbolsAvailable = typeof Object.getOwnPropertySymbols === 'function';
-
-	module.exports = function hoistNonReactStatics(targetComponent, sourceComponent, customStatics) {
-	    if (typeof sourceComponent !== 'string') { // don't hoist over string (html) components
-	        var keys = Object.getOwnPropertyNames(sourceComponent);
-
-	        /* istanbul ignore else */
-	        if (isGetOwnPropertySymbolsAvailable) {
-	            keys = keys.concat(Object.getOwnPropertySymbols(sourceComponent));
-	        }
-
-	        for (var i = 0; i < keys.length; ++i) {
-	            if (!REACT_STATICS[keys[i]] && !KNOWN_STATICS[keys[i]] && (!customStatics || !customStatics[keys[i]])) {
-	                try {
-	                    targetComponent[keys[i]] = sourceComponent[keys[i]];
-	                } catch (error) {
-
-	                }
-	            }
-	        }
-	    }
-
-	    return targetComponent;
-	};
-
-
-/***/ },
-/* 195 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright 2013-2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 */
-
-	'use strict';
-
-	/**
-	 * Use invariant() to assert state which your program assumes to be true.
-	 *
-	 * Provide sprintf-style format (only %s is supported) and arguments
-	 * to provide information about what broke and what you were
-	 * expecting.
-	 *
-	 * The invariant message will be stripped in production, but the invariant
-	 * will remain to ensure logic does not differ in production.
-	 */
-
-	var invariant = function(condition, format, a, b, c, d, e, f) {
-	  if (process.env.NODE_ENV !== 'production') {
-	    if (format === undefined) {
-	      throw new Error('invariant requires an error message argument');
-	    }
-	  }
-
-	  if (!condition) {
-	    var error;
-	    if (format === undefined) {
-	      error = new Error(
-	        'Minified exception occurred; use the non-minified dev environment ' +
-	        'for the full error message and additional helpful warnings.'
-	      );
-	    } else {
-	      var args = [a, b, c, d, e, f];
-	      var argIndex = 0;
-	      error = new Error(
-	        format.replace(/%s/g, function() { return args[argIndex++]; })
-	      );
-	      error.name = 'Invariant Violation';
-	    }
-
-	    error.framesToPop = 1; // we don't care about invariant's own frame
-	    throw error;
-	  }
-	};
-
-	module.exports = invariant;
-
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
-
-/***/ },
-/* 196 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1828,13 +148,13 @@ webpackJsonp([0],[
 	});
 	exports.configureStore = undefined;
 
-	var _redux = __webpack_require__(180);
+	var _redux = __webpack_require__(7);
 
-	var _reduxThunk = __webpack_require__(197);
+	var _reduxThunk = __webpack_require__(8);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _index = __webpack_require__(198);
+	var _index = __webpack_require__(9);
 
 	var _index2 = _interopRequireDefault(_index);
 
@@ -1848,7 +168,13 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 197 */
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = (__webpack_require__(3))(185);
+
+/***/ },
+/* 8 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1856,8 +182,8 @@ webpackJsonp([0],[
 	exports.__esModule = true;
 	function createThunkMiddleware(extraArgument) {
 	  return function (_ref) {
-	    var dispatch = _ref.dispatch;
-	    var getState = _ref.getState;
+	    var dispatch = _ref.dispatch,
+	        getState = _ref.getState;
 	    return function (next) {
 	      return function (action) {
 	        if (typeof action === 'function') {
@@ -1876,7 +202,7 @@ webpackJsonp([0],[
 	exports['default'] = thunk;
 
 /***/ },
-/* 198 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1885,25 +211,25 @@ webpackJsonp([0],[
 	    value: true
 	});
 
-	var _redux = __webpack_require__(180);
+	var _redux = __webpack_require__(7);
 
-	var _CommentReducer = __webpack_require__(199);
+	var _CommentReducer = __webpack_require__(10);
 
 	var _CommentReducer2 = _interopRequireDefault(_CommentReducer);
 
-	var _LoginReducer = __webpack_require__(201);
+	var _LoginReducer = __webpack_require__(12);
 
 	var _LoginReducer2 = _interopRequireDefault(_LoginReducer);
 
-	var _SortReducer = __webpack_require__(203);
+	var _SortReducer = __webpack_require__(14);
 
 	var _SortReducer2 = _interopRequireDefault(_SortReducer);
 
-	var _AlertPlaneReducer = __webpack_require__(204);
+	var _AlertPlaneReducer = __webpack_require__(15);
 
 	var _AlertPlaneReducer2 = _interopRequireDefault(_AlertPlaneReducer);
 
-	var _HandleDataReducer = __webpack_require__(205);
+	var _HandleDataReducer = __webpack_require__(16);
 
 	var _HandleDataReducer2 = _interopRequireDefault(_HandleDataReducer);
 
@@ -1921,7 +247,7 @@ webpackJsonp([0],[
 	exports.default = rootReducer;
 
 /***/ },
-/* 199 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1932,24 +258,21 @@ webpackJsonp([0],[
 
 	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
-	var _constants = __webpack_require__(200);
+	var _constants = __webpack_require__(11);
 
-	var _toTimeString$match$s = new Date().toTimeString().match(/(\d{2})\:(\d{2})\:(\d{2})/).slice(1, 4);
-
-	var _toTimeString$match$s2 = _slicedToArray(_toTimeString$match$s, 4);
-
-	var day = _toTimeString$match$s2[0];
-	var year = _toTimeString$match$s2[1];
-	var month = _toTimeString$match$s2[2];
-	var date = _toTimeString$match$s2[3];
-
-	var initialState = {
+	var _toTimeString$match$s = new Date().toTimeString().match(/(\d{2})\:(\d{2})\:(\d{2})/).slice(1, 4),
+	    _toTimeString$match$s2 = _slicedToArray(_toTimeString$match$s, 4),
+	    day = _toTimeString$match$s2[0],
+	    year = _toTimeString$match$s2[1],
+	    month = _toTimeString$match$s2[2],
+	    date = _toTimeString$match$s2[3],
+	    initialState = {
 		ItemDataes: [],
 		BandBoff: 1
 	};
 
 	var CommentReducer = function CommentReducer() {
-		var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
 		var action = arguments[1];
 
 		switch (action.type) {
@@ -1965,7 +288,7 @@ webpackJsonp([0],[
 	exports.default = CommentReducer;
 
 /***/ },
-/* 200 */
+/* 11 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -1992,7 +315,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 201 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2001,9 +324,9 @@ webpackJsonp([0],[
 	    value: true
 	});
 
-	var _constants = __webpack_require__(200);
+	var _constants = __webpack_require__(11);
 
-	var _util = __webpack_require__(202);
+	var _util = __webpack_require__(13);
 
 	var initialState = {
 	    userInfo: {},
@@ -2011,7 +334,7 @@ webpackJsonp([0],[
 	};
 
 	var LoginReducer = function LoginReducer() {
-	    var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
 	    var action = arguments[1];
 
 	    switch (action.type) {
@@ -2035,8 +358,148 @@ webpackJsonp([0],[
 	exports.default = LoginReducer;
 
 /***/ },
-/* 202 */,
-/* 203 */
+/* 13 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var M = Math,
+	    log = M.log,
+	    floor = M.floor,
+	    min = M.min,
+	    pow = M.pow;
+
+	String.prototype.splice = function (index, delnum) {
+		var replaceContext = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "";
+
+		var result = "",
+		    len = this.length,
+		    start = void 0,
+		    end = void 0;
+
+		if (delnum < 0) {
+			delnum = 0;
+		}
+
+		if (index < 0) {
+			index = -1;
+		}
+
+		start = index + 1 > len ? this.substring(0, len + 1) : this.substring(0, index + 1);
+
+		end = index + 1 + delnum > len ? "" : this.substring(index + 1 + delnum, len + 1);
+
+		result = start + replaceContext + end;
+
+		return result;
+	};
+
+	var $ = exports.$ = function $(v, d) {
+		d = d || document;
+		return d.querySelector(v);
+	};
+
+	var $$ = exports.$$ = function $$(v, d) {
+		d = d || document;
+		return d.querySelectorAll(v);
+	};
+
+	var getCookie = exports.getCookie = function getCookie(name) {
+		var arr = document.cookie.split("; "),
+		    i = 0,
+		    key = "",
+		    value = "";
+
+		for (i = 0; i < arr.length; i++) {
+			if (arr[i]) {
+				key = arr[i].match(/^(.+)=/)[1];
+				value = arr[i].match(/=(.+)$/)[1];
+			} else {
+				key = "";
+				value = "";
+			}
+
+			if (key === name) {
+				return arr[i].split("=");
+			}
+		}
+
+		return null;
+	};
+
+	var setCookie = exports.setCookie = function setCookie(name, value) {
+		var expiredays = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
+
+		var oDate = new Date();
+
+		oDate.setDate(oDate.getDate() + expiredays);
+		document.cookie = name + "=" + value + ";expires=" + oDate;
+	};
+
+	var delCookie = exports.delCookie = function delCookie(name) {
+		var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
+		var expiredays = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -1;
+
+		setCookie(name, value, expiredays);
+	};
+
+	var NumChangeToCN = exports.NumChangeToCN = function NumChangeToCN(n) {
+		var CN = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十"];
+
+		return CN[n];
+	};
+
+	var formatDate = exports.formatDate = function formatDate(publish_time) {
+		var pt = "",
+		    DateArr = publish_time.split("|"),
+		    nowDate = new Date().getTime(),
+		    di = nowDate - parseInt(DateArr[1]),
+		    div = ~~(di / 31536000000);
+
+		switch (true) {
+			case div === 0:
+				pt = DateArr[0];
+				break;
+
+			case div >= 1 && div <= 10:
+				pt = NumChangeToCN(div) + "\u5E74\u524D";
+				break;
+
+			default:
+				pt = "\u5F88\u4E45\u5F88\u4E45\u4EE5\u524D";
+				break;
+		}
+
+		return pt;
+	};
+
+	var getPostion = exports.getPostion = function getPostion(ele) {
+		var result = [0, 0];
+
+		while (ele) {
+			result[0] += ele.offsetLeft;
+			result[1] += ele.offsetTop;
+
+			ele = ele.offsetParent;
+		}
+
+		return result;
+	};
+
+	var MemoryHumanReadable = exports.MemoryHumanReadable = function MemoryHumanReadable(num) {
+		var units = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"],
+		    exponent = Math.min(floor(log(num) / log(1024)), units.length - 1),
+		    size = Number(num / Math.pow(1024, exponent)).toPrecision(3),
+		    unit = units[exponent];
+
+		return size + unit;
+	};
+
+/***/ },
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2045,14 +508,14 @@ webpackJsonp([0],[
 	    value: true
 	});
 
-	var _constants = __webpack_require__(200);
+	var _constants = __webpack_require__(11);
 
 	var initialState = {
 	    SortState: "newest"
 	};
 
 	var SortReducer = function SortReducer() {
-	    var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
 	    var action = arguments[1];
 
 	    switch (action.type) {
@@ -2069,7 +532,7 @@ webpackJsonp([0],[
 	exports.default = SortReducer;
 
 /***/ },
-/* 204 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2078,7 +541,7 @@ webpackJsonp([0],[
 	    value: true
 	});
 
-	var _constants = __webpack_require__(200);
+	var _constants = __webpack_require__(11);
 
 	var initialState = {
 	    AlertPlanePrompt: "",
@@ -2086,7 +549,7 @@ webpackJsonp([0],[
 	};
 
 	var AlertPlaneReducer = function AlertPlaneReducer() {
-	    var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
 	    var action = arguments[1];
 
 	    switch (action.type) {
@@ -2104,7 +567,7 @@ webpackJsonp([0],[
 	exports.default = AlertPlaneReducer;
 
 /***/ },
-/* 205 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2113,7 +576,7 @@ webpackJsonp([0],[
 	    value: true
 	});
 
-	var _constants = __webpack_require__(200);
+	var _constants = __webpack_require__(11);
 
 	var initialState = {
 	    PageCommentsNum: 6, // 每页10条评论
@@ -2124,7 +587,7 @@ webpackJsonp([0],[
 	};
 
 	var HandleDataReducer = function HandleDataReducer() {
-	    var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
 	    var action = arguments[1];
 
 	    switch (action.type) {
@@ -2148,10 +611,10 @@ webpackJsonp([0],[
 	exports.default = HandleDataReducer;
 
 /***/ },
-/* 206 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
 	"use strict";
 
@@ -2160,55 +623,55 @@ webpackJsonp([0],[
 	});
 	exports.DragAndUpdate = exports.DropList = exports.AlertPlane = exports.LoginTable = exports.FeedBackMain = exports.CommentWrap = exports.CommentPagination = exports.CommentList = exports.CommentItem = exports.CommentHeader = exports.CommentFooter = exports.CommentFeedback = exports.CommentEditer = undefined;
 
-	var _CommentEditer = __webpack_require__(207);
+	var _CommentEditer = __webpack_require__(18);
 
 	var _CommentEditer2 = _interopRequireDefault(_CommentEditer);
 
-	var _CommentFeedback = __webpack_require__(218);
+	var _CommentFeedback = __webpack_require__(29);
 
 	var _CommentFeedback2 = _interopRequireDefault(_CommentFeedback);
 
-	var _CommentFooter = __webpack_require__(391);
+	var _CommentFooter = __webpack_require__(208);
 
 	var _CommentFooter2 = _interopRequireDefault(_CommentFooter);
 
-	var _CommentHeader = __webpack_require__(392);
+	var _CommentHeader = __webpack_require__(209);
 
 	var _CommentHeader2 = _interopRequireDefault(_CommentHeader);
 
-	var _CommentItem = __webpack_require__(394);
+	var _CommentItem = __webpack_require__(211);
 
 	var _CommentItem2 = _interopRequireDefault(_CommentItem);
 
-	var _CommentList = __webpack_require__(395);
+	var _CommentList = __webpack_require__(212);
 
 	var _CommentList2 = _interopRequireDefault(_CommentList);
 
-	var _CommentPagination = __webpack_require__(396);
+	var _CommentPagination = __webpack_require__(213);
 
 	var _CommentPagination2 = _interopRequireDefault(_CommentPagination);
 
-	var _CommentWrap = __webpack_require__(397);
+	var _CommentWrap = __webpack_require__(214);
 
 	var _CommentWrap2 = _interopRequireDefault(_CommentWrap);
 
-	var _FeedBackMain = __webpack_require__(398);
+	var _FeedBackMain = __webpack_require__(215);
 
 	var _FeedBackMain2 = _interopRequireDefault(_FeedBackMain);
 
-	var _LoginTable = __webpack_require__(399);
+	var _LoginTable = __webpack_require__(216);
 
 	var _LoginTable2 = _interopRequireDefault(_LoginTable);
 
-	var _AlertPlane = __webpack_require__(400);
+	var _AlertPlane = __webpack_require__(217);
 
 	var _AlertPlane2 = _interopRequireDefault(_AlertPlane);
 
-	var _DropList = __webpack_require__(401);
+	var _DropList = __webpack_require__(218);
 
 	var _DropList2 = _interopRequireDefault(_DropList);
 
-	var _DragAndUpdate = __webpack_require__(402);
+	var _DragAndUpdate = __webpack_require__(219);
 
 	var _DragAndUpdate2 = _interopRequireDefault(_DragAndUpdate);
 
@@ -2228,13 +691,13 @@ webpackJsonp([0],[
 	exports.DropList = _DropList2.default;
 	exports.DragAndUpdate = _DragAndUpdate2.default;
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "router.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "router.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 207 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
 	"use strict";
 
@@ -2248,17 +711,17 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _router = __webpack_require__(206);
+	var _router = __webpack_require__(17);
 
-	var _util = __webpack_require__(202);
+	var _util = __webpack_require__(13);
 
-	var _reactRedux = __webpack_require__(173);
+	var _reactRedux = __webpack_require__(5);
 
-	var _redux = __webpack_require__(180);
+	var _redux = __webpack_require__(7);
 
-	var _LoginActions = __webpack_require__(208);
+	var _LoginActions = __webpack_require__(19);
 
-	var _AlertPlaneActions = __webpack_require__(215);
+	var _AlertPlaneActions = __webpack_require__(26);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2298,9 +761,9 @@ webpackJsonp([0],[
 		}, {
 			key: "render",
 			value: function render() {
-				var _props = this.props;
-				var userInfo = _props.userInfo;
-				var actions = _props.actions;
+				var _props = this.props,
+				    userInfo = _props.userInfo,
+				    actions = _props.actions;
 
 
 				var LoginBthns = void 0;
@@ -2332,7 +795,7 @@ webpackJsonp([0],[
 								className: "login-out__btn",
 								onClick: this.LoginOut
 							},
-							"登出"
+							"\u767B\u51FA"
 						)
 					);
 				} else {
@@ -2344,7 +807,7 @@ webpackJsonp([0],[
 						_react2.default.createElement(
 							"span",
 							{ className: "init_prompt" },
-							"欢迎您使用阔论，请先登录"
+							"\u6B22\u8FCE\u60A8\u4F7F\u7528\u9614\u8BBA\uFF0C\u8BF7\u5148\u767B\u5F55"
 						),
 						_react2.default.createElement(
 							"button",
@@ -2352,7 +815,7 @@ webpackJsonp([0],[
 								className: "login-in__btn",
 								onClick: actions.LoginTableStateTask
 							},
-							"登录"
+							"\u767B\u5F55"
 						)
 					);
 				}
@@ -2399,10 +862,10 @@ webpackJsonp([0],[
 		};
 	})(CommentEditer);
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CommentEditer.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "CommentEditer.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 208 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2412,11 +875,11 @@ webpackJsonp([0],[
 	});
 	exports.checkLoginThunk = exports.LoginOutThunk = exports.LoginInThunk = exports.UpDateUserInfoTask = exports.LoginTableStateTask = undefined;
 
-	var _constants = __webpack_require__(200);
+	var _constants = __webpack_require__(11);
 
-	var _reduxActions = __webpack_require__(209);
+	var _reduxActions = __webpack_require__(20);
 
-	var _AlertPlaneActions = __webpack_require__(215);
+	var _AlertPlaneActions = __webpack_require__(26);
 
 	var LoginTableStateTask = exports.LoginTableStateTask = (0, _reduxActions.createAction)(_constants.Types.CHANGE_LOGIN_TABLE_STATE);
 
@@ -2446,9 +909,9 @@ webpackJsonp([0],[
 	            }
 	        }).catch(function (errCode) {
 	            if (errCode) {
-	                (0, _AlertPlaneActions.AlertPlaneThunk)("登录失败， " + errCode + " 错误");
+	                (0, _AlertPlaneActions.AlertPlaneThunk)("\u767B\u5F55\u5931\u8D25\uFF0C " + errCode + " \u9519\u8BEF");
 	            } else {
-	                (0, _AlertPlaneActions.AlertPlaneThunk)("登录失败， 未知错误");
+	                (0, _AlertPlaneActions.AlertPlaneThunk)("\u767B\u5F55\u5931\u8D25\uFF0C \u672A\u77E5\u9519\u8BEF");
 	            }
 	        });
 	    };
@@ -2474,9 +937,9 @@ webpackJsonp([0],[
 	            }
 	        }).catch(function (errCode) {
 	            if (errCode) {
-	                (0, _AlertPlaneActions.AlertPlaneThunk)("登出失败， " + errCode + " 错误");
+	                (0, _AlertPlaneActions.AlertPlaneThunk)("\u767B\u51FA\u5931\u8D25\uFF0C " + errCode + " \u9519\u8BEF");
 	            } else {
-	                (0, _AlertPlaneActions.AlertPlaneThunk)("登出失败， 未知错误");
+	                (0, _AlertPlaneActions.AlertPlaneThunk)("\u767B\u51FA\u5931\u8D25\uFF0C \u672A\u77E5\u9519\u8BEF");
 	            }
 	        });
 	    };
@@ -2505,7 +968,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 209 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2515,15 +978,15 @@ webpackJsonp([0],[
 	});
 	exports.handleActions = exports.handleAction = exports.createAction = undefined;
 
-	var _createAction = __webpack_require__(210);
+	var _createAction = __webpack_require__(21);
 
 	var _createAction2 = _interopRequireDefault(_createAction);
 
-	var _handleAction = __webpack_require__(211);
+	var _handleAction = __webpack_require__(22);
 
 	var _handleAction2 = _interopRequireDefault(_handleAction);
 
-	var _handleActions = __webpack_require__(212);
+	var _handleActions = __webpack_require__(23);
 
 	var _handleActions2 = _interopRequireDefault(_handleActions);
 
@@ -2534,7 +997,7 @@ webpackJsonp([0],[
 	exports.handleActions = _handleActions2.default;
 
 /***/ },
-/* 210 */
+/* 21 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2582,7 +1045,7 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 211 */
+/* 22 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2620,7 +1083,7 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 212 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2630,15 +1093,15 @@ webpackJsonp([0],[
 	});
 	exports.default = handleActions;
 
-	var _handleAction = __webpack_require__(211);
+	var _handleAction = __webpack_require__(22);
 
 	var _handleAction2 = _interopRequireDefault(_handleAction);
 
-	var _ownKeys = __webpack_require__(213);
+	var _ownKeys = __webpack_require__(24);
 
 	var _ownKeys2 = _interopRequireDefault(_ownKeys);
 
-	var _reduceReducers = __webpack_require__(214);
+	var _reduceReducers = __webpack_require__(25);
 
 	var _reduceReducers2 = _interopRequireDefault(_reduceReducers);
 
@@ -2660,7 +1123,7 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 213 */
+/* 24 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2684,7 +1147,7 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 214 */
+/* 25 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -2707,7 +1170,7 @@ webpackJsonp([0],[
 	module.exports = exports["default"];
 
 /***/ },
-/* 215 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2717,11 +1180,11 @@ webpackJsonp([0],[
 	});
 	exports.AlertPlaneThunk = exports.TorFTask = undefined;
 
-	var _constants = __webpack_require__(200);
+	var _constants = __webpack_require__(11);
 
-	var _reduxActions = __webpack_require__(209);
+	var _reduxActions = __webpack_require__(20);
 
-	var _foxListener = __webpack_require__(216);
+	var _foxListener = __webpack_require__(27);
 
 	var _foxListener2 = _interopRequireDefault(_foxListener);
 
@@ -2758,7 +1221,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 216 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -2769,19 +1232,19 @@ webpackJsonp([0],[
 
 	'use strict';
 
-	module.exports = __webpack_require__(217);
+	module.exports = __webpack_require__(28);
 
 /***/ },
-/* 217 */
+/* 28 */
 /***/ function(module, exports) {
 
-	"use strict";function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}Object.defineProperty(exports,"__esModule",{value:!0});var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol?"symbol":typeof e},_createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),Util=function(){function e(){_classCallCheck(this,e),this.handlers={}}return _createClass(e,[{key:"publish",value:function(e){for(var t=this,r=arguments.length,n=Array(r>1?r-1:0),s=1;s<r;s++)n[s-1]=arguments[s];try{var i=function(){var r=t,s=t.RegAnalyse(e),i=s.ev,a=s.className;if(!t.isHas(i,a))return{v:void 0};if(a)t.handlers[i][a].forEach(function(e){return e.apply(r,n)});else{var l=!0,o=!1,u=void 0;try{for(var h,f=Object.keys(t.handlers[i])[Symbol.iterator]();!(l=(h=f.next()).done);l=!0){var c=h.value;t.handlers[i][c].forEach(function(e){return e.apply(r,n)})}}catch(e){o=!0,u=e}finally{try{!l&&f.return&&f.return()}finally{if(o)throw u}}}}();if("object"===("undefined"==typeof i?"undefined":_typeof(i)))return i.v}catch(e){throw new Error(e)}return this}},{key:"once",value:function(e){for(var t=arguments.length,r=Array(t>1?t-1:0),n=1;n<t;n++)r[n-1]=arguments[n];this.publish.apply(this,[e].concat(r)),this.unsubscribe(e)}},{key:"subscribe",value:function(e,t){this.isString(e);var r=this.RegAnalyse(e),n=r.ev,s=r.className;if(!n)throw new Error("listenerName must only combine with only character、number and _  ");if(/^default$/.test(s))throw new Error("default eventClass was binded !");return!(n in this.handlers)&&(this.handlers[n]={default:[]}),s?this.handlers[n][s]?this.handlers[n][s].push(t):this.handlers[n][s]=[t]:this.handlers[n].default.push(t),this}},{key:"unsubscribe",value:function(e){this.isString(e);var t=this.RegAnalyse(e),r=t.ev,n=t.className;if(this.isHas(r,n))return n?delete this.handlers[r][n]:delete this.handlers[r],this}},{key:"isHas",value:function(e,t){if(e in this.handlers&&(!t||t in this.handlers[e]))return!0;throw new Error("The Event didnt bind !")}},{key:"RegAnalyse",value:function(e){var t=/^(\w+)(\.(\w+))?$/.exec(e),r=t[1],n=t[3];return{className:n,ev:r}}},{key:"isString",value:function(e){if("string"!=typeof e)throw new Error("EventName must is a string !")}}]),e}();module.exports=Util,exports.default=Util;
+	"use strict";function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},_createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),$handlers_key=Symbol("$handlers_key"),Util=function(){function e(){_classCallCheck(this,e);var t=arguments.length<=0?void 0:arguments[0],r=this;if(this[$handlers_key]={},t)switch(r.testType(t)){case"[object Object]":return Object.assign(r,t)}}return _createClass(e,[{key:"testType",value:function(e){return Object.prototype.toString.call(e)}},{key:"publish",value:function(e){for(var t=this,r=arguments.length,n=Array(r>1?r-1:0),i=1;i<r;i++)n[i-1]=arguments[i];try{var s=function(){var r=t,i=t.RegAnalyse(e),s=i.ev,a=i.className;if(!t.isHas(s,a))return{v:void 0};if(a)t[$handlers_key][s][a].forEach(function(e){return e.apply(r,n)});else{var o=!0,l=!1,c=void 0;try{for(var u,y=Object.keys(t[$handlers_key][s])[Symbol.iterator]();!(o=(u=y.next()).done);o=!0){var h=u.value;t[$handlers_key][s][h].forEach(function(e){return e.apply(r,n)})}}catch(e){l=!0,c=e}finally{try{!o&&y.return&&y.return()}finally{if(l)throw c}}}}();if("object"===("undefined"==typeof s?"undefined":_typeof(s)))return s.v}catch(e){throw new Error(e)}return this}},{key:"once",value:function(e){for(var t=arguments.length,r=Array(t>1?t-1:0),n=1;n<t;n++)r[n-1]=arguments[n];this.publish.apply(this,[e].concat(r)),this.unsubscribe(e)}},{key:"subscribe",value:function(e,t){this.isString(e);var r=this.RegAnalyse(e),n=r.ev,i=r.className;if(!n)throw new Error("listenerName must only combine with only character、number and _  ");if(/^default$/.test(i))throw new Error("default eventClass was binded !");return!(n in this[$handlers_key])&&(this[$handlers_key][n]={default:[]}),i?this[$handlers_key][n][i]?this[$handlers_key][n][i].push(t):this[$handlers_key][n][i]=[t]:this[$handlers_key][n].default.push(t),this}},{key:"unsubscribe",value:function(e){this.isString(e);var t=this.RegAnalyse(e),r=t.ev,n=t.className;if(this.isHas(r,n))return n?delete this[$handlers_key][r][n]:delete this[$handlers_key][r],this}},{key:"isHas",value:function(e,t){if(e in this[$handlers_key]&&(!t||t in this[$handlers_key][e]))return!0;throw new Error("The Event didnt bind !")}},{key:"RegAnalyse",value:function(e){var t=/^(\w+)(\.(\w+))?$/.exec(e),r=t[1],n=t[3];return{className:n,ev:r}}},{key:"isString",value:function(e){if("string"!=typeof e)throw new Error("EventName must is a string !")}},{key:"find",value:function(e){var t=this;if("[object String]"!==t.testType(e))return void console.error("params must be string!");var r=e.split("."),n=null,i=null;try{r.length>1?r.reduce(function(e,t){if(e.hasOwnProperty(t))return n=e,i=t,e[t];throw Error("Doesnt find this property! Please cleck this property name was right!")},t):(n=t,i=r[0])}catch(e){console.error(e)}return{$p:n,$c:i}}},{key:"bindSetterandGetter",value:function(e,t,r,n){var i=e[t];Object.defineProperty(e,t,{get:function(){return n?n.call(this,i):i},set:function(e){i=r?r.call(this,e):e}})}},{key:"watch",value:function(e,t,r,n){var i=this,s=t.deep,a=this.find(e),o=a.$p,l=a.$c;if(s){var c=i.testType(o[l]);"[object Object]"===c||"[object Array]"===c?i.tree(o[l],function(e,t,r,n){i.bindSetterandGetter(e,t,r,n)},r,n):console.error("deep-bind root must is a object or array")}else i.bindSetterandGetter(o,l,r,n)}},{key:"tree",value:function(e,t,r,n){var i=this;for(var s in e){var a=i.testType(e[s]);"[object Object]"!==a&&"[object Array]"!==a||i.tree(e[s],t,r,n),t(e,s,r,n)}}}]),e}();module.exports=Util;
 
 /***/ },
-/* 218 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
 	"use strict";
 
@@ -2797,31 +1260,31 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactRedux = __webpack_require__(173);
+	var _reactRedux = __webpack_require__(5);
 
-	var _redux = __webpack_require__(180);
+	var _redux = __webpack_require__(7);
 
-	var _marked = __webpack_require__(219);
+	var _marked = __webpack_require__(30);
 
 	var _marked2 = _interopRequireDefault(_marked);
 
-	var _highlight = __webpack_require__(220);
+	var _highlight = __webpack_require__(31);
 
 	var _highlight2 = _interopRequireDefault(_highlight);
 
-	var _util = __webpack_require__(202);
+	var _util = __webpack_require__(13);
 
-	var _expressions_list = __webpack_require__(388);
+	var _expressions_list = __webpack_require__(205);
 
 	var _expressions_list2 = _interopRequireDefault(_expressions_list);
 
-	var _CommentActions = __webpack_require__(389);
+	var _CommentActions = __webpack_require__(206);
 
-	var _LoginActions = __webpack_require__(208);
+	var _LoginActions = __webpack_require__(19);
 
-	var _AlertPlaneActions = __webpack_require__(215);
+	var _AlertPlaneActions = __webpack_require__(26);
 
-	var _router = __webpack_require__(206);
+	var _router = __webpack_require__(17);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2964,34 +1427,29 @@ webpackJsonp([0],[
 		}, {
 			key: "sendComment",
 			value: function sendComment(ev) {
-				var _props = this.props;
-				var actions = _props.actions;
-				var userInfo = _props.userInfo;
-				var ItemDataes = _props.ItemDataes;
-				var loginTableState = _props.loginTableState;
-				var AllDataNum = _props.AllDataNum;
-				var CommentMainTask = _props.CommentMainTask;
-				var CommentFeedBackTask = _props.CommentFeedBackTask;
-				var CommentSubFeedBackTask = _props.CommentSubFeedBackTask;
-				var ParentIndexOnDb = _props.ParentIndexOnDb;
-				var ParentIndex = _props.ParentIndex;
-				var _props$BeFeedIndex = _props.BeFeedIndex;
-				var BeFeedIndex = _props$BeFeedIndex === undefined ? BeFeedIndex || -1 : _props$BeFeedIndex;
-				var NowPage = _props.NowPage;
-				var SortState = _props.SortState;
-
-				var oEditerWrap = this.refs["editer-wrap"];
-				var oDate = new Date();
-
-				var _oDate$toLocaleDateSt = oDate.toLocaleDateString().match(/(\d{4})\/(\d{1,2})\/(\d{1,2})/).slice(1, 4);
-
-				var _oDate$toLocaleDateSt2 = _slicedToArray(_oDate$toLocaleDateSt, 3);
-
-				var year = _oDate$toLocaleDateSt2[0];
-				var month = _oDate$toLocaleDateSt2[1];
-				var day = _oDate$toLocaleDateSt2[2];
-
-				var commentContent = {
+				var _props = this.props,
+				    actions = _props.actions,
+				    userInfo = _props.userInfo,
+				    ItemDataes = _props.ItemDataes,
+				    loginTableState = _props.loginTableState,
+				    AllDataNum = _props.AllDataNum,
+				    CommentMainTask = _props.CommentMainTask,
+				    CommentFeedBackTask = _props.CommentFeedBackTask,
+				    CommentSubFeedBackTask = _props.CommentSubFeedBackTask,
+				    ParentIndexOnDb = _props.ParentIndexOnDb,
+				    ParentIndex = _props.ParentIndex,
+				    _props$BeFeedIndex = _props.BeFeedIndex,
+				    BeFeedIndex = _props$BeFeedIndex === undefined ? BeFeedIndex || -1 : _props$BeFeedIndex,
+				    NowPage = _props.NowPage,
+				    SortState = _props.SortState,
+				    oEditerWrap = this.refs["editer-wrap"],
+				    oDate = new Date(),
+				    _oDate$toLocaleDateSt = oDate.toLocaleDateString().match(/(\d{4})\/(\d{1,2})\/(\d{1,2})/).slice(1, 4),
+				    _oDate$toLocaleDateSt2 = _slicedToArray(_oDate$toLocaleDateSt, 3),
+				    year = _oDate$toLocaleDateSt2[0],
+				    month = _oDate$toLocaleDateSt2[1],
+				    day = _oDate$toLocaleDateSt2[2],
+				    commentContent = {
 					"avatar_url": userInfo.userAvatar,
 					"author_name": userInfo.userName,
 					"author_email": userInfo.userEmail,
@@ -3155,7 +1613,7 @@ webpackJsonp([0],[
 					_this4.props.actions.AlertPlaneThunk("图片上传失败，请检查网络连接");
 				}).then(function (data) {
 					var editerWrap = _this4.refs["editer-wrap"];
-					editerWrap.value += "![自拍](" + data.url + ")";
+					editerWrap.value += "![\u81EA\u62CD](" + data.url + ")";
 				});
 			}
 		}, {
@@ -3163,21 +1621,21 @@ webpackJsonp([0],[
 			value: function render() {
 				var _this5 = this;
 
-				var _props2 = this.props;
-				var actions = _props2.actions;
-				var MainFeedBackBox = _props2.MainFeedBackBox;
-				var choice_list = void 0;
-				var editerWrap = this.refs["editer-wrap"];
-				var colors = [["#BE93C5", "#7BC6CC"], ["#4ECDC4", "#556270"], ["#A1FFCE", "#FAFFD1"], ["#ff6e7f", "#bfe9ff"]];
-				var codeTypeList = ["c", "c++", "c#", "java", "javascript", "go", "python", "php", "ruby", "lisp", "nginx", "objective-c", "http", "json", "sql", "html", "xml", "css", "less", "scss", "stylus"];
-				var tableSizeX = 5;
-				var tableSizeY = 5;
-				var tdSize = 31; //( x === y)
-				var tablePosition = (0, _util.getPostion)(this.refs["table-matrix"]);
-				var tableRow = [];
+				var _props2 = this.props,
+				    actions = _props2.actions,
+				    MainFeedBackBox = _props2.MainFeedBackBox,
+				    choice_list = void 0,
+				    editerWrap = this.refs["editer-wrap"],
+				    colors = [["#BE93C5", "#7BC6CC"], ["#4ECDC4", "#556270"], ["#A1FFCE", "#FAFFD1"], ["#ff6e7f", "#bfe9ff"]],
+				    codeTypeList = ["c", "c++", "c#", "java", "javascript", "go", "python", "php", "ruby", "lisp", "nginx", "objective-c", "http", "json", "sql", "html", "xml", "css", "less", "scss", "stylus"],
+				    tableSizeX = 5,
+				    tableSizeY = 5,
+				    tdSize = 31,
+				    tablePosition = (0, _util.getPostion)(this.refs["table-matrix"]),
+				    tableRow = [],
+				    expressionsListColNum = 17,
+				    expressionsListBox = [];
 
-				var expressionsListColNum = 17; //每行10列
-				var expressionsListBox = [];
 
 				var name = void 0,
 				    url = void 0,
@@ -3293,7 +1751,7 @@ webpackJsonp([0],[
 										var id = parseInt(ev.target.dataset.btnId),
 										    _len = editerWrap.value.length;
 
-										editerWrap.value += id != 0 ? "\n# 大标题 # [" + colors[id - 1][0] + "|" + colors[id - 1][1] + "] \n" : "\n# 大标题 \n";
+										editerWrap.value += id != 0 ? "\n# \u5927\u6807\u9898 # [" + colors[id - 1][0] + "|" + colors[id - 1][1] + "] \n" : "\n# 大标题 \n";
 
 										editerWrap.setSelectionRange(_len + 3, _len + 6);
 									}
@@ -3309,7 +1767,7 @@ webpackJsonp([0],[
 								style: {
 									background: "#7c795d"
 								},
-								title: "原色"
+								title: "\u539F\u8272"
 							}),
 							colors.map(function (value, idx) {
 								return _react2.default.createElement("div", {
@@ -3333,8 +1791,8 @@ webpackJsonp([0],[
 								_react2.default.createElement(
 									"div",
 									null,
-									_react2.default.createElement("input", { type: "text", placeholder: "图片alt", ref: "alt-input" }),
-									_react2.default.createElement("input", { type: "text", placeholder: "图片地址(url)", ref: "img-url-input" }),
+									_react2.default.createElement("input", { type: "text", placeholder: "\u56FE\u7247alt", ref: "alt-input" }),
+									_react2.default.createElement("input", { type: "text", placeholder: "\u56FE\u7247\u5730\u5740(url)", ref: "img-url-input" }),
 									_react2.default.createElement(
 										"button",
 										{
@@ -3351,7 +1809,7 @@ webpackJsonp([0],[
 												imgUrlInput.value = "";
 											}
 										},
-										"插入图片"
+										"\u63D2\u5165\u56FE\u7247"
 									)
 								),
 								_react2.default.createElement(_router.DragAndUpdate, {
@@ -3369,8 +1827,8 @@ webpackJsonp([0],[
 						choice_list = _react2.default.createElement(
 							"div",
 							{ className: "syntaxs__sub-list" },
-							_react2.default.createElement("input", { type: "text", placeholder: "链接名", ref: "link-name-input" }),
-							_react2.default.createElement("input", { type: "text", placeholder: "链接地址(url)", ref: "link-url-input" }),
+							_react2.default.createElement("input", { type: "text", placeholder: "\u94FE\u63A5\u540D", ref: "link-name-input" }),
+							_react2.default.createElement("input", { type: "text", placeholder: "\u94FE\u63A5\u5730\u5740(url)", ref: "link-url-input" }),
 							_react2.default.createElement(
 								"button",
 								{
@@ -3387,7 +1845,7 @@ webpackJsonp([0],[
 										LinkUrlInput.value = "";
 									}
 								},
-								"插入链接"
+								"\u63D2\u5165\u94FE\u63A5"
 							)
 						);
 						break;
@@ -3425,7 +1883,7 @@ webpackJsonp([0],[
 										});
 									}
 								},
-								"插入代码"
+								"\u63D2\u5165\u4EE3\u7801"
 							)
 						);
 						break;
@@ -3471,7 +1929,7 @@ webpackJsonp([0],[
 								this.state.cTableX,
 								" x ",
 								this.state.cTableY,
-								" 表格"
+								" \u8868\u683C"
 							),
 							_react2.default.createElement(
 								"button",
@@ -3483,7 +1941,7 @@ webpackJsonp([0],[
 											    str = "";
 
 											for (var _i = 0; _i < $x; _i++) {
-												str += "|   标题" + (_i + 1) + "   ";
+												str += "|   \u6807\u9898" + (_i + 1) + "   ";
 											}
 											str += "|\n";
 											for (var _i2 = 0; _i2 < $x; _i2++) {
@@ -3495,7 +1953,7 @@ webpackJsonp([0],[
 
 											for (var _j = 0; _j < $y; _j++) {
 												for (var _i3 = 0; _i3 < $x; _i3++) {
-													str += "| 表格内容" + count + " ";
+													str += "| \u8868\u683C\u5185\u5BB9" + count + " ";
 													count++;
 												}
 												str += "|\n";
@@ -3510,7 +1968,7 @@ webpackJsonp([0],[
 										});
 									}
 								},
-								"插入表格"
+								"\u63D2\u5165\u8868\u683C"
 							)
 						);
 						break;
@@ -3526,7 +1984,7 @@ webpackJsonp([0],[
 								_react2.default.createElement(
 									"button",
 									{ className: "upload__btn", onClick: this.uploadSnap },
-									"上传图片"
+									"\u4E0A\u4F20\u56FE\u7247"
 								)
 							)
 						);
@@ -3545,7 +2003,7 @@ webpackJsonp([0],[
 							"ul",
 							{ className: "syntaxs__list" },
 							_react2.default.createElement("li", { className: "emoji-list",
-								title: "表情列表",
+								title: "\u8868\u60C5\u5217\u8868",
 								style: this.state.choiceType === "expressions_list" ? { background: "url(/img/icon-hover.png) 5px -316px , #ccc" } : null,
 								onClick: function onClick(ev) {
 									_this5.SyntaxsListHandle.call(_this5, ev, function (ev, editerWrap) {
@@ -3563,7 +2021,7 @@ webpackJsonp([0],[
 
 							}),
 							_react2.default.createElement("li", { className: "bold",
-								title: "加粗",
+								title: "\u52A0\u7C97",
 								onClick: function onClick(ev) {
 									_this5.SyntaxsListHandle.call(null, ev, function (ev, editerWrap) {
 										editerWrap.value += "** 加粗文本 **";
@@ -3573,7 +2031,7 @@ webpackJsonp([0],[
 								}
 							}),
 							_react2.default.createElement("li", { className: "italic",
-								title: "斜体",
+								title: "\u659C\u4F53",
 								onClick: function onClick(ev) {
 									_this5.SyntaxsListHandle.call(null, ev, function (ev, editerWrap) {
 										editerWrap.value += "_ 斜体文本 _";
@@ -3583,7 +2041,7 @@ webpackJsonp([0],[
 								}
 							}),
 							_react2.default.createElement("li", { className: "a-link",
-								title: "A链接",
+								title: "A\u94FE\u63A5",
 								style: this.state.choiceType === "a_link_list" ? { background: "url(/img/icon-hover.png) 4px -103px,#ccc" } : null,
 								onClick: function onClick(ev) {
 									_this5.SyntaxsListHandle.call(_this5, ev, function (ev, editerWrap) {
@@ -3600,7 +2058,7 @@ webpackJsonp([0],[
 								}
 							}),
 							_react2.default.createElement("li", { className: "image",
-								title: "引入图片",
+								title: "\u5F15\u5165\u56FE\u7247",
 								style: this.state.choiceType === "img_list" ? { background: "url(/img/icon-hover.png) 4px -151px,#ccc" } : null,
 								onClick: function onClick(ev) {
 									_this5.SyntaxsListHandle.call(_this5, ev, function (ev, editerWrap) {
@@ -3617,7 +2075,7 @@ webpackJsonp([0],[
 								}
 							}),
 							_react2.default.createElement("li", { className: "table",
-								title: "选择表格",
+								title: "\u9009\u62E9\u8868\u683C",
 								style: this.state.choiceType === "table_list" ? { background: "url(/img/icon-hover.png) 4px -175px,#ccc" } : null,
 								onClick: function onClick(ev) {
 									_this5.SyntaxsListHandle.call(_this5, ev, function (ev, editerWrap) {
@@ -3634,7 +2092,7 @@ webpackJsonp([0],[
 								}
 							}),
 							_react2.default.createElement("li", { className: "blockquote-block",
-								title: "引用",
+								title: "\u5F15\u7528",
 								onClick: function onClick(ev) {
 									_this5.SyntaxsListHandle.call(null, ev, function (ev, editerWrap) {
 										editerWrap.value += "> 引用内容";
@@ -3644,7 +2102,7 @@ webpackJsonp([0],[
 								}
 							}),
 							_react2.default.createElement("li", { className: "o-list",
-								title: "有序列表",
+								title: "\u6709\u5E8F\u5217\u8868",
 								onClick: function onClick(ev) {
 									_this5.SyntaxsListHandle.call(null, ev, function (ev, editerWrap) {
 										editerWrap.value += "\n1. 例1\n2. 例2\n3. 例3";
@@ -3652,7 +2110,7 @@ webpackJsonp([0],[
 								}
 							}),
 							_react2.default.createElement("li", { className: "u-list",
-								title: "无序列表",
+								title: "\u65E0\u5E8F\u5217\u8868",
 								onClick: function onClick(ev) {
 									_this5.SyntaxsListHandle.call(_this5, ev, function (ev, editerWrap) {
 										editerWrap.value += "\n* 例1\n* 例2\n* 例3";
@@ -3660,7 +2118,7 @@ webpackJsonp([0],[
 								}
 							}),
 							_react2.default.createElement("li", { className: "h1-tag",
-								title: "大标题",
+								title: "\u5927\u6807\u9898",
 								style: this.state.choiceType === "h1_list" ? { background: "url(/img/icon-hover.png) 4px -247px,#ccc" } : null,
 								onClick: function onClick(ev) {
 									_this5.SyntaxsListHandle.call(_this5, ev, function (ev, editerWrap) {
@@ -3677,7 +2135,7 @@ webpackJsonp([0],[
 								}
 							}),
 							_react2.default.createElement("li", { className: "h2-tag",
-								title: "小标题",
+								title: "\u5C0F\u6807\u9898",
 								onClick: function onClick(ev) {
 									_this5.SyntaxsListHandle.call(null, ev, function (ev, editerWrap) {
 										var len = editerWrap.value.length;
@@ -3687,7 +2145,7 @@ webpackJsonp([0],[
 								}
 							}),
 							_react2.default.createElement("li", { className: "code-block",
-								title: "代码高亮",
+								title: "\u4EE3\u7801\u9AD8\u4EAE",
 								style: this.state.choiceType === "code_block_list" ? { background: "url(/img/icon-hover.png) 4px -341px,#ccc" } : null,
 								onClick: function onClick(ev) {
 									_this5.SyntaxsListHandle.call(_this5, ev, function (ev, editerWrap) {
@@ -3706,7 +2164,7 @@ webpackJsonp([0],[
 							_react2.default.createElement(
 								"li",
 								{ className: "snap-block",
-									title: "自拍上传",
+									title: "\u81EA\u62CD\u4E0A\u4F20",
 									style: this.state.choiceType === "snap-block_list" ? { background: "url(/img/icon-hover.png) 4px -365px,#ccc" } : null,
 									onClick: function onClick(ev) {
 										_this5.SyntaxsListHandle.call(_this5, ev, function (ev, editerWrap) {
@@ -3726,7 +2184,7 @@ webpackJsonp([0],[
 								},
 								_react2.default.createElement(
 									"figure",
-									{ className: "snap_video_wrap", title: "正在使用摄像头自拍",
+									{ className: "snap_video_wrap", title: "\u6B63\u5728\u4F7F\u7528\u6444\u50CF\u5934\u81EA\u62CD",
 										onClick: function onClick(ev) {
 											ev.stopPropagation();
 											ev.preventDefault();
@@ -3744,12 +2202,12 @@ webpackJsonp([0],[
 											{ className: "insert snap-btn",
 												onClick: this.snap
 											},
-											"拍照"
+											"\u62CD\u7167"
 										),
 										_react2.default.createElement(
 											"span",
 											{ style: { color: "#fff" } },
-											"延时自拍："
+											"\u5EF6\u65F6\u81EA\u62CD\uFF1A"
 										),
 										_react2.default.createElement(_router.DropList, {
 											dataList: ["0秒", "3秒", "5秒", "10秒", "12秒"],
@@ -3771,8 +2229,8 @@ webpackJsonp([0],[
 						{ className: "comment__feedback__box__wrap" },
 						_react2.default.createElement("textarea", { className: "comment__feedback--edit",
 							name: "feedback_content",
-							placeholder: "说点什么吧...",
-							"aria-label": "说点什么吧...",
+							placeholder: "\u8BF4\u70B9\u4EC0\u4E48\u5427...",
+							"aria-label": "\u8BF4\u70B9\u4EC0\u4E48\u5427...",
 							onKeyDown: this.editDefalut,
 							ref: "editer-wrap",
 							style: {
@@ -3789,15 +2247,13 @@ webpackJsonp([0],[
 							{ className: "editor__resize__wrap" },
 							_react2.default.createElement("a", { className: "editor__resize",
 								href: "javascript:;",
-								title: "拖拽改变评论框大小",
+								title: "\u62D6\u62FD\u6539\u53D8\u8BC4\u8BBA\u6846\u5927\u5C0F",
 								draggable: false,
 								onMouseDown: function onMouseDown(ev) {
 									_this5.mdown.call(_this5, ev, function (params) {
-										var _params = _slicedToArray(params, 2);
-
-										var dragTop = _params[0];
-										var dragLeft = _params[1];
-
+										var _params = _slicedToArray(params, 2),
+										    dragTop = _params[0],
+										    dragLeft = _params[1];
 
 										if (_this5.props.MainFeedBackBox && dragTop <= 150) {
 											dragTop = 150;
@@ -3828,7 +2284,7 @@ webpackJsonp([0],[
 							_react2.default.createElement(
 								"p",
 								{ className: "comment__feedback__mask--title" },
-								"阔论"
+								"\u9614\u8BBA"
 							),
 							_react2.default.createElement(
 								"p",
@@ -3845,15 +2301,15 @@ webpackJsonp([0],[
 							{ className: "feedback--btns__reset",
 								onClick: this.reSet
 							},
-							"重置"
+							"\u91CD\u7F6E"
 						),
 						_react2.default.createElement(
 							"button",
 							{ className: "feedback--btns__comment",
 								onClick: this.sendComment,
-								title: "点击 & Ctrl+Enter"
+								title: "\u70B9\u51FB & Ctrl+Enter"
 							},
-							"评论一下"
+							"\u8BC4\u8BBA\u4E00\u4E0B"
 						)
 					)
 				);
@@ -3883,10 +2339,10 @@ webpackJsonp([0],[
 		};
 	})(CommentFeedback);
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CommentFeedback.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "CommentFeedback.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 219 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -5179,182 +3635,188 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 220 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var hljs = __webpack_require__(221);
+	var hljs = __webpack_require__(32);
 
-	hljs.registerLanguage('1c', __webpack_require__(222));
-	hljs.registerLanguage('abnf', __webpack_require__(223));
-	hljs.registerLanguage('accesslog', __webpack_require__(224));
-	hljs.registerLanguage('actionscript', __webpack_require__(225));
-	hljs.registerLanguage('ada', __webpack_require__(226));
-	hljs.registerLanguage('apache', __webpack_require__(227));
-	hljs.registerLanguage('applescript', __webpack_require__(228));
-	hljs.registerLanguage('cpp', __webpack_require__(229));
-	hljs.registerLanguage('arduino', __webpack_require__(230));
-	hljs.registerLanguage('armasm', __webpack_require__(231));
-	hljs.registerLanguage('xml', __webpack_require__(232));
-	hljs.registerLanguage('asciidoc', __webpack_require__(233));
-	hljs.registerLanguage('aspectj', __webpack_require__(234));
-	hljs.registerLanguage('autohotkey', __webpack_require__(235));
-	hljs.registerLanguage('autoit', __webpack_require__(236));
-	hljs.registerLanguage('avrasm', __webpack_require__(237));
-	hljs.registerLanguage('awk', __webpack_require__(238));
-	hljs.registerLanguage('axapta', __webpack_require__(239));
-	hljs.registerLanguage('bash', __webpack_require__(240));
-	hljs.registerLanguage('basic', __webpack_require__(241));
-	hljs.registerLanguage('bnf', __webpack_require__(242));
-	hljs.registerLanguage('brainfuck', __webpack_require__(243));
-	hljs.registerLanguage('cal', __webpack_require__(244));
-	hljs.registerLanguage('capnproto', __webpack_require__(245));
-	hljs.registerLanguage('ceylon', __webpack_require__(246));
-	hljs.registerLanguage('clojure', __webpack_require__(247));
-	hljs.registerLanguage('clojure-repl', __webpack_require__(248));
-	hljs.registerLanguage('cmake', __webpack_require__(249));
-	hljs.registerLanguage('coffeescript', __webpack_require__(250));
-	hljs.registerLanguage('coq', __webpack_require__(251));
-	hljs.registerLanguage('cos', __webpack_require__(252));
-	hljs.registerLanguage('crmsh', __webpack_require__(253));
-	hljs.registerLanguage('crystal', __webpack_require__(254));
-	hljs.registerLanguage('cs', __webpack_require__(255));
-	hljs.registerLanguage('csp', __webpack_require__(256));
-	hljs.registerLanguage('css', __webpack_require__(257));
-	hljs.registerLanguage('d', __webpack_require__(258));
-	hljs.registerLanguage('markdown', __webpack_require__(259));
-	hljs.registerLanguage('dart', __webpack_require__(260));
-	hljs.registerLanguage('delphi', __webpack_require__(261));
-	hljs.registerLanguage('diff', __webpack_require__(262));
-	hljs.registerLanguage('django', __webpack_require__(263));
-	hljs.registerLanguage('dns', __webpack_require__(264));
-	hljs.registerLanguage('dockerfile', __webpack_require__(265));
-	hljs.registerLanguage('dos', __webpack_require__(266));
-	hljs.registerLanguage('dsconfig', __webpack_require__(267));
-	hljs.registerLanguage('dts', __webpack_require__(268));
-	hljs.registerLanguage('dust', __webpack_require__(269));
-	hljs.registerLanguage('ebnf', __webpack_require__(270));
-	hljs.registerLanguage('elixir', __webpack_require__(271));
-	hljs.registerLanguage('elm', __webpack_require__(272));
-	hljs.registerLanguage('ruby', __webpack_require__(273));
-	hljs.registerLanguage('erb', __webpack_require__(274));
-	hljs.registerLanguage('erlang-repl', __webpack_require__(275));
-	hljs.registerLanguage('erlang', __webpack_require__(276));
-	hljs.registerLanguage('excel', __webpack_require__(277));
-	hljs.registerLanguage('fix', __webpack_require__(278));
-	hljs.registerLanguage('fortran', __webpack_require__(279));
-	hljs.registerLanguage('fsharp', __webpack_require__(280));
-	hljs.registerLanguage('gams', __webpack_require__(281));
-	hljs.registerLanguage('gauss', __webpack_require__(282));
-	hljs.registerLanguage('gcode', __webpack_require__(283));
-	hljs.registerLanguage('gherkin', __webpack_require__(284));
-	hljs.registerLanguage('glsl', __webpack_require__(285));
-	hljs.registerLanguage('go', __webpack_require__(286));
-	hljs.registerLanguage('golo', __webpack_require__(287));
-	hljs.registerLanguage('gradle', __webpack_require__(288));
-	hljs.registerLanguage('groovy', __webpack_require__(289));
-	hljs.registerLanguage('haml', __webpack_require__(290));
-	hljs.registerLanguage('handlebars', __webpack_require__(291));
-	hljs.registerLanguage('haskell', __webpack_require__(292));
-	hljs.registerLanguage('haxe', __webpack_require__(293));
-	hljs.registerLanguage('hsp', __webpack_require__(294));
-	hljs.registerLanguage('htmlbars', __webpack_require__(295));
-	hljs.registerLanguage('http', __webpack_require__(296));
-	hljs.registerLanguage('inform7', __webpack_require__(297));
-	hljs.registerLanguage('ini', __webpack_require__(298));
-	hljs.registerLanguage('irpf90', __webpack_require__(299));
-	hljs.registerLanguage('java', __webpack_require__(300));
-	hljs.registerLanguage('javascript', __webpack_require__(301));
-	hljs.registerLanguage('json', __webpack_require__(302));
-	hljs.registerLanguage('julia', __webpack_require__(303));
-	hljs.registerLanguage('kotlin', __webpack_require__(304));
-	hljs.registerLanguage('lasso', __webpack_require__(305));
-	hljs.registerLanguage('ldif', __webpack_require__(306));
-	hljs.registerLanguage('less', __webpack_require__(307));
-	hljs.registerLanguage('lisp', __webpack_require__(308));
-	hljs.registerLanguage('livecodeserver', __webpack_require__(309));
-	hljs.registerLanguage('livescript', __webpack_require__(310));
-	hljs.registerLanguage('lsl', __webpack_require__(311));
-	hljs.registerLanguage('lua', __webpack_require__(312));
-	hljs.registerLanguage('makefile', __webpack_require__(313));
-	hljs.registerLanguage('mathematica', __webpack_require__(314));
-	hljs.registerLanguage('matlab', __webpack_require__(315));
-	hljs.registerLanguage('maxima', __webpack_require__(316));
-	hljs.registerLanguage('mel', __webpack_require__(317));
-	hljs.registerLanguage('mercury', __webpack_require__(318));
-	hljs.registerLanguage('mipsasm', __webpack_require__(319));
-	hljs.registerLanguage('mizar', __webpack_require__(320));
-	hljs.registerLanguage('perl', __webpack_require__(321));
-	hljs.registerLanguage('mojolicious', __webpack_require__(322));
-	hljs.registerLanguage('monkey', __webpack_require__(323));
-	hljs.registerLanguage('moonscript', __webpack_require__(324));
-	hljs.registerLanguage('nginx', __webpack_require__(325));
-	hljs.registerLanguage('nimrod', __webpack_require__(326));
-	hljs.registerLanguage('nix', __webpack_require__(327));
-	hljs.registerLanguage('nsis', __webpack_require__(328));
-	hljs.registerLanguage('objectivec', __webpack_require__(329));
-	hljs.registerLanguage('ocaml', __webpack_require__(330));
-	hljs.registerLanguage('openscad', __webpack_require__(331));
-	hljs.registerLanguage('oxygene', __webpack_require__(332));
-	hljs.registerLanguage('parser3', __webpack_require__(333));
-	hljs.registerLanguage('pf', __webpack_require__(334));
-	hljs.registerLanguage('php', __webpack_require__(335));
-	hljs.registerLanguage('pony', __webpack_require__(336));
-	hljs.registerLanguage('powershell', __webpack_require__(337));
-	hljs.registerLanguage('processing', __webpack_require__(338));
-	hljs.registerLanguage('profile', __webpack_require__(339));
-	hljs.registerLanguage('prolog', __webpack_require__(340));
-	hljs.registerLanguage('protobuf', __webpack_require__(341));
-	hljs.registerLanguage('puppet', __webpack_require__(342));
-	hljs.registerLanguage('purebasic', __webpack_require__(343));
-	hljs.registerLanguage('python', __webpack_require__(344));
-	hljs.registerLanguage('q', __webpack_require__(345));
-	hljs.registerLanguage('qml', __webpack_require__(346));
-	hljs.registerLanguage('r', __webpack_require__(347));
-	hljs.registerLanguage('rib', __webpack_require__(348));
-	hljs.registerLanguage('roboconf', __webpack_require__(349));
-	hljs.registerLanguage('rsl', __webpack_require__(350));
-	hljs.registerLanguage('ruleslanguage', __webpack_require__(351));
-	hljs.registerLanguage('rust', __webpack_require__(352));
-	hljs.registerLanguage('scala', __webpack_require__(353));
-	hljs.registerLanguage('scheme', __webpack_require__(354));
-	hljs.registerLanguage('scilab', __webpack_require__(355));
-	hljs.registerLanguage('scss', __webpack_require__(356));
-	hljs.registerLanguage('smali', __webpack_require__(357));
-	hljs.registerLanguage('smalltalk', __webpack_require__(358));
-	hljs.registerLanguage('sml', __webpack_require__(359));
-	hljs.registerLanguage('sqf', __webpack_require__(360));
-	hljs.registerLanguage('sql', __webpack_require__(361));
-	hljs.registerLanguage('stan', __webpack_require__(362));
-	hljs.registerLanguage('stata', __webpack_require__(363));
-	hljs.registerLanguage('step21', __webpack_require__(364));
-	hljs.registerLanguage('stylus', __webpack_require__(365));
-	hljs.registerLanguage('subunit', __webpack_require__(366));
-	hljs.registerLanguage('swift', __webpack_require__(367));
-	hljs.registerLanguage('taggerscript', __webpack_require__(368));
-	hljs.registerLanguage('yaml', __webpack_require__(369));
-	hljs.registerLanguage('tap', __webpack_require__(370));
-	hljs.registerLanguage('tcl', __webpack_require__(371));
-	hljs.registerLanguage('tex', __webpack_require__(372));
-	hljs.registerLanguage('thrift', __webpack_require__(373));
-	hljs.registerLanguage('tp', __webpack_require__(374));
-	hljs.registerLanguage('twig', __webpack_require__(375));
-	hljs.registerLanguage('typescript', __webpack_require__(376));
-	hljs.registerLanguage('vala', __webpack_require__(377));
-	hljs.registerLanguage('vbnet', __webpack_require__(378));
-	hljs.registerLanguage('vbscript', __webpack_require__(379));
-	hljs.registerLanguage('vbscript-html', __webpack_require__(380));
-	hljs.registerLanguage('verilog', __webpack_require__(381));
-	hljs.registerLanguage('vhdl', __webpack_require__(382));
-	hljs.registerLanguage('vim', __webpack_require__(383));
-	hljs.registerLanguage('x86asm', __webpack_require__(384));
-	hljs.registerLanguage('xl', __webpack_require__(385));
-	hljs.registerLanguage('xquery', __webpack_require__(386));
-	hljs.registerLanguage('zephir', __webpack_require__(387));
+	hljs.registerLanguage('1c', __webpack_require__(33));
+	hljs.registerLanguage('abnf', __webpack_require__(34));
+	hljs.registerLanguage('accesslog', __webpack_require__(35));
+	hljs.registerLanguage('actionscript', __webpack_require__(36));
+	hljs.registerLanguage('ada', __webpack_require__(37));
+	hljs.registerLanguage('apache', __webpack_require__(38));
+	hljs.registerLanguage('applescript', __webpack_require__(39));
+	hljs.registerLanguage('cpp', __webpack_require__(40));
+	hljs.registerLanguage('arduino', __webpack_require__(41));
+	hljs.registerLanguage('armasm', __webpack_require__(42));
+	hljs.registerLanguage('xml', __webpack_require__(43));
+	hljs.registerLanguage('asciidoc', __webpack_require__(44));
+	hljs.registerLanguage('aspectj', __webpack_require__(45));
+	hljs.registerLanguage('autohotkey', __webpack_require__(46));
+	hljs.registerLanguage('autoit', __webpack_require__(47));
+	hljs.registerLanguage('avrasm', __webpack_require__(48));
+	hljs.registerLanguage('awk', __webpack_require__(49));
+	hljs.registerLanguage('axapta', __webpack_require__(50));
+	hljs.registerLanguage('bash', __webpack_require__(51));
+	hljs.registerLanguage('basic', __webpack_require__(52));
+	hljs.registerLanguage('bnf', __webpack_require__(53));
+	hljs.registerLanguage('brainfuck', __webpack_require__(54));
+	hljs.registerLanguage('cal', __webpack_require__(55));
+	hljs.registerLanguage('capnproto', __webpack_require__(56));
+	hljs.registerLanguage('ceylon', __webpack_require__(57));
+	hljs.registerLanguage('clean', __webpack_require__(58));
+	hljs.registerLanguage('clojure', __webpack_require__(59));
+	hljs.registerLanguage('clojure-repl', __webpack_require__(60));
+	hljs.registerLanguage('cmake', __webpack_require__(61));
+	hljs.registerLanguage('coffeescript', __webpack_require__(62));
+	hljs.registerLanguage('coq', __webpack_require__(63));
+	hljs.registerLanguage('cos', __webpack_require__(64));
+	hljs.registerLanguage('crmsh', __webpack_require__(65));
+	hljs.registerLanguage('crystal', __webpack_require__(66));
+	hljs.registerLanguage('cs', __webpack_require__(67));
+	hljs.registerLanguage('csp', __webpack_require__(68));
+	hljs.registerLanguage('css', __webpack_require__(69));
+	hljs.registerLanguage('d', __webpack_require__(70));
+	hljs.registerLanguage('markdown', __webpack_require__(71));
+	hljs.registerLanguage('dart', __webpack_require__(72));
+	hljs.registerLanguage('delphi', __webpack_require__(73));
+	hljs.registerLanguage('diff', __webpack_require__(74));
+	hljs.registerLanguage('django', __webpack_require__(75));
+	hljs.registerLanguage('dns', __webpack_require__(76));
+	hljs.registerLanguage('dockerfile', __webpack_require__(77));
+	hljs.registerLanguage('dos', __webpack_require__(78));
+	hljs.registerLanguage('dsconfig', __webpack_require__(79));
+	hljs.registerLanguage('dts', __webpack_require__(80));
+	hljs.registerLanguage('dust', __webpack_require__(81));
+	hljs.registerLanguage('ebnf', __webpack_require__(82));
+	hljs.registerLanguage('elixir', __webpack_require__(83));
+	hljs.registerLanguage('elm', __webpack_require__(84));
+	hljs.registerLanguage('ruby', __webpack_require__(85));
+	hljs.registerLanguage('erb', __webpack_require__(86));
+	hljs.registerLanguage('erlang-repl', __webpack_require__(87));
+	hljs.registerLanguage('erlang', __webpack_require__(88));
+	hljs.registerLanguage('excel', __webpack_require__(89));
+	hljs.registerLanguage('fix', __webpack_require__(90));
+	hljs.registerLanguage('flix', __webpack_require__(91));
+	hljs.registerLanguage('fortran', __webpack_require__(92));
+	hljs.registerLanguage('fsharp', __webpack_require__(93));
+	hljs.registerLanguage('gams', __webpack_require__(94));
+	hljs.registerLanguage('gauss', __webpack_require__(95));
+	hljs.registerLanguage('gcode', __webpack_require__(96));
+	hljs.registerLanguage('gherkin', __webpack_require__(97));
+	hljs.registerLanguage('glsl', __webpack_require__(98));
+	hljs.registerLanguage('go', __webpack_require__(99));
+	hljs.registerLanguage('golo', __webpack_require__(100));
+	hljs.registerLanguage('gradle', __webpack_require__(101));
+	hljs.registerLanguage('groovy', __webpack_require__(102));
+	hljs.registerLanguage('haml', __webpack_require__(103));
+	hljs.registerLanguage('handlebars', __webpack_require__(104));
+	hljs.registerLanguage('haskell', __webpack_require__(105));
+	hljs.registerLanguage('haxe', __webpack_require__(106));
+	hljs.registerLanguage('hsp', __webpack_require__(107));
+	hljs.registerLanguage('htmlbars', __webpack_require__(108));
+	hljs.registerLanguage('http', __webpack_require__(109));
+	hljs.registerLanguage('hy', __webpack_require__(110));
+	hljs.registerLanguage('inform7', __webpack_require__(111));
+	hljs.registerLanguage('ini', __webpack_require__(112));
+	hljs.registerLanguage('irpf90', __webpack_require__(113));
+	hljs.registerLanguage('java', __webpack_require__(114));
+	hljs.registerLanguage('javascript', __webpack_require__(115));
+	hljs.registerLanguage('json', __webpack_require__(116));
+	hljs.registerLanguage('julia', __webpack_require__(117));
+	hljs.registerLanguage('kotlin', __webpack_require__(118));
+	hljs.registerLanguage('lasso', __webpack_require__(119));
+	hljs.registerLanguage('ldif', __webpack_require__(120));
+	hljs.registerLanguage('leaf', __webpack_require__(121));
+	hljs.registerLanguage('less', __webpack_require__(122));
+	hljs.registerLanguage('lisp', __webpack_require__(123));
+	hljs.registerLanguage('livecodeserver', __webpack_require__(124));
+	hljs.registerLanguage('livescript', __webpack_require__(125));
+	hljs.registerLanguage('llvm', __webpack_require__(126));
+	hljs.registerLanguage('lsl', __webpack_require__(127));
+	hljs.registerLanguage('lua', __webpack_require__(128));
+	hljs.registerLanguage('makefile', __webpack_require__(129));
+	hljs.registerLanguage('mathematica', __webpack_require__(130));
+	hljs.registerLanguage('matlab', __webpack_require__(131));
+	hljs.registerLanguage('maxima', __webpack_require__(132));
+	hljs.registerLanguage('mel', __webpack_require__(133));
+	hljs.registerLanguage('mercury', __webpack_require__(134));
+	hljs.registerLanguage('mipsasm', __webpack_require__(135));
+	hljs.registerLanguage('mizar', __webpack_require__(136));
+	hljs.registerLanguage('perl', __webpack_require__(137));
+	hljs.registerLanguage('mojolicious', __webpack_require__(138));
+	hljs.registerLanguage('monkey', __webpack_require__(139));
+	hljs.registerLanguage('moonscript', __webpack_require__(140));
+	hljs.registerLanguage('n1ql', __webpack_require__(141));
+	hljs.registerLanguage('nginx', __webpack_require__(142));
+	hljs.registerLanguage('nimrod', __webpack_require__(143));
+	hljs.registerLanguage('nix', __webpack_require__(144));
+	hljs.registerLanguage('nsis', __webpack_require__(145));
+	hljs.registerLanguage('objectivec', __webpack_require__(146));
+	hljs.registerLanguage('ocaml', __webpack_require__(147));
+	hljs.registerLanguage('openscad', __webpack_require__(148));
+	hljs.registerLanguage('oxygene', __webpack_require__(149));
+	hljs.registerLanguage('parser3', __webpack_require__(150));
+	hljs.registerLanguage('pf', __webpack_require__(151));
+	hljs.registerLanguage('php', __webpack_require__(152));
+	hljs.registerLanguage('pony', __webpack_require__(153));
+	hljs.registerLanguage('powershell', __webpack_require__(154));
+	hljs.registerLanguage('processing', __webpack_require__(155));
+	hljs.registerLanguage('profile', __webpack_require__(156));
+	hljs.registerLanguage('prolog', __webpack_require__(157));
+	hljs.registerLanguage('protobuf', __webpack_require__(158));
+	hljs.registerLanguage('puppet', __webpack_require__(159));
+	hljs.registerLanguage('purebasic', __webpack_require__(160));
+	hljs.registerLanguage('python', __webpack_require__(161));
+	hljs.registerLanguage('q', __webpack_require__(162));
+	hljs.registerLanguage('qml', __webpack_require__(163));
+	hljs.registerLanguage('r', __webpack_require__(164));
+	hljs.registerLanguage('rib', __webpack_require__(165));
+	hljs.registerLanguage('roboconf', __webpack_require__(166));
+	hljs.registerLanguage('rsl', __webpack_require__(167));
+	hljs.registerLanguage('ruleslanguage', __webpack_require__(168));
+	hljs.registerLanguage('rust', __webpack_require__(169));
+	hljs.registerLanguage('scala', __webpack_require__(170));
+	hljs.registerLanguage('scheme', __webpack_require__(171));
+	hljs.registerLanguage('scilab', __webpack_require__(172));
+	hljs.registerLanguage('scss', __webpack_require__(173));
+	hljs.registerLanguage('smali', __webpack_require__(174));
+	hljs.registerLanguage('smalltalk', __webpack_require__(175));
+	hljs.registerLanguage('sml', __webpack_require__(176));
+	hljs.registerLanguage('sqf', __webpack_require__(177));
+	hljs.registerLanguage('sql', __webpack_require__(178));
+	hljs.registerLanguage('stan', __webpack_require__(179));
+	hljs.registerLanguage('stata', __webpack_require__(180));
+	hljs.registerLanguage('step21', __webpack_require__(181));
+	hljs.registerLanguage('stylus', __webpack_require__(182));
+	hljs.registerLanguage('subunit', __webpack_require__(183));
+	hljs.registerLanguage('swift', __webpack_require__(184));
+	hljs.registerLanguage('taggerscript', __webpack_require__(185));
+	hljs.registerLanguage('yaml', __webpack_require__(186));
+	hljs.registerLanguage('tap', __webpack_require__(187));
+	hljs.registerLanguage('tcl', __webpack_require__(188));
+	hljs.registerLanguage('tex', __webpack_require__(189));
+	hljs.registerLanguage('thrift', __webpack_require__(190));
+	hljs.registerLanguage('tp', __webpack_require__(191));
+	hljs.registerLanguage('twig', __webpack_require__(192));
+	hljs.registerLanguage('typescript', __webpack_require__(193));
+	hljs.registerLanguage('vala', __webpack_require__(194));
+	hljs.registerLanguage('vbnet', __webpack_require__(195));
+	hljs.registerLanguage('vbscript', __webpack_require__(196));
+	hljs.registerLanguage('vbscript-html', __webpack_require__(197));
+	hljs.registerLanguage('verilog', __webpack_require__(198));
+	hljs.registerLanguage('vhdl', __webpack_require__(199));
+	hljs.registerLanguage('vim', __webpack_require__(200));
+	hljs.registerLanguage('x86asm', __webpack_require__(201));
+	hljs.registerLanguage('xl', __webpack_require__(202));
+	hljs.registerLanguage('xquery', __webpack_require__(203));
+	hljs.registerLanguage('zephir', __webpack_require__(204));
 
 	module.exports = hljs;
 
 /***/ },
-/* 221 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -5461,15 +3923,17 @@ webpackJsonp([0],[
 	    }
 	  }
 
-	  function inherit(parent, obj) {
+	  function inherit(parent) {  // inherit(parent, override_obj, override_obj, ...)
 	    var key;
 	    var result = {};
+	    var objects = Array.prototype.slice.call(arguments, 1);
 
 	    for (key in parent)
 	      result[key] = parent[key];
-	    if (obj)
+	    objects.forEach(function(obj) {
 	      for (key in obj)
 	        result[key] = obj[key];
+	    });
 	    return result;
 	  }
 
@@ -5551,7 +4015,7 @@ webpackJsonp([0],[
 
 	    while (original.length || highlighted.length) {
 	      var stream = selectStream();
-	      result += escape(value.substr(processed, stream[0].offset - processed));
+	      result += escape(value.substring(processed, stream[0].offset));
 	      processed = stream[0].offset;
 	      if (stream === original) {
 	        /*
@@ -5579,6 +4043,15 @@ webpackJsonp([0],[
 	  }
 
 	  /* Initialization */
+
+	  function expand_mode(mode) {
+	    if (mode.variants && !mode.cached_variants) {
+	      mode.cached_variants = mode.variants.map(function(variant) {
+	        return inherit(mode, {variants: null}, variant);
+	      });
+	    }
+	    return mode.cached_variants || (mode.endsWithParent && [inherit(mode)]) || [mode];
+	  }
 
 	  function compileLanguage(language) {
 
@@ -5645,15 +4118,9 @@ webpackJsonp([0],[
 	      if (!mode.contains) {
 	        mode.contains = [];
 	      }
-	      var expanded_contains = [];
-	      mode.contains.forEach(function(c) {
-	        if (c.variants) {
-	          c.variants.forEach(function(v) {expanded_contains.push(inherit(c, v));});
-	        } else {
-	          expanded_contains.push(c === 'self' ? mode : c);
-	        }
-	      });
-	      mode.contains = expanded_contains;
+	      mode.contains = Array.prototype.concat.apply([], mode.contains.map(function(c) {
+	        return expand_mode(c === 'self' ? mode : c)
+	      }));
 	      mode.contains.forEach(function(c) {compileMode(c, mode);});
 
 	      if (mode.starts) {
@@ -5737,7 +4204,7 @@ webpackJsonp([0],[
 	      match = top.lexemesRe.exec(mode_buffer);
 
 	      while (match) {
-	        result += escape(mode_buffer.substr(last_index, match.index - last_index));
+	        result += escape(mode_buffer.substring(last_index, match.index));
 	        keyword_match = keywordMatch(top, match);
 	        if (keyword_match) {
 	          relevance += keyword_match[1];
@@ -5874,7 +4341,7 @@ webpackJsonp([0],[
 	        match = top.terminators.exec(value);
 	        if (!match)
 	          break;
-	        count = processLexeme(value.substr(index, match.index - index), match[0]);
+	        count = processLexeme(value.substring(index, match.index), match[0]);
 	        index = match.index + count;
 	      }
 	      processLexeme(value.substr(index));
@@ -5952,6 +4419,7 @@ webpackJsonp([0],[
 	          } else if (options.tabReplace) {
 	            return p1.replace(/\t/g, options.tabReplace);
 	          }
+	          return '';
 	      });
 	  }
 
@@ -6178,7 +4646,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 222 */
+/* 33 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs){
@@ -6261,7 +4729,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 223 */
+/* 34 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -6336,7 +4804,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 224 */
+/* 35 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -6378,7 +4846,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 225 */
+/* 36 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -6456,7 +4924,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 226 */
+/* 37 */
 /***/ function(module, exports) {
 
 	module.exports = // We try to support full Ada2012
@@ -6633,7 +5101,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 227 */
+/* 38 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -6683,7 +5151,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 228 */
+/* 39 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -6773,7 +5241,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 229 */
+/* 40 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -6826,7 +5294,7 @@ webpackJsonp([0],[
 	      hljs.inherit(STRINGS, {className: 'meta-string'}),
 	      {
 	        className: 'meta-string',
-	        begin: '<', end: '>',
+	        begin: /<[^\n>]*>/, end: /$/,
 	        illegal: '\\n',
 	      },
 	      hljs.C_LINE_COMMENT_MODE,
@@ -6943,7 +5411,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 230 */
+/* 41 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -7047,7 +5515,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 231 */
+/* 42 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -7143,7 +5611,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 232 */
+/* 43 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -7250,7 +5718,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 233 */
+/* 44 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -7442,7 +5910,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 234 */
+/* 45 */
 /***/ function(module, exports) {
 
 	module.exports = function (hljs) {
@@ -7590,7 +6058,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 235 */
+/* 46 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -7642,7 +6110,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 236 */
+/* 47 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -7782,7 +6250,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 237 */
+/* 48 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -7848,7 +6316,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 238 */
+/* 49 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -7905,7 +6373,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 239 */
+/* 50 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -7940,7 +6408,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 240 */
+/* 51 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -8019,7 +6487,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 241 */
+/* 52 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -8074,7 +6542,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 242 */
+/* 53 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs){
@@ -8107,7 +6575,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 243 */
+/* 54 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs){
@@ -8148,7 +6616,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 244 */
+/* 55 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -8232,7 +6700,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 245 */
+/* 56 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -8285,7 +6753,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 246 */
+/* 57 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -8356,7 +6824,36 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 247 */
+/* 58 */
+/***/ function(module, exports) {
+
+	module.exports = function(hljs) {
+	  return {
+	    aliases: ['clean','icl','dcl'],
+	    keywords: {
+	      keyword:
+	        'if let in with where case of class instance otherwise ' +
+	        'implementation definition system module from import qualified as ' +
+	        'special code inline foreign export ccall stdcall generic derive ' +
+	        'infix infixl infixr',
+	      literal:
+	        'True False'
+	    },
+	    contains: [
+
+	      hljs.C_LINE_COMMENT_MODE,
+	      hljs.C_BLOCK_COMMENT_MODE,
+	      hljs.APOS_STRING_MODE,
+	      hljs.QUOTE_STRING_MODE,
+	      hljs.C_NUMBER_MODE,
+
+	      {begin: '->|<-[|:]?|::|#!?|>>=|\\{\\||\\|\\}|:==|=:|\\.\\.|<>|`'} // relevance booster
+	    ]
+	  };
+	};
+
+/***/ },
+/* 59 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -8455,7 +6952,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 248 */
+/* 60 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -8474,7 +6971,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 249 */
+/* 61 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -8516,7 +7013,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 250 */
+/* 62 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -8524,7 +7021,7 @@ webpackJsonp([0],[
 	    keyword:
 	      // JS keywords
 	      'in if for while finally new do return else break catch instanceof throw try this ' +
-	      'switch continue typeof delete debugger super ' +
+	      'switch continue typeof delete debugger super yield import export from as default await ' +
 	      // Coffee keywords
 	      'then unless until loop of by when and or is isnt not',
 	    literal:
@@ -8587,9 +7084,16 @@ webpackJsonp([0],[
 	      begin: '@' + JS_IDENT_RE // relevance booster
 	    },
 	    {
-	      begin: '`', end: '`',
+	      subLanguage: 'javascript',
 	      excludeBegin: true, excludeEnd: true,
-	      subLanguage: 'javascript'
+	      variants: [
+	        {
+	          begin: '```', end: '```',
+	        },
+	        {
+	          begin: '`', end: '`',
+	        }
+	      ]
 	    }
 	  ];
 	  SUBST.contains = EXPRESSIONS;
@@ -8659,7 +7163,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 251 */
+/* 63 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -8730,7 +7234,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 252 */
+/* 64 */
 /***/ function(module, exports) {
 
 	module.exports = function cos (hljs) {
@@ -8858,7 +7362,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 253 */
+/* 65 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -8956,7 +7460,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 254 */
+/* 66 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -9137,7 +7641,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 255 */
+/* 67 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -9308,7 +7812,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 256 */
+/* 68 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -9334,7 +7838,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 257 */
+/* 69 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -9443,7 +7947,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 258 */
+/* 70 */
 /***/ function(module, exports) {
 
 	module.exports = /**
@@ -9705,7 +8209,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 259 */
+/* 71 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -9817,7 +8321,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 260 */
+/* 72 */
 /***/ function(module, exports) {
 
 	module.exports = function (hljs) {
@@ -9922,7 +8426,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 261 */
+/* 73 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -9940,21 +8444,16 @@ webpackJsonp([0],[
 	    'specialize strict unaligned varargs ';
 	  var COMMENT_MODES = [
 	    hljs.C_LINE_COMMENT_MODE,
-	    hljs.COMMENT(
-	      /\{/,
-	      /\}/,
-	      {
-	        relevance: 0
-	      }
-	    ),
-	    hljs.COMMENT(
-	      /\(\*/,
-	      /\*\)/,
-	      {
-	        relevance: 10
-	      }
-	    )
+	    hljs.COMMENT(/\{/, /\}/, {relevance: 0}),
+	    hljs.COMMENT(/\(\*/, /\*\)/, {relevance: 10})
 	  ];
+	  var DIRECTIVE = {
+	    className: 'meta',
+	    variants: [
+	      {begin: /\{\$/, end: /\}/},
+	      {begin: /\(\*\$/, end: /\*\)/}
+	    ]
+	  };
 	  var STRING = {
 	    className: 'string',
 	    begin: /'/, end: /'/,
@@ -9979,8 +8478,9 @@ webpackJsonp([0],[
 	        className: 'params',
 	        begin: /\(/, end: /\)/,
 	        keywords: KEYWORDS,
-	        contains: [STRING, CHAR_STRING]
-	      }
+	        contains: [STRING, CHAR_STRING, DIRECTIVE].concat(COMMENT_MODES)
+	      },
+	      DIRECTIVE
 	    ].concat(COMMENT_MODES)
 	  };
 	  return {
@@ -9992,13 +8492,14 @@ webpackJsonp([0],[
 	      STRING, CHAR_STRING,
 	      hljs.NUMBER_MODE,
 	      CLASS,
-	      FUNCTION
+	      FUNCTION,
+	      DIRECTIVE
 	    ].concat(COMMENT_MODES)
 	  };
 	};
 
 /***/ },
-/* 262 */
+/* 74 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -10042,7 +8543,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 263 */
+/* 75 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -10110,7 +8611,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 264 */
+/* 76 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -10143,7 +8644,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 265 */
+/* 77 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -10169,7 +8670,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 266 */
+/* 78 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -10225,7 +8726,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 267 */
+/* 79 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -10276,7 +8777,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 268 */
+/* 80 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -10404,7 +8905,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 269 */
+/* 81 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -10440,7 +8941,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 270 */
+/* 82 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -10477,7 +8978,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 271 */
+/* 83 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -10578,7 +9079,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 272 */
+/* 84 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -10665,7 +9166,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 273 */
+/* 85 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -10793,7 +9294,7 @@ webpackJsonp([0],[
 	      keywords: RUBY_KEYWORDS
 	    },
 	    { // regexp container
-	      begin: '(' + hljs.RE_STARTERS_RE + ')\\s*',
+	      begin: '(' + hljs.RE_STARTERS_RE + '|unless)\\s*',
 	      contains: [
 	        IRB_OBJECT,
 	        {
@@ -10845,7 +9346,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 274 */
+/* 86 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -10864,7 +9365,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 275 */
+/* 87 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -10914,7 +9415,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 276 */
+/* 88 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -11064,7 +9565,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 277 */
+/* 89 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -11116,7 +9617,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 278 */
+/* 90 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -11149,7 +9650,56 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 279 */
+/* 91 */
+/***/ function(module, exports) {
+
+	module.exports = function (hljs) {
+
+	    var CHAR = {
+	        className: 'string',
+	        begin: /'(.|\\[xXuU][a-zA-Z0-9]+)'/
+	    };
+
+	    var STRING = {
+	        className: 'string',
+	        variants: [
+	            {
+	                begin: '"', end: '"'
+	            }
+	        ]
+	    };
+
+	    var NAME = {
+	        className: 'title',
+	        begin: /[^0-9\n\t "'(),.`{}\[\]:;][^\n\t "'(),.`{}\[\]:;]+|[^0-9\n\t "'(),.`{}\[\]:;=]/
+	    };
+
+	    var METHOD = {
+	        className: 'function',
+	        beginKeywords: 'def',
+	        end: /[:={\[(\n;]/,
+	        excludeEnd: true,
+	        contains: [NAME]
+	    };
+
+	    return {
+	        keywords: {
+	            literal: 'true false',
+	            keyword: 'case class def else enum if impl import in lat rel index let match namespace switch type yield with'
+	        },
+	        contains: [
+	            hljs.C_LINE_COMMENT_MODE,
+	            hljs.C_BLOCK_COMMENT_MODE,
+	            CHAR,
+	            STRING,
+	            METHOD,
+	            hljs.C_NUMBER_MODE
+	        ]
+	    };
+	};
+
+/***/ },
+/* 92 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -11224,7 +9774,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 280 */
+/* 93 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -11287,7 +9837,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 281 */
+/* 94 */
 /***/ function(module, exports) {
 
 	module.exports = function (hljs) {
@@ -11445,7 +9995,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 282 */
+/* 95 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -11500,7 +10050,7 @@ webpackJsonp([0],[
 	              'getpath getPreviousTradingDay getPreviousWeekDay getRow getscalar3D getscalar4D getTrRow getwind glm gradcplx gradMT ' +
 	              'gradMTm gradMTT gradMTTm gradp graphprt graphset hasimag header headermt hess hessMT hessMTg hessMTgw hessMTm ' +
 	              'hessMTmw hessMTT hessMTTg hessMTTgw hessMTTm hessMTw hessp hist histf histp hsec imag indcv indexcat indices indices2 ' +
-	              'indicesf indicesfn indnv indsav indx integrate1d integrateControlCreate intgrat2 intgrat3 inthp1 inthp2 inthp3 inthp4 ' +
+	              'indicesf indicesfn indnv indsav integrate1d integrateControlCreate intgrat2 intgrat3 inthp1 inthp2 inthp3 inthp4 ' +
 	              'inthpControlCreate intquad1 intquad2 intquad3 intrleav intrleavsa intrsect intsimp inv invpd invswp iscplx iscplxf ' +
 	              'isden isinfnanmiss ismiss key keyav keyw lag lag1 lagn lapEighb lapEighi lapEighvb lapEighvi lapgEig lapgEigh lapgEighv ' +
 	              'lapgEigv lapgSchur lapgSvdcst lapgSvds lapgSvdst lapSvdcusv lapSvds lapSvdusv ldlp ldlsol linSolve listwise ln lncdfbvn ' +
@@ -11540,7 +10090,9 @@ webpackJsonp([0],[
 	              'utctodtv utrisol vals varCovMS varCovXS varget vargetl varmall varmares varput varputl vartypef vcm vcms vcx vcxs ' +
 	              'vec vech vecr vector vget view viewxyz vlist vnamecv volume vput vread vtypecv wait waitc walkindex where window ' +
 	              'writer xlabel xlsGetSheetCount xlsGetSheetSize xlsGetSheetTypes xlsMakeRange xlsReadM xlsReadSA xlsWrite xlsWriteM ' +
-	              'xlsWriteSA xpnd xtics xy xyz ylabel ytics zeros zeta zlabel ztics',
+	              'xlsWriteSA xpnd xtics xy xyz ylabel ytics zeros zeta zlabel ztics cdfEmpirical dot h5create h5open h5read h5readAttribute ' +
+	              'h5write h5writeAttribute ldl plotAddErrorBar plotAddSurface plotCDFEmpirical plotSetColormap plotSetContourLabels ' +
+	              'plotSetLegendFont plotSetTextInterpreter plotSetXTicCount plotSetYTicCount plotSetZLevels powerm strjoin strtrim sylvester',
 	    literal: 'DB_AFTER_LAST_ROW DB_ALL_TABLES DB_BATCH_OPERATIONS DB_BEFORE_FIRST_ROW DB_BLOB DB_EVENT_NOTIFICATIONS ' +
 	             'DB_FINISH_QUERY DB_HIGH_PRECISION DB_LAST_INSERT_ID DB_LOW_PRECISION_DOUBLE DB_LOW_PRECISION_INT32 ' +
 	             'DB_LOW_PRECISION_INT64 DB_LOW_PRECISION_NUMBERS DB_MULTIPLE_RESULT_SETS DB_NAMED_PLACEHOLDERS ' +
@@ -11671,7 +10223,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 283 */
+/* 96 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -11742,7 +10294,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 284 */
+/* 97 */
 /***/ function(module, exports) {
 
 	module.exports = function (hljs) {
@@ -11783,7 +10335,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 285 */
+/* 98 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -11791,7 +10343,7 @@ webpackJsonp([0],[
 	    keywords: {
 	      keyword:
 	        // Statements
-	        'break continue discard do else for if return while' +
+	        'break continue discard do else for if return while switch case default ' +
 	        // Qualifiers
 	        'attribute binding buffer ccw centroid centroid varying coherent column_major const cw ' +
 	        'depth_any depth_greater depth_less depth_unchanged early_fragment_tests equal_spacing ' +
@@ -11904,7 +10456,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 286 */
+/* 99 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -11962,7 +10514,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 287 */
+/* 100 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -11989,7 +10541,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 288 */
+/* 101 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -12028,7 +10580,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 289 */
+/* 102 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -12126,7 +10678,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 290 */
+/* 103 */
 /***/ function(module, exports) {
 
 	module.exports = // TODO support filter tags like :javascript, support inline HTML
@@ -12237,7 +10789,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 291 */
+/* 104 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -12275,7 +10827,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 292 */
+/* 105 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -12401,69 +10953,123 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 293 */
+/* 106 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
 	  var IDENT_RE = '[a-zA-Z_$][a-zA-Z0-9_$]*';
 	  var IDENT_FUNC_RETURN_TYPE_RE = '([*]|[a-zA-Z_$][a-zA-Z0-9_$]*)';
 
+	  var HAXE_BASIC_TYPES = 'Int Float String Bool Dynamic Void Array ';
+
 	  return {
 	    aliases: ['hx'],
 	    keywords: {
-	      keyword: 'break callback case cast catch class continue default do dynamic else enum extends extern ' +
-	    'for function here if implements import in inline interface never new override package private ' +
-	    'public return static super switch this throw trace try typedef untyped using var while',
-	      literal: 'true false null'
+	      keyword: 'break callback case cast catch continue default do dynamic else enum extern ' +
+	               'for function here if import in inline never new override package private get set ' +
+	               'public return static super switch this throw trace try typedef untyped using var while ' +
+	               HAXE_BASIC_TYPES,
+	      built_in:
+	        'trace this',
+	      literal:
+	        'true false null _'
 	    },
 	    contains: [
-	      hljs.APOS_STRING_MODE,
+	      { className: 'string', // interpolate-able strings
+	        begin: '\'', end: '\'',
+	        contains: [
+	          hljs.BACKSLASH_ESCAPE,
+	          { className: 'subst', // interpolation
+	            begin: '\\$\\{', end: '\\}'
+	          },
+	          { className: 'subst', // interpolation
+	            begin: '\\$', end: '\\W}'
+	          }
+	        ]
+	      },
 	      hljs.QUOTE_STRING_MODE,
 	      hljs.C_LINE_COMMENT_MODE,
 	      hljs.C_BLOCK_COMMENT_MODE,
 	      hljs.C_NUMBER_MODE,
-	      {
-	        className: 'class',
-	        beginKeywords: 'class interface', end: '{', excludeEnd: true,
+	      { className: 'meta', // compiler meta
+	        begin: '@:', end: '$'
+	      },
+	      { className: 'meta', // compiler conditionals
+	        begin: '#', end: '$',
+	        keywords: {'meta-keyword': 'if else elseif end error'}
+	      },
+	      { className: 'type', // function types
+	        begin: ':[ \t]*', end: '[^A-Za-z0-9_ \t\\->]',
+	        excludeBegin: true, excludeEnd: true,
+	        relevance: 0
+	      },
+	      { className: 'type', // types
+	        begin: ':[ \t]*', end: '\\W',
+	        excludeBegin: true, excludeEnd: true
+	      },
+	      { className: 'type', // instantiation
+	        begin: 'new *', end: '\\W',
+	        excludeBegin: true, excludeEnd: true
+	      },
+	      { className: 'class', // enums
+	        beginKeywords: 'enum', end: '\\{',
 	        contains: [
-	          {
-	            beginKeywords: 'extends implements'
+	          hljs.TITLE_MODE
+	        ]
+	      },
+	      { className: 'class', // abstracts
+	        beginKeywords: 'abstract', end: '[\\{$]',
+	        contains: [
+	          { className: 'type',
+	            begin: '\\(', end: '\\)',
+	            excludeBegin: true, excludeEnd: true
+	          },
+	          { className: 'type',
+	            begin: 'from +', end: '\\W',
+	            excludeBegin: true, excludeEnd: true
+	          },
+	          { className: 'type',
+	            begin: 'to +', end: '\\W',
+	            excludeBegin: true, excludeEnd: true
+	          },
+	          hljs.TITLE_MODE
+	        ],
+	        keywords: {
+	          keyword: 'abstract from to'
+	        }
+	      },
+	      { className: 'class', // classes
+	        begin: '\\b(class|interface) +', end: '[\\{$]',  excludeEnd: true,
+	        keywords: 'class interface',
+	        contains: [
+	          { className: 'keyword',
+	            begin: '\\b(extends|implements) +',
+	            keywords: 'extends implements',
+	            contains: [
+	              {
+	                className: 'type',
+	                begin: hljs.IDENT_RE,
+	                relevance: 0
+	              }
+	            ]
 	          },
 	          hljs.TITLE_MODE
 	        ]
 	      },
-	      {
-	        className: 'meta',
-	        begin: '#', end: '$',
-	        keywords: {'meta-keyword': 'if else elseif end error'}
-	      },
-	      {
-	        className: 'function',
-	        beginKeywords: 'function', end: '[{;]', excludeEnd: true,
+	      { className: 'function',
+	        beginKeywords: 'function', end: '\\(', excludeEnd: true,
 	        illegal: '\\S',
 	        contains: [
-	          hljs.TITLE_MODE,
-	          {
-	            className: 'params',
-	            begin: '\\(', end: '\\)',
-	            contains: [
-	              hljs.APOS_STRING_MODE,
-	              hljs.QUOTE_STRING_MODE,
-	              hljs.C_LINE_COMMENT_MODE,
-	              hljs.C_BLOCK_COMMENT_MODE
-	            ]
-	          },
-	          {
-	            begin: ':\\s*' + IDENT_FUNC_RETURN_TYPE_RE
-	          }
+	          hljs.TITLE_MODE
 	        ]
 	      }
-	    ]
+	    ],
+	    illegal: /<\//
 	  };
 	};
 
 /***/ },
-/* 294 */
+/* 107 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -12513,7 +11119,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 295 */
+/* 108 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -12588,7 +11194,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 296 */
+/* 109 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -12633,7 +11239,113 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 297 */
+/* 110 */
+/***/ function(module, exports) {
+
+	module.exports = function(hljs) {
+	  var keywords = {
+	    'builtin-name':
+	      // keywords
+	      '!= % %= & &= * ** **= *= *map ' +
+	      '+ += , --build-class-- --import-- -= . / // //= ' +
+	      '/= < << <<= <= = > >= >> >>= ' +
+	      '@ @= ^ ^= abs accumulate all and any ap-compose ' +
+	      'ap-dotimes ap-each ap-each-while ap-filter ap-first ap-if ap-last ap-map ap-map-when ap-pipe ' +
+	      'ap-reduce ap-reject apply as-> ascii assert assoc bin break butlast ' +
+	      'callable calling-module-name car case cdr chain chr coll? combinations compile ' +
+	      'compress cond cons cons? continue count curry cut cycle dec ' +
+	      'def default-method defclass defmacro defmacro-alias defmacro/g! defmain defmethod defmulti defn ' +
+	      'defn-alias defnc defnr defreader defseq del delattr delete-route dict-comp dir ' +
+	      'disassemble dispatch-reader-macro distinct divmod do doto drop drop-last drop-while empty? ' +
+	      'end-sequence eval eval-and-compile eval-when-compile even? every? except exec filter first ' +
+	      'flatten float? fn fnc fnr for for* format fraction genexpr ' +
+	      'gensym get getattr global globals group-by hasattr hash hex id ' +
+	      'identity if if* if-not if-python2 import in inc input instance? ' +
+	      'integer integer-char? integer? interleave interpose is is-coll is-cons is-empty is-even ' +
+	      'is-every is-float is-instance is-integer is-integer-char is-iterable is-iterator is-keyword is-neg is-none ' +
+	      'is-not is-numeric is-odd is-pos is-string is-symbol is-zero isinstance islice issubclass ' +
+	      'iter iterable? iterate iterator? keyword keyword? lambda last len let ' +
+	      'lif lif-not list* list-comp locals loop macro-error macroexpand macroexpand-1 macroexpand-all ' +
+	      'map max merge-with method-decorator min multi-decorator multicombinations name neg? next ' +
+	      'none? nonlocal not not-in not? nth numeric? oct odd? open ' +
+	      'or ord partition permutations pos? post-route postwalk pow prewalk print ' +
+	      'product profile/calls profile/cpu put-route quasiquote quote raise range read read-str ' +
+	      'recursive-replace reduce remove repeat repeatedly repr require rest round route ' +
+	      'route-with-methods rwm second seq set-comp setattr setv some sorted string ' +
+	      'string? sum switch symbol? take take-nth take-while tee try unless ' +
+	      'unquote unquote-splicing vars walk when while with with* with-decorator with-gensyms ' +
+	      'xi xor yield yield-from zero? zip zip-longest | |= ~'
+	   };
+
+	  var SYMBOLSTART = 'a-zA-Z_\\-!.?+*=<>&#\'';
+	  var SYMBOL_RE = '[' + SYMBOLSTART + '][' + SYMBOLSTART + '0-9/;:]*';
+	  var SIMPLE_NUMBER_RE = '[-+]?\\d+(\\.\\d+)?';
+
+	  var SHEBANG = {
+	    className: 'meta',
+	    begin: '^#!', end: '$'
+	  };
+
+	  var SYMBOL = {
+	    begin: SYMBOL_RE,
+	    relevance: 0
+	  };
+	  var NUMBER = {
+	    className: 'number', begin: SIMPLE_NUMBER_RE,
+	    relevance: 0
+	  };
+	  var STRING = hljs.inherit(hljs.QUOTE_STRING_MODE, {illegal: null});
+	  var COMMENT = hljs.COMMENT(
+	    ';',
+	    '$',
+	    {
+	      relevance: 0
+	    }
+	  );
+	  var LITERAL = {
+	    className: 'literal',
+	    begin: /\b([Tt]rue|[Ff]alse|nil|None)\b/
+	  };
+	  var COLLECTION = {
+	    begin: '[\\[\\{]', end: '[\\]\\}]'
+	  };
+	  var HINT = {
+	    className: 'comment',
+	    begin: '\\^' + SYMBOL_RE
+	  };
+	  var HINT_COL = hljs.COMMENT('\\^\\{', '\\}');
+	  var KEY = {
+	    className: 'symbol',
+	    begin: '[:]{1,2}' + SYMBOL_RE
+	  };
+	  var LIST = {
+	    begin: '\\(', end: '\\)'
+	  };
+	  var BODY = {
+	    endsWithParent: true,
+	    relevance: 0
+	  };
+	  var NAME = {
+	    keywords: keywords,
+	    lexemes: SYMBOL_RE,
+	    className: 'name', begin: SYMBOL_RE,
+	    starts: BODY
+	  };
+	  var DEFAULT_CONTAINS = [LIST, STRING, HINT, HINT_COL, COMMENT, KEY, COLLECTION, NUMBER, LITERAL, SYMBOL];
+
+	  LIST.contains = [hljs.COMMENT('comment', ''), NAME, BODY];
+	  BODY.contains = DEFAULT_CONTAINS;
+	  COLLECTION.contains = DEFAULT_CONTAINS;
+
+	  return {
+	    aliases: ['hylang'],
+	    illegal: /\S/,
+	    contains: [SHEBANG, LIST, STRING, HINT, HINT_COL, COMMENT, KEY, COLLECTION, NUMBER, LITERAL]
+	  }
+	};
+
+/***/ },
+/* 111 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -12694,7 +11406,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 298 */
+/* 112 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -12764,7 +11476,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 299 */
+/* 113 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -12844,17 +11556,18 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 300 */
+/* 114 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
-	  var GENERIC_IDENT_RE = hljs.UNDERSCORE_IDENT_RE + '(<' + hljs.UNDERSCORE_IDENT_RE + '(\\s*,\\s*' + hljs.UNDERSCORE_IDENT_RE + ')*>)?';
+	  var JAVA_IDENT_RE = '[\u00C0-\u02B8a-zA-Z_$][\u00C0-\u02B8a-zA-Z_$0-9]*';
+	  var GENERIC_IDENT_RE = JAVA_IDENT_RE + '(<' + JAVA_IDENT_RE + '(\\s*,\\s*' + JAVA_IDENT_RE + ')*>)?';
 	  var KEYWORDS =
 	    'false synchronized int abstract float private char boolean static null if const ' +
 	    'for true while long strictfp finally protected import native final void ' +
 	    'enum else break transient catch instanceof byte super volatile case assert short ' +
 	    'package default double public try this switch continue throws protected public private ' +
-	    'module requires exports';
+	    'module requires exports do';
 
 	  // https://docs.oracle.com/javase/7/docs/technotes/guides/language/underscores-literals.html
 	  var JAVA_NUMBER_RE = '\\b' +
@@ -12955,7 +11668,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 301 */
+/* 115 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -13130,7 +11843,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 302 */
+/* 116 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -13171,7 +11884,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 303 */
+/* 117 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -13353,15 +12066,15 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 304 */
+/* 118 */
 /***/ function(module, exports) {
 
-	module.exports = function (hljs) {
+	module.exports = function(hljs) {
 	  var KEYWORDS = {
 	    keyword:
 	      'abstract as val var vararg get set class object open private protected public noinline ' +
 	      'crossinline dynamic final enum if else do while for when throw try catch finally ' +
-	      'import package is in fun override companion reified inline ' +
+	      'import package is in fun override companion reified inline lateinit init' +
 	      'interface annotation data sealed internal infix operator out by constructor super ' +
 	      // to be deleted soon
 	      'trait volatile transient native default',
@@ -13531,7 +12244,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 305 */
+/* 119 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -13698,7 +12411,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 306 */
+/* 120 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -13725,7 +12438,51 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 307 */
+/* 121 */
+/***/ function(module, exports) {
+
+	module.exports = function (hljs) {
+	  return {
+	    contains: [
+	      {
+	        className: 'function',
+	        begin: '#+' + '[A-Za-z_0-9]*' + '\\(',
+	        end:' {',
+	        returnBegin: true,
+	        excludeEnd: true,
+	        contains : [
+	          {
+	            className: 'keyword',
+	            begin: '#+'
+	          },
+	          {
+	            className: 'title',
+	            begin: '[A-Za-z_][A-Za-z_0-9]*'
+	          },
+	          {
+	            className: 'params',
+	            begin: '\\(', end: '\\)',
+	            endsParent: true,
+	            contains: [
+	              {
+	                className: 'string',
+	                begin: '"',
+	                end: '"'
+	              },
+	              {
+	                className: 'variable',
+	                begin: '[A-Za-z_][A-Za-z_0-9]*'
+	              }
+	            ]
+	          }
+	        ]
+	      }
+	    ]
+	  };
+	};
+
+/***/ },
+/* 122 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -13869,7 +12626,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 308 */
+/* 123 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -13976,7 +12733,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 309 */
+/* 124 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -14137,7 +12894,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 310 */
+/* 125 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -14290,7 +13047,100 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 311 */
+/* 126 */
+/***/ function(module, exports) {
+
+	module.exports = function(hljs) {
+	  var identifier = '([-a-zA-Z$._][\\w\\-$.]*)';
+	  return {
+	    //lexemes: '[.%]?' + hljs.IDENT_RE,
+	    keywords:
+	      'begin end true false declare define global ' +
+	      'constant private linker_private internal ' +
+	      'available_externally linkonce linkonce_odr weak ' +
+	      'weak_odr appending dllimport dllexport common ' +
+	      'default hidden protected extern_weak external ' +
+	      'thread_local zeroinitializer undef null to tail ' +
+	      'target triple datalayout volatile nuw nsw nnan ' +
+	      'ninf nsz arcp fast exact inbounds align ' +
+	      'addrspace section alias module asm sideeffect ' +
+	      'gc dbg linker_private_weak attributes blockaddress ' +
+	      'initialexec localdynamic localexec prefix unnamed_addr ' +
+	      'ccc fastcc coldcc x86_stdcallcc x86_fastcallcc ' +
+	      'arm_apcscc arm_aapcscc arm_aapcs_vfpcc ptx_device ' +
+	      'ptx_kernel intel_ocl_bicc msp430_intrcc spir_func ' +
+	      'spir_kernel x86_64_sysvcc x86_64_win64cc x86_thiscallcc ' +
+	      'cc c signext zeroext inreg sret nounwind ' +
+	      'noreturn noalias nocapture byval nest readnone ' +
+	      'readonly inlinehint noinline alwaysinline optsize ssp ' +
+	      'sspreq noredzone noimplicitfloat naked builtin cold ' +
+	      'nobuiltin noduplicate nonlazybind optnone returns_twice ' +
+	      'sanitize_address sanitize_memory sanitize_thread sspstrong ' +
+	      'uwtable returned type opaque eq ne slt sgt ' +
+	      'sle sge ult ugt ule uge oeq one olt ogt ' +
+	      'ole oge ord uno ueq une x acq_rel acquire ' +
+	      'alignstack atomic catch cleanup filter inteldialect ' +
+	      'max min monotonic nand personality release seq_cst ' +
+	      'singlethread umax umin unordered xchg add fadd ' +
+	      'sub fsub mul fmul udiv sdiv fdiv urem srem ' +
+	      'frem shl lshr ashr and or xor icmp fcmp ' +
+	      'phi call trunc zext sext fptrunc fpext uitofp ' +
+	      'sitofp fptoui fptosi inttoptr ptrtoint bitcast ' +
+	      'addrspacecast select va_arg ret br switch invoke ' +
+	      'unwind unreachable indirectbr landingpad resume ' +
+	      'malloc alloca free load store getelementptr ' +
+	      'extractelement insertelement shufflevector getresult ' +
+	      'extractvalue insertvalue atomicrmw cmpxchg fence ' +
+	      'argmemonly double',
+	    contains: [
+	      {
+	        className: 'keyword',
+	        begin: 'i\\d+'
+	      },
+	      hljs.COMMENT(
+	        ';', '\\n', {relevance: 0}
+	      ),
+	      // Double quote string
+	      hljs.QUOTE_STRING_MODE,
+	      {
+	        className: 'string',
+	        variants: [
+	          // Double-quoted string
+	          { begin: '"', end: '[^\\\\]"' },
+	        ],
+	        relevance: 0
+	      },
+	      {
+	        className: 'title',
+	        variants: [
+	          { begin: '@' + identifier },
+	          { begin: '@\\d+' },
+	          { begin: '!' + identifier },
+	          { begin: '!\\d+' + identifier }
+	        ]
+	      },
+	      {
+	        className: 'symbol',
+	        variants: [
+	          { begin: '%' + identifier },
+	          { begin: '%\\d+' },
+	          { begin: '#\\d+' },
+	        ]
+	      },
+	      {
+	        className: 'number',
+	        variants: [
+	            { begin: '0[xX][a-fA-F0-9]+' },
+	            { begin: '-?\\d+(?:[.]\\d+)?(?:[eE][-+]?\\d+(?:[.]\\d+)?)?' }
+	        ],
+	        relevance: 0
+	      },
+	    ]
+	  };
+	};
+
+/***/ },
+/* 127 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -14377,7 +13227,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 312 */
+/* 128 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -14401,14 +13251,24 @@ webpackJsonp([0],[
 	  return {
 	    lexemes: hljs.UNDERSCORE_IDENT_RE,
 	    keywords: {
-	      keyword:
-	        'and break do else elseif end false for if in local nil not or repeat return then ' +
-	        'true until while',
+	      literal: "true false nil",
+	      keyword: "and break do else elseif end for goto if in local not or repeat return then until while",
 	      built_in:
-	        '_G _VERSION assert collectgarbage dofile error getfenv getmetatable ipairs load ' +
-	        'loadfile loadstring module next pairs pcall print rawequal rawget rawset require ' +
-	        'select setfenv setmetatable tonumber tostring type unpack xpcall coroutine debug ' +
-	        'io math os package string table'
+	        //Metatags and globals:
+	        '_G _ENV _VERSION __index __newindex __mode __call __metatable __tostring __len ' +
+	        '__gc __add __sub __mul __div __mod __pow __concat __unm __eq __lt __le assert ' +
+	        //Standard methods and properties:
+	        'collectgarbage dofile error getfenv getmetatable ipairs load loadfile loadstring' +
+	        'module next pairs pcall print rawequal rawget rawset require select setfenv' +
+	        'setmetatable tonumber tostring type unpack xpcall arg self' +
+	        //Library methods and properties (one line per library):
+	        'coroutine resume yield status wrap create running debug getupvalue' +
+	        'debug sethook getmetatable gethook setmetatable setlocal traceback setfenv getinfo setupvalue getlocal getregistry getfenv' +
+	        'io lines write close flush open output type read stderr stdin input stdout popen tmpfile' +
+	        'math, log, max, acos, huge, ldexp, pi, cos, tanh, pow, deg, tan, cosh, sinh, random, randomseed, frexp, ceil, floor, rad, abs, sqrt, modf, asin, min, mod, fmod, log10, atan2, exp, sin, atan' +
+	        'os, exit, setlocale, date, getenv, difftime, remove, time, clock, tmpname, rename, execute, package, preload, loadlib, loaded, loaders, cpath, config path, seeall' +
+	        'string, sub, upper, len, gfind, rep, find, match, char, dump, gmatch, reverse, byte, format, gsub, lower' +
+	        'table, setn, insert, getn, foreachi, maxn, foreach, concat, sort, remove'
 	    },
 	    contains: COMMENTS.concat([
 	      {
@@ -14437,7 +13297,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 313 */
+/* 129 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -14486,7 +13346,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 314 */
+/* 130 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -14548,7 +13408,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 315 */
+/* 131 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -14640,7 +13500,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 316 */
+/* 132 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -15050,7 +13910,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 317 */
+/* 133 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -15279,7 +14139,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 318 */
+/* 134 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -15365,7 +14225,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 319 */
+/* 135 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -15455,7 +14315,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 320 */
+/* 136 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -15478,7 +14338,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 321 */
+/* 137 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -15639,7 +14499,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 322 */
+/* 138 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -15668,7 +14528,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 323 */
+/* 139 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -15747,7 +14607,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 324 */
+/* 140 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -15863,7 +14723,80 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 325 */
+/* 141 */
+/***/ function(module, exports) {
+
+	module.exports = function(hljs) {
+	  return {
+	    case_insensitive: true,
+	    contains: [
+	      {
+	        beginKeywords:
+	          'build create index delete drop explain infer|10 insert merge prepare select update upsert|10',
+	        end: /;/, endsWithParent: true,
+	        keywords: {
+	          // Taken from http://developer.couchbase.com/documentation/server/current/n1ql/n1ql-language-reference/reservedwords.html
+	          keyword:
+	            'all alter analyze and any array as asc begin between binary boolean break bucket build by call ' +
+	            'case cast cluster collate collection commit connect continue correlate cover create database ' +
+	            'dataset datastore declare decrement delete derived desc describe distinct do drop each element ' +
+	            'else end every except exclude execute exists explain fetch first flatten for force from ' +
+	            'function grant group gsi having if ignore ilike in include increment index infer inline inner ' +
+	            'insert intersect into is join key keys keyspace known last left let letting like limit lsm map ' +
+	            'mapping matched materialized merge minus namespace nest not number object offset on ' +
+	            'option or order outer over parse partition password path pool prepare primary private privilege ' +
+	            'procedure public raw realm reduce rename return returning revoke right role rollback satisfies ' +
+	            'schema select self semi set show some start statistics string system then to transaction trigger ' +
+	            'truncate under union unique unknown unnest unset update upsert use user using validate value ' +
+	            'valued values via view when where while with within work xor',
+	          // Taken from http://developer.couchbase.com/documentation/server/4.5/n1ql/n1ql-language-reference/literals.html
+	          literal:
+	            'true false null missing|5',
+	          // Taken from http://developer.couchbase.com/documentation/server/4.5/n1ql/n1ql-language-reference/functions.html
+	          built_in:
+	            'array_agg array_append array_concat array_contains array_count array_distinct array_ifnull array_length ' +
+	            'array_max array_min array_position array_prepend array_put array_range array_remove array_repeat array_replace ' +
+	            'array_reverse array_sort array_sum avg count max min sum greatest least ifmissing ifmissingornull ifnull ' +
+	            'missingif nullif ifinf ifnan ifnanorinf naninf neginfif posinfif clock_millis clock_str date_add_millis ' +
+	            'date_add_str date_diff_millis date_diff_str date_part_millis date_part_str date_trunc_millis date_trunc_str ' +
+	            'duration_to_str millis str_to_millis millis_to_str millis_to_utc millis_to_zone_name now_millis now_str ' +
+	            'str_to_duration str_to_utc str_to_zone_name decode_json encode_json encoded_size poly_length base64 base64_encode ' +
+	            'base64_decode meta uuid abs acos asin atan atan2 ceil cos degrees e exp ln log floor pi power radians random ' +
+	            'round sign sin sqrt tan trunc object_length object_names object_pairs object_inner_pairs object_values ' +
+	            'object_inner_values object_add object_put object_remove object_unwrap regexp_contains regexp_like regexp_position ' +
+	            'regexp_replace contains initcap length lower ltrim position repeat replace rtrim split substr title trim upper ' +
+	            'isarray isatom isboolean isnumber isobject isstring type toarray toatom toboolean tonumber toobject tostring'
+	        },
+	        contains: [
+	          {
+	            className: 'string',
+	            begin: '\'', end: '\'',
+	            contains: [hljs.BACKSLASH_ESCAPE],
+	            relevance: 0
+	          },
+	          {
+	            className: 'string',
+	            begin: '"', end: '"',
+	            contains: [hljs.BACKSLASH_ESCAPE],
+	            relevance: 0
+	          },
+	          {
+	            className: 'symbol',
+	            begin: '`', end: '`',
+	            contains: [hljs.BACKSLASH_ESCAPE],
+	            relevance: 2
+	          },
+	          hljs.C_NUMBER_MODE,
+	          hljs.C_BLOCK_COMMENT_MODE
+	        ]
+	      },
+	      hljs.C_BLOCK_COMMENT_MODE
+	    ]
+	  };
+	};
+
+/***/ },
+/* 142 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -15960,7 +14893,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 326 */
+/* 143 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -16019,7 +14952,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 327 */
+/* 144 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -16072,71 +15005,92 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 328 */
+/* 145 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
 	  var CONSTANTS = {
 	    className: 'variable',
-	    begin: '\\$(ADMINTOOLS|APPDATA|CDBURN_AREA|CMDLINE|COMMONFILES32|COMMONFILES64|COMMONFILES|COOKIES|DESKTOP|DOCUMENTS|EXEDIR|EXEFILE|EXEPATH|FAVORITES|FONTS|HISTORY|HWNDPARENT|INSTDIR|INTERNET_CACHE|LANGUAGE|LOCALAPPDATA|MUSIC|NETHOOD|OUTDIR|PICTURES|PLUGINSDIR|PRINTHOOD|PROFILE|PROGRAMFILES32|PROGRAMFILES64|PROGRAMFILES|QUICKLAUNCH|RECENT|RESOURCES_LOCALIZED|RESOURCES|SENDTO|SMPROGRAMS|SMSTARTUP|STARTMENU|SYSDIR|TEMP|TEMPLATES|VIDEOS|WINDIR)'
+	    begin: /\$(ADMINTOOLS|APPDATA|CDBURN_AREA|CMDLINE|COMMONFILES32|COMMONFILES64|COMMONFILES|COOKIES|DESKTOP|DOCUMENTS|EXEDIR|EXEFILE|EXEPATH|FAVORITES|FONTS|HISTORY|HWNDPARENT|INSTDIR|INTERNET_CACHE|LANGUAGE|LOCALAPPDATA|MUSIC|NETHOOD|OUTDIR|PICTURES|PLUGINSDIR|PRINTHOOD|PROFILE|PROGRAMFILES32|PROGRAMFILES64|PROGRAMFILES|QUICKLAUNCH|RECENT|RESOURCES_LOCALIZED|RESOURCES|SENDTO|SMPROGRAMS|SMSTARTUP|STARTMENU|SYSDIR|TEMP|TEMPLATES|VIDEOS|WINDIR)/
 	  };
 
 	  var DEFINES = {
 	    // ${defines}
 	    className: 'variable',
-	    begin: '\\$+{[a-zA-Z0-9_]+}'
+	    begin: /\$+{[\w\.:-]+}/
 	  };
 
 	  var VARIABLES = {
 	    // $variables
 	    className: 'variable',
-	    begin: '\\$+[a-zA-Z0-9_]+',
-	    illegal: '\\(\\){}'
+	    begin: /\$+\w+/,
+	    illegal: /\(\){}/
 	  };
 
 	  var LANGUAGES = {
 	    // $(language_strings)
 	    className: 'variable',
-	    begin: '\\$+\\([a-zA-Z0-9_]+\\)'
+	    begin: /\$+\([\w\^\.:-]+\)/
 	  };
 
 	  var PARAMETERS = {
 	    // command parameters
-	    className: 'built_in',
+	    className: 'params',
 	    begin: '(ARCHIVE|FILE_ATTRIBUTE_ARCHIVE|FILE_ATTRIBUTE_NORMAL|FILE_ATTRIBUTE_OFFLINE|FILE_ATTRIBUTE_READONLY|FILE_ATTRIBUTE_SYSTEM|FILE_ATTRIBUTE_TEMPORARY|HKCR|HKCU|HKDD|HKEY_CLASSES_ROOT|HKEY_CURRENT_CONFIG|HKEY_CURRENT_USER|HKEY_DYN_DATA|HKEY_LOCAL_MACHINE|HKEY_PERFORMANCE_DATA|HKEY_USERS|HKLM|HKPD|HKU|IDABORT|IDCANCEL|IDIGNORE|IDNO|IDOK|IDRETRY|IDYES|MB_ABORTRETRYIGNORE|MB_DEFBUTTON1|MB_DEFBUTTON2|MB_DEFBUTTON3|MB_DEFBUTTON4|MB_ICONEXCLAMATION|MB_ICONINFORMATION|MB_ICONQUESTION|MB_ICONSTOP|MB_OK|MB_OKCANCEL|MB_RETRYCANCEL|MB_RIGHT|MB_RTLREADING|MB_SETFOREGROUND|MB_TOPMOST|MB_USERICON|MB_YESNO|NORMAL|OFFLINE|READONLY|SHCTX|SHELL_CONTEXT|SYSTEM|TEMPORARY)'
 	  };
 
-	  var COMPILER ={
+	  var COMPILER = {
 	    // !compiler_flags
 	    className: 'keyword',
-	    begin: '\\!(addincludedir|addplugindir|appendfile|cd|define|delfile|echo|else|endif|error|execute|finalize|getdllversionsystem|ifdef|ifmacrodef|ifmacrondef|ifndef|if|include|insertmacro|macroend|macro|makensis|packhdr|searchparse|searchreplace|tempfile|undef|verbose|warning)'
+	    begin: /\!(addincludedir|addplugindir|appendfile|cd|define|delfile|echo|else|endif|error|execute|finalize|getdllversionsystem|ifdef|ifmacrodef|ifmacrondef|ifndef|if|include|insertmacro|macroend|macro|makensis|packhdr|searchparse|searchreplace|tempfile|undef|verbose|warning)/
+	  };
+
+	  var METACHARS = {
+	    // $\n, $\r, $\t, $$
+	    className: 'subst',
+	    begin: /\$(\\[nrt]|\$)/
+	  };
+
+	  var PLUGINS = {
+	    // plug::ins
+	    className: 'class',
+	    begin: /\w+\:\:\w+/
+	  };
+
+	    var STRING = {
+	      className: 'string',
+	      variants: [
+	        {
+	          begin: '"', end: '"'
+	        },
+	        {
+	          begin: '\'', end: '\''
+	        },
+	        {
+	          begin: '`', end: '`'
+	        }
+	      ],
+	      illegal: /\n/,
+	      contains: [
+	        METACHARS,
+	        CONSTANTS,
+	        DEFINES,
+	        VARIABLES,
+	        LANGUAGES
+	      ]
 	  };
 
 	  return {
 	    case_insensitive: false,
 	    keywords: {
 	      keyword:
-	      'Abort AddBrandingImage AddSize AllowRootDirInstall AllowSkipFiles AutoCloseWindow BGFont BGGradient BrandingText BringToFront Call CallInstDLL Caption ChangeUI CheckBitmap ClearErrors CompletedText ComponentText CopyFiles CRCCheck CreateDirectory CreateFont CreateShortCut Delete DeleteINISec DeleteINIStr DeleteRegKey DeleteRegValue DetailPrint DetailsButtonText DirText DirVar DirVerify EnableWindow EnumRegKey EnumRegValue Exch Exec ExecShell ExecWait ExpandEnvStrings File FileBufSize FileClose FileErrorText FileOpen FileRead FileReadByte FileReadUTF16LE FileReadWord FileSeek FileWrite FileWriteByte FileWriteUTF16LE FileWriteWord FindClose FindFirst FindNext FindWindow FlushINI FunctionEnd GetCurInstType GetCurrentAddress GetDlgItem GetDLLVersion GetDLLVersionLocal GetErrorLevel GetFileTime GetFileTimeLocal GetFullPathName GetFunctionAddress GetInstDirError GetLabelAddress GetTempFileName Goto HideWindow Icon IfAbort IfErrors IfFileExists IfRebootFlag IfSilent InitPluginsDir InstallButtonText InstallColors InstallDir InstallDirRegKey InstProgressFlags InstType InstTypeGetText InstTypeSetText IntCmp IntCmpU IntFmt IntOp IsWindow LangString LicenseBkColor LicenseData LicenseForceSelection LicenseLangString LicenseText LoadLanguageFile LockWindow LogSet LogText ManifestDPIAware ManifestSupportedOS MessageBox MiscButtonText Name Nop OutFile Page PageCallbacks PageExEnd Pop Push Quit ReadEnvStr ReadINIStr ReadRegDWORD ReadRegStr Reboot RegDLL Rename RequestExecutionLevel ReserveFile Return RMDir SearchPath SectionEnd SectionGetFlags SectionGetInstTypes SectionGetSize SectionGetText SectionGroupEnd SectionIn SectionSetFlags SectionSetInstTypes SectionSetSize SectionSetText SendMessage SetAutoClose SetBrandingImage SetCompress SetCompressor SetCompressorDictSize SetCtlColors SetCurInstType SetDatablockOptimize SetDateSave SetDetailsPrint SetDetailsView SetErrorLevel SetErrors SetFileAttributes SetFont SetOutPath SetOverwrite SetPluginUnload SetRebootFlag SetRegView SetShellVarContext SetSilent ShowInstDetails ShowUninstDetails ShowWindow SilentInstall SilentUnInstall Sleep SpaceTexts StrCmp StrCmpS StrCpy StrLen SubCaption SubSectionEnd Unicode UninstallButtonText UninstallCaption UninstallIcon UninstallSubCaption UninstallText UninstPage UnRegDLL Var VIAddVersionKey VIFileVersion VIProductVersion WindowIcon WriteINIStr WriteRegBin WriteRegDWORD WriteRegExpandStr WriteRegStr WriteUninstaller XPStyle',
+	      'Abort AddBrandingImage AddSize AllowRootDirInstall AllowSkipFiles AutoCloseWindow BGFont BGGradient BrandingText BringToFront Call CallInstDLL Caption ChangeUI CheckBitmap ClearErrors CompletedText ComponentText CopyFiles CRCCheck CreateDirectory CreateFont CreateShortCut Delete DeleteINISec DeleteINIStr DeleteRegKey DeleteRegValue DetailPrint DetailsButtonText DirText DirVar DirVerify EnableWindow EnumRegKey EnumRegValue Exch Exec ExecShell ExecWait ExpandEnvStrings File FileBufSize FileClose FileErrorText FileOpen FileRead FileReadByte FileReadUTF16LE FileReadWord FileSeek FileWrite FileWriteByte FileWriteUTF16LE FileWriteWord FindClose FindFirst FindNext FindWindow FlushINI FunctionEnd GetCurInstType GetCurrentAddress GetDlgItem GetDLLVersion GetDLLVersionLocal GetErrorLevel GetFileTime GetFileTimeLocal GetFullPathName GetFunctionAddress GetInstDirError GetLabelAddress GetTempFileName Goto HideWindow Icon IfAbort IfErrors IfFileExists IfRebootFlag IfSilent InitPluginsDir InstallButtonText InstallColors InstallDir InstallDirRegKey InstProgressFlags InstType InstTypeGetText InstTypeSetText IntCmp IntCmpU IntFmt IntOp IsWindow LangString LicenseBkColor LicenseData LicenseForceSelection LicenseLangString LicenseText LoadLanguageFile LockWindow LogSet LogText ManifestDPIAware ManifestSupportedOS MessageBox MiscButtonText Name Nop OutFile Page PageCallbacks PageExEnd Pop Push Quit ReadEnvStr ReadINIStr ReadRegDWORD ReadRegStr Reboot RegDLL Rename RequestExecutionLevel ReserveFile Return RMDir SearchPath SectionEnd SectionGetFlags SectionGetInstTypes SectionGetSize SectionGetText SectionGroupEnd SectionIn SectionSetFlags SectionSetInstTypes SectionSetSize SectionSetText SendMessage SetAutoClose SetBrandingImage SetCompress SetCompressor SetCompressorDictSize SetCtlColors SetCurInstType SetDatablockOptimize SetDateSave SetDetailsPrint SetDetailsView SetErrorLevel SetErrors SetFileAttributes SetFont SetOutPath SetOverwrite SetRebootFlag SetRegView SetShellVarContext SetSilent ShowInstDetails ShowUninstDetails ShowWindow SilentInstall SilentUnInstall Sleep SpaceTexts StrCmp StrCmpS StrCpy StrLen SubCaption Unicode UninstallButtonText UninstallCaption UninstallIcon UninstallSubCaption UninstallText UninstPage UnRegDLL Var VIAddVersionKey VIFileVersion VIProductVersion WindowIcon WriteINIStr WriteRegBin WriteRegDWORD WriteRegExpandStr WriteRegStr WriteUninstaller XPStyle',
 	      literal:
-	      'admin all auto both colored current false force hide highest lastused leave listonly none normal notset off on open print show silent silentlog smooth textonly true user '
+	      'admin all auto both bottom bzip2 colored components current custom directory false force hide highest ifdiff ifnewer instfiles lastused leave left license listonly lzma nevershow none normal notset off on open print right show silent silentlog smooth textonly top true try un.components un.custom un.directory un.instfiles un.license uninstConfirm user Win10 Win7 Win8 WinVista zlib'
 	    },
 	    contains: [
 	      hljs.HASH_COMMENT_MODE,
 	      hljs.C_BLOCK_COMMENT_MODE,
-	      {
-	        className: 'string',
-	        begin: '"', end: '"',
-	        illegal: '\\n',
-	        contains: [
-	          { // $\n, $\r, $\t, $$
-	            begin: '\\$(\\\\(n|r|t)|\\$)'
-	          },
-	          CONSTANTS,
-	          DEFINES,
-	          VARIABLES,
-	          LANGUAGES
-	        ]
-	      },
 	      hljs.COMMENT(
 	        ';',
 	        '$',
@@ -16146,23 +15100,22 @@ webpackJsonp([0],[
 	      ),
 	      {
 	        className: 'function',
-	        beginKeywords: 'Function PageEx Section SectionGroup SubSection', end: '$'
+	        beginKeywords: 'Function PageEx Section SectionGroup', end: '$'
 	      },
+	      STRING,
 	      COMPILER,
 	      DEFINES,
 	      VARIABLES,
 	      LANGUAGES,
 	      PARAMETERS,
-	      hljs.NUMBER_MODE,
-	      { // plug::ins
-	        begin: hljs.IDENT_RE + '::' + hljs.IDENT_RE
-	      }
+	      PLUGINS,
+	      hljs.NUMBER_MODE
 	    ]
 	  };
 	};
 
 /***/ },
-/* 329 */
+/* 146 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -16257,7 +15210,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 330 */
+/* 147 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -16332,7 +15285,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 331 */
+/* 148 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -16393,7 +15346,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 332 */
+/* 149 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -16467,7 +15420,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 333 */
+/* 150 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -16519,7 +15472,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 334 */
+/* 151 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -16575,7 +15528,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 335 */
+/* 152 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -16706,7 +15659,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 336 */
+/* 153 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -16801,7 +15754,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 337 */
+/* 154 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -16870,7 +15823,7 @@ webpackJsonp([0],[
 	    case_insensitive: true,
 	    keywords: {
 	      keyword: 'if else foreach return function do while until elseif begin for trap data dynamicparam end break throw param continue finally in switch exit filter try process catch',
-	      built_in: 'Add-Computer Add-Content Add-History Add-JobTrigger Add-Member Add-PSSnapin Add-Type Checkpoint-Computer Clear-Content Clear-EventLog Clear-History Clear-Host Clear-Item Clear-ItemProperty Clear-Variable Compare-Object Complete-Transaction Connect-PSSession Connect-WSMan Convert-Path ConvertFrom-Csv ConvertFrom-Json ConvertFrom-SecureString ConvertFrom-StringData ConvertTo-Csv ConvertTo-Html ConvertTo-Json ConvertTo-SecureString ConvertTo-Xml Copy-Item Copy-ItemProperty Debug-Process Disable-ComputerRestore Disable-JobTrigger Disable-PSBreakpoint Disable-PSRemoting Disable-PSSessionConfiguration Disable-WSManCredSSP Disconnect-PSSession Disconnect-WSMan Disable-ScheduledJob Enable-ComputerRestore Enable-JobTrigger Enable-PSBreakpoint Enable-PSRemoting Enable-PSSessionConfiguration Enable-ScheduledJob Enable-WSManCredSSP Enter-PSSession Exit-PSSession Export-Alias Export-Clixml Export-Console Export-Counter Export-Csv Export-FormatData Export-ModuleMember Export-PSSession ForEach-Object Format-Custom Format-List Format-Table Format-Wide Get-Acl Get-Alias Get-AuthenticodeSignature Get-ChildItem Get-Command Get-ComputerRestorePoint Get-Content Get-ControlPanelItem Get-Counter Get-Credential Get-Culture Get-Date Get-Event Get-EventLog Get-EventSubscriber Get-ExecutionPolicy Get-FormatData Get-Host Get-HotFix Get-Help Get-History Get-IseSnippet Get-Item Get-ItemProperty Get-Job Get-JobTrigger Get-Location Get-Member Get-Module Get-PfxCertificate Get-Process Get-PSBreakpoint Get-PSCallStack Get-PSDrive Get-PSProvider Get-PSSession Get-PSSessionConfiguration Get-PSSnapin Get-Random Get-ScheduledJob Get-ScheduledJobOption Get-Service Get-TraceSource Get-Transaction Get-TypeData Get-UICulture Get-Unique Get-Variable Get-Verb Get-WinEvent Get-WmiObject Get-WSManCredSSP Get-WSManInstance Group-Object Import-Alias Import-Clixml Import-Counter Import-Csv Import-IseSnippet Import-LocalizedData Import-PSSession Import-Module Invoke-AsWorkflow Invoke-Command Invoke-Expression Invoke-History Invoke-Item Invoke-RestMethod Invoke-WebRequest Invoke-WmiMethod Invoke-WSManAction Join-Path Limit-EventLog Measure-Command Measure-Object Move-Item Move-ItemProperty New-Alias New-Event New-EventLog New-IseSnippet New-Item New-ItemProperty New-JobTrigger New-Object New-Module New-ModuleManifest New-PSDrive New-PSSession New-PSSessionConfigurationFile New-PSSessionOption New-PSTransportOption New-PSWorkflowExecutionOption New-PSWorkflowSession New-ScheduledJobOption New-Service New-TimeSpan New-Variable New-WebServiceProxy New-WinEvent New-WSManInstance New-WSManSessionOption Out-Default Out-File Out-GridView Out-Host Out-Null Out-Printer Out-String Pop-Location Push-Location Read-Host Receive-Job Register-EngineEvent Register-ObjectEvent Register-PSSessionConfiguration Register-ScheduledJob Register-WmiEvent Remove-Computer Remove-Event Remove-EventLog Remove-Item Remove-ItemProperty Remove-Job Remove-JobTrigger Remove-Module Remove-PSBreakpoint Remove-PSDrive Remove-PSSession Remove-PSSnapin Remove-TypeData Remove-Variable Remove-WmiObject Remove-WSManInstance Rename-Computer Rename-Item Rename-ItemProperty Reset-ComputerMachinePassword Resolve-Path Restart-Computer Restart-Service Restore-Computer Resume-Job Resume-Service Save-Help Select-Object Select-String Select-Xml Send-MailMessage Set-Acl Set-Alias Set-AuthenticodeSignature Set-Content Set-Date Set-ExecutionPolicy Set-Item Set-ItemProperty Set-JobTrigger Set-Location Set-PSBreakpoint Set-PSDebug Set-PSSessionConfiguration Set-ScheduledJob Set-ScheduledJobOption Set-Service Set-StrictMode Set-TraceSource Set-Variable Set-WmiInstance Set-WSManInstance Set-WSManQuickConfig Show-Command Show-ControlPanelItem Show-EventLog Sort-Object Split-Path Start-Job Start-Process Start-Service Start-Sleep Start-Transaction Start-Transcript Stop-Computer Stop-Job Stop-Process Stop-Service Stop-Transcript Suspend-Job Suspend-Service Tee-Object Test-ComputerSecureChannel Test-Connection Test-ModuleManifest Test-Path Test-PSSessionConfigurationFile Trace-Command Unblock-File Undo-Transaction Unregister-Event Unregister-PSSessionConfiguration Unregister-ScheduledJob Update-FormatData Update-Help Update-List Update-TypeData Use-Transaction Wait-Event Wait-Job Wait-Process Where-Object Write-Debug Write-Error Write-EventLog Write-Host Write-Output Write-Progress Write-Verbose Write-Warning',
+	      built_in: 'Add-Computer Add-Content Add-History Add-JobTrigger Add-Member Add-PSSnapin Add-Type Checkpoint-Computer Clear-Content Clear-EventLog Clear-History Clear-Host Clear-Item Clear-ItemProperty Clear-Variable Compare-Object Complete-Transaction Connect-PSSession Connect-WSMan Convert-Path ConvertFrom-Csv ConvertFrom-Json ConvertFrom-SecureString ConvertFrom-StringData ConvertTo-Csv ConvertTo-Html ConvertTo-Json ConvertTo-SecureString ConvertTo-Xml Copy-Item Copy-ItemProperty Debug-Process Disable-ComputerRestore Disable-JobTrigger Disable-PSBreakpoint Disable-PSRemoting Disable-PSSessionConfiguration Disable-WSManCredSSP Disconnect-PSSession Disconnect-WSMan Disable-ScheduledJob Enable-ComputerRestore Enable-JobTrigger Enable-PSBreakpoint Enable-PSRemoting Enable-PSSessionConfiguration Enable-ScheduledJob Enable-WSManCredSSP Enter-PSSession Exit-PSSession Export-Alias Export-Clixml Export-Console Export-Counter Export-Csv Export-FormatData Export-ModuleMember Export-PSSession ForEach-Object Format-Custom Format-List Format-Table Format-Wide Get-Acl Get-Alias Get-AuthenticodeSignature Get-ChildItem Get-Command Get-ComputerRestorePoint Get-Content Get-ControlPanelItem Get-Counter Get-Credential Get-Culture Get-Date Get-Event Get-EventLog Get-EventSubscriber Get-ExecutionPolicy Get-FormatData Get-Host Get-HotFix Get-Help Get-History Get-IseSnippet Get-Item Get-ItemProperty Get-Job Get-JobTrigger Get-Location Get-Member Get-Module Get-PfxCertificate Get-Process Get-PSBreakpoint Get-PSCallStack Get-PSDrive Get-PSProvider Get-PSSession Get-PSSessionConfiguration Get-PSSnapin Get-Random Get-ScheduledJob Get-ScheduledJobOption Get-Service Get-TraceSource Get-Transaction Get-TypeData Get-UICulture Get-Unique Get-Variable Get-Verb Get-WinEvent Get-WmiObject Get-WSManCredSSP Get-WSManInstance Group-Object Import-Alias Import-Clixml Import-Counter Import-Csv Import-IseSnippet Import-LocalizedData Import-PSSession Import-Module Invoke-AsWorkflow Invoke-Command Invoke-Expression Invoke-History Invoke-Item Invoke-RestMethod Invoke-WebRequest Invoke-WmiMethod Invoke-WSManAction Join-Path Limit-EventLog Measure-Command Measure-Object Move-Item Move-ItemProperty New-Alias New-Event New-EventLog New-IseSnippet New-Item New-ItemProperty New-JobTrigger New-Object New-Module New-ModuleManifest New-PSDrive New-PSSession New-PSSessionConfigurationFile New-PSSessionOption New-PSTransportOption New-PSWorkflowExecutionOption New-PSWorkflowSession New-ScheduledJobOption New-Service New-TimeSpan New-Variable New-WebServiceProxy New-WinEvent New-WSManInstance New-WSManSessionOption Out-Default Out-File Out-GridView Out-Host Out-Null Out-Printer Out-String Pop-Location Push-Location Read-Host Receive-Job Register-EngineEvent Register-ObjectEvent Register-PSSessionConfiguration Register-ScheduledJob Register-WmiEvent Remove-Computer Remove-Event Remove-EventLog Remove-Item Remove-ItemProperty Remove-Job Remove-JobTrigger Remove-Module Remove-PSBreakpoint Remove-PSDrive Remove-PSSession Remove-PSSnapin Remove-TypeData Remove-Variable Remove-WmiObject Remove-WSManInstance Rename-Computer Rename-Item Rename-ItemProperty Reset-ComputerMachinePassword Resolve-Path Restart-Computer Restart-Service Restore-Computer Resume-Job Resume-Service Save-Help Select-Object Select-String Select-Xml Send-MailMessage Set-Acl Set-Alias Set-AuthenticodeSignature Set-Content Set-Date Set-ExecutionPolicy Set-Item Set-ItemProperty Set-JobTrigger Set-Location Set-PSBreakpoint Set-PSDebug Set-PSSessionConfiguration Set-ScheduledJob Set-ScheduledJobOption Set-Service Set-StrictMode Set-TraceSource Set-Variable Set-WmiInstance Set-WSManInstance Set-WSManQuickConfig Show-Command Show-ControlPanelItem Show-EventLog Sort-Object Split-Path Start-Job Start-Process Start-Service Start-Sleep Start-Transaction Start-Transcript Stop-Computer Stop-Job Stop-Process Stop-Service Stop-Transcript Suspend-Job Suspend-Service Tee-Object Test-ComputerSecureChannel Test-Connection Test-ModuleManifest Test-Path Test-PSSessionConfigurationFile Trace-Command Unblock-File Undo-Transaction Unregister-Event Unregister-PSSessionConfiguration Unregister-ScheduledJob Update-FormatData Update-Help Update-List Update-TypeData Use-Transaction Wait-Event Wait-Job Wait-Process Where-Object Write-Debug Write-Error Write-EventLog Write-Host Write-Output Write-Progress Write-Verbose Write-Warning Add-MDTPersistentDrive Disable-MDTMonitorService Enable-MDTMonitorService Get-MDTDeploymentShareStatistics Get-MDTMonitorData Get-MDTOperatingSystemCatalog Get-MDTPersistentDrive Import-MDTApplication Import-MDTDriver Import-MDTOperatingSystem Import-MDTPackage Import-MDTTaskSequence New-MDTDatabase Remove-MDTMonitorData Remove-MDTPersistentDrive Restore-MDTPersistentDrive Set-MDTMonitorData Test-MDTDeploymentShare Test-MDTMonitorData Update-MDTDatabaseSchema Update-MDTDeploymentShare Update-MDTLinkedDS Update-MDTMedia Update-MDTMedia Add-VamtProductKey Export-VamtData Find-VamtManagedMachine Get-VamtConfirmationId Get-VamtProduct Get-VamtProductKey Import-VamtData Initialize-VamtData Install-VamtConfirmationId Install-VamtProductActivation Install-VamtProductKey Update-VamtProduct',
 	      nomarkup: '-ne -eq -lt -gt -ge -le -not -like -notlike -match -notmatch -contains -notcontains -in -notin -replace'
 	    },
 	    contains: [
@@ -16886,7 +15839,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 338 */
+/* 155 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -16938,7 +15891,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 339 */
+/* 156 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -16972,7 +15925,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 340 */
+/* 157 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -17064,7 +16017,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 341 */
+/* 158 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -17104,7 +16057,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 342 */
+/* 159 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -17223,7 +16176,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 343 */
+/* 160 */
 /***/ function(module, exports) {
 
 	module.exports = // Base deafult colors in PB IDE: background: #FFFFDF; foreground: #000000;
@@ -17285,12 +16238,26 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 344 */
+/* 161 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
+	  var KEYWORDS = {
+	    keyword:
+	      'and elif is global as in if from raise for except finally print import pass return ' +
+	      'exec else break not with class assert yield try while continue del or def lambda ' +
+	      'async await nonlocal|10 None True False',
+	    built_in:
+	      'Ellipsis NotImplemented'
+	  };
 	  var PROMPT = {
 	    className: 'meta',  begin: /^(>>>|\.\.\.) /
+	  };
+	  var SUBST = {
+	    className: 'subst',
+	    begin: /\{/, end: /\}/,
+	    keywords: KEYWORDS,
+	    illegal: /#/
 	  };
 	  var STRING = {
 	    className: 'string',
@@ -17307,6 +16274,14 @@ webpackJsonp([0],[
 	        relevance: 10
 	      },
 	      {
+	        begin: /(fr|rf|f)'''/, end: /'''/,
+	        contains: [PROMPT, SUBST]
+	      },
+	      {
+	        begin: /(fr|rf|f)"""/, end: /"""/,
+	        contains: [PROMPT, SUBST]
+	      },
+	      {
 	        begin: /(u|r|ur)'/, end: /'/,
 	        relevance: 10
 	      },
@@ -17319,6 +16294,14 @@ webpackJsonp([0],[
 	      },
 	      {
 	        begin: /(b|br)"/, end: /"/
+	      },
+	      {
+	        begin: /(fr|rf|f)'/, end: /'/,
+	        contains: [SUBST]
+	      },
+	      {
+	        begin: /(fr|rf|f)"/, end: /"/,
+	        contains: [SUBST]
 	      },
 	      hljs.APOS_STRING_MODE,
 	      hljs.QUOTE_STRING_MODE
@@ -17337,17 +16320,11 @@ webpackJsonp([0],[
 	    begin: /\(/, end: /\)/,
 	    contains: ['self', PROMPT, NUMBER, STRING]
 	  };
+	  SUBST.contains = [STRING, NUMBER, PROMPT];
 	  return {
 	    aliases: ['py', 'gyp'],
-	    keywords: {
-	      keyword:
-	        'and elif is global as in if from raise for except finally print import pass return ' +
-	        'exec else break not with class assert yield try while continue del or def lambda ' +
-	        'async await nonlocal|10 None True False',
-	      built_in:
-	        'Ellipsis NotImplemented'
-	    },
-	    illegal: /(<\/|->|\?)/,
+	    keywords: KEYWORDS,
+	    illegal: /(<\/|->|\?)|=>/,
 	    contains: [
 	      PROMPT,
 	      NUMBER,
@@ -17355,7 +16332,7 @@ webpackJsonp([0],[
 	      hljs.HASH_COMMENT_MODE,
 	      {
 	        variants: [
-	          {className: 'function', beginKeywords: 'def', relevance: 10},
+	          {className: 'function', beginKeywords: 'def'},
 	          {className: 'class', beginKeywords: 'class'}
 	        ],
 	        end: /:/,
@@ -17381,7 +16358,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 345 */
+/* 162 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -17408,7 +16385,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 346 */
+/* 163 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -17581,7 +16558,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 347 */
+/* 164 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -17655,7 +16632,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 348 */
+/* 165 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -17686,7 +16663,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 349 */
+/* 166 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -17757,7 +16734,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 350 */
+/* 167 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -17797,7 +16774,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 351 */
+/* 168 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -17862,32 +16839,36 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 352 */
+/* 169 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
-	  var NUM_SUFFIX = '([uif](8|16|32|64|size))\?';
+	  var NUM_SUFFIX = '([ui](8|16|32|64|128|size)|f(32|64))\?';
 	  var KEYWORDS =
 	    'alignof as be box break const continue crate do else enum extern ' +
 	    'false fn for if impl in let loop match mod mut offsetof once priv ' +
 	    'proc pub pure ref return self Self sizeof static struct super trait true ' +
-	    'type typeof unsafe unsized use virtual while where yield move default ' +
-	    'int i8 i16 i32 i64 isize ' +
-	    'uint u8 u32 u64 usize ' +
-	    'float f32 f64 ' +
-	    'str char bool'
+	    'type typeof unsafe unsized use virtual while where yield move default';
 	  var BUILTINS =
-	    // prelude
-	    'Copy Send Sized Sync Drop Fn FnMut FnOnce drop Box ToOwned Clone ' +
+	    // functions
+	    'drop ' +
+	    // types
+	    'i8 i16 i32 i64 i128 isize ' +
+	    'u8 u16 u32 u64 u128 usize ' +
+	    'f32 f64 ' +
+	    'str char bool ' +
+	    'Box Option Result String Vec ' +
+	    // traits
+	    'Copy Send Sized Sync Drop Fn FnMut FnOnce ToOwned Clone Debug ' +
 	    'PartialEq PartialOrd Eq Ord AsRef AsMut Into From Default Iterator ' +
-	    'Extend IntoIterator DoubleEndedIterator ExactSizeIterator Option ' +
-	    'Result SliceConcatExt String ToString Vec ' +
+	    'Extend IntoIterator DoubleEndedIterator ExactSizeIterator ' +
+	    'SliceConcatExt ToString ' +
 	    // macros
 	    'assert! assert_eq! bitflags! bytes! cfg! col! concat! concat_idents! ' +
 	    'debug_assert! debug_assert_eq! env! panic! file! format! format_args! ' +
 	    'include_bin! include_str! line! local_data_key! module_path! ' +
 	    'option_env! print! println! select! stringify! try! unimplemented! ' +
-	    'unreachable! vec! write! writeln! macro_rules!';
+	    'unreachable! vec! write! writeln! macro_rules! assert_ne! debug_assert_ne!';
 	  return {
 	    aliases: ['rs'],
 	    keywords: {
@@ -17952,7 +16933,7 @@ webpackJsonp([0],[
 	      },
 	      {
 	        className: 'class',
-	        beginKeywords: 'trait enum struct', end: '{',
+	        beginKeywords: 'trait enum struct union', end: '{',
 	        contains: [
 	          hljs.inherit(hljs.UNDERSCORE_TITLE_MODE, {endsParent: true})
 	        ],
@@ -17970,7 +16951,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 353 */
+/* 170 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -18089,7 +17070,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 354 */
+/* 171 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -18190,7 +17171,10 @@ webpackJsonp([0],[
 	  };
 
 	  var QUOTED_LIST = {
-	    begin: /'/,
+	    variants: [
+	      { begin: /'/ },
+	      { begin: '`' }
+	    ],
 	    contains: [
 	      {
 	        begin: '\\(', end: '\\)',
@@ -18234,7 +17218,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 355 */
+/* 172 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -18292,7 +17276,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 356 */
+/* 173 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -18394,7 +17378,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 357 */
+/* 174 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -18454,7 +17438,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 358 */
+/* 175 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -18508,7 +17492,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 359 */
+/* 176 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -18578,11 +17562,24 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 360 */
+/* 177 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
 	  var CPP = hljs.getLanguage('cpp').exports;
+
+	  // In SQF, a variable start with _
+	  var VARIABLE = {
+	    className: 'variable',
+	    begin: /\b_+[a-zA-Z_]\w*/
+	  };
+
+	  // In SQF, a function should fit myTag_fnc_myFunction pattern
+	  // https://community.bistudio.com/wiki/Functions_Library_(Arma_3)#Adding_a_Function
+	  var FUNCTION = {
+	    className: 'title',
+	    begin: /[a-zA-Z][a-zA-Z0-9]+_fnc_\w*/
+	  };
 
 	  // In SQF strings, quotes matching the start are escaped by adding a consecutive.
 	  // Example of single escaped quotes: " "" " and  ' '' '.
@@ -18608,426 +17605,321 @@ webpackJsonp([0],[
 	    keywords: {
 	      keyword:
 	        'case catch default do else exit exitWith for forEach from if ' +
-	        'switch then throw to try while with',
+	        'switch then throw to try waitUntil while with',
 	      built_in:
-	        'or plus abs accTime acos action actionKeys actionKeysImages ' +
-	        'actionKeysNames actionKeysNamesArray actionName activateAddons ' +
-	        'activatedAddons activateKey addAction addBackpack addBackpackCargo ' +
-	        'addBackpackCargoGlobal addBackpackGlobal addCamShake ' +
-	        'addCuratorAddons addCuratorCameraArea addCuratorEditableObjects ' +
-	        'addCuratorEditingArea addCuratorPoints addEditorObject ' +
-	        'addEventHandler addGoggles addGroupIcon addHandgunItem addHeadgear ' +
-	        'addItem addItemCargo addItemCargoGlobal addItemPool ' +
-	        'addItemToBackpack addItemToUniform addItemToVest addLiveStats ' +
-	        'addMagazine addMagazine array addMagazineAmmoCargo ' +
-	        'addMagazineCargo addMagazineCargoGlobal addMagazineGlobal ' +
-	        'addMagazinePool addMagazines addMagazineTurret addMenu addMenuItem ' +
-	        'addMissionEventHandler addMPEventHandler addMusicEventHandler ' +
-	        'addPrimaryWeaponItem addPublicVariableEventHandler addRating ' +
-	        'addResources addScore addScoreSide addSecondaryWeaponItem ' +
-	        'addSwitchableUnit addTeamMember addToRemainsCollector addUniform ' +
-	        'addVehicle addVest addWaypoint addWeapon addWeaponCargo ' +
-	        'addWeaponCargoGlobal addWeaponGlobal addWeaponPool addWeaponTurret ' +
-	        'agent agents AGLToASL aimedAtTarget aimPos airDensityRTD ' +
-	        'airportSide AISFinishHeal alive allControls allCurators allDead ' +
-	        'allDeadMen allDisplays allGroups allMapMarkers allMines ' +
-	        'allMissionObjects allow3DMode allowCrewInImmobile ' +
-	        'allowCuratorLogicIgnoreAreas allowDamage allowDammage ' +
-	        'allowFileOperations allowFleeing allowGetIn allPlayers allSites ' +
-	        'allTurrets allUnits allUnitsUAV allVariables ammo and animate ' +
-	        'animateDoor animationPhase animationState append armoryPoints ' +
-	        'arrayIntersect asin ASLToAGL ASLToATL assert assignAsCargo ' +
-	        'assignAsCargoIndex assignAsCommander assignAsDriver assignAsGunner ' +
-	        'assignAsTurret assignCurator assignedCargo assignedCommander ' +
-	        'assignedDriver assignedGunner assignedItems assignedTarget ' +
-	        'assignedTeam assignedVehicle assignedVehicleRole assignItem ' +
-	        'assignTeam assignToAirport atan atan2 atg ATLToASL attachedObject ' +
-	        'attachedObjects attachedTo attachObject attachTo attackEnabled ' +
-	        'backpack backpackCargo backpackContainer backpackItems ' +
-	        'backpackMagazines backpackSpaceFor behaviour benchmark binocular ' +
-	        'blufor boundingBox boundingBoxReal boundingCenter breakOut breakTo ' +
-	        'briefingName buildingExit buildingPos buttonAction buttonSetAction ' +
-	        'cadetMode call callExtension camCommand camCommit ' +
-	        'camCommitPrepared camCommitted camConstuctionSetParams camCreate ' +
-	        'camDestroy cameraEffect cameraEffectEnableHUD cameraInterest ' +
-	        'cameraOn cameraView campaignConfigFile camPreload camPreloaded ' +
-	        'camPrepareBank camPrepareDir camPrepareDive camPrepareFocus ' +
-	        'camPrepareFov camPrepareFovRange camPreparePos camPrepareRelPos ' +
-	        'camPrepareTarget camSetBank camSetDir camSetDive camSetFocus ' +
-	        'camSetFov camSetFovRange camSetPos camSetRelPos camSetTarget ' +
-	        'camTarget camUseNVG canAdd canAddItemToBackpack ' +
-	        'canAddItemToUniform canAddItemToVest cancelSimpleTaskDestination ' +
-	        'canFire canMove canSlingLoad canStand canUnloadInCombat captive ' +
-	        'captiveNum cbChecked cbSetChecked ceil cheatsEnabled ' +
-	        'checkAIFeature civilian className clearAllItemsFromBackpack ' +
-	        'clearBackpackCargo clearBackpackCargoGlobal clearGroupIcons ' +
-	        'clearItemCargo clearItemCargoGlobal clearItemPool ' +
-	        'clearMagazineCargo clearMagazineCargoGlobal clearMagazinePool ' +
-	        'clearOverlay clearRadio clearWeaponCargo clearWeaponCargoGlobal ' +
-	        'clearWeaponPool closeDialog closeDisplay closeOverlay ' +
-	        'collapseObjectTree combatMode commandArtilleryFire commandChat ' +
-	        'commander commandFire commandFollow commandFSM commandGetOut ' +
-	        'commandingMenu commandMove commandRadio commandStop commandTarget ' +
-	        'commandWatch comment commitOverlay compile compileFinal ' +
-	        'completedFSM composeText configClasses configFile configHierarchy ' +
-	        'configName configProperties configSourceMod configSourceModList ' +
-	        'connectTerminalToUAV controlNull controlsGroupCtrl ' +
-	        'copyFromClipboard copyToClipboard copyWaypoints cos count ' +
-	        'countEnemy countFriendly countSide countType countUnknown ' +
-	        'createAgent createCenter createDialog createDiaryLink ' +
-	        'createDiaryRecord createDiarySubject createDisplay ' +
-	        'createGearDialog createGroup createGuardedPoint createLocation ' +
-	        'createMarker createMarkerLocal createMenu createMine ' +
-	        'createMissionDisplay createSimpleTask createSite createSoundSource ' +
-	        'createTask createTeam createTrigger createUnit createUnit array ' +
-	        'createVehicle createVehicle array createVehicleCrew ' +
-	        'createVehicleLocal crew ctrlActivate ctrlAddEventHandler ' +
-	        'ctrlAutoScrollDelay ctrlAutoScrollRewind ctrlAutoScrollSpeed ' +
-	        'ctrlChecked ctrlClassName ctrlCommit ctrlCommitted ctrlCreate ' +
-	        'ctrlDelete ctrlEnable ctrlEnabled ctrlFade ctrlHTMLLoaded ctrlIDC ' +
-	        'ctrlIDD ctrlMapAnimAdd ctrlMapAnimClear ctrlMapAnimCommit ' +
-	        'ctrlMapAnimDone ctrlMapCursor ctrlMapMouseOver ctrlMapScale ' +
-	        'ctrlMapScreenToWorld ctrlMapWorldToScreen ctrlModel ' +
-	        'ctrlModelDirAndUp ctrlModelScale ctrlParent ctrlPosition ' +
-	        'ctrlRemoveAllEventHandlers ctrlRemoveEventHandler ctrlScale ' +
-	        'ctrlSetActiveColor ctrlSetAutoScrollDelay ctrlSetAutoScrollRewind ' +
-	        'ctrlSetAutoScrollSpeed ctrlSetBackgroundColor ctrlSetChecked ' +
-	        'ctrlSetEventHandler ctrlSetFade ctrlSetFocus ctrlSetFont ' +
-	        'ctrlSetFontH1 ctrlSetFontH1B ctrlSetFontH2 ctrlSetFontH2B ' +
-	        'ctrlSetFontH3 ctrlSetFontH3B ctrlSetFontH4 ctrlSetFontH4B ' +
-	        'ctrlSetFontH5 ctrlSetFontH5B ctrlSetFontH6 ctrlSetFontH6B ' +
-	        'ctrlSetFontHeight ctrlSetFontHeightH1 ctrlSetFontHeightH2 ' +
-	        'ctrlSetFontHeightH3 ctrlSetFontHeightH4 ctrlSetFontHeightH5 ' +
-	        'ctrlSetFontHeightH6 ctrlSetFontP ctrlSetFontPB ' +
-	        'ctrlSetForegroundColor ctrlSetModel ctrlSetModelDirAndUp ' +
-	        'ctrlSetModelScale ctrlSetPosition ctrlSetScale ' +
-	        'ctrlSetStructuredText ctrlSetText ctrlSetTextColor ctrlSetTooltip ' +
-	        'ctrlSetTooltipColorBox ctrlSetTooltipColorShade ' +
-	        'ctrlSetTooltipColorText ctrlShow ctrlShown ctrlText ctrlTextHeight ' +
-	        'ctrlType ctrlVisible curatorAddons curatorCamera curatorCameraArea ' +
-	        'curatorCameraAreaCeiling curatorCoef curatorEditableObjects ' +
-	        'curatorEditingArea curatorEditingAreaType curatorMouseOver ' +
-	        'curatorPoints curatorRegisteredObjects curatorSelected ' +
-	        'curatorWaypointCost currentChannel currentCommand currentMagazine ' +
-	        'currentMagazineDetail currentMagazineDetailTurret ' +
-	        'currentMagazineTurret currentMuzzle currentNamespace currentTask ' +
-	        'currentTasks currentThrowable currentVisionMode currentWaypoint ' +
-	        'currentWeapon currentWeaponMode currentWeaponTurret currentZeroing ' +
-	        'cursorTarget customChat customRadio cutFadeOut cutObj cutRsc ' +
-	        'cutText damage date dateToNumber daytime deActivateKey ' +
-	        'debriefingText debugFSM debugLog deg deleteAt deleteCenter ' +
-	        'deleteCollection deleteEditorObject deleteGroup deleteIdentity ' +
-	        'deleteLocation deleteMarker deleteMarkerLocal deleteRange ' +
-	        'deleteResources deleteSite deleteStatus deleteTeam deleteVehicle ' +
-	        'deleteVehicleCrew deleteWaypoint detach detectedMines ' +
-	        'diag activeMissionFSMs diag activeSQFScripts diag activeSQSScripts ' +
-	        'diag captureFrame diag captureSlowFrame diag fps diag fpsMin ' +
-	        'diag frameNo diag log diag logSlowFrame diag tickTime dialog ' +
-	        'diarySubjectExists didJIP didJIPOwner difficulty difficultyEnabled ' +
-	        'difficultyEnabledRTD direction directSay disableAI ' +
-	        'disableCollisionWith disableConversation disableDebriefingStats ' +
-	        'disableSerialization disableTIEquipment disableUAVConnectability ' +
-	        'disableUserInput displayAddEventHandler displayCtrl displayNull ' +
-	        'displayRemoveAllEventHandlers displayRemoveEventHandler ' +
-	        'displaySetEventHandler dissolveTeam distance distance2D ' +
-	        'distanceSqr distributionRegion doArtilleryFire doFire doFollow ' +
-	        'doFSM doGetOut doMove doorPhase doStop doTarget doWatch drawArrow ' +
-	        'drawEllipse drawIcon drawIcon3D drawLine drawLine3D drawLink ' +
-	        'drawLocation drawRectangle driver drop east echo editObject ' +
-	        'editorSetEventHandler effectiveCommander emptyPositions enableAI ' +
-	        'enableAIFeature enableAttack enableCamShake enableCaustics ' +
-	        'enableCollisionWith enableCopilot enableDebriefingStats ' +
-	        'enableDiagLegend enableEndDialog enableEngineArtillery ' +
-	        'enableEnvironment enableFatigue enableGunLights enableIRLasers ' +
-	        'enableMimics enablePersonTurret enableRadio enableReload ' +
-	        'enableRopeAttach enableSatNormalOnDetail enableSaving ' +
-	        'enableSentences enableSimulation enableSimulationGlobal ' +
-	        'enableTeamSwitch enableUAVConnectability enableUAVWaypoints ' +
-	        'endLoadingScreen endMission engineOn enginesIsOnRTD enginesRpmRTD ' +
-	        'enginesTorqueRTD entities estimatedEndServerTime estimatedTimeLeft ' +
-	        'evalObjectArgument everyBackpack everyContainer exec ' +
-	        'execEditorScript execFSM execVM exp expectedDestination ' +
-	        'eyeDirection eyePos face faction fadeMusic fadeRadio fadeSound ' +
-	        'fadeSpeech failMission fillWeaponsFromPool find findCover ' +
-	        'findDisplay findEditorObject findEmptyPosition ' +
-	        'findEmptyPositionReady findNearestEnemy finishMissionInit finite ' +
-	        'fire fireAtTarget firstBackpack flag flagOwner fleeing floor ' +
-	        'flyInHeight fog fogForecast fogParams forceAddUniform forceEnd ' +
-	        'forceMap forceRespawn forceSpeed forceWalk forceWeaponFire ' +
-	        'forceWeatherChange forEachMember forEachMemberAgent ' +
-	        'forEachMemberTeam format formation formationDirection ' +
-	        'formationLeader formationMembers formationPosition formationTask ' +
-	        'formatText formLeader freeLook fromEditor fuel fullCrew ' +
-	        'gearSlotAmmoCount gearSlotData getAllHitPointsDamage getAmmoCargo ' +
-	        'getArray getArtilleryAmmo getArtilleryComputerSettings ' +
-	        'getArtilleryETA getAssignedCuratorLogic getAssignedCuratorUnit ' +
-	        'getBackpackCargo getBleedingRemaining getBurningValue ' +
-	        'getCargoIndex getCenterOfMass getClientState getConnectedUAV ' +
-	        'getDammage getDescription getDir getDirVisual getDLCs ' +
-	        'getEditorCamera getEditorMode getEditorObjectScope ' +
-	        'getElevationOffset getFatigue getFriend getFSMVariable ' +
-	        'getFuelCargo getGroupIcon getGroupIconParams getGroupIcons ' +
-	        'getHideFrom getHit getHitIndex getHitPointDamage getItemCargo ' +
-	        'getMagazineCargo getMarkerColor getMarkerPos getMarkerSize ' +
-	        'getMarkerType getMass getModelInfo getNumber getObjectArgument ' +
-	        'getObjectChildren getObjectDLC getObjectMaterials getObjectProxy ' +
-	        'getObjectTextures getObjectType getObjectViewDistance ' +
-	        'getOxygenRemaining getPersonUsedDLCs getPlayerChannel getPlayerUID ' +
-	        'getPos getPosASL getPosASLVisual getPosASLW getPosATL ' +
-	        'getPosATLVisual getPosVisual getPosWorld getRepairCargo ' +
-	        'getResolution getShadowDistance getSlingLoad getSpeed ' +
-	        'getSuppression getTerrainHeightASL getText getVariable ' +
-	        'getWeaponCargo getWPPos glanceAt globalChat globalRadio goggles ' +
-	        'goto group groupChat groupFromNetId groupIconSelectable ' +
-	        'groupIconsVisible groupId groupOwner groupRadio groupSelectedUnits ' +
-	        'groupSelectUnit grpNull gunner gusts halt handgunItems ' +
-	        'handgunMagazine handgunWeapon handsHit hasInterface hasWeapon ' +
-	        'hcAllGroups hcGroupParams hcLeader hcRemoveAllGroups hcRemoveGroup ' +
-	        'hcSelected hcSelectGroup hcSetGroup hcShowBar hcShownBar headgear ' +
-	        'hideBody hideObject hideObjectGlobal hint hintC hintCadet ' +
-	        'hintSilent hmd hostMission htmlLoad HUDMovementLevels humidity ' +
-	        'image importAllGroups importance in incapacitatedState independent ' +
-	        'inflame inflamed inGameUISetEventHandler inheritsFrom ' +
-	        'initAmbientLife inputAction inRangeOfArtillery insertEditorObject ' +
-	        'intersect isAbleToBreathe isAgent isArray isAutoHoverOn ' +
-	        'isAutonomous isAutotest isBleeding isBurning isClass ' +
-	        'isCollisionLightOn isCopilotEnabled isDedicated isDLCAvailable ' +
-	        'isEngineOn isEqualTo isFlashlightOn isFlatEmpty isForcedWalk ' +
-	        'isFormationLeader isHidden isInRemainsCollector ' +
-	        'isInstructorFigureEnabled isIRLaserOn isKeyActive isKindOf ' +
-	        'isLightOn isLocalized isManualFire isMarkedForCollection ' +
-	        'isMultiplayer isNil isNull isNumber isObjectHidden isObjectRTD ' +
-	        'isOnRoad isPipEnabled isPlayer isRealTime isServer ' +
-	        'isShowing3DIcons isSteamMission isStreamFriendlyUIEnabled isText ' +
-	        'isTouchingGround isTurnedOut isTutHintsEnabled isUAVConnectable ' +
-	        'isUAVConnected isUniformAllowed isWalking isWeaponDeployed ' +
-	        'isWeaponRested itemCargo items itemsWithMagazines join joinAs ' +
-	        'joinAsSilent joinSilent joinString kbAddDatabase ' +
-	        'kbAddDatabaseTargets kbAddTopic kbHasTopic kbReact kbRemoveTopic ' +
-	        'kbTell kbWasSaid keyImage keyName knowsAbout land landAt ' +
-	        'landResult language laserTarget lbAdd lbClear lbColor lbCurSel ' +
-	        'lbData lbDelete lbIsSelected lbPicture lbSelection lbSetColor ' +
-	        'lbSetCurSel lbSetData lbSetPicture lbSetPictureColor ' +
-	        'lbSetPictureColorDisabled lbSetPictureColorSelected ' +
-	        'lbSetSelectColor lbSetSelectColorRight lbSetSelected lbSetTooltip ' +
-	        'lbSetValue lbSize lbSort lbSortByValue lbText lbValue leader ' +
-	        'leaderboardDeInit leaderboardGetRows leaderboardInit leaveVehicle ' +
-	        'libraryCredits libraryDisclaimers lifeState lightAttachObject ' +
-	        'lightDetachObject lightIsOn lightnings limitSpeed linearConversion ' +
-	        'lineBreak lineIntersects lineIntersectsObjs lineIntersectsSurfaces ' +
-	        'lineIntersectsWith linkItem list listObjects ln lnbAddArray ' +
-	        'lnbAddColumn lnbAddRow lnbClear lnbColor lnbCurSelRow lnbData ' +
-	        'lnbDeleteColumn lnbDeleteRow lnbGetColumnsPosition lnbPicture ' +
-	        'lnbSetColor lnbSetColumnsPos lnbSetCurSelRow lnbSetData ' +
-	        'lnbSetPicture lnbSetText lnbSetValue lnbSize lnbText lnbValue load ' +
-	        'loadAbs loadBackpack loadFile loadGame loadIdentity loadMagazine ' +
-	        'loadOverlay loadStatus loadUniform loadVest local localize ' +
-	        'locationNull locationPosition lock lockCameraTo lockCargo ' +
-	        'lockDriver locked lockedCargo lockedDriver lockedTurret lockTurret ' +
-	        'lockWP log logEntities lookAt lookAtPos magazineCargo magazines ' +
-	        'magazinesAllTurrets magazinesAmmo magazinesAmmoCargo ' +
-	        'magazinesAmmoFull magazinesDetail magazinesDetailBackpack ' +
-	        'magazinesDetailUniform magazinesDetailVest magazinesTurret ' +
-	        'magazineTurretAmmo mapAnimAdd mapAnimClear mapAnimCommit ' +
-	        'mapAnimDone mapCenterOnCamera mapGridPosition ' +
-	        'markAsFinishedOnSteam markerAlpha markerBrush markerColor ' +
-	        'markerDir markerPos markerShape markerSize markerText markerType ' +
-	        'max members min mineActive mineDetectedBy missionConfigFile ' +
-	        'missionName missionNamespace missionStart mod modelToWorld ' +
-	        'modelToWorldVisual moonIntensity morale move moveInAny moveInCargo ' +
-	        'moveInCommander moveInDriver moveInGunner moveInTurret ' +
-	        'moveObjectToEnd moveOut moveTime moveTo moveToCompleted ' +
-	        'moveToFailed musicVolume name name location nameSound nearEntities ' +
-	        'nearestBuilding nearestLocation nearestLocations ' +
-	        'nearestLocationWithDubbing nearestObject nearestObjects ' +
-	        'nearObjects nearObjectsReady nearRoads nearSupplies nearTargets ' +
-	        'needReload netId netObjNull newOverlay nextMenuItemIndex ' +
-	        'nextWeatherChange nMenuItems not numberToDate objectCurators ' +
-	        'objectFromNetId objectParent objNull objStatus onBriefingGroup ' +
-	        'onBriefingNotes onBriefingPlan onBriefingTeamSwitch ' +
-	        'onCommandModeChanged onDoubleClick onEachFrame onGroupIconClick ' +
-	        'onGroupIconOverEnter onGroupIconOverLeave ' +
-	        'onHCGroupSelectionChanged onMapSingleClick onPlayerConnected ' +
-	        'onPlayerDisconnected onPreloadFinished onPreloadStarted ' +
-	        'onShowNewObject onTeamSwitch openCuratorInterface openMap ' +
-	        'openYoutubeVideo opfor or orderGetIn overcast overcastForecast ' +
-	        'owner param params parseNumber parseText parsingNamespace ' +
-	        'particlesQuality pi pickWeaponPool pitch playableSlotsNumber ' +
-	        'playableUnits playAction playActionNow player playerRespawnTime ' +
-	        'playerSide playersNumber playGesture playMission playMove ' +
-	        'playMoveNow playMusic playScriptedMission playSound playSound3D ' +
-	        'position positionCameraToWorld posScreenToWorld posWorldToScreen ' +
-	        'ppEffectAdjust ppEffectCommit ppEffectCommitted ppEffectCreate ' +
-	        'ppEffectDestroy ppEffectEnable ppEffectForceInNVG precision ' +
-	        'preloadCamera preloadObject preloadSound preloadTitleObj ' +
-	        'preloadTitleRsc preprocessFile preprocessFileLineNumbers ' +
-	        'primaryWeapon primaryWeaponItems primaryWeaponMagazine priority ' +
-	        'private processDiaryLink productVersion profileName ' +
-	        'profileNamespace profileNameSteam progressLoadingScreen ' +
-	        'progressPosition progressSetPosition publicVariable ' +
-	        'publicVariableClient publicVariableServer pushBack putWeaponPool ' +
-	        'queryItemsPool queryMagazinePool queryWeaponPool rad ' +
-	        'radioChannelAdd radioChannelCreate radioChannelRemove ' +
-	        'radioChannelSetCallSign radioChannelSetLabel radioVolume rain ' +
-	        'rainbow random rank rankId rating rectangular registeredTasks ' +
-	        'registerTask reload reloadEnabled remoteControl remoteExec ' +
-	        'remoteExecCall removeAction removeAllActions ' +
-	        'removeAllAssignedItems removeAllContainers removeAllCuratorAddons ' +
-	        'removeAllCuratorCameraAreas removeAllCuratorEditingAreas ' +
-	        'removeAllEventHandlers removeAllHandgunItems removeAllItems ' +
-	        'removeAllItemsWithMagazines removeAllMissionEventHandlers ' +
-	        'removeAllMPEventHandlers removeAllMusicEventHandlers ' +
-	        'removeAllPrimaryWeaponItems removeAllWeapons removeBackpack ' +
-	        'removeBackpackGlobal removeCuratorAddons removeCuratorCameraArea ' +
-	        'removeCuratorEditableObjects removeCuratorEditingArea ' +
-	        'removeDrawIcon removeDrawLinks removeEventHandler ' +
-	        'removeFromRemainsCollector removeGoggles removeGroupIcon ' +
-	        'removeHandgunItem removeHeadgear removeItem removeItemFromBackpack ' +
-	        'removeItemFromUniform removeItemFromVest removeItems ' +
-	        'removeMagazine removeMagazineGlobal removeMagazines ' +
-	        'removeMagazinesTurret removeMagazineTurret removeMenuItem ' +
-	        'removeMissionEventHandler removeMPEventHandler ' +
-	        'removeMusicEventHandler removePrimaryWeaponItem ' +
-	        'removeSecondaryWeaponItem removeSimpleTask removeSwitchableUnit ' +
-	        'removeTeamMember removeUniform removeVest removeWeapon ' +
-	        'removeWeaponGlobal removeWeaponTurret requiredVersion ' +
-	        'resetCamShake resetSubgroupDirection resistance resize resources ' +
-	        'respawnVehicle restartEditorCamera reveal revealMine reverse ' +
-	        'reversedMouseY roadsConnectedTo roleDescription ' +
-	        'ropeAttachedObjects ropeAttachedTo ropeAttachEnabled ropeAttachTo ' +
-	        'ropeCreate ropeCut ropeEndPosition ropeLength ropes ropeUnwind ' +
-	        'ropeUnwound rotorsForcesRTD rotorsRpmRTD round runInitScript ' +
-	        'safeZoneH safeZoneW safeZoneWAbs safeZoneX safeZoneXAbs safeZoneY ' +
-	        'saveGame saveIdentity saveJoysticks saveOverlay ' +
-	        'saveProfileNamespace saveStatus saveVar savingEnabled say say2D ' +
-	        'say3D scopeName score scoreSide screenToWorld scriptDone ' +
-	        'scriptName scriptNull scudState secondaryWeapon ' +
-	        'secondaryWeaponItems secondaryWeaponMagazine select ' +
-	        'selectBestPlaces selectDiarySubject selectedEditorObjects ' +
-	        'selectEditorObject selectionPosition selectLeader selectNoPlayer ' +
-	        'selectPlayer selectWeapon selectWeaponTurret sendAUMessage ' +
-	        'sendSimpleCommand sendTask sendTaskResult sendUDPMessage ' +
-	        'serverCommand serverCommandAvailable serverCommandExecutable ' +
-	        'serverName serverTime set setAccTime setAirportSide setAmmo ' +
-	        'setAmmoCargo setAperture setApertureNew setArmoryPoints ' +
-	        'setAttributes setAutonomous setBehaviour setBleedingRemaining ' +
-	        'setCameraInterest setCamShakeDefParams setCamShakeParams ' +
-	        'setCamUseTi setCaptive setCenterOfMass setCollisionLight ' +
-	        'setCombatMode setCompassOscillation setCuratorCameraAreaCeiling ' +
-	        'setCuratorCoef setCuratorEditingAreaType setCuratorWaypointCost ' +
-	        'setCurrentChannel setCurrentTask setCurrentWaypoint setDamage ' +
-	        'setDammage setDate setDebriefingText setDefaultCamera ' +
-	        'setDestination setDetailMapBlendPars setDir setDirection ' +
-	        'setDrawIcon setDropInterval setEditorMode setEditorObjectScope ' +
-	        'setEffectCondition setFace setFaceAnimation setFatigue ' +
-	        'setFlagOwner setFlagSide setFlagTexture setFog setFog array ' +
-	        'setFormation setFormationTask setFormDir setFriend setFromEditor ' +
-	        'setFSMVariable setFuel setFuelCargo setGroupIcon ' +
-	        'setGroupIconParams setGroupIconsSelectable setGroupIconsVisible ' +
-	        'setGroupId setGroupIdGlobal setGroupOwner setGusts setHideBehind ' +
-	        'setHit setHitIndex setHitPointDamage setHorizonParallaxCoef ' +
-	        'setHUDMovementLevels setIdentity setImportance setLeader ' +
-	        'setLightAmbient setLightAttenuation setLightBrightness ' +
-	        'setLightColor setLightDayLight setLightFlareMaxDistance ' +
-	        'setLightFlareSize setLightIntensity setLightnings setLightUseFlare ' +
-	        'setLocalWindParams setMagazineTurretAmmo setMarkerAlpha ' +
-	        'setMarkerAlphaLocal setMarkerBrush setMarkerBrushLocal ' +
-	        'setMarkerColor setMarkerColorLocal setMarkerDir setMarkerDirLocal ' +
-	        'setMarkerPos setMarkerPosLocal setMarkerShape setMarkerShapeLocal ' +
-	        'setMarkerSize setMarkerSizeLocal setMarkerText setMarkerTextLocal ' +
-	        'setMarkerType setMarkerTypeLocal setMass setMimic setMousePosition ' +
-	        'setMusicEffect setMusicEventHandler setName setNameSound ' +
-	        'setObjectArguments setObjectMaterial setObjectProxy ' +
-	        'setObjectTexture setObjectTextureGlobal setObjectViewDistance ' +
-	        'setOvercast setOwner setOxygenRemaining setParticleCircle ' +
-	        'setParticleClass setParticleFire setParticleParams ' +
-	        'setParticleRandom setPilotLight setPiPEffect setPitch setPlayable ' +
-	        'setPlayerRespawnTime setPos setPosASL setPosASL2 setPosASLW ' +
-	        'setPosATL setPosition setPosWorld setRadioMsg setRain setRainbow ' +
-	        'setRandomLip setRank setRectangular setRepairCargo ' +
-	        'setShadowDistance setSide setSimpleTaskDescription ' +
-	        'setSimpleTaskDestination setSimpleTaskTarget setSimulWeatherLayers ' +
-	        'setSize setSkill setSkill array setSlingLoad setSoundEffect ' +
-	        'setSpeaker setSpeech setSpeedMode setStatValue setSuppression ' +
-	        'setSystemOfUnits setTargetAge setTaskResult setTaskState ' +
-	        'setTerrainGrid setText setTimeMultiplier setTitleEffect ' +
-	        'setTriggerActivation setTriggerArea setTriggerStatements ' +
-	        'setTriggerText setTriggerTimeout setTriggerType setType ' +
-	        'setUnconscious setUnitAbility setUnitPos setUnitPosWeak ' +
-	        'setUnitRank setUnitRecoilCoefficient setUnloadInCombat ' +
-	        'setUserActionText setVariable setVectorDir setVectorDirAndUp ' +
-	        'setVectorUp setVehicleAmmo setVehicleAmmoDef setVehicleArmor ' +
-	        'setVehicleId setVehicleLock setVehiclePosition setVehicleTiPars ' +
-	        'setVehicleVarName setVelocity setVelocityTransformation ' +
-	        'setViewDistance setVisibleIfTreeCollapsed setWaves ' +
-	        'setWaypointBehaviour setWaypointCombatMode ' +
-	        'setWaypointCompletionRadius setWaypointDescription ' +
-	        'setWaypointFormation setWaypointHousePosition ' +
-	        'setWaypointLoiterRadius setWaypointLoiterType setWaypointName ' +
-	        'setWaypointPosition setWaypointScript setWaypointSpeed ' +
-	        'setWaypointStatements setWaypointTimeout setWaypointType ' +
-	        'setWaypointVisible setWeaponReloadingTime setWind setWindDir ' +
-	        'setWindForce setWindStr setWPPos show3DIcons showChat ' +
-	        'showCinemaBorder showCommandingMenu showCompass showCuratorCompass ' +
-	        'showGPS showHUD showLegend showMap shownArtilleryComputer ' +
-	        'shownChat shownCompass shownCuratorCompass showNewEditorObject ' +
-	        'shownGPS shownHUD shownMap shownPad shownRadio shownUAVFeed ' +
-	        'shownWarrant shownWatch showPad showRadio showSubtitles ' +
-	        'showUAVFeed showWarrant showWatch showWaypoint side sideChat ' +
-	        'sideEnemy sideFriendly sideLogic sideRadio sideUnknown simpleTasks ' +
-	        'simulationEnabled simulCloudDensity simulCloudOcclusion ' +
-	        'simulInClouds simulWeatherSync sin size sizeOf skill skillFinal ' +
-	        'skipTime sleep sliderPosition sliderRange sliderSetPosition ' +
-	        'sliderSetRange sliderSetSpeed sliderSpeed slingLoadAssistantShown ' +
-	        'soldierMagazines someAmmo sort soundVolume spawn speaker speed ' +
-	        'speedMode splitString sqrt squadParams stance startLoadingScreen ' +
-	        'step stop stopped str sunOrMoon supportInfo suppressFor ' +
-	        'surfaceIsWater surfaceNormal surfaceType swimInDepth ' +
-	        'switchableUnits switchAction switchCamera switchGesture ' +
-	        'switchLight switchMove synchronizedObjects synchronizedTriggers ' +
-	        'synchronizedWaypoints synchronizeObjectsAdd ' +
-	        'synchronizeObjectsRemove synchronizeTrigger synchronizeWaypoint ' +
-	        'synchronizeWaypoint trigger systemChat systemOfUnits tan ' +
-	        'targetKnowledge targetsAggregate targetsQuery taskChildren ' +
-	        'taskCompleted taskDescription taskDestination taskHint taskNull ' +
-	        'taskParent taskResult taskState teamMember teamMemberNull teamName ' +
-	        'teams teamSwitch teamSwitchEnabled teamType terminate ' +
-	        'terrainIntersect terrainIntersectASL text text location textLog ' +
-	        'textLogFormat tg time timeMultiplier titleCut titleFadeOut ' +
-	        'titleObj titleRsc titleText toArray toLower toString toUpper ' +
-	        'triggerActivated triggerActivation triggerArea ' +
-	        'triggerAttachedVehicle triggerAttachObject triggerAttachVehicle ' +
-	        'triggerStatements triggerText triggerTimeout triggerTimeoutCurrent ' +
-	        'triggerType turretLocal turretOwner turretUnit tvAdd tvClear ' +
-	        'tvCollapse tvCount tvCurSel tvData tvDelete tvExpand tvPicture ' +
-	        'tvSetCurSel tvSetData tvSetPicture tvSetPictureColor tvSetTooltip ' +
-	        'tvSetValue tvSort tvSortByValue tvText tvValue type typeName ' +
-	        'typeOf UAVControl uiNamespace uiSleep unassignCurator unassignItem ' +
-	        'unassignTeam unassignVehicle underwater uniform uniformContainer ' +
-	        'uniformItems uniformMagazines unitAddons unitBackpack unitPos ' +
-	        'unitReady unitRecoilCoefficient units unitsBelowHeight unlinkItem ' +
-	        'unlockAchievement unregisterTask updateDrawIcon updateMenuItem ' +
-	        'updateObjectTree useAudioTimeForMoves vectorAdd vectorCos ' +
-	        'vectorCrossProduct vectorDiff vectorDir vectorDirVisual ' +
-	        'vectorDistance vectorDistanceSqr vectorDotProduct vectorFromTo ' +
-	        'vectorMagnitude vectorMagnitudeSqr vectorMultiply vectorNormalized ' +
-	        'vectorUp vectorUpVisual vehicle vehicleChat vehicleRadio vehicles ' +
-	        'vehicleVarName velocity velocityModelSpace verifySignature vest ' +
-	        'vestContainer vestItems vestMagazines viewDistance visibleCompass ' +
-	        'visibleGPS visibleMap visiblePosition visiblePositionASL ' +
-	        'visibleWatch waitUntil waves waypointAttachedObject ' +
-	        'waypointAttachedVehicle waypointAttachObject waypointAttachVehicle ' +
-	        'waypointBehaviour waypointCombatMode waypointCompletionRadius ' +
-	        'waypointDescription waypointFormation waypointHousePosition ' +
-	        'waypointLoiterRadius waypointLoiterType waypointName ' +
-	        'waypointPosition waypoints waypointScript waypointsEnabledUAV ' +
-	        'waypointShow waypointSpeed waypointStatements waypointTimeout ' +
-	        'waypointTimeoutCurrent waypointType waypointVisible ' +
-	        'weaponAccessories weaponCargo weaponDirection weaponLowered ' +
-	        'weapons weaponsItems weaponsItemsCargo weaponState weaponsTurret ' +
-	        'weightRTD west WFSideText wind windDir windStr wingsForcesRTD ' +
-	        'worldName worldSize worldToModel worldToModelVisual worldToScreen ' +
-	        '_forEachIndex _this _x',
+	        'abs accTime acos action actionIDs actionKeys actionKeysImages actionKeysNames ' +
+	        'actionKeysNamesArray actionName actionParams activateAddons activatedAddons activateKey ' +
+	        'add3DENConnection add3DENEventHandler add3DENLayer addAction addBackpack addBackpackCargo ' +
+	        'addBackpackCargoGlobal addBackpackGlobal addCamShake addCuratorAddons addCuratorCameraArea ' +
+	        'addCuratorEditableObjects addCuratorEditingArea addCuratorPoints addEditorObject addEventHandler ' +
+	        'addGoggles addGroupIcon addHandgunItem addHeadgear addItem addItemCargo addItemCargoGlobal ' +
+	        'addItemPool addItemToBackpack addItemToUniform addItemToVest addLiveStats addMagazine ' +
+	        'addMagazineAmmoCargo addMagazineCargo addMagazineCargoGlobal addMagazineGlobal addMagazinePool ' +
+	        'addMagazines addMagazineTurret addMenu addMenuItem addMissionEventHandler addMPEventHandler ' +
+	        'addMusicEventHandler addOwnedMine addPlayerScores addPrimaryWeaponItem ' +
+	        'addPublicVariableEventHandler addRating addResources addScore addScoreSide addSecondaryWeaponItem ' +
+	        'addSwitchableUnit addTeamMember addToRemainsCollector addUniform addVehicle addVest addWaypoint ' +
+	        'addWeapon addWeaponCargo addWeaponCargoGlobal addWeaponGlobal addWeaponItem addWeaponPool ' +
+	        'addWeaponTurret agent agents AGLToASL aimedAtTarget aimPos airDensityRTD airportSide ' +
+	        'AISFinishHeal alive all3DENEntities allControls allCurators allCutLayers allDead allDeadMen ' +
+	        'allDisplays allGroups allMapMarkers allMines allMissionObjects allow3DMode allowCrewInImmobile ' +
+	        'allowCuratorLogicIgnoreAreas allowDamage allowDammage allowFileOperations allowFleeing allowGetIn ' +
+	        'allowSprint allPlayers allSites allTurrets allUnits allUnitsUAV allVariables ammo and animate ' +
+	        'animateDoor animateSource animationNames animationPhase animationSourcePhase animationState ' +
+	        'append apply armoryPoints arrayIntersect asin ASLToAGL ASLToATL assert assignAsCargo ' +
+	        'assignAsCargoIndex assignAsCommander assignAsDriver assignAsGunner assignAsTurret assignCurator ' +
+	        'assignedCargo assignedCommander assignedDriver assignedGunner assignedItems assignedTarget ' +
+	        'assignedTeam assignedVehicle assignedVehicleRole assignItem assignTeam assignToAirport atan atan2 ' +
+	        'atg ATLToASL attachedObject attachedObjects attachedTo attachObject attachTo attackEnabled ' +
+	        'backpack backpackCargo backpackContainer backpackItems backpackMagazines backpackSpaceFor ' +
+	        'behaviour benchmark binocular blufor boundingBox boundingBoxReal boundingCenter breakOut breakTo ' +
+	        'briefingName buildingExit buildingPos buttonAction buttonSetAction cadetMode call callExtension ' +
+	        'camCommand camCommit camCommitPrepared camCommitted camConstuctionSetParams camCreate camDestroy ' +
+	        'cameraEffect cameraEffectEnableHUD cameraInterest cameraOn cameraView campaignConfigFile ' +
+	        'camPreload camPreloaded camPrepareBank camPrepareDir camPrepareDive camPrepareFocus camPrepareFov ' +
+	        'camPrepareFovRange camPreparePos camPrepareRelPos camPrepareTarget camSetBank camSetDir ' +
+	        'camSetDive camSetFocus camSetFov camSetFovRange camSetPos camSetRelPos camSetTarget camTarget ' +
+	        'camUseNVG canAdd canAddItemToBackpack canAddItemToUniform canAddItemToVest ' +
+	        'cancelSimpleTaskDestination canFire canMove canSlingLoad canStand canSuspend canUnloadInCombat ' +
+	        'canVehicleCargo captive captiveNum cbChecked cbSetChecked ceil channelEnabled cheatsEnabled ' +
+	        'checkAIFeature checkVisibility civilian className clearAllItemsFromBackpack clearBackpackCargo ' +
+	        'clearBackpackCargoGlobal clearGroupIcons clearItemCargo clearItemCargoGlobal clearItemPool ' +
+	        'clearMagazineCargo clearMagazineCargoGlobal clearMagazinePool clearOverlay clearRadio ' +
+	        'clearWeaponCargo clearWeaponCargoGlobal clearWeaponPool clientOwner closeDialog closeDisplay ' +
+	        'closeOverlay collapseObjectTree collect3DENHistory combatMode commandArtilleryFire commandChat ' +
+	        'commander commandFire commandFollow commandFSM commandGetOut commandingMenu commandMove ' +
+	        'commandRadio commandStop commandSuppressiveFire commandTarget commandWatch comment commitOverlay ' +
+	        'compile compileFinal completedFSM composeText configClasses configFile configHierarchy configName ' +
+	        'configNull configProperties configSourceAddonList configSourceMod configSourceModList ' +
+	        'connectTerminalToUAV controlNull controlsGroupCtrl copyFromClipboard copyToClipboard ' +
+	        'copyWaypoints cos count countEnemy countFriendly countSide countType countUnknown ' +
+	        'create3DENComposition create3DENEntity createAgent createCenter createDialog createDiaryLink ' +
+	        'createDiaryRecord createDiarySubject createDisplay createGearDialog createGroup ' +
+	        'createGuardedPoint createLocation createMarker createMarkerLocal createMenu createMine ' +
+	        'createMissionDisplay createMPCampaignDisplay createSimpleObject createSimpleTask createSite ' +
+	        'createSoundSource createTask createTeam createTrigger createUnit createVehicle createVehicleCrew ' +
+	        'createVehicleLocal crew ctrlActivate ctrlAddEventHandler ctrlAngle ctrlAutoScrollDelay ' +
+	        'ctrlAutoScrollRewind ctrlAutoScrollSpeed ctrlChecked ctrlClassName ctrlCommit ctrlCommitted ' +
+	        'ctrlCreate ctrlDelete ctrlEnable ctrlEnabled ctrlFade ctrlHTMLLoaded ctrlIDC ctrlIDD ' +
+	        'ctrlMapAnimAdd ctrlMapAnimClear ctrlMapAnimCommit ctrlMapAnimDone ctrlMapCursor ctrlMapMouseOver ' +
+	        'ctrlMapScale ctrlMapScreenToWorld ctrlMapWorldToScreen ctrlModel ctrlModelDirAndUp ctrlModelScale ' +
+	        'ctrlParent ctrlParentControlsGroup ctrlPosition ctrlRemoveAllEventHandlers ctrlRemoveEventHandler ' +
+	        'ctrlScale ctrlSetActiveColor ctrlSetAngle ctrlSetAutoScrollDelay ctrlSetAutoScrollRewind ' +
+	        'ctrlSetAutoScrollSpeed ctrlSetBackgroundColor ctrlSetChecked ctrlSetEventHandler ctrlSetFade ' +
+	        'ctrlSetFocus ctrlSetFont ctrlSetFontH1 ctrlSetFontH1B ctrlSetFontH2 ctrlSetFontH2B ctrlSetFontH3 ' +
+	        'ctrlSetFontH3B ctrlSetFontH4 ctrlSetFontH4B ctrlSetFontH5 ctrlSetFontH5B ctrlSetFontH6 ' +
+	        'ctrlSetFontH6B ctrlSetFontHeight ctrlSetFontHeightH1 ctrlSetFontHeightH2 ctrlSetFontHeightH3 ' +
+	        'ctrlSetFontHeightH4 ctrlSetFontHeightH5 ctrlSetFontHeightH6 ctrlSetFontHeightSecondary ' +
+	        'ctrlSetFontP ctrlSetFontPB ctrlSetFontSecondary ctrlSetForegroundColor ctrlSetModel ' +
+	        'ctrlSetModelDirAndUp ctrlSetModelScale ctrlSetPosition ctrlSetScale ctrlSetStructuredText ' +
+	        'ctrlSetText ctrlSetTextColor ctrlSetTooltip ctrlSetTooltipColorBox ctrlSetTooltipColorShade ' +
+	        'ctrlSetTooltipColorText ctrlShow ctrlShown ctrlText ctrlTextHeight ctrlType ctrlVisible ' +
+	        'curatorAddons curatorCamera curatorCameraArea curatorCameraAreaCeiling curatorCoef ' +
+	        'curatorEditableObjects curatorEditingArea curatorEditingAreaType curatorMouseOver curatorPoints ' +
+	        'curatorRegisteredObjects curatorSelected curatorWaypointCost current3DENOperation currentChannel ' +
+	        'currentCommand currentMagazine currentMagazineDetail currentMagazineDetailTurret ' +
+	        'currentMagazineTurret currentMuzzle currentNamespace currentTask currentTasks currentThrowable ' +
+	        'currentVisionMode currentWaypoint currentWeapon currentWeaponMode currentWeaponTurret ' +
+	        'currentZeroing cursorObject cursorTarget customChat customRadio cutFadeOut cutObj cutRsc cutText ' +
+	        'damage date dateToNumber daytime deActivateKey debriefingText debugFSM debugLog deg ' +
+	        'delete3DENEntities deleteAt deleteCenter deleteCollection deleteEditorObject deleteGroup ' +
+	        'deleteIdentity deleteLocation deleteMarker deleteMarkerLocal deleteRange deleteResources ' +
+	        'deleteSite deleteStatus deleteTeam deleteVehicle deleteVehicleCrew deleteWaypoint detach ' +
+	        'detectedMines diag_activeMissionFSMs diag_activeScripts diag_activeSQFScripts ' +
+	        'diag_activeSQSScripts diag_captureFrame diag_captureSlowFrame diag_codePerformance diag_drawMode ' +
+	        'diag_enable diag_enabled diag_fps diag_fpsMin diag_frameNo diag_list diag_log diag_logSlowFrame ' +
+	        'diag_mergeConfigFile diag_recordTurretLimits diag_tickTime diag_toggle dialog diarySubjectExists ' +
+	        'didJIP didJIPOwner difficulty difficultyEnabled difficultyEnabledRTD difficultyOption direction ' +
+	        'directSay disableAI disableCollisionWith disableConversation disableDebriefingStats ' +
+	        'disableNVGEquipment disableRemoteSensors disableSerialization disableTIEquipment ' +
+	        'disableUAVConnectability disableUserInput displayAddEventHandler displayCtrl displayNull ' +
+	        'displayParent displayRemoveAllEventHandlers displayRemoveEventHandler displaySetEventHandler ' +
+	        'dissolveTeam distance distance2D distanceSqr distributionRegion do3DENAction doArtilleryFire ' +
+	        'doFire doFollow doFSM doGetOut doMove doorPhase doStop doSuppressiveFire doTarget doWatch ' +
+	        'drawArrow drawEllipse drawIcon drawIcon3D drawLine drawLine3D drawLink drawLocation drawPolygon ' +
+	        'drawRectangle driver drop east echo edit3DENMissionAttributes editObject editorSetEventHandler ' +
+	        'effectiveCommander emptyPositions enableAI enableAIFeature enableAimPrecision enableAttack ' +
+	        'enableAudioFeature enableCamShake enableCaustics enableChannel enableCollisionWith enableCopilot ' +
+	        'enableDebriefingStats enableDiagLegend enableEndDialog enableEngineArtillery enableEnvironment ' +
+	        'enableFatigue enableGunLights enableIRLasers enableMimics enablePersonTurret enableRadio ' +
+	        'enableReload enableRopeAttach enableSatNormalOnDetail enableSaving enableSentences ' +
+	        'enableSimulation enableSimulationGlobal enableStamina enableTeamSwitch enableUAVConnectability ' +
+	        'enableUAVWaypoints enableVehicleCargo endLoadingScreen endMission engineOn enginesIsOnRTD ' +
+	        'enginesRpmRTD enginesTorqueRTD entities estimatedEndServerTime estimatedTimeLeft ' +
+	        'evalObjectArgument everyBackpack everyContainer exec execEditorScript execFSM execVM exp ' +
+	        'expectedDestination exportJIPMessages eyeDirection eyePos face faction fadeMusic fadeRadio ' +
+	        'fadeSound fadeSpeech failMission fillWeaponsFromPool find findCover findDisplay findEditorObject ' +
+	        'findEmptyPosition findEmptyPositionReady findNearestEnemy finishMissionInit finite fire ' +
+	        'fireAtTarget firstBackpack flag flagOwner flagSide flagTexture fleeing floor flyInHeight ' +
+	        'flyInHeightASL fog fogForecast fogParams forceAddUniform forcedMap forceEnd forceMap forceRespawn ' +
+	        'forceSpeed forceWalk forceWeaponFire forceWeatherChange forEachMember forEachMemberAgent ' +
+	        'forEachMemberTeam format formation formationDirection formationLeader formationMembers ' +
+	        'formationPosition formationTask formatText formLeader freeLook fromEditor fuel fullCrew ' +
+	        'gearIDCAmmoCount gearSlotAmmoCount gearSlotData get3DENActionState get3DENAttribute get3DENCamera ' +
+	        'get3DENConnections get3DENEntity get3DENEntityID get3DENGrid get3DENIconsVisible ' +
+	        'get3DENLayerEntities get3DENLinesVisible get3DENMissionAttribute get3DENMouseOver get3DENSelected ' +
+	        'getAimingCoef getAllHitPointsDamage getAllOwnedMines getAmmoCargo getAnimAimPrecision ' +
+	        'getAnimSpeedCoef getArray getArtilleryAmmo getArtilleryComputerSettings getArtilleryETA ' +
+	        'getAssignedCuratorLogic getAssignedCuratorUnit getBackpackCargo getBleedingRemaining ' +
+	        'getBurningValue getCameraViewDirection getCargoIndex getCenterOfMass getClientState ' +
+	        'getClientStateNumber getConnectedUAV getCustomAimingCoef getDammage getDescription getDir ' +
+	        'getDirVisual getDLCs getEditorCamera getEditorMode getEditorObjectScope getElevationOffset ' +
+	        'getFatigue getFriend getFSMVariable getFuelCargo getGroupIcon getGroupIconParams getGroupIcons ' +
+	        'getHideFrom getHit getHitIndex getHitPointDamage getItemCargo getMagazineCargo getMarkerColor ' +
+	        'getMarkerPos getMarkerSize getMarkerType getMass getMissionConfig getMissionConfigValue ' +
+	        'getMissionDLCs getMissionLayerEntities getModelInfo getMousePosition getNumber getObjectArgument ' +
+	        'getObjectChildren getObjectDLC getObjectMaterials getObjectProxy getObjectTextures getObjectType ' +
+	        'getObjectViewDistance getOxygenRemaining getPersonUsedDLCs getPilotCameraDirection ' +
+	        'getPilotCameraPosition getPilotCameraRotation getPilotCameraTarget getPlayerChannel ' +
+	        'getPlayerScores getPlayerUID getPos getPosASL getPosASLVisual getPosASLW getPosATL ' +
+	        'getPosATLVisual getPosVisual getPosWorld getRelDir getRelPos getRemoteSensorsDisabled ' +
+	        'getRepairCargo getResolution getShadowDistance getShotParents getSlingLoad getSpeed getStamina ' +
+	        'getStatValue getSuppression getTerrainHeightASL getText getUnitLoadout getUnitTrait getVariable ' +
+	        'getVehicleCargo getWeaponCargo getWeaponSway getWPPos glanceAt globalChat globalRadio goggles ' +
+	        'goto group groupChat groupFromNetId groupIconSelectable groupIconsVisible groupId groupOwner ' +
+	        'groupRadio groupSelectedUnits groupSelectUnit grpNull gunner gusts halt handgunItems ' +
+	        'handgunMagazine handgunWeapon handsHit hasInterface hasPilotCamera hasWeapon hcAllGroups ' +
+	        'hcGroupParams hcLeader hcRemoveAllGroups hcRemoveGroup hcSelected hcSelectGroup hcSetGroup ' +
+	        'hcShowBar hcShownBar headgear hideBody hideObject hideObjectGlobal hideSelection hint hintC ' +
+	        'hintCadet hintSilent hmd hostMission htmlLoad HUDMovementLevels humidity image importAllGroups ' +
+	        'importance in inArea inAreaArray incapacitatedState independent inflame inflamed ' +
+	        'inGameUISetEventHandler inheritsFrom initAmbientLife inPolygon inputAction inRangeOfArtillery ' +
+	        'insertEditorObject intersect is3DEN is3DENMultiplayer isAbleToBreathe isAgent isArray ' +
+	        'isAutoHoverOn isAutonomous isAutotest isBleeding isBurning isClass isCollisionLightOn ' +
+	        'isCopilotEnabled isDedicated isDLCAvailable isEngineOn isEqualTo isEqualType isEqualTypeAll ' +
+	        'isEqualTypeAny isEqualTypeArray isEqualTypeParams isFilePatchingEnabled isFlashlightOn ' +
+	        'isFlatEmpty isForcedWalk isFormationLeader isHidden isInRemainsCollector ' +
+	        'isInstructorFigureEnabled isIRLaserOn isKeyActive isKindOf isLightOn isLocalized isManualFire ' +
+	        'isMarkedForCollection isMultiplayer isMultiplayerSolo isNil isNull isNumber isObjectHidden ' +
+	        'isObjectRTD isOnRoad isPipEnabled isPlayer isRealTime isRemoteExecuted isRemoteExecutedJIP ' +
+	        'isServer isShowing3DIcons isSprintAllowed isStaminaEnabled isSteamMission ' +
+	        'isStreamFriendlyUIEnabled isText isTouchingGround isTurnedOut isTutHintsEnabled isUAVConnectable ' +
+	        'isUAVConnected isUniformAllowed isVehicleCargo isWalking isWeaponDeployed isWeaponRested ' +
+	        'itemCargo items itemsWithMagazines join joinAs joinAsSilent joinSilent joinString kbAddDatabase ' +
+	        'kbAddDatabaseTargets kbAddTopic kbHasTopic kbReact kbRemoveTopic kbTell kbWasSaid keyImage ' +
+	        'keyName knowsAbout land landAt landResult language laserTarget lbAdd lbClear lbColor lbCurSel ' +
+	        'lbData lbDelete lbIsSelected lbPicture lbSelection lbSetColor lbSetCurSel lbSetData lbSetPicture ' +
+	        'lbSetPictureColor lbSetPictureColorDisabled lbSetPictureColorSelected lbSetSelectColor ' +
+	        'lbSetSelectColorRight lbSetSelected lbSetTooltip lbSetValue lbSize lbSort lbSortByValue lbText ' +
+	        'lbValue leader leaderboardDeInit leaderboardGetRows leaderboardInit leaveVehicle libraryCredits ' +
+	        'libraryDisclaimers lifeState lightAttachObject lightDetachObject lightIsOn lightnings limitSpeed ' +
+	        'linearConversion lineBreak lineIntersects lineIntersectsObjs lineIntersectsSurfaces ' +
+	        'lineIntersectsWith linkItem list listObjects ln lnbAddArray lnbAddColumn lnbAddRow lnbClear ' +
+	        'lnbColor lnbCurSelRow lnbData lnbDeleteColumn lnbDeleteRow lnbGetColumnsPosition lnbPicture ' +
+	        'lnbSetColor lnbSetColumnsPos lnbSetCurSelRow lnbSetData lnbSetPicture lnbSetText lnbSetValue ' +
+	        'lnbSize lnbText lnbValue load loadAbs loadBackpack loadFile loadGame loadIdentity loadMagazine ' +
+	        'loadOverlay loadStatus loadUniform loadVest local localize locationNull locationPosition lock ' +
+	        'lockCameraTo lockCargo lockDriver locked lockedCargo lockedDriver lockedTurret lockIdentity ' +
+	        'lockTurret lockWP log logEntities logNetwork logNetworkTerminate lookAt lookAtPos magazineCargo ' +
+	        'magazines magazinesAllTurrets magazinesAmmo magazinesAmmoCargo magazinesAmmoFull magazinesDetail ' +
+	        'magazinesDetailBackpack magazinesDetailUniform magazinesDetailVest magazinesTurret ' +
+	        'magazineTurretAmmo mapAnimAdd mapAnimClear mapAnimCommit mapAnimDone mapCenterOnCamera ' +
+	        'mapGridPosition markAsFinishedOnSteam markerAlpha markerBrush markerColor markerDir markerPos ' +
+	        'markerShape markerSize markerText markerType max members menuAction menuAdd menuChecked menuClear ' +
+	        'menuCollapse menuData menuDelete menuEnable menuEnabled menuExpand menuHover menuPicture ' +
+	        'menuSetAction menuSetCheck menuSetData menuSetPicture menuSetValue menuShortcut menuShortcutText ' +
+	        'menuSize menuSort menuText menuURL menuValue min mineActive mineDetectedBy missionConfigFile ' +
+	        'missionDifficulty missionName missionNamespace missionStart missionVersion mod modelToWorld ' +
+	        'modelToWorldVisual modParams moonIntensity moonPhase morale move move3DENCamera moveInAny ' +
+	        'moveInCargo moveInCommander moveInDriver moveInGunner moveInTurret moveObjectToEnd moveOut ' +
+	        'moveTime moveTo moveToCompleted moveToFailed musicVolume name nameSound nearEntities ' +
+	        'nearestBuilding nearestLocation nearestLocations nearestLocationWithDubbing nearestObject ' +
+	        'nearestObjects nearestTerrainObjects nearObjects nearObjectsReady nearRoads nearSupplies ' +
+	        'nearTargets needReload netId netObjNull newOverlay nextMenuItemIndex nextWeatherChange nMenuItems ' +
+	        'not numberToDate objectCurators objectFromNetId objectParent objNull objStatus onBriefingGroup ' +
+	        'onBriefingNotes onBriefingPlan onBriefingTeamSwitch onCommandModeChanged onDoubleClick ' +
+	        'onEachFrame onGroupIconClick onGroupIconOverEnter onGroupIconOverLeave onHCGroupSelectionChanged ' +
+	        'onMapSingleClick onPlayerConnected onPlayerDisconnected onPreloadFinished onPreloadStarted ' +
+	        'onShowNewObject onTeamSwitch openCuratorInterface openDLCPage openMap openYoutubeVideo opfor or ' +
+	        'orderGetIn overcast overcastForecast owner param params parseNumber parseText parsingNamespace ' +
+	        'particlesQuality pi pickWeaponPool pitch pixelGrid pixelGridBase pixelGridNoUIScale pixelH pixelW ' +
+	        'playableSlotsNumber playableUnits playAction playActionNow player playerRespawnTime playerSide ' +
+	        'playersNumber playGesture playMission playMove playMoveNow playMusic playScriptedMission ' +
+	        'playSound playSound3D position positionCameraToWorld posScreenToWorld posWorldToScreen ' +
+	        'ppEffectAdjust ppEffectCommit ppEffectCommitted ppEffectCreate ppEffectDestroy ppEffectEnable ' +
+	        'ppEffectEnabled ppEffectForceInNVG precision preloadCamera preloadObject preloadSound ' +
+	        'preloadTitleObj preloadTitleRsc preprocessFile preprocessFileLineNumbers primaryWeapon ' +
+	        'primaryWeaponItems primaryWeaponMagazine priority private processDiaryLink productVersion ' +
+	        'profileName profileNamespace profileNameSteam progressLoadingScreen progressPosition ' +
+	        'progressSetPosition publicVariable publicVariableClient publicVariableServer pushBack ' +
+	        'pushBackUnique putWeaponPool queryItemsPool queryMagazinePool queryWeaponPool rad radioChannelAdd ' +
+	        'radioChannelCreate radioChannelRemove radioChannelSetCallSign radioChannelSetLabel radioVolume ' +
+	        'rain rainbow random rank rankId rating rectangular registeredTasks registerTask reload ' +
+	        'reloadEnabled remoteControl remoteExec remoteExecCall remove3DENConnection remove3DENEventHandler ' +
+	        'remove3DENLayer removeAction removeAll3DENEventHandlers removeAllActions removeAllAssignedItems ' +
+	        'removeAllContainers removeAllCuratorAddons removeAllCuratorCameraAreas ' +
+	        'removeAllCuratorEditingAreas removeAllEventHandlers removeAllHandgunItems removeAllItems ' +
+	        'removeAllItemsWithMagazines removeAllMissionEventHandlers removeAllMPEventHandlers ' +
+	        'removeAllMusicEventHandlers removeAllOwnedMines removeAllPrimaryWeaponItems removeAllWeapons ' +
+	        'removeBackpack removeBackpackGlobal removeCuratorAddons removeCuratorCameraArea ' +
+	        'removeCuratorEditableObjects removeCuratorEditingArea removeDrawIcon removeDrawLinks ' +
+	        'removeEventHandler removeFromRemainsCollector removeGoggles removeGroupIcon removeHandgunItem ' +
+	        'removeHeadgear removeItem removeItemFromBackpack removeItemFromUniform removeItemFromVest ' +
+	        'removeItems removeMagazine removeMagazineGlobal removeMagazines removeMagazinesTurret ' +
+	        'removeMagazineTurret removeMenuItem removeMissionEventHandler removeMPEventHandler ' +
+	        'removeMusicEventHandler removeOwnedMine removePrimaryWeaponItem removeSecondaryWeaponItem ' +
+	        'removeSimpleTask removeSwitchableUnit removeTeamMember removeUniform removeVest removeWeapon ' +
+	        'removeWeaponGlobal removeWeaponTurret requiredVersion resetCamShake resetSubgroupDirection ' +
+	        'resistance resize resources respawnVehicle restartEditorCamera reveal revealMine reverse ' +
+	        'reversedMouseY roadAt roadsConnectedTo roleDescription ropeAttachedObjects ropeAttachedTo ' +
+	        'ropeAttachEnabled ropeAttachTo ropeCreate ropeCut ropeDestroy ropeDetach ropeEndPosition ' +
+	        'ropeLength ropes ropeUnwind ropeUnwound rotorsForcesRTD rotorsRpmRTD round runInitScript ' +
+	        'safeZoneH safeZoneW safeZoneWAbs safeZoneX safeZoneXAbs safeZoneY save3DENInventory saveGame ' +
+	        'saveIdentity saveJoysticks saveOverlay saveProfileNamespace saveStatus saveVar savingEnabled say ' +
+	        'say2D say3D scopeName score scoreSide screenshot screenToWorld scriptDone scriptName scriptNull ' +
+	        'scudState secondaryWeapon secondaryWeaponItems secondaryWeaponMagazine select selectBestPlaces ' +
+	        'selectDiarySubject selectedEditorObjects selectEditorObject selectionNames selectionPosition ' +
+	        'selectLeader selectMax selectMin selectNoPlayer selectPlayer selectRandom selectWeapon ' +
+	        'selectWeaponTurret sendAUMessage sendSimpleCommand sendTask sendTaskResult sendUDPMessage ' +
+	        'serverCommand serverCommandAvailable serverCommandExecutable serverName serverTime set ' +
+	        'set3DENAttribute set3DENAttributes set3DENGrid set3DENIconsVisible set3DENLayer ' +
+	        'set3DENLinesVisible set3DENMissionAttributes set3DENModelsVisible set3DENObjectType ' +
+	        'set3DENSelected setAccTime setAirportSide setAmmo setAmmoCargo setAnimSpeedCoef setAperture ' +
+	        'setApertureNew setArmoryPoints setAttributes setAutonomous setBehaviour setBleedingRemaining ' +
+	        'setCameraInterest setCamShakeDefParams setCamShakeParams setCamUseTi setCaptive setCenterOfMass ' +
+	        'setCollisionLight setCombatMode setCompassOscillation setCuratorCameraAreaCeiling setCuratorCoef ' +
+	        'setCuratorEditingAreaType setCuratorWaypointCost setCurrentChannel setCurrentTask ' +
+	        'setCurrentWaypoint setCustomAimCoef setDamage setDammage setDate setDebriefingText ' +
+	        'setDefaultCamera setDestination setDetailMapBlendPars setDir setDirection setDrawIcon ' +
+	        'setDropInterval setEditorMode setEditorObjectScope setEffectCondition setFace setFaceAnimation ' +
+	        'setFatigue setFlagOwner setFlagSide setFlagTexture setFog setFormation setFormationTask ' +
+	        'setFormDir setFriend setFromEditor setFSMVariable setFuel setFuelCargo setGroupIcon ' +
+	        'setGroupIconParams setGroupIconsSelectable setGroupIconsVisible setGroupId setGroupIdGlobal ' +
+	        'setGroupOwner setGusts setHideBehind setHit setHitIndex setHitPointDamage setHorizonParallaxCoef ' +
+	        'setHUDMovementLevels setIdentity setImportance setLeader setLightAmbient setLightAttenuation ' +
+	        'setLightBrightness setLightColor setLightDayLight setLightFlareMaxDistance setLightFlareSize ' +
+	        'setLightIntensity setLightnings setLightUseFlare setLocalWindParams setMagazineTurretAmmo ' +
+	        'setMarkerAlpha setMarkerAlphaLocal setMarkerBrush setMarkerBrushLocal setMarkerColor ' +
+	        'setMarkerColorLocal setMarkerDir setMarkerDirLocal setMarkerPos setMarkerPosLocal setMarkerShape ' +
+	        'setMarkerShapeLocal setMarkerSize setMarkerSizeLocal setMarkerText setMarkerTextLocal ' +
+	        'setMarkerType setMarkerTypeLocal setMass setMimic setMousePosition setMusicEffect ' +
+	        'setMusicEventHandler setName setNameSound setObjectArguments setObjectMaterial ' +
+	        'setObjectMaterialGlobal setObjectProxy setObjectTexture setObjectTextureGlobal ' +
+	        'setObjectViewDistance setOvercast setOwner setOxygenRemaining setParticleCircle setParticleClass ' +
+	        'setParticleFire setParticleParams setParticleRandom setPilotCameraDirection ' +
+	        'setPilotCameraRotation setPilotCameraTarget setPilotLight setPiPEffect setPitch setPlayable ' +
+	        'setPlayerRespawnTime setPos setPosASL setPosASL2 setPosASLW setPosATL setPosition setPosWorld ' +
+	        'setRadioMsg setRain setRainbow setRandomLip setRank setRectangular setRepairCargo ' +
+	        'setShadowDistance setShotParents setSide setSimpleTaskAlwaysVisible setSimpleTaskCustomData ' +
+	        'setSimpleTaskDescription setSimpleTaskDestination setSimpleTaskTarget setSimpleTaskType ' +
+	        'setSimulWeatherLayers setSize setSkill setSlingLoad setSoundEffect setSpeaker setSpeech ' +
+	        'setSpeedMode setStamina setStaminaScheme setStatValue setSuppression setSystemOfUnits ' +
+	        'setTargetAge setTaskResult setTaskState setTerrainGrid setText setTimeMultiplier setTitleEffect ' +
+	        'setTriggerActivation setTriggerArea setTriggerStatements setTriggerText setTriggerTimeout ' +
+	        'setTriggerType setType setUnconscious setUnitAbility setUnitLoadout setUnitPos setUnitPosWeak ' +
+	        'setUnitRank setUnitRecoilCoefficient setUnitTrait setUnloadInCombat setUserActionText setVariable ' +
+	        'setVectorDir setVectorDirAndUp setVectorUp setVehicleAmmo setVehicleAmmoDef setVehicleArmor ' +
+	        'setVehicleCargo setVehicleId setVehicleLock setVehiclePosition setVehicleTiPars setVehicleVarName ' +
+	        'setVelocity setVelocityTransformation setViewDistance setVisibleIfTreeCollapsed setWaves ' +
+	        'setWaypointBehaviour setWaypointCombatMode setWaypointCompletionRadius setWaypointDescription ' +
+	        'setWaypointForceBehaviour setWaypointFormation setWaypointHousePosition setWaypointLoiterRadius ' +
+	        'setWaypointLoiterType setWaypointName setWaypointPosition setWaypointScript setWaypointSpeed ' +
+	        'setWaypointStatements setWaypointTimeout setWaypointType setWaypointVisible ' +
+	        'setWeaponReloadingTime setWind setWindDir setWindForce setWindStr setWPPos show3DIcons showChat ' +
+	        'showCinemaBorder showCommandingMenu showCompass showCuratorCompass showGPS showHUD showLegend ' +
+	        'showMap shownArtilleryComputer shownChat shownCompass shownCuratorCompass showNewEditorObject ' +
+	        'shownGPS shownHUD shownMap shownPad shownRadio shownScoretable shownUAVFeed shownWarrant ' +
+	        'shownWatch showPad showRadio showScoretable showSubtitles showUAVFeed showWarrant showWatch ' +
+	        'showWaypoint showWaypoints side sideAmbientLife sideChat sideEmpty sideEnemy sideFriendly ' +
+	        'sideLogic sideRadio sideUnknown simpleTasks simulationEnabled simulCloudDensity ' +
+	        'simulCloudOcclusion simulInClouds simulWeatherSync sin size sizeOf skill skillFinal skipTime ' +
+	        'sleep sliderPosition sliderRange sliderSetPosition sliderSetRange sliderSetSpeed sliderSpeed ' +
+	        'slingLoadAssistantShown soldierMagazines someAmmo sort soundVolume spawn speaker speed speedMode ' +
+	        'splitString sqrt squadParams stance startLoadingScreen step stop stopEngineRTD stopped str ' +
+	        'sunOrMoon supportInfo suppressFor surfaceIsWater surfaceNormal surfaceType swimInDepth ' +
+	        'switchableUnits switchAction switchCamera switchGesture switchLight switchMove ' +
+	        'synchronizedObjects synchronizedTriggers synchronizedWaypoints synchronizeObjectsAdd ' +
+	        'synchronizeObjectsRemove synchronizeTrigger synchronizeWaypoint systemChat systemOfUnits tan ' +
+	        'targetKnowledge targetsAggregate targetsQuery taskAlwaysVisible taskChildren taskCompleted ' +
+	        'taskCustomData taskDescription taskDestination taskHint taskMarkerOffset taskNull taskParent ' +
+	        'taskResult taskState taskType teamMember teamMemberNull teamName teams teamSwitch ' +
+	        'teamSwitchEnabled teamType terminate terrainIntersect terrainIntersectASL text textLog ' +
+	        'textLogFormat tg time timeMultiplier titleCut titleFadeOut titleObj titleRsc titleText toArray ' +
+	        'toFixed toLower toString toUpper triggerActivated triggerActivation triggerArea ' +
+	        'triggerAttachedVehicle triggerAttachObject triggerAttachVehicle triggerStatements triggerText ' +
+	        'triggerTimeout triggerTimeoutCurrent triggerType turretLocal turretOwner turretUnit tvAdd tvClear ' +
+	        'tvCollapse tvCount tvCurSel tvData tvDelete tvExpand tvPicture tvSetCurSel tvSetData tvSetPicture ' +
+	        'tvSetPictureColor tvSetPictureColorDisabled tvSetPictureColorSelected tvSetPictureRight ' +
+	        'tvSetPictureRightColor tvSetPictureRightColorDisabled tvSetPictureRightColorSelected tvSetText ' +
+	        'tvSetTooltip tvSetValue tvSort tvSortByValue tvText tvTooltip tvValue type typeName typeOf ' +
+	        'UAVControl uiNamespace uiSleep unassignCurator unassignItem unassignTeam unassignVehicle ' +
+	        'underwater uniform uniformContainer uniformItems uniformMagazines unitAddons unitAimPosition ' +
+	        'unitAimPositionVisual unitBackpack unitIsUAV unitPos unitReady unitRecoilCoefficient units ' +
+	        'unitsBelowHeight unlinkItem unlockAchievement unregisterTask updateDrawIcon updateMenuItem ' +
+	        'updateObjectTree useAISteeringComponent useAudioTimeForMoves vectorAdd vectorCos ' +
+	        'vectorCrossProduct vectorDiff vectorDir vectorDirVisual vectorDistance vectorDistanceSqr ' +
+	        'vectorDotProduct vectorFromTo vectorMagnitude vectorMagnitudeSqr vectorMultiply vectorNormalized ' +
+	        'vectorUp vectorUpVisual vehicle vehicleCargoEnabled vehicleChat vehicleRadio vehicles ' +
+	        'vehicleVarName velocity velocityModelSpace verifySignature vest vestContainer vestItems ' +
+	        'vestMagazines viewDistance visibleCompass visibleGPS visibleMap visiblePosition ' +
+	        'visiblePositionASL visibleScoretable visibleWatch waves waypointAttachedObject ' +
+	        'waypointAttachedVehicle waypointAttachObject waypointAttachVehicle waypointBehaviour ' +
+	        'waypointCombatMode waypointCompletionRadius waypointDescription waypointForceBehaviour ' +
+	        'waypointFormation waypointHousePosition waypointLoiterRadius waypointLoiterType waypointName ' +
+	        'waypointPosition waypoints waypointScript waypointsEnabledUAV waypointShow waypointSpeed ' +
+	        'waypointStatements waypointTimeout waypointTimeoutCurrent waypointType waypointVisible ' +
+	        'weaponAccessories weaponAccessoriesCargo weaponCargo weaponDirection weaponInertia weaponLowered ' +
+	        'weapons weaponsItems weaponsItemsCargo weaponState weaponsTurret weightRTD west WFSideText wind',
 	      literal:
 	        'true false nil'
 	    },
@@ -19035,6 +17927,8 @@ webpackJsonp([0],[
 	      hljs.C_LINE_COMMENT_MODE,
 	      hljs.C_BLOCK_COMMENT_MODE,
 	      hljs.NUMBER_MODE,
+	      VARIABLE,
+	      FUNCTION,
 	      STRINGS,
 	      CPP.preprocessor
 	    ],
@@ -19043,7 +17937,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 361 */
+/* 178 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -19207,7 +18101,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 362 */
+/* 179 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -19294,7 +18188,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 363 */
+/* 180 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -19336,7 +18230,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 364 */
+/* 181 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -19387,7 +18281,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 365 */
+/* 182 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -19845,7 +18739,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 366 */
+/* 183 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -19883,7 +18777,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 367 */
+/* 184 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -19916,7 +18810,7 @@ webpackJsonp([0],[
 
 	  var TYPE = {
 	    className: 'type',
-	    begin: '\\b[A-Z][\\w\']*',
+	    begin: '\\b[A-Z][\\w\u00C0-\u02B8\']*',
 	    relevance: 0
 	  };
 	  var BLOCK_COMMENT = hljs.COMMENT(
@@ -19983,7 +18877,7 @@ webpackJsonp([0],[
 	        end: '\\{',
 	        excludeEnd: true,
 	        contains: [
-	          hljs.inherit(hljs.TITLE_MODE, {begin: /[A-Za-z$_][0-9A-Za-z$_]*/})
+	          hljs.inherit(hljs.TITLE_MODE, {begin: /[A-Za-z$_][\u00C0-\u02B80-9A-Za-z$_]*/})
 	        ]
 	      },
 	      {
@@ -20004,7 +18898,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 368 */
+/* 185 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -20052,11 +18946,11 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 369 */
+/* 186 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
-	  var LITERALS = {literal: '{ } true false yes no Yes No True False null'};
+	  var LITERALS = 'true false yes no null';
 
 	  var keyPrefix = '^[ \\-]*';
 	  var keyName =  '[a-zA-Z_][\\w\\-]*';
@@ -20081,7 +18975,8 @@ webpackJsonp([0],[
 	    relevance: 0,
 	    variants: [
 	      {begin: /'/, end: /'/},
-	      {begin: /"/, end: /"/}
+	      {begin: /"/, end: /"/},
+	      {begin: /\S+/}
 	    ],
 	    contains: [
 	      hljs.BACKSLASH_ESCAPE,
@@ -20131,16 +19026,19 @@ webpackJsonp([0],[
 	        begin: '^ *-',
 	        relevance: 0
 	      },
-	      STRING,
 	      hljs.HASH_COMMENT_MODE,
-	      hljs.C_NUMBER_MODE
-	    ],
-	    keywords: LITERALS
+	      {
+	        beginKeywords: LITERALS,
+	        keywords: {literal: LITERALS}
+	      },
+	      hljs.C_NUMBER_MODE,
+	      STRING
+	    ]
 	  };
 	};
 
 /***/ },
-/* 370 */
+/* 187 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -20180,7 +19078,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 371 */
+/* 188 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -20245,7 +19143,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 372 */
+/* 189 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -20311,7 +19209,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 373 */
+/* 190 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -20350,7 +19248,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 374 */
+/* 191 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -20438,7 +19336,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 375 */
+/* 192 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -20508,7 +19406,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 376 */
+/* 193 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -20517,7 +19415,8 @@ webpackJsonp([0],[
 	      'in if for while finally var new function do return void else break catch ' +
 	      'instanceof with throw case default try this switch continue typeof delete ' +
 	      'let yield const class public private protected get set super ' +
-	      'static implements enum export import declare type namespace abstract',
+	      'static implements enum export import declare type namespace abstract ' +
+	      'as from extends async await',
 	    literal:
 	      'true false null undefined NaN Infinity',
 	    built_in:
@@ -20527,7 +19426,7 @@ webpackJsonp([0],[
 	      'TypeError URIError Number Math Date String RegExp Array Float32Array ' +
 	      'Float64Array Int16Array Int32Array Int8Array Uint16Array Uint32Array ' +
 	      'Uint8Array Uint8ClampedArray ArrayBuffer DataView JSON Intl arguments require ' +
-	      'module console window document any number boolean string void'
+	      'module console window document any number boolean string void Promise'
 	  };
 
 	  return {
@@ -20568,7 +19467,35 @@ webpackJsonp([0],[
 	        contains: [
 	          hljs.C_LINE_COMMENT_MODE,
 	          hljs.C_BLOCK_COMMENT_MODE,
-	          hljs.REGEXP_MODE
+	          hljs.REGEXP_MODE,
+	          {
+	            className: 'function',
+	            begin: '(\\(.*?\\)|' + hljs.IDENT_RE + ')\\s*=>', returnBegin: true,
+	            end: '\\s*=>',
+	            contains: [
+	              {
+	                className: 'params',
+	                variants: [
+	                  {
+	                    begin: hljs.IDENT_RE
+	                  },
+	                  {
+	                    begin: /\(\s*\)/,
+	                  },
+	                  {
+	                    begin: /\(/, end: /\)/,
+	                    excludeBegin: true, excludeEnd: true,
+	                    keywords: KEYWORDS,
+	                    contains: [
+	                      'self',
+	                      hljs.C_LINE_COMMENT_MODE,
+	                      hljs.C_BLOCK_COMMENT_MODE
+	                    ]
+	                  }
+	                ]
+	              }
+	            ]
+	          }
 	        ],
 	        relevance: 0
 	      },
@@ -20596,7 +19523,22 @@ webpackJsonp([0],[
 	        relevance: 0 // () => {} is more typical in TypeScript
 	      },
 	      {
-	        beginKeywords: 'constructor', end: /\{/, excludeEnd: true
+	        beginKeywords: 'constructor', end: /\{/, excludeEnd: true,
+	        contains: [
+	          'self',
+	          {
+	            className: 'params',
+	            begin: /\(/, end: /\)/,
+	            excludeBegin: true,
+	            excludeEnd: true,
+	            keywords: KEYWORDS,
+	            contains: [
+	              hljs.C_LINE_COMMENT_MODE,
+	              hljs.C_BLOCK_COMMENT_MODE
+	            ],
+	            illegal: /["'\(]/
+	          }
+	        ]
 	      },
 	      { // prevent references like module.id from being higlighted as module definitions
 	        begin: /module\./,
@@ -20615,13 +19557,16 @@ webpackJsonp([0],[
 	      },
 	      {
 	        begin: '\\.' + hljs.IDENT_RE, relevance: 0 // hack: prevents detection of keywords after dots
+	      },
+	      {
+	        className: 'meta', begin: '@[A-Za-z]+'
 	      }
 	    ]
 	  };
 	};
 
 /***/ },
-/* 377 */
+/* 194 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -20675,7 +19620,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 378 */
+/* 195 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -20735,7 +19680,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 379 */
+/* 196 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -20778,7 +19723,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 380 */
+/* 197 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -20794,7 +19739,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 381 */
+/* 198 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -20897,7 +19842,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 382 */
+/* 199 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -20962,7 +19907,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 383 */
+/* 200 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -21072,7 +20017,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 384 */
+/* 201 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -21212,7 +20157,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 385 */
+/* 202 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -21289,7 +20234,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 386 */
+/* 203 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -21364,7 +20309,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 387 */
+/* 204 */
 /***/ function(module, exports) {
 
 	module.exports = function(hljs) {
@@ -21475,7 +20420,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 388 */
+/* 205 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21550,7 +20495,7 @@ webpackJsonp([0],[
 	exports.default = expressions_list;
 
 /***/ },
-/* 389 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -21560,13 +20505,13 @@ webpackJsonp([0],[
 	});
 	exports.VoteUpThunk = exports.DelThunk = exports.CommentThunk = exports.UpDateItemDataesTask = undefined;
 
-	var _constants = __webpack_require__(200);
+	var _constants = __webpack_require__(11);
 
-	var _reduxActions = __webpack_require__(209);
+	var _reduxActions = __webpack_require__(20);
 
-	var _AlertPlaneActions = __webpack_require__(215);
+	var _AlertPlaneActions = __webpack_require__(26);
 
-	var _HandleDataActions = __webpack_require__(390);
+	var _HandleDataActions = __webpack_require__(207);
 
 	var UpDateItemDataesTask = exports.UpDateItemDataesTask = (0, _reduxActions.createAction)(_constants.Types.UPDATE_ITEM_DATAES, function (newDataes) {
 	    return {
@@ -21576,7 +20521,7 @@ webpackJsonp([0],[
 
 	// 每次进行操作完成后，需要更新数据栈
 	var CommentThunk = exports.CommentThunk = function CommentThunk(page, SortState, newContent) {
-	    var FBIndex = arguments.length <= 3 || arguments[3] === undefined ? -1 : arguments[3];
+	    var FBIndex = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : -1;
 
 	    return function (dispatch) {
 	        var data = JSON.stringify(newContent);
@@ -21626,7 +20571,7 @@ webpackJsonp([0],[
 	};
 
 	var DelThunk = exports.DelThunk = function DelThunk(page, SortState, index) {
-	    var ParentIndex = arguments.length <= 3 || arguments[3] === undefined ? -1 : arguments[3];
+	    var ParentIndex = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : -1;
 
 	    return function (dispatch) {
 	        fetch("/delData", {
@@ -21677,7 +20622,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 390 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -21687,13 +20632,13 @@ webpackJsonp([0],[
 	});
 	exports.getDataesThunk = exports.UpDateDataInfoTask = undefined;
 
-	var _constants = __webpack_require__(200);
+	var _constants = __webpack_require__(11);
 
-	var _reduxActions = __webpack_require__(209);
+	var _reduxActions = __webpack_require__(20);
 
-	var _AlertPlaneActions = __webpack_require__(215);
+	var _AlertPlaneActions = __webpack_require__(26);
 
-	var _CommentActions = __webpack_require__(389);
+	var _CommentActions = __webpack_require__(206);
 
 	var UpDateDataInfoTask = exports.UpDateDataInfoTask = (0, _reduxActions.createAction)(_constants.Types.UPDATE_GLOBAL_DATA_INFO, function (AllDataNum, NowPage) {
 	    return {
@@ -21737,10 +20682,10 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 391 */
+/* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
 	"use strict";
 
@@ -21754,7 +20699,7 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _router = __webpack_require__(206);
+	var _router = __webpack_require__(17);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21789,13 +20734,13 @@ webpackJsonp([0],[
 
 	exports.default = CommentFooter;
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CommentFooter.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "CommentFooter.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 392 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
 	"use strict";
 
@@ -21809,13 +20754,13 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactRedux = __webpack_require__(173);
+	var _reactRedux = __webpack_require__(5);
 
-	var _redux = __webpack_require__(180);
+	var _redux = __webpack_require__(7);
 
-	var _SortActions = __webpack_require__(393);
+	var _SortActions = __webpack_require__(210);
 
-	var _HandleDataActions = __webpack_require__(390);
+	var _HandleDataActions = __webpack_require__(207);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21840,10 +20785,10 @@ webpackJsonp([0],[
 		_createClass(CommentHeader, [{
 			key: "sortListHandle",
 			value: function sortListHandle(St) {
-				var _props = this.props;
-				var SortState = _props.SortState;
-				var NowPage = _props.NowPage;
-				var actions = _props.actions;
+				var _props = this.props,
+				    SortState = _props.SortState,
+				    NowPage = _props.NowPage,
+				    actions = _props.actions;
 
 
 				if (SortState !== St) {
@@ -21854,9 +20799,9 @@ webpackJsonp([0],[
 		}, {
 			key: "render",
 			value: function render() {
-				var _props2 = this.props;
-				var ItemDataes = _props2.ItemDataes;
-				var AllDataNum = _props2.AllDataNum;
+				var _props2 = this.props,
+				    ItemDataes = _props2.ItemDataes,
+				    AllDataNum = _props2.AllDataNum;
 
 
 				return _react2.default.createElement(
@@ -21865,7 +20810,7 @@ webpackJsonp([0],[
 					_react2.default.createElement(
 						"p",
 						{ className: "comment__header__span" },
-						"评论列表 ( ",
+						"\u8BC4\u8BBA\u5217\u8868 ( ",
 						_react2.default.createElement(
 							"span",
 							null,
@@ -21881,14 +20826,14 @@ webpackJsonp([0],[
 							{
 								onClick: this.sortListHandle.bind(this, "newest")
 							},
-							"最新"
+							"\u6700\u65B0"
 						),
 						_react2.default.createElement(
 							"button",
 							{
 								onClick: this.sortListHandle.bind(this, "hottest")
 							},
-							"最热"
+							"\u6700\u70ED"
 						)
 					)
 				);
@@ -21914,10 +20859,10 @@ webpackJsonp([0],[
 		};
 	})(CommentHeader);
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CommentHeader.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "CommentHeader.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 393 */
+/* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -21927,9 +20872,9 @@ webpackJsonp([0],[
 	});
 	exports.ChangeSortStateTask = undefined;
 
-	var _constants = __webpack_require__(200);
+	var _constants = __webpack_require__(11);
 
-	var _reduxActions = __webpack_require__(209);
+	var _reduxActions = __webpack_require__(20);
 
 	var ChangeSortStateTask = exports.ChangeSortStateTask = (0, _reduxActions.createAction)(_constants.Types.SORT_STATE_CHANGE, function (SortState) {
 	    return {
@@ -21938,10 +20883,10 @@ webpackJsonp([0],[
 	});
 
 /***/ },
-/* 394 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
 	"use strict";
 
@@ -21955,17 +20900,17 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactRedux = __webpack_require__(173);
+	var _reactRedux = __webpack_require__(5);
 
-	var _redux = __webpack_require__(180);
+	var _redux = __webpack_require__(7);
 
-	var _CommentActions = __webpack_require__(389);
+	var _CommentActions = __webpack_require__(206);
 
-	var _AlertPlaneActions = __webpack_require__(215);
+	var _AlertPlaneActions = __webpack_require__(26);
 
-	var _util = __webpack_require__(202);
+	var _util = __webpack_require__(13);
 
-	var _router = __webpack_require__(206);
+	var _router = __webpack_require__(17);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22012,12 +20957,12 @@ webpackJsonp([0],[
 		}, {
 			key: "DelSelf",
 			value: function DelSelf() {
-				var index = this.props.ItemData.index;
-				var _props = this.props;
-				var ItemDataes = _props.ItemDataes;
-				var actions = _props.actions;
-				var SortState = _props.SortState;
-				var NowPage = _props.NowPage;
+				var index = this.props.ItemData.index,
+				    _props = this.props,
+				    ItemDataes = _props.ItemDataes,
+				    actions = _props.actions,
+				    SortState = _props.SortState,
+				    NowPage = _props.NowPage;
 
 
 				actions.AlertPlaneThunk("您确定删除该评论？（其下的回复也会被删除!）", function () {
@@ -22027,9 +20972,9 @@ webpackJsonp([0],[
 		}, {
 			key: "ToggleFeedbackShow",
 			value: function ToggleFeedbackShow() {
-				var _state = this.state;
-				var feedContentboff = _state.feedContentboff;
-				var feedWrapboff = _state.feedWrapboff;
+				var _state = this.state,
+				    feedContentboff = _state.feedContentboff,
+				    feedWrapboff = _state.feedWrapboff;
 
 
 				this.setState({
@@ -22040,10 +20985,10 @@ webpackJsonp([0],[
 		}, {
 			key: "VoteUpHandle",
 			value: function VoteUpHandle() {
-				var _props2 = this.props;
-				var actions = _props2.actions;
-				var userInfo = _props2.userInfo;
-				var index = this.props.ItemData.index;
+				var _props2 = this.props,
+				    actions = _props2.actions,
+				    userInfo = _props2.userInfo,
+				    index = this.props.ItemData.index;
 
 
 				this.setState({
@@ -22061,19 +21006,19 @@ webpackJsonp([0],[
 		}, {
 			key: "render",
 			value: function render() {
-				var _props$ItemData = this.props.ItemData;
-				var index = _props$ItemData.index;
-				var avatar_url = _props$ItemData.avatar_url;
-				var author_name = _props$ItemData.author_name;
-				var author_email = _props$ItemData.author_email;
-				var publish_time = _props$ItemData.publish_time;
-				var publish_content = _props$ItemData.publish_content;
-				var commentAuthor = _props$ItemData.commentAuthor;
-				var FeedBack = _props$ItemData.FeedBack;
-				var _props3 = this.props;
-				var ItemDataes = _props3.ItemDataes;
-				var userInfo = _props3.userInfo;
-				var SelfIndex = _props3.SelfIndex;
+				var _props$ItemData = this.props.ItemData,
+				    index = _props$ItemData.index,
+				    avatar_url = _props$ItemData.avatar_url,
+				    author_name = _props$ItemData.author_name,
+				    author_email = _props$ItemData.author_email,
+				    publish_time = _props$ItemData.publish_time,
+				    publish_content = _props$ItemData.publish_content,
+				    commentAuthor = _props$ItemData.commentAuthor,
+				    FeedBack = _props$ItemData.FeedBack,
+				    _props3 = this.props,
+				    ItemDataes = _props3.ItemDataes,
+				    userInfo = _props3.userInfo,
+				    SelfIndex = _props3.SelfIndex;
 
 
 				var pt = (0, _util.formatDate)(publish_time),
@@ -22084,7 +21029,7 @@ webpackJsonp([0],[
 						"section",
 						{
 							className: "comment__options__has-voted-up",
-							title: "您尚未登陆，或已经点过赞。自己不能帮自己点赞"
+							title: "\u60A8\u5C1A\u672A\u767B\u9646\uFF0C\u6216\u5DF2\u7ECF\u70B9\u8FC7\u8D5E\u3002\u81EA\u5DF1\u4E0D\u80FD\u5E2E\u81EA\u5DF1\u70B9\u8D5E"
 						},
 						_react2.default.createElement(
 							"button",
@@ -22096,13 +21041,13 @@ webpackJsonp([0],[
 								},
 								this.state.vote_up
 							),
-							" 已赞"
+							" \u5DF2\u8D5E"
 						)
 					);
 				} else {
 					voteUpBox = _react2.default.createElement(
 						"section",
-						{ className: "comment__options__vote-up", title: "点赞" },
+						{ className: "comment__options__vote-up", title: "\u70B9\u8D5E" },
 						_react2.default.createElement(
 							"button",
 							{
@@ -22115,7 +21060,7 @@ webpackJsonp([0],[
 								},
 								this.state.vote_up
 							),
-							" 赞"
+							" \u8D5E"
 						)
 					);
 				}
@@ -22153,7 +21098,7 @@ webpackJsonp([0],[
 							_react2.default.createElement(
 								"p",
 								{ className: "comment__content--time" },
-								"发布于：",
+								"\u53D1\u5E03\u4E8E\uFF1A",
 								pt
 							),
 							_react2.default.createElement("div", { className: "comment__content--content",
@@ -22175,9 +21120,9 @@ webpackJsonp([0],[
 										_react2.default.createElement(
 											"span",
 											null,
-											"回复 (",
+											"\u56DE\u590D (",
 											FeedBack.length,
-											"条)"
+											"\u6761)"
 										)
 									),
 									userInfo.userEmail === author_email ? _react2.default.createElement(
@@ -22190,7 +21135,7 @@ webpackJsonp([0],[
 										_react2.default.createElement(
 											"span",
 											null,
-											"删除"
+											"\u5220\u9664"
 										)
 									) : null
 								),
@@ -22222,7 +21167,7 @@ webpackJsonp([0],[
 								_react2.default.createElement(
 									"h3",
 									null,
-									"分享您的思想和看法..."
+									"\u5206\u4EAB\u60A8\u7684\u601D\u60F3\u548C\u770B\u6CD5..."
 								),
 								_react2.default.createElement(_router.CommentFeedback, {
 									CommentFeedBackTask: true,
@@ -22258,13 +21203,13 @@ webpackJsonp([0],[
 		};
 	})(CommentItem);
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CommentItem.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "CommentItem.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 395 */
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
 	"use strict";
 
@@ -22278,17 +21223,17 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactRedux = __webpack_require__(173);
+	var _reactRedux = __webpack_require__(5);
 
-	var _redux = __webpack_require__(180);
+	var _redux = __webpack_require__(7);
 
-	var _LoginActions = __webpack_require__(208);
+	var _LoginActions = __webpack_require__(19);
 
-	var _HandleDataActions = __webpack_require__(390);
+	var _HandleDataActions = __webpack_require__(207);
 
-	var _AlertPlaneActions = __webpack_require__(215);
+	var _AlertPlaneActions = __webpack_require__(26);
 
-	var _router = __webpack_require__(206);
+	var _router = __webpack_require__(17);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22310,9 +21255,9 @@ webpackJsonp([0],[
 		_createClass(CommentList, [{
 			key: "componentWillMount",
 			value: function componentWillMount() {
-				var _props = this.props;
-				var actions = _props.actions;
-				var SortState = _props.SortState;
+				var _props = this.props,
+				    actions = _props.actions,
+				    SortState = _props.SortState;
 
 				// 初始时候，更新登录状态
 
@@ -22323,12 +21268,12 @@ webpackJsonp([0],[
 		}, {
 			key: "render",
 			value: function render() {
-				var _props2 = this.props;
-				var ItemDataes = _props2.ItemDataes;
-				var SortState = _props2.SortState;
-				var NowPage = _props2.NowPage;
-				var actions = _props2.actions;
-				var AllDataNum = _props2.AllDataNum;
+				var _props2 = this.props,
+				    ItemDataes = _props2.ItemDataes,
+				    SortState = _props2.SortState,
+				    NowPage = _props2.NowPage,
+				    actions = _props2.actions,
+				    AllDataNum = _props2.AllDataNum;
 
 
 				var box = void 0;
@@ -22348,7 +21293,7 @@ webpackJsonp([0],[
 						_react2.default.createElement(
 							"p",
 							null,
-							"该页评论已被删除，请切换其他页"
+							"\u8BE5\u9875\u8BC4\u8BBA\u5DF2\u88AB\u5220\u9664\uFF0C\u8BF7\u5207\u6362\u5176\u4ED6\u9875"
 						)
 					);
 				} else {
@@ -22358,7 +21303,7 @@ webpackJsonp([0],[
 						_react2.default.createElement(
 							"p",
 							null,
-							"评论头条等你来抢！"
+							"\u8BC4\u8BBA\u5934\u6761\u7B49\u4F60\u6765\u62A2\uFF01"
 						)
 					);
 				}
@@ -22400,13 +21345,13 @@ webpackJsonp([0],[
 		};
 	})(CommentList);
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CommentList.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "CommentList.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 396 */
+/* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
 	"use strict";
 
@@ -22422,11 +21367,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactRedux = __webpack_require__(173);
+	var _reactRedux = __webpack_require__(5);
 
-	var _redux = __webpack_require__(180);
+	var _redux = __webpack_require__(7);
 
-	var _HandleDataActions = __webpack_require__(390);
+	var _HandleDataActions = __webpack_require__(207);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22451,13 +21396,14 @@ webpackJsonp([0],[
 		_createClass(CommentPagination, [{
 			key: "pagination",
 			value: function pagination() {
-				var _props = this.props;
-				var AllDataNum = _props.AllDataNum;
-				var PaginationNum = _props.PaginationNum;
-				var PaginationLimit = _props.PaginationLimit;
-				var NowPage = _props.NowPage;
-				var halfNum = ~~(PaginationLimit / 2);
-				var result = [];
+				var _props = this.props,
+				    AllDataNum = _props.AllDataNum,
+				    PaginationNum = _props.PaginationNum,
+				    PaginationLimit = _props.PaginationLimit,
+				    NowPage = _props.NowPage,
+				    halfNum = ~~(PaginationLimit / 2),
+				    result = [];
+
 
 				switch (true) {
 					case PaginationNum < PaginationLimit:
@@ -22533,11 +21479,11 @@ webpackJsonp([0],[
 		_createClass(PaginationsItem, [{
 			key: "handleChangePage",
 			value: function handleChangePage(order) {
-				var _props2 = this.props;
-				var actions = _props2.actions;
-				var AllDataNum = _props2.AllDataNum;
-				var PaginationNum = _props2.PaginationNum;
-				var SortState = _props2.SortState;
+				var _props2 = this.props,
+				    actions = _props2.actions,
+				    AllDataNum = _props2.AllDataNum,
+				    PaginationNum = _props2.PaginationNum,
+				    SortState = _props2.SortState;
 
 
 				switch (true) {
@@ -22554,9 +21500,9 @@ webpackJsonp([0],[
 		}, {
 			key: "render",
 			value: function render() {
-				var _props3 = this.props;
-				var order = _props3.order;
-				var active = _props3.active;
+				var _props3 = this.props,
+				    order = _props3.order,
+				    active = _props3.active;
 
 
 				return _react2.default.createElement(
@@ -22594,13 +21540,13 @@ webpackJsonp([0],[
 		};
 	})(CommentPagination);
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CommentPagination.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "CommentPagination.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 397 */
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
 	"use strict";
 
@@ -22614,7 +21560,7 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _router = __webpack_require__(206);
+	var _router = __webpack_require__(17);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22654,13 +21600,13 @@ webpackJsonp([0],[
 
 	exports.default = CommentWrap;
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CommentWrap.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "CommentWrap.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 398 */
+/* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
 	"use strict";
 
@@ -22674,17 +21620,17 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactRedux = __webpack_require__(173);
+	var _reactRedux = __webpack_require__(5);
 
-	var _redux = __webpack_require__(180);
+	var _redux = __webpack_require__(7);
 
-	var _CommentActions = __webpack_require__(389);
+	var _CommentActions = __webpack_require__(206);
 
-	var _util = __webpack_require__(202);
+	var _util = __webpack_require__(13);
 
-	var _router = __webpack_require__(206);
+	var _router = __webpack_require__(17);
 
-	var _AlertPlaneActions = __webpack_require__(215);
+	var _AlertPlaneActions = __webpack_require__(26);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22713,12 +21659,12 @@ webpackJsonp([0],[
 		_createClass(FeedBackMain, [{
 			key: "DelSelf",
 			value: function DelSelf() {
-				var _props = this.props;
-				var ParentIndexOnDb = _props.ParentIndexOnDb;
-				var actions = _props.actions;
-				var NowPage = _props.NowPage;
-				var SortState = _props.SortState;
-				var FeedBackIndex = this.props.FeedBackData.FeedBackIndex;
+				var _props = this.props,
+				    ParentIndexOnDb = _props.ParentIndexOnDb,
+				    actions = _props.actions,
+				    NowPage = _props.NowPage,
+				    SortState = _props.SortState,
+				    FeedBackIndex = this.props.FeedBackData.FeedBackIndex;
 
 
 				actions.AlertPlaneThunk("您确定删除该回复吗？", function () {
@@ -22735,22 +21681,22 @@ webpackJsonp([0],[
 		}, {
 			key: "render",
 			value: function render() {
-				var _props$FeedBackData = this.props.FeedBackData;
-				var FeedBackIndex = _props$FeedBackData.FeedBackIndex;
-				var avatar_url = _props$FeedBackData.avatar_url;
-				var author_name = _props$FeedBackData.author_name;
-				var author_email = _props$FeedBackData.author_email;
-				var publish_time = _props$FeedBackData.publish_time;
-				var publish_content = _props$FeedBackData.publish_content;
-				var commentAuthor = _props$FeedBackData.commentAuthor;
-				var vote_up = _props$FeedBackData.vote_up;
-				var ForBidFeedBack = _props$FeedBackData.ForBidFeedBack;
-				var BeFeedIndex = _props$FeedBackData.BeFeedIndex;
-				var _props2 = this.props;
-				var ItemDataes = _props2.ItemDataes;
-				var userInfo = _props2.userInfo;
-				var ParentIndex = _props2.ParentIndex;
-				var ParentIndexOnDb = _props2.ParentIndexOnDb;
+				var _props$FeedBackData = this.props.FeedBackData,
+				    FeedBackIndex = _props$FeedBackData.FeedBackIndex,
+				    avatar_url = _props$FeedBackData.avatar_url,
+				    author_name = _props$FeedBackData.author_name,
+				    author_email = _props$FeedBackData.author_email,
+				    publish_time = _props$FeedBackData.publish_time,
+				    publish_content = _props$FeedBackData.publish_content,
+				    commentAuthor = _props$FeedBackData.commentAuthor,
+				    vote_up = _props$FeedBackData.vote_up,
+				    ForBidFeedBack = _props$FeedBackData.ForBidFeedBack,
+				    BeFeedIndex = _props$FeedBackData.BeFeedIndex,
+				    _props2 = this.props,
+				    ItemDataes = _props2.ItemDataes,
+				    userInfo = _props2.userInfo,
+				    ParentIndex = _props2.ParentIndex,
+				    ParentIndexOnDb = _props2.ParentIndexOnDb;
 
 				var pt = (0, _util.formatDate)(publish_time);
 
@@ -22784,7 +21730,7 @@ webpackJsonp([0],[
 						ForBidFeedBack ? _react2.default.createElement(
 							"p",
 							{ className: "sub__feedback" },
-							"回复：",
+							"\u56DE\u590D\uFF1A",
 							_react2.default.createElement(
 								"span",
 								null,
@@ -22794,7 +21740,7 @@ webpackJsonp([0],[
 						_react2.default.createElement(
 							"p",
 							{ className: "feedback__content--time" },
-							"发布于：",
+							"\u53D1\u5E03\u4E8E\uFF1A",
 							pt
 						),
 						_react2.default.createElement("div", { className: "feedback__content--content",
@@ -22816,7 +21762,7 @@ webpackJsonp([0],[
 									_react2.default.createElement(
 										"span",
 										null,
-										"回复"
+										"\u56DE\u590D"
 									)
 								) : null,
 								userInfo.userEmail === author_email ? _react2.default.createElement(
@@ -22829,7 +21775,7 @@ webpackJsonp([0],[
 									_react2.default.createElement(
 										"span",
 										null,
-										"删除"
+										"\u5220\u9664"
 									)
 								) : null
 							)
@@ -22870,13 +21816,13 @@ webpackJsonp([0],[
 		};
 	})(FeedBackMain);
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "FeedBackMain.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "FeedBackMain.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 399 */
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
 	"use strict";
 
@@ -22890,11 +21836,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactRedux = __webpack_require__(173);
+	var _reactRedux = __webpack_require__(5);
 
-	var _redux = __webpack_require__(180);
+	var _redux = __webpack_require__(7);
 
-	var _LoginActions = __webpack_require__(208);
+	var _LoginActions = __webpack_require__(19);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22979,10 +21925,10 @@ webpackJsonp([0],[
 		}, {
 			key: "close",
 			value: function close(ev) {
-				var _props$actions = this.props.actions;
-				var LoginTableStateTask = _props$actions.LoginTableStateTask;
-				var ChangeValidateTask = _props$actions.ChangeValidateTask;
-				var ChangeValidateInfoTask = _props$actions.ChangeValidateInfoTask;
+				var _props$actions = this.props.actions,
+				    LoginTableStateTask = _props$actions.LoginTableStateTask,
+				    ChangeValidateTask = _props$actions.ChangeValidateTask,
+				    ChangeValidateInfoTask = _props$actions.ChangeValidateInfoTask;
 
 
 				LoginTableStateTask();
@@ -23003,9 +21949,9 @@ webpackJsonp([0],[
 		}, {
 			key: "LoginIn",
 			value: function LoginIn() {
-				var Name = this.refs["tourist-login-user-name"].value;
-				var Email = this.refs["tourist-login-user-email"].value;
-				var actions = this.props.actions;
+				var Name = this.refs["tourist-login-user-name"].value,
+				    Email = this.refs["tourist-login-user-email"].value,
+				    actions = this.props.actions;
 
 
 				if (this.nameLegal && this.emailLegal) {
@@ -23024,14 +21970,12 @@ webpackJsonp([0],[
 		}, {
 			key: "Validate",
 			value: function Validate(type) {
-				var Name = this.refs["tourist-login-user-name"];
-				var Email = this.refs["tourist-login-user-email"];
-
-				var actions = this.props.actions;
-
-				var _state = this.state;
-				var userNameInfo = _state.userNameInfo;
-				var userEmailInfo = _state.userEmailInfo;
+				var Name = this.refs["tourist-login-user-name"],
+				    Email = this.refs["tourist-login-user-email"],
+				    actions = this.props.actions,
+				    _state = this.state,
+				    userNameInfo = _state.userNameInfo,
+				    userEmailInfo = _state.userEmailInfo;
 
 
 				var rule = {
@@ -23104,9 +22048,9 @@ webpackJsonp([0],[
 			value: function render() {
 				var _this2 = this;
 
-				var _props = this.props;
-				var loginTableState = _props.loginTableState;
-				var actions = _props.actions;
+				var _props = this.props,
+				    loginTableState = _props.loginTableState,
+				    actions = _props.actions;
 
 
 				if (!loginTableState) {
@@ -23133,7 +22077,7 @@ webpackJsonp([0],[
 											onClick: this.toggleState,
 											ref: "btn1"
 										},
-										"游客登录"
+										"\u6E38\u5BA2\u767B\u5F55"
 									),
 									_react2.default.createElement(
 										"button",
@@ -23141,7 +22085,7 @@ webpackJsonp([0],[
 											onClick: this.toggleState,
 											ref: "btn2"
 										},
-										"sns登录"
+										"sns\u767B\u5F55"
 									),
 									_react2.default.createElement("div", { ref: "state-bar", className: "state__bar" })
 								),
@@ -23157,7 +22101,7 @@ webpackJsonp([0],[
 											_react2.default.createElement(
 												"p",
 												null,
-												"昵称:"
+												"\u6635\u79F0:"
 											),
 											_react2.default.createElement("input", { type: "text",
 												className: "tourist__login--user-name",
@@ -23179,7 +22123,7 @@ webpackJsonp([0],[
 											_react2.default.createElement(
 												"p",
 												null,
-												"邮箱："
+												"\u90AE\u7BB1\uFF1A"
 											),
 											_react2.default.createElement("input", { type: "text",
 												className: "tourist__login--email",
@@ -23197,7 +22141,7 @@ webpackJsonp([0],[
 										),
 										_react2.default.createElement("input", { type: "button",
 											className: "tourist__login--submit",
-											value: "登录",
+											value: "\u767B\u5F55",
 											onClick: this.LoginIn
 										})
 									),
@@ -23239,13 +22183,13 @@ webpackJsonp([0],[
 		};
 	})(LoginTable);
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "LoginTable.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "LoginTable.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 400 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
 	"use strict";
 
@@ -23259,11 +22203,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactRedux = __webpack_require__(173);
+	var _reactRedux = __webpack_require__(5);
 
-	var _redux = __webpack_require__(180);
+	var _redux = __webpack_require__(7);
 
-	var _AlertPlaneActions = __webpack_require__(215);
+	var _AlertPlaneActions = __webpack_require__(26);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23360,7 +22304,7 @@ webpackJsonp([0],[
 	                                {
 	                                    onClick: this.sure
 	                                },
-	                                "确定"
+	                                "\u786E\u5B9A"
 	                            )
 	                        ),
 	                        _react2.default.createElement(
@@ -23372,7 +22316,7 @@ webpackJsonp([0],[
 	                                {
 	                                    onClick: this.cancel
 	                                },
-	                                "取消"
+	                                "\u53D6\u6D88"
 	                            )
 	                        )
 	                    )
@@ -23398,13 +22342,13 @@ webpackJsonp([0],[
 	    };
 	})(AlertPlane);
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "AlertPlane.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "AlertPlane.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 401 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
 	"use strict";
 
@@ -23420,7 +22364,7 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _util = __webpack_require__(202);
+	var _util = __webpack_require__(13);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23594,11 +22538,10 @@ webpackJsonp([0],[
 	                            ref: "drag-btn",
 	                            onMouseDown: function onMouseDown(ev) {
 	                                _this2.mdown.call(_this2, ev, function (params) {
-	                                    var _params = _slicedToArray(params, 1);
-
-	                                    var dragTop = _params[0];
-	                                    var bOffset = dragTop;
-	                                    var lOffset = 0;
+	                                    var _params = _slicedToArray(params, 1),
+	                                        dragTop = _params[0],
+	                                        bOffset = dragTop,
+	                                        lOffset = 0;
 
 	                                    if (dragTop >= 120 - _this2.state.dragBtnHeight) {
 	                                        bOffset = 120 - _this2.state.dragBtnHeight;
@@ -23630,13 +22573,13 @@ webpackJsonp([0],[
 
 	exports.default = DropList;
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "DropList.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "DropList.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 402 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
 	"use strict";
 
@@ -23650,13 +22593,13 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactRedux = __webpack_require__(173);
+	var _reactRedux = __webpack_require__(5);
 
-	var _redux = __webpack_require__(180);
+	var _redux = __webpack_require__(7);
 
-	var _util = __webpack_require__(202);
+	var _util = __webpack_require__(13);
 
-	var _AlertPlaneActions = __webpack_require__(215);
+	var _AlertPlaneActions = __webpack_require__(26);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23688,14 +22631,15 @@ webpackJsonp([0],[
 	    _createClass(DragAndUpdate, [{
 	        key: "handleUploadData",
 	        value: function handleUploadData(fileList) {
-	            var _props = this.props;
-	            var actions = _props.actions;
-	            var callback = _props.callback;
-	            var fr = new FileReader();
-	            var promiseStack = [];
-	            var flag = 0;
-	            var allSize = 0;
-	            var SizeLimit = 5 * 1024 * 1024;
+	            var _props = this.props,
+	                actions = _props.actions,
+	                callback = _props.callback,
+	                fr = new FileReader(),
+	                promiseStack = [],
+	                flag = 0,
+	                allSize = 0,
+	                SizeLimit = 5 * 1024 * 1024;
+
 
 	            fileList = fileList.map(function (value, idx) {
 	                if (!value.type) {
@@ -23712,45 +22656,43 @@ webpackJsonp([0],[
 	            if (allSize > SizeLimit) {
 	                return actions.AlertPlaneThunk("单次上传图片总量不能超过5MB");
 	            } else {
-	                (function () {
-	                    var parseImageAndFetch = function parseImageAndFetch() {
-	                        var value = fileList.shift();
-	                        fr.readAsDataURL(value.file);
+	                var _parseImageAndFetch = function _parseImageAndFetch() {
+	                    var value = fileList.shift();
+	                    fr.readAsDataURL(value.file);
 
-	                        fr.onloadend = function (evt) {
-	                            var promise = fetch("/upLoadImage", {
-	                                method: "POST",
-	                                headers: {
-	                                    "Charset": "utf-8",
-	                                    "Content-Type": "text/plain"
-	                                },
-	                                body: flag + evt.target.result
-	                            }).then(function (res) {
-	                                if (res.ok) {
-	                                    return res.json();
-	                                }
-	                            });
-
-	                            promiseStack.push(promise);
-
-	                            if (flag !== fileList.length) {
-	                                return parseImageAndFetch();
-	                            } else {
-	                                Promise.all(promiseStack).then(function (pics) {
-	                                    var datas = pics.sort(function (objA, objB) {
-	                                        return objA.order - objB.order;
-	                                    });
-	                                    callback && callback(datas);
-	                                }).catch(function (err) {
-	                                    throw err;
-	                                    actions.AlertPlaneThunk("上传图片失败");
-	                                });
+	                    fr.onloadend = function (evt) {
+	                        var promise = fetch("/upLoadImage", {
+	                            method: "POST",
+	                            headers: {
+	                                "Charset": "utf-8",
+	                                "Content-Type": "text/plain"
+	                            },
+	                            body: flag + evt.target.result
+	                        }).then(function (res) {
+	                            if (res.ok) {
+	                                return res.json();
 	                            }
-	                        };
-	                    };
+	                        });
 
-	                    parseImageAndFetch();
-	                })();
+	                        promiseStack.push(promise);
+
+	                        if (flag !== fileList.length) {
+	                            return _parseImageAndFetch();
+	                        } else {
+	                            Promise.all(promiseStack).then(function (pics) {
+	                                var datas = pics.sort(function (objA, objB) {
+	                                    return objA.order - objB.order;
+	                                });
+	                                callback && callback(datas);
+	                            }).catch(function (err) {
+	                                throw err;
+	                                actions.AlertPlaneThunk("上传图片失败");
+	                            });
+	                        }
+	                    };
+	                };
+
+	                _parseImageAndFetch();
 	            }
 	        }
 	    }, {
@@ -23805,7 +22747,7 @@ webpackJsonp([0],[
 	                        onDragOver: this.clearDefault,
 	                        onDrop: this.handleDrag
 	                    },
-	                    "拖拽上传图片"
+	                    "\u62D6\u62FD\u4E0A\u4F20\u56FE\u7247"
 	                ),
 	                _react2.default.createElement("input", { type: "file",
 	                    accept: "image/*",
@@ -23819,12 +22761,12 @@ webpackJsonp([0],[
 	                    { className: "upload__btn",
 	                        onClick: this.handleClickUpload
 	                    },
-	                    "点击上传"
+	                    "\u70B9\u51FB\u4E0A\u4F20"
 	                ),
 	                _react2.default.createElement(
 	                    "p",
 	                    { style: { color: "red" } },
-	                    "（ps: 单次上传图片总量不能超过5MB！）"
+	                    "\uFF08ps: \u5355\u6B21\u4E0A\u4F20\u56FE\u7247\u603B\u91CF\u4E0D\u80FD\u8D85\u8FC75MB\uFF01\uFF09"
 	                )
 	            );
 	        }
@@ -23843,26 +22785,26 @@ webpackJsonp([0],[
 	    };
 	})(DragAndUpdate);
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("E:\\GitHub\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "DragAndUpdate.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\github\\program\\kuolun\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "DragAndUpdate.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 403 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(404);
+	var content = __webpack_require__(221);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(406)(content, {});
+	var update = __webpack_require__(223)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/autoprefixer-loader/index.js!./../../node_modules/less-loader/index.js!./app.less", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/autoprefixer-loader/index.js!./../../node_modules/less-loader/index.js!./app.less");
+			module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/autoprefixer-loader/index.js!../../node_modules/less-loader/index.js!./app.less", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/autoprefixer-loader/index.js!../../node_modules/less-loader/index.js!./app.less");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -23872,21 +22814,21 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 404 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(405)();
+	exports = module.exports = __webpack_require__(222)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "@charset \"utf-8\";\n* {\n  box-sizing: border-box;\n  font-family: arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  font-size: 14px;\n  outline: none;\n}\nbody {\n  margin: 0;\n  padding: 0;\n  font-size: 0;\n}\na {\n  -webkit-transition: 5s;\n  transition: 5s;\n  text-decoration: none;\n}\nul,\nol {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\ntable {\n  border-collapse: collapse;\n}\nselect {\n  -webkit-appearance: none;\n     -moz-appearance: none;\n          appearance: none;\n}\nh1,\nh2,\nh3 {\n  margin-bottom: 1em;\n}\np,\npre {\n  margin: 0;\n}\nblockquote {\n  margin: 0;\n}\ninput[type=\"submit\"],\nbutton {\n  display: inline-block;\n  border-radius: 0;\n  border: none;\n  padding: 0;\n  background: none;\n  cursor: pointer;\n}\nfigure {\n  margin: 0;\n}\ni {\n  display: inline-block;\n}\n/*下拉组件*/\n.drop__list {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  width: 140px;\n  height: 28px;\n  border: 1px solid #ccc;\n  cursor: pointer;\n  position: relative;\n  border-radius: 3px 3px 0px 0px;\n  color: #929699;\n  font-size: 0px;\n  margin-right: 20px;\n}\n.drop__list p {\n  width: 100px;\n  height: 20px;\n  margin: 3px 0 3px 5px;\n  font-size: 14px;\n}\n.drop__list i {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  top: 5px;\n  right: 5px;\n  content: \"\";\n  width: 16px;\n  height: 16px;\n  display: block;\n  background: url(\"/img/icon.png\") -30px 0px;\n}\n.drop__list .drop__wrap {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  top: 26px;\n  left: 0;\n  width: 100%;\n  border-radius: 0px 0px 3px 3px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  overflow: hidden;\n  border: 1px solid #ccc;\n  border-top: none;\n  z-index: 1234;\n  height: 0px;\n}\n.drop__list ul {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  padding: 5px 0;\n  overflow: hidden;\n  background: #E6E6E6;\n  font-size: 14px;\n}\n.drop__list ul li {\n  height: 25px;\n  line-height: 25px;\n  padding: 0px 5px;\n}\n.drop__list ul li:hover {\n  color: #fff;\n  background: #1C86D1;\n}\n.drag__wrap {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  top: 0;\n  right: 0;\n  background: #F5F5F5;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.drag__wrap .drag__btn {\n  border-radius: 3px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  min-height: 5px;\n  width: 100%;\n  border: 1px solid #979797;\n  background-color: rgba(0, 0, 0, 0.6);\n}\n.drag__wrap .drag__btn:hover {\n  border: 1px solid #636363;\n  background-color: rgba(0, 0, 0, 0.8);\n}\n.drag__wrap .drag__btn:active {\n  border: 1px solid #636363;\n  background-color: #000000;\n}\n.column-arrange {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.none {\n  display: none !important;\n}\n.b-c {\n  position: fixed;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  margin: auto;\n}\n.hidden {\n  height: 0 !important;\n}\n@-webkit-keyframes swing {\n  20%,\n  40%,\n  60%,\n  80%,\n  100% {\n    -webkit-transform-origin: topcenter;\n            transform-origin: topcenter;\n  }\n  20% {\n    -webkit-transform: rotate(15deg);\n            transform: rotate(15deg);\n  }\n  40% {\n    -webkit-transform: rotate(-10deg);\n            transform: rotate(-10deg);\n  }\n  60% {\n    -webkit-transform: rotate(5deg);\n            transform: rotate(5deg);\n  }\n  80% {\n    -webkit-transform: rotate(-5deg);\n            transform: rotate(-5deg);\n  }\n  100% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n  }\n}\n@keyframes swing {\n  20%,\n  40%,\n  60%,\n  80%,\n  100% {\n    -webkit-transform-origin: topcenter;\n            transform-origin: topcenter;\n  }\n  20% {\n    -webkit-transform: rotate(15deg);\n            transform: rotate(15deg);\n  }\n  40% {\n    -webkit-transform: rotate(-10deg);\n            transform: rotate(-10deg);\n  }\n  60% {\n    -webkit-transform: rotate(5deg);\n            transform: rotate(5deg);\n  }\n  80% {\n    -webkit-transform: rotate(-5deg);\n            transform: rotate(-5deg);\n  }\n  100% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n  }\n}\n@-webkit-keyframes masked {\n  0% {\n    background-position: 0 0;\n  }\n  100% {\n    background-position: -100% 0;\n  }\n}\n@keyframes masked {\n  0% {\n    background-position: 0 0;\n  }\n  100% {\n    background-position: -100% 0;\n  }\n}\n.comment__feedback__wrap {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  background: #fbfbfb;\n  width: 100%;\n  margin-top: 20px;\n}\n.comment__feedback__box__syntaxs {\n  border-radius: 5px 5px 0 0;\n  border: 1px solid #272636;\n}\n.comment__feedback__box__syntaxs .syntaxs__list {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 32px;\n  -ms-flex-flow: row no-wrap;\n      flex-flow: row no-wrap;\n}\n.comment__feedback__box__syntaxs .syntaxs__list > li {\n  width: 32px;\n  height: 32px;\n  margin: 0 4px;\n  background-image: url(\"/img/icon.png\");\n  cursor: pointer;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .bold {\n  background-position: 6px -79px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .bold:hover {\n  background: url(\"/img/icon-hover.png\") 6px -79px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .italic {\n  background-position: 8px -127px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .italic:hover {\n  background: url(\"/img/icon-hover.png\") 8px -127px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .a-link {\n  background-position: 4px -103px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .a-link:hover {\n  background: url(\"/img/icon-hover.png\") 4px -103px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .image {\n  background-position: 4px -151px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .image:hover {\n  background: url(\"/img/icon-hover.png\") 4px -151px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .table {\n  background-position: 4px -175px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .table:hover {\n  background: url(\"/img/icon-hover.png\") 4px -175px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .blockquote-block {\n  background-position: 4px -292px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .blockquote-block:hover {\n  background: url(\"/img/icon-hover.png\") 4px -292px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .u-list {\n  background-position: 2px -223px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .u-list:hover {\n  background: url(\"/img/icon-hover.png\") 2px -223px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .o-list {\n  background-position: 2px -199px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .o-list:hover {\n  background: url(\"/img/icon-hover.png\") 2px -199px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h1-tag {\n  background-position: 4px -247px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h1-tag:hover {\n  background: url(\"/img/icon-hover.png\") 4px -247px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h2-tag {\n  background-position: 4px -269px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h2-tag:hover {\n  background: url(\"/img/icon-hover.png\") 4px -269px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .code-block {\n  background-position: 4px -341px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .code-block:hover {\n  background: url(\"/img/icon-hover.png\") 4px -341px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .snap-block {\n  position: relative;\n  background-position: 4px -365px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .snap-block:hover {\n  background: url(\"/img/icon-hover.png\") 4px -365px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .snap-block .snap_video_wrap {\n  border-radius: 5px;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  top: -318px;\n  left: -225px;\n  width: 450px;\n  height: 300px;\n  padding: 10px 10px 0 10px;\n  background: rgba(0, 0, 0, 0.3);\n  -webkit-transform: scale(0, 0);\n          transform: scale(0, 0);\n  -webkit-transform-origin: 54% 108%;\n          transform-origin: 54% 108%;\n  cursor: default;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .snap-block .snap_video_wrap::before {\n  display: block;\n  content: \"\";\n  position: absolute;\n  bottom: -32px;\n  left: 225px;\n  border: 16px solid transparent;\n  border-top: 16px solid rgba(0, 0, 0, 0.3);\n}\n.comment__feedback__box__syntaxs .syntaxs__list .snap-block .snap_options {\n  width: 100%;\n  height: 30px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .snap-block .snap_options .drop__list p {\n  color: #fff;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .snap-block .snap-btn {\n  margin: 0 10px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .emoji-list {\n  background-position: 5px -316px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .emoji-list:hover {\n  background: url(\"/img/icon-hover.png\") 5px -316px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 5px;\n  border-top: 1px solid #272636;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list > div.choice-btn {\n  border-radius: 5px;\n  position: relative;\n  width: 32px;\n  height: 32px;\n  margin: 0 4px;\n  cursor: pointer;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list > div.choice-btn:hover {\n  box-shadow: 0 0 1px 1px #1C86D1;\n}\n.comment__feedback__box__syntaxs .drop__upload__area {\n  border-radius: 5px;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  position: relative;\n  width: 454px;\n  height: 80px;\n  margin: 15px 0;\n  border: 1px dashed #1C86D1;\n  text-align: center;\n  font: 300 30px/75px \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  cursor: default;\n}\n.comment__feedback__box__syntaxs .drop__upload__area::after,\n.comment__feedback__box__syntaxs .drop__upload__area::before {\n  content: '';\n  display: block;\n  z-index: -1;\n  color: #1C86D1;\n  box-shadow: inset 0 0 0 2px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  -webkit-animation: clip-me 6s linear infinite;\n          animation: clip-me 6s linear infinite;\n}\n.comment__feedback__box__syntaxs .drop__upload__area::before {\n  -webkit-animation-delay: -3s;\n          animation-delay: -3s;\n}\n@-webkit-keyframes clip-me {\n  0%,\n  100% {\n    clip: rect(0px, 454px, 4px, 0px);\n  }\n  25% {\n    clip: rect(0px, 4px, 80px, 0px);\n  }\n  50% {\n    clip: rect(76px, 454px, 80px, 0px);\n  }\n  75% {\n    clip: rect(0px, 454px, 80px, 450px);\n  }\n}\n@keyframes clip-me {\n  0%,\n  100% {\n    clip: rect(0px, 454px, 4px, 0px);\n  }\n  25% {\n    clip: rect(0px, 4px, 80px, 0px);\n  }\n  50% {\n    clip: rect(76px, 454px, 80px, 0px);\n  }\n  75% {\n    clip: rect(0px, 454px, 80px, 450px);\n  }\n}\n.comment__feedback__box__syntaxs .upload__btn {\n  border-radius: 5px;\n  width: 454px;\n  height: 40px;\n  background: #1C86D1;\n  color: #fff;\n  font-size: 18px;\n  margin-bottom: 10px;\n}\n.comment__feedback__box__syntaxs .upload__btn:active {\n  background: #3075DC;\n}\n.comment__feedback__box__syntaxs input[type=\"text\"] {\n  border-radius: 3px;\n  height: 30px;\n  border: 1px solid #1C86D1;\n  margin-right: 20px;\n  font-size: 14px;\n  text-indent: 5px;\n}\n.comment__feedback__box__syntaxs .insert {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  border-radius: 5px;\n  color: #272636;\n  border: 1px solid #1C86D1;\n  line-height: 30px;\n  width: 70px;\n  height: 30px;\n}\n.comment__feedback__box__syntaxs .insert:hover {\n  background: #1C86D1;\n  color: #fff;\n}\n.comment__feedback__box__syntaxs .table-size-matrix {\n  margin: 10px 0 10px 90px;\n}\n.comment__feedback__box__syntaxs .table-size-matrix tr,\n.comment__feedback__box__syntaxs .table-size-matrix td {\n  border: 1px solid #ccc;\n}\n.comment__feedback__box__syntaxs .table-size-matrix td {\n  padding: 15px;\n}\n.comment__feedback__box__syntaxs .table-matrix-dimension {\n  font-size: 18px;\n  text-decoration: underline;\n  margin: 0 20px;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap {\n  width: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  border-top: 1px solid #ccc;\n  border-left: 1px solid #ccc;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap td {\n  border-right: 1px solid #ccc;\n  border-bottom: 1px solid #ccc;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap td:hover {\n  background: #ccc;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap td a {\n  display: inline-block;\n  width: 32px;\n  height: 32px;\n  padding: 4px;\n}\n.comment__feedback__box__syntaxs #snap_canvas {\n  margin-bottom: 10px;\n}\n.comment__feedback__box__syntaxs .snap_wrap {\n  width: 430px;\n  margin: 20px auto;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.comment__feedback__box__wrap {\n  position: relative;\n}\n.editor__resize__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.editor__resize {\n  display: inline-block;\n  width: 130px;\n  height: 8px;\n  cursor: row-resize;\n  margin-top: 2px;\n  border-top: 1px solid #ccc;\n  border-bottom: 1px solid #ccc;\n}\n.comment__feedback__box {\n  position: relative;\n  width: 100%;\n}\n.comment__feedback {\n  padding: 10px;\n  border-top: 1px solid #272636;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n}\n.comment__feedback h3 {\n  font: 200 24px/1 arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n}\n.login-infos {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  font-size: 16px;\n  padding-bottom: 10px;\n}\n.login-infos a {\n  color: #1C86D1;\n}\n.login-infos .init_prompt {\n  cursor: default;\n  color: rgba(0, 0, 0, 0.5);\n}\n.login-out__btn {\n  border-radius: 5px;\n  float: right;\n  width: 70px;\n  height: 25px;\n  background: #C81623;\n  color: #fff;\n}\n.login-out__btn:active {\n  background: #AA151F;\n}\n.login-in__btn {\n  border-radius: 5px;\n  float: right;\n  width: 70px;\n  height: 25px;\n  padding: 0 5px;\n  background: #1C86D1;\n  color: #fff;\n}\n.login-in__btn:active {\n  background: #3075DC;\n}\n.comment__feedback--section {\n  width: calc(100% - 74px);\n}\n.comment__feedback--edit {\n  border-radius: 0px 0px 5px 5px;\n  width: 100%;\n  min-height: 30px;\n  padding: 5px;\n  border: 1px solid #272636;\n  border-top: none;\n  font: 200 14px/1.5 arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  resize: none;\n  overflow: hidden;\n  white-space: pre-wrap;\n  -moz-tab-size: 4;\n    -o-tab-size: 4;\n       tab-size: 4;\n}\n.comment__feedback--btns {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  width: 100%;\n  margin-top: 10px;\n}\n.comment__feedback--btns button {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  border-radius: 5px;\n  line-height: 30px;\n  width: 70px;\n  height: 30px;\n}\n.feedback--btns__reset {\n  color: #C81623;\n  border: 1px solid #C81623;\n}\n.feedback--btns__reset:hover {\n  background: #C81623;\n  color: #fff;\n}\n.feedback--btns__comment {\n  margin-left: 10px;\n  color: #272636;\n  border: 1px solid #1C86D1;\n}\n.feedback--btns__comment:hover {\n  background: #1C86D1;\n  color: #fff;\n}\n.comment__feedback__mask {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  border-radius: 2px;\n  position: absolute;\n  top: 0;\n  left: 1px;\n  width: 604px;\n  height: 149px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  cursor: default;\n  background: #ccc;\n}\n.comment__feedback__mask p {\n  color: #fff;\n}\n.comment__feedback__mask--title {\n  font: 100 60px/60px \"\\5FAE\\8F6F\\96C5\\9ED1\";\n}\n.comment__feedback__mask--pinyin {\n  margin-top: 15px;\n  font: 100 20px/20px arial;\n}\n.clearfix::after {\n  content: \".\";\n  display: block;\n  height: 0;\n  visibility: hidden;\n  clear: both;\n}\n.demo {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  width: 900px;\n  margin: 50px auto 50px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  padding: 0 100px;\n}\n.comment__wrap {\n  width: 100%;\n}\n.comment__header {\n  border-radius: 5px;\n  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.6);\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -moz-justify-content: space-between;\n  height: 50px;\n  background: #1C86D1;\n  color: #fff;\n  font-size: 0;\n  padding: 5px 8px;\n}\n.comment__header::after {\n  content: \"\";\n  display: block;\n  position: absolute;\n  left: 41px;\n  bottom: -20px;\n  height: 0px;\n  border: 10px solid transparent;\n  border-top: 10px solid #1C86D1;\n}\n.comment__header .comment__header__span {\n  width: 150px;\n  height: 16px;\n  font: 200 16px/16px arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  margin-left: 10px;\n}\n.comment__header .comment__header__btns {\n  width: 80px;\n  height: 30px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.comment__header .comment__header__btns button {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  display: inline-block;\n  width: 40px;\n  height: 30px;\n  color: #fff;\n  font-size: 14px;\n}\n.comment__header .comment__header__btns button:hover {\n  color: #d32;\n}\n.comment__footer {\n  border-radius: 5px;\n  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.6);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  position: relative;\n  height: 70px;\n  background: #1C86D1;\n}\n.comment__footer::before {\n  content: \"\";\n  display: block;\n  position: absolute;\n  top: -20px;\n  left: 41px;\n  height: 0;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #1C86D1;\n}\n.comment__pagination {\n  border-radius: 5px;\n  box-shadow: 0 0 2px rgba(0, 0, 0, 0.7);\n  overflow: hidden;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 35px;\n}\n.comment__pagination li {\n  -webkit-transition: 0.3s;\n  transition: 0.3s;\n  width: 40px;\n  height: 100%;\n  color: #fff;\n  text-align: center;\n  cursor: pointer;\n}\n.comment__pagination li:hover {\n  color: #1C86D1;\n  background: #fff;\n}\n.comment__pagination li div {\n  padding: 10px 0;\n  height: 100%;\n  line-height: 15px;\n}\n.comment__pagination li > div.active {\n  color: #1C86D1;\n  background: #fff;\n  border-left: none !important;\n}\n.comment__pagination li:not(:nth-of-type(1)) div {\n  border-left: 1px solid rgba(0, 0, 0, 0.2);\n}\n.comment__list {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  margin: 0 0 0 50px;\n  border-left: 2px solid #1C86D1;\n}\n.no__comment__item {\n  padding: 20px;\n  text-align: center;\n}\n.no__comment__item p {\n  border-radius: 5px;\n  height: 70px;\n  font-size: 24px;\n  line-height: 70px;\n  color: rgba(0, 0, 0, 0.6);\n  border: 1px solid #272636;\n}\n.comment__item {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: relative;\n  padding: 20px;\n}\n.comment__item::after {\n  border-radius: 50%;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  left: -8px;\n  top: 40px;\n  content: \"\";\n  display: block;\n  background: #1C86D1;\n  width: 10px;\n  height: 10px;\n  border: 2px solid #fff;\n}\n.comment__item:hover::after {\n  background: #51CA65;\n}\n.comment__item:hover .comment__content {\n  -webkit-transform: translateX(15px);\n          transform: translateX(15px);\n}\n.comment__content {\n  border-radius: 5px;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n  padding: 10px;\n  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);\n}\n.comment__author--avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.comment__author--avatar > img:hover,\n.comment__author--avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.comment__content--main {\n  width: calc(100% - 74px);\n}\n.comment__content--author {\n  font-size: 18px;\n}\n.comment__content--author a {\n  color: #1C86D1;\n}\n.comment__content--time {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  font-size: 12px;\n  margin-top: 2px;\n  color: #ddd;\n  cursor: default;\n}\n.comment__content--time:hover {\n  color: #1C86D1;\n}\n.comment__content--content {\n  font-size: 0px;\n  line-height: 1.4;\n  padding: 24px 0 0 0px;\n  white-space: pre;\n}\n.comment__content--content h1.text-effect-basic {\n  text-fill-color: transparent;\n  -webkit-text-fill-color: transparent;\n  background-clip: text;\n  -webkit-background-clip: text;\n  background-size: 200% 200%;\n  -webkit-animation: masked 3s infinite linear;\n          animation: masked 3s infinite linear;\n}\n.comment__content--content h1 {\n  margin-top: 10px;\n  padding-bottom: 10px;\n  font-size: 25px;\n  color: #7c795d;\n  font-weight: normal;\n  line-height: 1.1;\n  border-bottom: 1px solid #7c795d;\n}\n.comment__content--content h2 {\n  margin: 5px 0;\n  height: 30px;\n  text-indent: 5px;\n  color: #7c795d;\n  font: 400 20px/30px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  border-left: 5px solid #1C86D1;\n}\n.comment__content--content pre,\n.comment__content--content p,\n.comment__content--content code {\n  -moz-tab-size: 2;\n    -o-tab-size: 2;\n       tab-size: 2;\n  white-space: pre-wrap;\n  word-break: break-all;\n}\n.comment__content--content p,\n.comment__content--content code {\n  font-size: 14px;\n}\n.comment__content--content strong {\n  font-size: 16px;\n}\n.comment__content--content a {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  color: #1C86D1;\n  margin: 0px 2px;\n}\n.comment__content--content a:hover {\n  color: #C91523;\n}\n.comment__content--content img {\n  max-width: 512px;\n  vertical-align: bottom;\n}\n.comment__content--content table {\n  border-radius: 5px;\n  margin: 20px 0;\n  padding: 8px;\n  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);\n  white-space: normal;\n  border-collapse: collapse;\n}\n.comment__content--content table tr {\n  border: 1px solid #000;\n}\n.comment__content--content table tr td,\n.comment__content--content table tr th {\n  font-size: 14px;\n  padding: 5px;\n  word-break: break-word;\n}\n.comment__content--content table tr td {\n  font-weight: 200;\n  border: 1px solid #000;\n}\n.comment__content--content blockquote {\n  border-radius: 5px;\n  position: relative;\n  background: #CCD0D5;\n  padding: 25px 10px 10px 30px;\n  overflow: hidden;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n}\n.comment__content--content blockquote::before {\n  position: absolute;\n  top: 0;\n  left: 0;\n  font-size: 14px;\n  background: -webkit-linear-gradient(112deg, transparent 50%, #1C86D1 50%);\n  background: linear-gradient(-22deg, transparent 50%, #1C86D1 50%);\n  width: 80px;\n  height: 30px;\n  display: block;\n  content: \"\\5F15\\8FF0\";\n  color: #fff;\n  padding: 3px 0 0 4px;\n}\n.comment__content--content pre {\n  border-radius: 5px;\n  overflow: hidden;\n  padding: 15px 0px 15px 8px;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n  margin: 15px 0;\n  background: #49483e;\n}\n.comment__content--content pre code {\n  color: #a6e22e;\n}\n.comment__content--content pre code .hljs-comment,\n.comment__content--content pre code .hljs-quote {\n  color: #999580;\n}\n.comment__content--content pre code .hljs-variable,\n.comment__content--content pre code .hljs-template-variable,\n.comment__content--content pre code .hljs-attr,\n.comment__content--content pre code .hljs-tag,\n.comment__content--content pre code .hljs-name,\n.comment__content--content pre code .hljs-regexp,\n.comment__content--content pre code .hljs-link,\n.comment__content--content pre code .hljs-name,\n.comment__content--content pre code .hljs-selector-id,\n.comment__content--content pre code .hljs-selector-class {\n  color: #f2777a;\n}\n.comment__content--content pre code .hljs-number,\n.comment__content--content pre code .hljs-meta,\n.comment__content--content pre code .hljs-built_in,\n.comment__content--content pre code .hljs-builtin-name,\n.comment__content--content pre code .hljs-literal,\n.comment__content--content pre code .hljs-type,\n.comment__content--content pre code .hljs-params {\n  color: #ae81ff;\n}\n.comment__content--content pre code .hljs-string,\n.comment__content--content pre code .hljs-symbol,\n.comment__content--content pre code .hljs-bullet {\n  color: #e6db74;\n}\n.comment__content--content pre code .hljs-title,\n.comment__content--content pre code .hljs-section {\n  color: #6684e1;\n}\n.comment__content--content pre code .hljs-keyword,\n.comment__content--content pre code .hljs-selector-tag {\n  color: #66D9EF;\n}\n.comment__content--content pre code .hljs {\n  display: block;\n  overflow-x: auto;\n  background: #20201d;\n  color: #a6a28c;\n  padding: 0.5em;\n}\n.comment__content--content pre code .hljs-emphasis {\n  font-style: italic;\n}\n.comment__content--content pre code .hljs-strong {\n  font-weight: bold;\n}\n.comment__content--content ol {\n  counter-reset: section;\n  padding: 10px 0 10px 20px;\n}\n.comment__content--content ol > li {\n  position: relative;\n  min-height: 20px;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  margin: 5px 0px;\n}\n.comment__content--content ol > li:before {\n  counter-increment: section;\n  content: counters(section, \"\") \".\";\n  display: inline-block;\n  position: absolute;\n  top: 0;\n  left: -20px;\n  font-size: 16px;\n  font-weight: bold;\n  font-style: italic;\n}\n.comment__content--content ol > li:nth-of-type(3n+1)::before {\n  color: #FE0002;\n}\n.comment__content--content ol > li:nth-of-type(3n+2)::before {\n  color: #F4F800;\n}\n.comment__content--content ol > li:nth-of-type(3n+3)::before {\n  color: #A3DF03;\n}\n.comment__content--content ul {\n  padding: 10px 0 10px 15px;\n}\n.comment__content--content ul > li {\n  position: relative;\n  margin-bottom: 10px;\n  line-height: 1.1;\n  min-height: 20px;\n  word-break: break-all;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n}\n.comment__content--content ul > li::before {\n  border-radius: 50%;\n  position: absolute;\n  top: 6px;\n  left: -13px;\n  content: \"\";\n  display: inline-block;\n  width: 8px;\n  height: 8px;\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #1C86D1 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #1C86D1 100%);\n}\n.comment__content--content ul > li:hover::before {\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #91E22E 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #91E22E 100%);\n}\n.comment__content--options {\n  padding-top: 15px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.comment__content--options__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-flex: 8;\n      -ms-flex-positive: 8;\n          flex-grow: 8;\n}\n.comment__content--options__wrap a {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.comment__content--options__wrap a i {\n  width: 16px;\n  height: 16px;\n  background-image: url(\"/img/icon.png\");\n}\n.comment__content--options__wrap a span {\n  font-size: 12px;\n  margin-left: 3px;\n  color: #272636;\n}\n.comment__content--options__wrap a:hover span {\n  color: #1C86D1;\n}\n.comment__content--options__wrap a:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.comment__content--options__callback i {\n  background-position: -5px 0px;\n}\n.comment__content--options__del {\n  margin-left: 8px;\n}\n.comment__content--options__del i {\n  background-position: -5px -16px;\n}\n.comment__options__vote-up {\n  text-align: right;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n.comment__options__vote-up button {\n  font-size: 18px;\n}\n.comment__options__vote-up button span {\n  font-size: 18px;\n}\n.comment__options__vote-up button:hover {\n  color: #1C86D1;\n}\n.comment__options__has-voted-up {\n  text-align: right;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n.comment__options__has-voted-up button {\n  font-size: 18px;\n  color: #C91523;\n  cursor: default;\n}\n.comment__options__has-voted-up button span {\n  font-size: 18px;\n}\n.feedback__content {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  width: 100%;\n  margin: 20px 10px 10px 5px;\n}\n.feedback__content--main {\n  border-radius: 5px;\n  position: relative;\n  border: 1px solid #272636;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  padding: 5px;\n  margin: 20px 0 0;\n}\n.feedback__content--main::after,\n.feedback__content--main::before {\n  content: \"\";\n  height: 0;\n  position: absolute;\n  left: 30px;\n}\n.feedback__content--main::after {\n  top: -20px;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #272636;\n}\n.feedback__content--main::before {\n  z-index: 2;\n  top: -19px;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #fff;\n}\n.sub__feedback {\n  margin: 5px 0;\n}\n.sub__feedback span {\n  font-size: 18px;\n  color: #1C86D1;\n}\n.feedback__wrap--content {\n  width: calc(100% - 74px);\n}\n.feedback__content--avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.feedback__content--avatar > img:hover,\n.feedback__content--avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.feedback__wrap--content {\n  width: calc(100% - 74px);\n}\n.feedback__content--author {\n  font-size: 18px;\n}\n.feedback__content--author a {\n  color: #1C86D1;\n}\n.feedback__content--time {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  font-size: 12px;\n  margin-top: 2px;\n  color: #ddd;\n  cursor: default;\n}\n.feedback__content--time:hover {\n  color: #1C86D1;\n}\n.feedback__content--content {\n  font-size: 0px;\n  line-height: 1.4;\n  padding: 24px 0 0 0px;\n  white-space: pre;\n}\n.feedback__content--content h1.text-effect-basic {\n  text-fill-color: transparent;\n  -webkit-text-fill-color: transparent;\n  background-clip: text;\n  -webkit-background-clip: text;\n  background-size: 200% 200%;\n  -webkit-animation: masked 3s infinite linear;\n          animation: masked 3s infinite linear;\n}\n.feedback__content--content h1 {\n  margin-top: 10px;\n  padding-bottom: 10px;\n  font-size: 25px;\n  color: #7c795d;\n  font-weight: normal;\n  line-height: 1.1;\n  border-bottom: 1px solid #7c795d;\n}\n.feedback__content--content h2 {\n  margin: 5px 0;\n  height: 30px;\n  text-indent: 5px;\n  color: #7c795d;\n  font: 400 20px/30px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  border-left: 5px solid #1C86D1;\n}\n.feedback__content--content pre,\n.feedback__content--content p,\n.feedback__content--content code {\n  -moz-tab-size: 2;\n    -o-tab-size: 2;\n       tab-size: 2;\n  white-space: pre-wrap;\n  word-break: break-all;\n}\n.feedback__content--content p,\n.feedback__content--content code {\n  font-size: 14px;\n}\n.feedback__content--content strong {\n  font-size: 16px;\n}\n.feedback__content--content a {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  color: #1C86D1;\n  margin: 0px 2px;\n}\n.feedback__content--content a:hover {\n  color: #C91523;\n}\n.feedback__content--content img {\n  max-width: 512px;\n  vertical-align: bottom;\n}\n.feedback__content--content table {\n  border-radius: 5px;\n  margin: 20px 0;\n  padding: 8px;\n  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);\n  white-space: normal;\n  border-collapse: collapse;\n}\n.feedback__content--content table tr {\n  border: 1px solid #000;\n}\n.feedback__content--content table tr td,\n.feedback__content--content table tr th {\n  font-size: 14px;\n  padding: 5px;\n  word-break: break-word;\n}\n.feedback__content--content table tr td {\n  font-weight: 200;\n  border: 1px solid #000;\n}\n.feedback__content--content blockquote {\n  border-radius: 5px;\n  position: relative;\n  background: #CCD0D5;\n  padding: 25px 10px 10px 30px;\n  overflow: hidden;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n}\n.feedback__content--content blockquote::before {\n  position: absolute;\n  top: 0;\n  left: 0;\n  font-size: 14px;\n  background: -webkit-linear-gradient(112deg, transparent 50%, #1C86D1 50%);\n  background: linear-gradient(-22deg, transparent 50%, #1C86D1 50%);\n  width: 80px;\n  height: 30px;\n  display: block;\n  content: \"\\5F15\\8FF0\";\n  color: #fff;\n  padding: 3px 0 0 4px;\n}\n.feedback__content--content pre {\n  border-radius: 5px;\n  overflow: hidden;\n  padding: 15px 0px 15px 8px;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n  margin: 15px 0;\n  background: #49483e;\n}\n.feedback__content--content pre code {\n  color: #a6e22e;\n}\n.feedback__content--content pre code .hljs-comment,\n.feedback__content--content pre code .hljs-quote {\n  color: #999580;\n}\n.feedback__content--content pre code .hljs-variable,\n.feedback__content--content pre code .hljs-template-variable,\n.feedback__content--content pre code .hljs-attr,\n.feedback__content--content pre code .hljs-tag,\n.feedback__content--content pre code .hljs-name,\n.feedback__content--content pre code .hljs-regexp,\n.feedback__content--content pre code .hljs-link,\n.feedback__content--content pre code .hljs-name,\n.feedback__content--content pre code .hljs-selector-id,\n.feedback__content--content pre code .hljs-selector-class {\n  color: #f2777a;\n}\n.feedback__content--content pre code .hljs-number,\n.feedback__content--content pre code .hljs-meta,\n.feedback__content--content pre code .hljs-built_in,\n.feedback__content--content pre code .hljs-builtin-name,\n.feedback__content--content pre code .hljs-literal,\n.feedback__content--content pre code .hljs-type,\n.feedback__content--content pre code .hljs-params {\n  color: #ae81ff;\n}\n.feedback__content--content pre code .hljs-string,\n.feedback__content--content pre code .hljs-symbol,\n.feedback__content--content pre code .hljs-bullet {\n  color: #e6db74;\n}\n.feedback__content--content pre code .hljs-title,\n.feedback__content--content pre code .hljs-section {\n  color: #6684e1;\n}\n.feedback__content--content pre code .hljs-keyword,\n.feedback__content--content pre code .hljs-selector-tag {\n  color: #66D9EF;\n}\n.feedback__content--content pre code .hljs {\n  display: block;\n  overflow-x: auto;\n  background: #20201d;\n  color: #a6a28c;\n  padding: 0.5em;\n}\n.feedback__content--content pre code .hljs-emphasis {\n  font-style: italic;\n}\n.feedback__content--content pre code .hljs-strong {\n  font-weight: bold;\n}\n.feedback__content--content ol {\n  counter-reset: section;\n  padding: 10px 0 10px 20px;\n}\n.feedback__content--content ol > li {\n  position: relative;\n  min-height: 20px;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  margin: 5px 0px;\n}\n.feedback__content--content ol > li:before {\n  counter-increment: section;\n  content: counters(section, \"\") \".\";\n  display: inline-block;\n  position: absolute;\n  top: 0;\n  left: -20px;\n  font-size: 16px;\n  font-weight: bold;\n  font-style: italic;\n}\n.feedback__content--content ol > li:nth-of-type(3n+1)::before {\n  color: #FE0002;\n}\n.feedback__content--content ol > li:nth-of-type(3n+2)::before {\n  color: #F4F800;\n}\n.feedback__content--content ol > li:nth-of-type(3n+3)::before {\n  color: #A3DF03;\n}\n.feedback__content--content ul {\n  padding: 10px 0 10px 15px;\n}\n.feedback__content--content ul > li {\n  position: relative;\n  margin-bottom: 10px;\n  line-height: 1.1;\n  min-height: 20px;\n  word-break: break-all;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n}\n.feedback__content--content ul > li::before {\n  border-radius: 50%;\n  position: absolute;\n  top: 6px;\n  left: -13px;\n  content: \"\";\n  display: inline-block;\n  width: 8px;\n  height: 8px;\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #1C86D1 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #1C86D1 100%);\n}\n.feedback__content--content ul > li:hover::before {\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #91E22E 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #91E22E 100%);\n}\n.feedback__content--options {\n  padding-top: 15px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.feedback__content--options__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 8;\n      -ms-flex-positive: 8;\n          flex-grow: 8;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.feedback__content--options__wrap a {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.feedback__content--options__wrap a i {\n  width: 16px;\n  height: 16px;\n  background-image: url(\"/img/icon.png\");\n}\n.feedback__content--options__wrap a span {\n  font-size: 12px;\n  margin-left: 3px;\n  color: #272636;\n}\n.feedback__content--options__wrap a:hover span {\n  color: #1C86D1;\n}\n.feedback__content--options__wrap a:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.feedback__content--options__callback i {\n  background-position: -5px 0px;\n}\n.feedback__content--options__del {\n  margin-left: 8px;\n}\n.feedback__content--options__del i {\n  background-position: -5px -16px;\n}\n.feedback__options__vote-up {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  text-align: right;\n}\n.feedback__options__vote-up button {\n  font-size: 18px;\n}\n.feedback__options__vote-up button span {\n  font-size: 18px;\n}\n.feedback__options__vote-up button:hover {\n  color: #1C86D1;\n}\n.editer-wrap {\n  margin-top: 20px;\n}\n.editer-wrap .comment__feedback {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  width: 100%;\n  border-top: none;\n}\n.editer-wrap .editer-wrap__avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.editer-wrap .editer-wrap__avatar > img:hover,\n.editer-wrap .editer-wrap__avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.editer-wrap .editer-wrap__avatar img {\n  height: 100%;\n}\n.editer-wrap .comment__feedback--edit {\n  min-height: 150px;\n}\n.editer-wrap .comment__feddback--btns {\n  width: 100%;\n}\n.login__table__bg {\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 999998;\n  background: rgba(0, 0, 0, 0.4);\n}\n.login__table {\n  border-radius: 5px;\n  box-shadow: 0 0 10px #000000;\n  position: fixed;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  margin: auto;\n  width: 320px;\n  height: 340px;\n  border: 1px solid rgba(0, 0, 0, 0.3);\n  background: #fff;\n  z-index: 999999;\n}\n.login__table__wrap {\n  overflow: hidden;\n  padding: 0 10px;\n}\n.login__table__header {\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 40px;\n}\n.login__table__header button {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  line-height: 50px;\n}\n.state__bar {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  bottom: 0;\n  left: 32px;\n  width: 80px;\n  height: 2px;\n  background: #1C86D1;\n}\n.state__bar:hover {\n  color: #1C86D1;\n}\n.state__bar--toggle {\n  left: 186px;\n}\n.login__table__forms {\n  position: relative;\n  height: 300px;\n}\n.login__table__forms form {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  top: 0;\n  left: 0;\n}\n.tourist__login {\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  padding-top: 50px;\n}\n.input__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  padding: 5px 0;\n  line-height: 20px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  margin-bottom: 15px;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n}\n.input__wrap p {\n  width: 60px;\n}\n.input__wrap input[type=\"text\"] {\n  border-radius: 5px;\n  border: 1px solid #272636;\n  padding: 5px;\n  width: 180px;\n  height: 27px;\n}\n.input__wrap label {\n  display: inline-block;\n  width: 100%;\n  height: 20px;\n  font-size: 12px;\n  color: #B61D1D;\n  padding: 5px 30px 0 0;\n  text-align: right;\n}\ninput[type=\"button\"].tourist__login--submit {\n  border-radius: 5px;\n  width: 180px;\n  height: 35px;\n  color: #fff;\n  background: #1C86D1;\n  margin: 30px auto 0;\n  cursor: pointer;\n  border: 1px solid #ccc;\n}\ninput[type=\"button\"].tourist__login--submit:active {\n  background: #3075DC;\n}\n.sns__login {\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 20px;\n}\n.sns__login div {\n  width: 70px;\n  height: 70px;\n  background: red;\n}\n.alert__wrap {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 99999999;\n  background: rgba(0, 0, 0, 0.8);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  overflow: hidden;\n}\n.alert__plane {\n  width: 100%;\n  height: 0px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background: rgba(255, 255, 255, 0.65);\n  -webkit-animation: alert_plane_animate .5s;\n          animation: alert_plane_animate .5s;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n.alert__plane header {\n  width: 100%;\n  height: 8px;\n  background: -webkit-linear-gradient(left, #F00001 12.5%, transparent 0px), -webkit-linear-gradient(left, #FF7F00 25%, transparent 0px), -webkit-linear-gradient(left, #E1E23B 37.5%, transparent 0px), -webkit-linear-gradient(left, #007940 50%, transparent 0px), -webkit-linear-gradient(left, #4041FE 62.5%, transparent 0px), -webkit-linear-gradient(left, #A001C0 75%, transparent 0px), -webkit-linear-gradient(left, #F7941E 87.5%, transparent 0px), -webkit-linear-gradient(left, #9AC147 100%, transparent 0px);\n  background: linear-gradient(to right, #F00001 12.5%, transparent 0px), linear-gradient(to right, #FF7F00 25%, transparent 0px), linear-gradient(to right, #E1E23B 37.5%, transparent 0px), linear-gradient(to right, #007940 50%, transparent 0px), linear-gradient(to right, #4041FE 62.5%, transparent 0px), linear-gradient(to right, #A001C0 75%, transparent 0px), linear-gradient(to right, #F7941E 87.5%, transparent 0px), linear-gradient(to right, #9AC147 100%, transparent 0px);\n  background-repeat: no-repeat;\n}\n.alert__plane footer {\n  width: 100%;\n  height: 42px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.alert__plane footer label {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  height: 100%;\n  cursor: pointer;\n  line-height: 42px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.alert__plane footer label:hover button {\n  color: #1C86D1;\n}\n.alert__plane footer label:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.alert__plane footer label:hover i::before {\n  -webkit-transform: scale(1);\n          transform: scale(1);\n}\n.alert__plane footer i {\n  position: relative;\n  width: 20px;\n  height: 20px;\n  background-image: url(\"/img/icon.png\");\n}\n.alert__plane footer i::before {\n  border-radius: 50%;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  content: \"\";\n  display: block;\n  width: 20px;\n  height: 20px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  z-index: -1;\n  background: #1C86D1;\n  -webkit-transform: scale(0);\n          transform: scale(0);\n}\n.alert__plane footer .alert__plane--btn_sure {\n  background-position: -4px -59px;\n}\n.alert__plane footer .alert__plane--btn_cancel {\n  background-position: -4px -36px;\n}\n.alert__plane footer button {\n  font-size: 18px;\n}\n@-webkit-keyframes alert_plane_animate {\n  0% {\n    height: 0;\n  }\n  100% {\n    height: 280px;\n  }\n}\n@keyframes alert_plane_animate {\n  0% {\n    height: 0;\n  }\n  100% {\n    height: 280px;\n  }\n}\n.alert__plane--question {\n  width: 100%;\n  height: 230px;\n  padding-top: 50px;\n  text-align: center;\n  font-size: 30px;\n  font-weight: 100;\n  line-height: 1.2;\n  overflow: hidden;\n  color: rgba(0, 0, 0, 0.7);\n}\n", ""]);
+	exports.push([module.id, "@charset \"utf-8\";\n* {\n  box-sizing: border-box;\n  font-family: arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  font-size: 14px;\n  outline: none;\n}\nbody {\n  margin: 0;\n  padding: 0;\n  font-size: 0;\n}\na {\n  -webkit-transition: 5s;\n  transition: 5s;\n  text-decoration: none;\n}\nul,\nol {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\ntable {\n  border-collapse: collapse;\n}\nselect {\n  -webkit-appearance: none;\n     -moz-appearance: none;\n          appearance: none;\n}\nh1,\nh2,\nh3 {\n  margin-bottom: 1em;\n}\np,\npre {\n  margin: 0;\n}\nblockquote {\n  margin: 0;\n}\ninput[type=\"submit\"],\nbutton {\n  display: inline-block;\n  border-radius: 0;\n  border: none;\n  padding: 0;\n  background: none;\n  cursor: pointer;\n}\nfigure {\n  margin: 0;\n}\ni {\n  display: inline-block;\n}\n/*下拉组件*/\n.drop__list {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  width: 140px;\n  height: 28px;\n  border: 1px solid #ccc;\n  cursor: pointer;\n  position: relative;\n  border-radius: 3px 3px 0px 0px;\n  color: #929699;\n  font-size: 0px;\n  margin-right: 20px;\n}\n.drop__list p {\n  width: 100px;\n  height: 20px;\n  margin: 3px 0 3px 5px;\n  font-size: 14px;\n}\n.drop__list i {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  top: 5px;\n  right: 5px;\n  content: \"\";\n  width: 16px;\n  height: 16px;\n  display: block;\n  background: url(\"/img/icon.png\") -30px 0px;\n}\n.drop__list .drop__wrap {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  top: 26px;\n  left: 0;\n  width: 100%;\n  border-radius: 0px 0px 3px 3px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  overflow: hidden;\n  border: 1px solid #ccc;\n  border-top: none;\n  z-index: 1234;\n  height: 0px;\n}\n.drop__list ul {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  padding: 5px 0;\n  overflow: hidden;\n  background: #E6E6E6;\n  font-size: 14px;\n}\n.drop__list ul li {\n  height: 25px;\n  line-height: 25px;\n  padding: 0px 5px;\n}\n.drop__list ul li:hover {\n  color: #fff;\n  background: #1C86D1;\n}\n.drag__wrap {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  top: 0;\n  right: 0;\n  background: #F5F5F5;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.drag__wrap .drag__btn {\n  border-radius: 3px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  min-height: 5px;\n  width: 100%;\n  border: 1px solid #979797;\n  background-color: rgba(0, 0, 0, 0.6);\n}\n.drag__wrap .drag__btn:hover {\n  border: 1px solid #636363;\n  background-color: rgba(0, 0, 0, 0.8);\n}\n.drag__wrap .drag__btn:active {\n  border: 1px solid #636363;\n  background-color: #000000;\n}\n.column-arrange {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: column wrap;\n          flex-flow: column wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.none {\n  display: none !important;\n}\n.b-c {\n  position: fixed;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  margin: auto;\n}\n.hidden {\n  height: 0 !important;\n}\n@-webkit-keyframes swing {\n  20%,\n  40%,\n  60%,\n  80%,\n  100% {\n    -webkit-transform-origin: topcenter;\n            transform-origin: topcenter;\n  }\n  20% {\n    -webkit-transform: rotate(15deg);\n            transform: rotate(15deg);\n  }\n  40% {\n    -webkit-transform: rotate(-10deg);\n            transform: rotate(-10deg);\n  }\n  60% {\n    -webkit-transform: rotate(5deg);\n            transform: rotate(5deg);\n  }\n  80% {\n    -webkit-transform: rotate(-5deg);\n            transform: rotate(-5deg);\n  }\n  100% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n  }\n}\n@keyframes swing {\n  20%,\n  40%,\n  60%,\n  80%,\n  100% {\n    -webkit-transform-origin: topcenter;\n            transform-origin: topcenter;\n  }\n  20% {\n    -webkit-transform: rotate(15deg);\n            transform: rotate(15deg);\n  }\n  40% {\n    -webkit-transform: rotate(-10deg);\n            transform: rotate(-10deg);\n  }\n  60% {\n    -webkit-transform: rotate(5deg);\n            transform: rotate(5deg);\n  }\n  80% {\n    -webkit-transform: rotate(-5deg);\n            transform: rotate(-5deg);\n  }\n  100% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n  }\n}\n@-webkit-keyframes masked {\n  0% {\n    background-position: 0 0;\n  }\n  100% {\n    background-position: -100% 0;\n  }\n}\n@keyframes masked {\n  0% {\n    background-position: 0 0;\n  }\n  100% {\n    background-position: -100% 0;\n  }\n}\n.comment__feedback__wrap {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  background: #fbfbfb;\n  width: 100%;\n  margin-top: 20px;\n}\n.comment__feedback__box__syntaxs {\n  border-radius: 5px 5px 0 0;\n  border: 1px solid #272636;\n}\n.comment__feedback__box__syntaxs .syntaxs__list {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 32px;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row no-wrap;\n          flex-flow: row no-wrap;\n}\n.comment__feedback__box__syntaxs .syntaxs__list > li {\n  width: 32px;\n  height: 32px;\n  margin: 0 4px;\n  background-image: url(\"/img/icon.png\");\n  cursor: pointer;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .bold {\n  background-position: 6px -79px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .bold:hover {\n  background: url(\"/img/icon-hover.png\") 6px -79px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .italic {\n  background-position: 8px -127px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .italic:hover {\n  background: url(\"/img/icon-hover.png\") 8px -127px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .a-link {\n  background-position: 4px -103px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .a-link:hover {\n  background: url(\"/img/icon-hover.png\") 4px -103px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .image {\n  background-position: 4px -151px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .image:hover {\n  background: url(\"/img/icon-hover.png\") 4px -151px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .table {\n  background-position: 4px -175px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .table:hover {\n  background: url(\"/img/icon-hover.png\") 4px -175px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .blockquote-block {\n  background-position: 4px -292px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .blockquote-block:hover {\n  background: url(\"/img/icon-hover.png\") 4px -292px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .u-list {\n  background-position: 2px -223px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .u-list:hover {\n  background: url(\"/img/icon-hover.png\") 2px -223px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .o-list {\n  background-position: 2px -199px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .o-list:hover {\n  background: url(\"/img/icon-hover.png\") 2px -199px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h1-tag {\n  background-position: 4px -247px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h1-tag:hover {\n  background: url(\"/img/icon-hover.png\") 4px -247px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h2-tag {\n  background-position: 4px -269px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .h2-tag:hover {\n  background: url(\"/img/icon-hover.png\") 4px -269px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .code-block {\n  background-position: 4px -341px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .code-block:hover {\n  background: url(\"/img/icon-hover.png\") 4px -341px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .snap-block {\n  position: relative;\n  background-position: 4px -365px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .snap-block:hover {\n  background: url(\"/img/icon-hover.png\") 4px -365px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .snap-block .snap_video_wrap {\n  border-radius: 5px;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  top: -318px;\n  left: -225px;\n  width: 450px;\n  height: 300px;\n  padding: 10px 10px 0 10px;\n  background: rgba(0, 0, 0, 0.3);\n  -webkit-transform: scale(0, 0);\n          transform: scale(0, 0);\n  -webkit-transform-origin: 54% 108%;\n          transform-origin: 54% 108%;\n  cursor: default;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: column wrap;\n          flex-flow: column wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .snap-block .snap_video_wrap::before {\n  display: block;\n  content: \"\";\n  position: absolute;\n  bottom: -32px;\n  left: 225px;\n  border: 16px solid transparent;\n  border-top: 16px solid rgba(0, 0, 0, 0.3);\n}\n.comment__feedback__box__syntaxs .syntaxs__list .snap-block .snap_options {\n  width: 100%;\n  height: 30px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .snap-block .snap_options .drop__list p {\n  color: #fff;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .snap-block .snap-btn {\n  margin: 0 10px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .emoji-list {\n  background-position: 5px -316px;\n}\n.comment__feedback__box__syntaxs .syntaxs__list .emoji-list:hover {\n  background: url(\"/img/icon-hover.png\") 5px -316px, #ccc;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row wrap;\n          flex-flow: row wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 5px;\n  border-top: 1px solid #272636;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list > div.choice-btn {\n  border-radius: 5px;\n  position: relative;\n  width: 32px;\n  height: 32px;\n  margin: 0 4px;\n  cursor: pointer;\n}\n.comment__feedback__box__syntaxs .syntaxs__sub-list > div.choice-btn:hover {\n  box-shadow: 0 0 1px 1px #1C86D1;\n}\n.comment__feedback__box__syntaxs .drop__upload__area {\n  border-radius: 5px;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  position: relative;\n  width: 454px;\n  height: 80px;\n  margin: 15px 0;\n  border: 1px dashed #1C86D1;\n  text-align: center;\n  font: 300 30px/75px \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  cursor: default;\n}\n.comment__feedback__box__syntaxs .drop__upload__area::after,\n.comment__feedback__box__syntaxs .drop__upload__area::before {\n  content: '';\n  display: block;\n  z-index: -1;\n  color: #1C86D1;\n  box-shadow: inset 0 0 0 2px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  -webkit-animation: clip-me 6s linear infinite;\n          animation: clip-me 6s linear infinite;\n}\n.comment__feedback__box__syntaxs .drop__upload__area::before {\n  -webkit-animation-delay: -3s;\n          animation-delay: -3s;\n}\n@-webkit-keyframes clip-me {\n  0%,\n  100% {\n    clip: rect(0px, 454px, 4px, 0px);\n  }\n  25% {\n    clip: rect(0px, 4px, 80px, 0px);\n  }\n  50% {\n    clip: rect(76px, 454px, 80px, 0px);\n  }\n  75% {\n    clip: rect(0px, 454px, 80px, 450px);\n  }\n}\n@keyframes clip-me {\n  0%,\n  100% {\n    clip: rect(0px, 454px, 4px, 0px);\n  }\n  25% {\n    clip: rect(0px, 4px, 80px, 0px);\n  }\n  50% {\n    clip: rect(76px, 454px, 80px, 0px);\n  }\n  75% {\n    clip: rect(0px, 454px, 80px, 450px);\n  }\n}\n.comment__feedback__box__syntaxs .upload__btn {\n  border-radius: 5px;\n  width: 454px;\n  height: 40px;\n  background: #1C86D1;\n  color: #fff;\n  font-size: 18px;\n  margin-bottom: 10px;\n}\n.comment__feedback__box__syntaxs .upload__btn:active {\n  background: #3075DC;\n}\n.comment__feedback__box__syntaxs input[type=\"text\"] {\n  border-radius: 3px;\n  height: 30px;\n  border: 1px solid #1C86D1;\n  margin-right: 20px;\n  font-size: 14px;\n  text-indent: 5px;\n}\n.comment__feedback__box__syntaxs .insert {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  border-radius: 5px;\n  color: #272636;\n  border: 1px solid #1C86D1;\n  line-height: 30px;\n  width: 70px;\n  height: 30px;\n}\n.comment__feedback__box__syntaxs .insert:hover {\n  background: #1C86D1;\n  color: #fff;\n}\n.comment__feedback__box__syntaxs .table-size-matrix {\n  margin: 10px 0 10px 90px;\n}\n.comment__feedback__box__syntaxs .table-size-matrix tr,\n.comment__feedback__box__syntaxs .table-size-matrix td {\n  border: 1px solid #ccc;\n}\n.comment__feedback__box__syntaxs .table-size-matrix td {\n  padding: 15px;\n}\n.comment__feedback__box__syntaxs .table-matrix-dimension {\n  font-size: 18px;\n  text-decoration: underline;\n  margin: 0 20px;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap {\n  width: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row wrap;\n          flex-flow: row wrap;\n  border-top: 1px solid #ccc;\n  border-left: 1px solid #ccc;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap td {\n  border-right: 1px solid #ccc;\n  border-bottom: 1px solid #ccc;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap td:hover {\n  background: #ccc;\n}\n.comment__feedback__box__syntaxs .expressions__list__wrap td a {\n  display: inline-block;\n  width: 32px;\n  height: 32px;\n  padding: 4px;\n}\n.comment__feedback__box__syntaxs #snap_canvas {\n  margin-bottom: 10px;\n}\n.comment__feedback__box__syntaxs .snap_wrap {\n  width: 430px;\n  margin: 20px auto;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: column wrap;\n          flex-flow: column wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.comment__feedback__box__wrap {\n  position: relative;\n}\n.editor__resize__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.editor__resize {\n  display: inline-block;\n  width: 130px;\n  height: 8px;\n  cursor: row-resize;\n  margin-top: 2px;\n  border-top: 1px solid #ccc;\n  border-bottom: 1px solid #ccc;\n}\n.comment__feedback__box {\n  position: relative;\n  width: 100%;\n}\n.comment__feedback {\n  padding: 10px;\n  border-top: 1px solid #272636;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row wrap;\n          flex-flow: row wrap;\n}\n.comment__feedback h3 {\n  font: 200 24px/1 arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n}\n.login-infos {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  font-size: 16px;\n  padding-bottom: 10px;\n}\n.login-infos a {\n  color: #1C86D1;\n}\n.login-infos .init_prompt {\n  cursor: default;\n  color: rgba(0, 0, 0, 0.5);\n}\n.login-out__btn {\n  border-radius: 5px;\n  float: right;\n  width: 70px;\n  height: 25px;\n  background: #C81623;\n  color: #fff;\n}\n.login-out__btn:active {\n  background: #AA151F;\n}\n.login-in__btn {\n  border-radius: 5px;\n  float: right;\n  width: 70px;\n  height: 25px;\n  padding: 0 5px;\n  background: #1C86D1;\n  color: #fff;\n}\n.login-in__btn:active {\n  background: #3075DC;\n}\n.comment__feedback--section {\n  width: calc(100% - 74px);\n}\n.comment__feedback--edit {\n  border-radius: 0px 0px 5px 5px;\n  width: 100%;\n  min-height: 30px;\n  padding: 5px;\n  border: 1px solid #272636;\n  border-top: none;\n  font: 200 14px/1.5 arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  resize: none;\n  overflow: hidden;\n  white-space: pre-wrap;\n  -moz-tab-size: 4;\n    -o-tab-size: 4;\n       tab-size: 4;\n}\n.comment__feedback--btns {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  width: 100%;\n  margin-top: 10px;\n}\n.comment__feedback--btns button {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  border-radius: 5px;\n  line-height: 30px;\n  width: 70px;\n  height: 30px;\n}\n.feedback--btns__reset {\n  color: #C81623;\n  border: 1px solid #C81623;\n}\n.feedback--btns__reset:hover {\n  background: #C81623;\n  color: #fff;\n}\n.feedback--btns__comment {\n  margin-left: 10px;\n  color: #272636;\n  border: 1px solid #1C86D1;\n}\n.feedback--btns__comment:hover {\n  background: #1C86D1;\n  color: #fff;\n}\n.comment__feedback__mask {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  border-radius: 2px;\n  position: absolute;\n  top: 0;\n  left: 1px;\n  width: 604px;\n  height: 149px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: column wrap;\n          flex-flow: column wrap;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  cursor: default;\n  background: #ccc;\n}\n.comment__feedback__mask p {\n  color: #fff;\n}\n.comment__feedback__mask--title {\n  font: 100 60px/60px \"\\5FAE\\8F6F\\96C5\\9ED1\";\n}\n.comment__feedback__mask--pinyin {\n  margin-top: 15px;\n  font: 100 20px/20px arial;\n}\n.clearfix::after {\n  content: \".\";\n  display: block;\n  height: 0;\n  visibility: hidden;\n  clear: both;\n}\n.demo {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  width: 900px;\n  margin: 50px auto 50px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  padding: 0 100px;\n}\n.comment__wrap {\n  width: 100%;\n}\n.comment__header {\n  border-radius: 5px;\n  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.6);\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -moz-justify-content: space-between;\n  height: 50px;\n  background: #1C86D1;\n  color: #fff;\n  font-size: 0;\n  padding: 5px 8px;\n}\n.comment__header::after {\n  content: \"\";\n  display: block;\n  position: absolute;\n  left: 41px;\n  bottom: -20px;\n  height: 0px;\n  border: 10px solid transparent;\n  border-top: 10px solid #1C86D1;\n}\n.comment__header .comment__header__span {\n  width: 150px;\n  height: 16px;\n  font: 200 16px/16px arial, \"\\5FAE\\8F6F\\96C5\\9ED1\";\n  margin-left: 10px;\n}\n.comment__header .comment__header__btns {\n  width: 80px;\n  height: 30px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.comment__header .comment__header__btns button {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  display: inline-block;\n  width: 40px;\n  height: 30px;\n  color: #fff;\n  font-size: 14px;\n}\n.comment__header .comment__header__btns button:hover {\n  color: #d32;\n}\n.comment__footer {\n  border-radius: 5px;\n  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.6);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  position: relative;\n  height: 70px;\n  background: #1C86D1;\n}\n.comment__footer::before {\n  content: \"\";\n  display: block;\n  position: absolute;\n  top: -20px;\n  left: 41px;\n  height: 0;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #1C86D1;\n}\n.comment__pagination {\n  border-radius: 5px;\n  box-shadow: 0 0 2px rgba(0, 0, 0, 0.7);\n  overflow: hidden;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 35px;\n}\n.comment__pagination li {\n  -webkit-transition: 0.3s;\n  transition: 0.3s;\n  width: 40px;\n  height: 100%;\n  color: #fff;\n  text-align: center;\n  cursor: pointer;\n}\n.comment__pagination li:hover {\n  color: #1C86D1;\n  background: #fff;\n}\n.comment__pagination li div {\n  padding: 10px 0;\n  height: 100%;\n  line-height: 15px;\n}\n.comment__pagination li > div.active {\n  color: #1C86D1;\n  background: #fff;\n  border-left: none !important;\n}\n.comment__pagination li:not(:nth-of-type(1)) div {\n  border-left: 1px solid rgba(0, 0, 0, 0.2);\n}\n.comment__list {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  margin: 0 0 0 50px;\n  border-left: 2px solid #1C86D1;\n}\n.no__comment__item {\n  padding: 20px;\n  text-align: center;\n}\n.no__comment__item p {\n  border-radius: 5px;\n  height: 70px;\n  font-size: 24px;\n  line-height: 70px;\n  color: rgba(0, 0, 0, 0.6);\n  border: 1px solid #272636;\n}\n.comment__item {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: relative;\n  padding: 20px;\n}\n.comment__item::after {\n  border-radius: 50%;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  left: -8px;\n  top: 40px;\n  content: \"\";\n  display: block;\n  background: #1C86D1;\n  width: 10px;\n  height: 10px;\n  border: 2px solid #fff;\n}\n.comment__item:hover::after {\n  background: #51CA65;\n}\n.comment__item:hover .comment__content {\n  -webkit-transform: translateX(15px);\n          transform: translateX(15px);\n}\n.comment__content {\n  border-radius: 5px;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row wrap;\n          flex-flow: row wrap;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n  padding: 10px;\n  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);\n}\n.comment__author--avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.comment__author--avatar > img:hover,\n.comment__author--avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.comment__content--main {\n  width: calc(100% - 74px);\n}\n.comment__content--author {\n  font-size: 18px;\n}\n.comment__content--author a {\n  color: #1C86D1;\n}\n.comment__content--time {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  font-size: 12px;\n  margin-top: 2px;\n  color: #ddd;\n  cursor: default;\n}\n.comment__content--time:hover {\n  color: #1C86D1;\n}\n.comment__content--content {\n  font-size: 0px;\n  line-height: 1.4;\n  padding: 24px 0 0 0px;\n  white-space: pre;\n}\n.comment__content--content h1.text-effect-basic {\n  text-fill-color: transparent;\n  -webkit-text-fill-color: transparent;\n  background-clip: text;\n  -webkit-background-clip: text;\n  background-size: 200% 200%;\n  -webkit-animation: masked 3s infinite linear;\n          animation: masked 3s infinite linear;\n}\n.comment__content--content h1 {\n  margin-top: 10px;\n  padding-bottom: 10px;\n  font-size: 25px;\n  color: #7c795d;\n  font-weight: normal;\n  line-height: 1.1;\n  border-bottom: 1px solid #7c795d;\n}\n.comment__content--content h2 {\n  margin: 5px 0;\n  height: 30px;\n  text-indent: 5px;\n  color: #7c795d;\n  font: 400 20px/30px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  border-left: 5px solid #1C86D1;\n}\n.comment__content--content pre,\n.comment__content--content p,\n.comment__content--content code {\n  -moz-tab-size: 2;\n    -o-tab-size: 2;\n       tab-size: 2;\n  white-space: pre-wrap;\n  word-break: break-all;\n}\n.comment__content--content p,\n.comment__content--content code {\n  font-size: 14px;\n}\n.comment__content--content strong {\n  font-size: 16px;\n}\n.comment__content--content a {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  color: #1C86D1;\n  margin: 0px 2px;\n}\n.comment__content--content a:hover {\n  color: #C91523;\n}\n.comment__content--content img {\n  max-width: 512px;\n  vertical-align: bottom;\n}\n.comment__content--content table {\n  border-radius: 5px;\n  margin: 20px 0;\n  padding: 8px;\n  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);\n  white-space: normal;\n  border-collapse: collapse;\n}\n.comment__content--content table tr {\n  border: 1px solid #000;\n}\n.comment__content--content table tr td,\n.comment__content--content table tr th {\n  font-size: 14px;\n  padding: 5px;\n  word-break: break-word;\n}\n.comment__content--content table tr td {\n  font-weight: 200;\n  border: 1px solid #000;\n}\n.comment__content--content blockquote {\n  border-radius: 5px;\n  position: relative;\n  background: #CCD0D5;\n  padding: 25px 10px 10px 30px;\n  overflow: hidden;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n}\n.comment__content--content blockquote::before {\n  position: absolute;\n  top: 0;\n  left: 0;\n  font-size: 14px;\n  background: -webkit-linear-gradient(112deg, transparent 50%, #1C86D1 50%);\n  background: linear-gradient(-22deg, transparent 50%, #1C86D1 50%);\n  width: 80px;\n  height: 30px;\n  display: block;\n  content: \"\\5F15\\8FF0\";\n  color: #fff;\n  padding: 3px 0 0 4px;\n}\n.comment__content--content pre {\n  border-radius: 5px;\n  overflow: hidden;\n  padding: 15px 0px 15px 8px;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n  margin: 15px 0;\n  background: #49483e;\n}\n.comment__content--content pre code {\n  color: #a6e22e;\n}\n.comment__content--content pre code .hljs-comment,\n.comment__content--content pre code .hljs-quote {\n  color: #999580;\n}\n.comment__content--content pre code .hljs-variable,\n.comment__content--content pre code .hljs-template-variable,\n.comment__content--content pre code .hljs-attr,\n.comment__content--content pre code .hljs-tag,\n.comment__content--content pre code .hljs-name,\n.comment__content--content pre code .hljs-regexp,\n.comment__content--content pre code .hljs-link,\n.comment__content--content pre code .hljs-name,\n.comment__content--content pre code .hljs-selector-id,\n.comment__content--content pre code .hljs-selector-class {\n  color: #f2777a;\n}\n.comment__content--content pre code .hljs-number,\n.comment__content--content pre code .hljs-meta,\n.comment__content--content pre code .hljs-built_in,\n.comment__content--content pre code .hljs-builtin-name,\n.comment__content--content pre code .hljs-literal,\n.comment__content--content pre code .hljs-type,\n.comment__content--content pre code .hljs-params {\n  color: #ae81ff;\n}\n.comment__content--content pre code .hljs-string,\n.comment__content--content pre code .hljs-symbol,\n.comment__content--content pre code .hljs-bullet {\n  color: #e6db74;\n}\n.comment__content--content pre code .hljs-title,\n.comment__content--content pre code .hljs-section {\n  color: #6684e1;\n}\n.comment__content--content pre code .hljs-keyword,\n.comment__content--content pre code .hljs-selector-tag {\n  color: #66D9EF;\n}\n.comment__content--content pre code .hljs {\n  display: block;\n  overflow-x: auto;\n  background: #20201d;\n  color: #a6a28c;\n  padding: 0.5em;\n}\n.comment__content--content pre code .hljs-emphasis {\n  font-style: italic;\n}\n.comment__content--content pre code .hljs-strong {\n  font-weight: bold;\n}\n.comment__content--content ol {\n  counter-reset: section;\n  padding: 10px 0 10px 20px;\n}\n.comment__content--content ol > li {\n  position: relative;\n  min-height: 20px;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  margin: 5px 0px;\n}\n.comment__content--content ol > li:before {\n  counter-increment: section;\n  content: counters(section, \"\") \".\";\n  display: inline-block;\n  position: absolute;\n  top: 0;\n  left: -20px;\n  font-size: 16px;\n  font-weight: bold;\n  font-style: italic;\n}\n.comment__content--content ol > li:nth-of-type(3n+1)::before {\n  color: #FE0002;\n}\n.comment__content--content ol > li:nth-of-type(3n+2)::before {\n  color: #F4F800;\n}\n.comment__content--content ol > li:nth-of-type(3n+3)::before {\n  color: #A3DF03;\n}\n.comment__content--content ul {\n  padding: 10px 0 10px 15px;\n}\n.comment__content--content ul > li {\n  position: relative;\n  margin-bottom: 10px;\n  line-height: 1.1;\n  min-height: 20px;\n  word-break: break-all;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n}\n.comment__content--content ul > li::before {\n  border-radius: 50%;\n  position: absolute;\n  top: 6px;\n  left: -13px;\n  content: \"\";\n  display: inline-block;\n  width: 8px;\n  height: 8px;\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #1C86D1 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #1C86D1 100%);\n}\n.comment__content--content ul > li:hover::before {\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #91E22E 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #91E22E 100%);\n}\n.comment__content--options {\n  padding-top: 15px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.comment__content--options__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-flex: 8;\n      -ms-flex-positive: 8;\n          flex-grow: 8;\n}\n.comment__content--options__wrap a {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.comment__content--options__wrap a i {\n  width: 16px;\n  height: 16px;\n  background-image: url(\"/img/icon.png\");\n}\n.comment__content--options__wrap a span {\n  font-size: 12px;\n  margin-left: 3px;\n  color: #272636;\n}\n.comment__content--options__wrap a:hover span {\n  color: #1C86D1;\n}\n.comment__content--options__wrap a:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.comment__content--options__callback i {\n  background-position: -5px 0px;\n}\n.comment__content--options__del {\n  margin-left: 8px;\n}\n.comment__content--options__del i {\n  background-position: -5px -16px;\n}\n.comment__options__vote-up {\n  text-align: right;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n.comment__options__vote-up button {\n  font-size: 18px;\n}\n.comment__options__vote-up button span {\n  font-size: 18px;\n}\n.comment__options__vote-up button:hover {\n  color: #1C86D1;\n}\n.comment__options__has-voted-up {\n  text-align: right;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n.comment__options__has-voted-up button {\n  font-size: 18px;\n  color: #C91523;\n  cursor: default;\n}\n.comment__options__has-voted-up button span {\n  font-size: 18px;\n}\n.feedback__content {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  width: 100%;\n  margin: 20px 10px 10px 5px;\n}\n.feedback__content--main {\n  border-radius: 5px;\n  position: relative;\n  border: 1px solid #272636;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row wrap;\n          flex-flow: row wrap;\n  padding: 5px;\n  margin: 20px 0 0;\n}\n.feedback__content--main::after,\n.feedback__content--main::before {\n  content: \"\";\n  height: 0;\n  position: absolute;\n  left: 30px;\n}\n.feedback__content--main::after {\n  top: -20px;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #272636;\n}\n.feedback__content--main::before {\n  z-index: 2;\n  top: -19px;\n  border: 10px solid transparent;\n  border-bottom: 10px solid #fff;\n}\n.sub__feedback {\n  margin: 5px 0;\n}\n.sub__feedback span {\n  font-size: 18px;\n  color: #1C86D1;\n}\n.feedback__wrap--content {\n  width: calc(100% - 74px);\n}\n.feedback__content--avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.feedback__content--avatar > img:hover,\n.feedback__content--avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.feedback__wrap--content {\n  width: calc(100% - 74px);\n}\n.feedback__content--author {\n  font-size: 18px;\n}\n.feedback__content--author a {\n  color: #1C86D1;\n}\n.feedback__content--time {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  font-size: 12px;\n  margin-top: 2px;\n  color: #ddd;\n  cursor: default;\n}\n.feedback__content--time:hover {\n  color: #1C86D1;\n}\n.feedback__content--content {\n  font-size: 0px;\n  line-height: 1.4;\n  padding: 24px 0 0 0px;\n  white-space: pre;\n}\n.feedback__content--content h1.text-effect-basic {\n  text-fill-color: transparent;\n  -webkit-text-fill-color: transparent;\n  background-clip: text;\n  -webkit-background-clip: text;\n  background-size: 200% 200%;\n  -webkit-animation: masked 3s infinite linear;\n          animation: masked 3s infinite linear;\n}\n.feedback__content--content h1 {\n  margin-top: 10px;\n  padding-bottom: 10px;\n  font-size: 25px;\n  color: #7c795d;\n  font-weight: normal;\n  line-height: 1.1;\n  border-bottom: 1px solid #7c795d;\n}\n.feedback__content--content h2 {\n  margin: 5px 0;\n  height: 30px;\n  text-indent: 5px;\n  color: #7c795d;\n  font: 400 20px/30px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  border-left: 5px solid #1C86D1;\n}\n.feedback__content--content pre,\n.feedback__content--content p,\n.feedback__content--content code {\n  -moz-tab-size: 2;\n    -o-tab-size: 2;\n       tab-size: 2;\n  white-space: pre-wrap;\n  word-break: break-all;\n}\n.feedback__content--content p,\n.feedback__content--content code {\n  font-size: 14px;\n}\n.feedback__content--content strong {\n  font-size: 16px;\n}\n.feedback__content--content a {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  color: #1C86D1;\n  margin: 0px 2px;\n}\n.feedback__content--content a:hover {\n  color: #C91523;\n}\n.feedback__content--content img {\n  max-width: 512px;\n  vertical-align: bottom;\n}\n.feedback__content--content table {\n  border-radius: 5px;\n  margin: 20px 0;\n  padding: 8px;\n  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);\n  white-space: normal;\n  border-collapse: collapse;\n}\n.feedback__content--content table tr {\n  border: 1px solid #000;\n}\n.feedback__content--content table tr td,\n.feedback__content--content table tr th {\n  font-size: 14px;\n  padding: 5px;\n  word-break: break-word;\n}\n.feedback__content--content table tr td {\n  font-weight: 200;\n  border: 1px solid #000;\n}\n.feedback__content--content blockquote {\n  border-radius: 5px;\n  position: relative;\n  background: #CCD0D5;\n  padding: 25px 10px 10px 30px;\n  overflow: hidden;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n}\n.feedback__content--content blockquote::before {\n  position: absolute;\n  top: 0;\n  left: 0;\n  font-size: 14px;\n  background: -webkit-linear-gradient(112deg, transparent 50%, #1C86D1 50%);\n  background: linear-gradient(-22deg, transparent 50%, #1C86D1 50%);\n  width: 80px;\n  height: 30px;\n  display: block;\n  content: \"\\5F15\\8FF0\";\n  color: #fff;\n  padding: 3px 0 0 4px;\n}\n.feedback__content--content pre {\n  border-radius: 5px;\n  overflow: hidden;\n  padding: 15px 0px 15px 8px;\n  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.5);\n  margin: 15px 0;\n  background: #49483e;\n}\n.feedback__content--content pre code {\n  color: #a6e22e;\n}\n.feedback__content--content pre code .hljs-comment,\n.feedback__content--content pre code .hljs-quote {\n  color: #999580;\n}\n.feedback__content--content pre code .hljs-variable,\n.feedback__content--content pre code .hljs-template-variable,\n.feedback__content--content pre code .hljs-attr,\n.feedback__content--content pre code .hljs-tag,\n.feedback__content--content pre code .hljs-name,\n.feedback__content--content pre code .hljs-regexp,\n.feedback__content--content pre code .hljs-link,\n.feedback__content--content pre code .hljs-name,\n.feedback__content--content pre code .hljs-selector-id,\n.feedback__content--content pre code .hljs-selector-class {\n  color: #f2777a;\n}\n.feedback__content--content pre code .hljs-number,\n.feedback__content--content pre code .hljs-meta,\n.feedback__content--content pre code .hljs-built_in,\n.feedback__content--content pre code .hljs-builtin-name,\n.feedback__content--content pre code .hljs-literal,\n.feedback__content--content pre code .hljs-type,\n.feedback__content--content pre code .hljs-params {\n  color: #ae81ff;\n}\n.feedback__content--content pre code .hljs-string,\n.feedback__content--content pre code .hljs-symbol,\n.feedback__content--content pre code .hljs-bullet {\n  color: #e6db74;\n}\n.feedback__content--content pre code .hljs-title,\n.feedback__content--content pre code .hljs-section {\n  color: #6684e1;\n}\n.feedback__content--content pre code .hljs-keyword,\n.feedback__content--content pre code .hljs-selector-tag {\n  color: #66D9EF;\n}\n.feedback__content--content pre code .hljs {\n  display: block;\n  overflow-x: auto;\n  background: #20201d;\n  color: #a6a28c;\n  padding: 0.5em;\n}\n.feedback__content--content pre code .hljs-emphasis {\n  font-style: italic;\n}\n.feedback__content--content pre code .hljs-strong {\n  font-weight: bold;\n}\n.feedback__content--content ol {\n  counter-reset: section;\n  padding: 10px 0 10px 20px;\n}\n.feedback__content--content ol > li {\n  position: relative;\n  min-height: 20px;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n  margin: 5px 0px;\n}\n.feedback__content--content ol > li:before {\n  counter-increment: section;\n  content: counters(section, \"\") \".\";\n  display: inline-block;\n  position: absolute;\n  top: 0;\n  left: -20px;\n  font-size: 16px;\n  font-weight: bold;\n  font-style: italic;\n}\n.feedback__content--content ol > li:nth-of-type(3n+1)::before {\n  color: #FE0002;\n}\n.feedback__content--content ol > li:nth-of-type(3n+2)::before {\n  color: #F4F800;\n}\n.feedback__content--content ol > li:nth-of-type(3n+3)::before {\n  color: #A3DF03;\n}\n.feedback__content--content ul {\n  padding: 10px 0 10px 15px;\n}\n.feedback__content--content ul > li {\n  position: relative;\n  margin-bottom: 10px;\n  line-height: 1.1;\n  min-height: 20px;\n  word-break: break-all;\n  font: 200 14px/20px \"\\5FAE\\8F6F\\96C5\\9ED1\", arial;\n}\n.feedback__content--content ul > li::before {\n  border-radius: 50%;\n  position: absolute;\n  top: 6px;\n  left: -13px;\n  content: \"\";\n  display: inline-block;\n  width: 8px;\n  height: 8px;\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #1C86D1 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #1C86D1 100%);\n}\n.feedback__content--content ul > li:hover::before {\n  background: -webkit-linear-gradient(315deg, #f5f5f5 5%, #91E22E 100%);\n  background: linear-gradient(135deg, #f5f5f5 5%, #91E22E 100%);\n}\n.feedback__content--options {\n  padding-top: 15px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.feedback__content--options__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 8;\n      -ms-flex-positive: 8;\n          flex-grow: 8;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.feedback__content--options__wrap a {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.feedback__content--options__wrap a i {\n  width: 16px;\n  height: 16px;\n  background-image: url(\"/img/icon.png\");\n}\n.feedback__content--options__wrap a span {\n  font-size: 12px;\n  margin-left: 3px;\n  color: #272636;\n}\n.feedback__content--options__wrap a:hover span {\n  color: #1C86D1;\n}\n.feedback__content--options__wrap a:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.feedback__content--options__callback i {\n  background-position: -5px 0px;\n}\n.feedback__content--options__del {\n  margin-left: 8px;\n}\n.feedback__content--options__del i {\n  background-position: -5px -16px;\n}\n.feedback__options__vote-up {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  text-align: right;\n}\n.feedback__options__vote-up button {\n  font-size: 18px;\n}\n.feedback__options__vote-up button span {\n  font-size: 18px;\n}\n.feedback__options__vote-up button:hover {\n  color: #1C86D1;\n}\n.editer-wrap {\n  margin-top: 20px;\n}\n.editer-wrap .comment__feedback {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row wrap;\n          flex-flow: row wrap;\n  width: 100%;\n  border-top: none;\n}\n.editer-wrap .editer-wrap__avatar {\n  border-radius: 5px;\n  width: 62px;\n  height: 62px;\n  margin-right: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.4);\n}\n.editer-wrap .editer-wrap__avatar > img:hover,\n.editer-wrap .editer-wrap__avatar:hover {\n  -webkit-animation-fill-mode: both;\n          animation-fill-mode: both;\n  -webkit-transform-origin: topcenter;\n          transform-origin: topcenter;\n  -webkit-animation: swing 0.7s;\n          animation: swing 0.7s;\n}\n.editer-wrap .editer-wrap__avatar img {\n  height: 100%;\n}\n.editer-wrap .comment__feedback--edit {\n  min-height: 150px;\n}\n.editer-wrap .comment__feddback--btns {\n  width: 100%;\n}\n.login__table__bg {\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 999998;\n  background: rgba(0, 0, 0, 0.4);\n}\n.login__table {\n  border-radius: 5px;\n  box-shadow: 0 0 10px #000000;\n  position: fixed;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  margin: auto;\n  width: 320px;\n  height: 340px;\n  border: 1px solid rgba(0, 0, 0, 0.3);\n  background: #fff;\n  z-index: 999999;\n}\n.login__table__wrap {\n  overflow: hidden;\n  padding: 0 10px;\n}\n.login__table__header {\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 40px;\n}\n.login__table__header button {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  line-height: 50px;\n}\n.state__bar {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  position: absolute;\n  bottom: 0;\n  left: 32px;\n  width: 80px;\n  height: 2px;\n  background: #1C86D1;\n}\n.state__bar:hover {\n  color: #1C86D1;\n}\n.state__bar--toggle {\n  left: 186px;\n}\n.login__table__forms {\n  position: relative;\n  height: 300px;\n}\n.login__table__forms form {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  top: 0;\n  left: 0;\n}\n.tourist__login {\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: column wrap;\n          flex-flow: column wrap;\n  padding-top: 50px;\n}\n.input__wrap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  padding: 5px 0;\n  line-height: 20px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  margin-bottom: 15px;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row wrap;\n          flex-flow: row wrap;\n}\n.input__wrap p {\n  width: 60px;\n}\n.input__wrap input[type=\"text\"] {\n  border-radius: 5px;\n  border: 1px solid #272636;\n  padding: 5px;\n  width: 180px;\n  height: 27px;\n}\n.input__wrap label {\n  display: inline-block;\n  width: 100%;\n  height: 20px;\n  font-size: 12px;\n  color: #B61D1D;\n  padding: 5px 30px 0 0;\n  text-align: right;\n}\ninput[type=\"button\"].tourist__login--submit {\n  border-radius: 5px;\n  width: 180px;\n  height: 35px;\n  color: #fff;\n  background: #1C86D1;\n  margin: 30px auto 0;\n  cursor: pointer;\n  border: 1px solid #ccc;\n}\ninput[type=\"button\"].tourist__login--submit:active {\n  background: #3075DC;\n}\n.sns__login {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row wrap;\n          flex-flow: row wrap;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 20px;\n}\n.sns__login div {\n  width: 70px;\n  height: 70px;\n  background: red;\n}\n.alert__wrap {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 99999999;\n  background: rgba(0, 0, 0, 0.8);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  overflow: hidden;\n}\n.alert__plane {\n  width: 100%;\n  height: 0px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: column wrap;\n          flex-flow: column wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background: rgba(255, 255, 255, 0.65);\n  -webkit-animation: alert_plane_animate .5s;\n          animation: alert_plane_animate .5s;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n.alert__plane header {\n  width: 100%;\n  height: 8px;\n  background: -webkit-linear-gradient(left, #F00001 12.5%, transparent 0px), -webkit-linear-gradient(left, #FF7F00 25%, transparent 0px), -webkit-linear-gradient(left, #E1E23B 37.5%, transparent 0px), -webkit-linear-gradient(left, #007940 50%, transparent 0px), -webkit-linear-gradient(left, #4041FE 62.5%, transparent 0px), -webkit-linear-gradient(left, #A001C0 75%, transparent 0px), -webkit-linear-gradient(left, #F7941E 87.5%, transparent 0px), -webkit-linear-gradient(left, #9AC147 100%, transparent 0px);\n  background: linear-gradient(to right, #F00001 12.5%, transparent 0px), linear-gradient(to right, #FF7F00 25%, transparent 0px), linear-gradient(to right, #E1E23B 37.5%, transparent 0px), linear-gradient(to right, #007940 50%, transparent 0px), linear-gradient(to right, #4041FE 62.5%, transparent 0px), linear-gradient(to right, #A001C0 75%, transparent 0px), linear-gradient(to right, #F7941E 87.5%, transparent 0px), linear-gradient(to right, #9AC147 100%, transparent 0px);\n  background-repeat: no-repeat;\n}\n.alert__plane footer {\n  width: 100%;\n  height: 42px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.alert__plane footer label {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  height: 100%;\n  cursor: pointer;\n  line-height: 42px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.alert__plane footer label:hover button {\n  color: #1C86D1;\n}\n.alert__plane footer label:hover i {\n  background-image: url(\"/img/icon-hover.png\");\n}\n.alert__plane footer label:hover i::before {\n  -webkit-transform: scale(1);\n          transform: scale(1);\n}\n.alert__plane footer i {\n  position: relative;\n  width: 20px;\n  height: 20px;\n  background-image: url(\"/img/icon.png\");\n}\n.alert__plane footer i::before {\n  border-radius: 50%;\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  content: \"\";\n  display: block;\n  width: 20px;\n  height: 20px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  z-index: -1;\n  background: #1C86D1;\n  -webkit-transform: scale(0);\n          transform: scale(0);\n}\n.alert__plane footer .alert__plane--btn_sure {\n  background-position: -4px -59px;\n}\n.alert__plane footer .alert__plane--btn_cancel {\n  background-position: -4px -36px;\n}\n.alert__plane footer button {\n  font-size: 18px;\n}\n@-webkit-keyframes alert_plane_animate {\n  0% {\n    height: 0;\n  }\n  100% {\n    height: 280px;\n  }\n}\n@keyframes alert_plane_animate {\n  0% {\n    height: 0;\n  }\n  100% {\n    height: 280px;\n  }\n}\n.alert__plane--question {\n  width: 100%;\n  height: 230px;\n  padding-top: 50px;\n  text-align: center;\n  font-size: 30px;\n  font-weight: 100;\n  line-height: 1.2;\n  overflow: hidden;\n  color: rgba(0, 0, 0, 0.7);\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 405 */
+/* 222 */
 /***/ function(module, exports) {
 
 	/*
@@ -23942,7 +22884,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 406 */
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -23958,7 +22900,7 @@ webpackJsonp([0],[
 			};
 		},
 		isOldIE = memoize(function() {
-			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
+			return /msie [6-9]\b/.test(self.navigator.userAgent.toLowerCase());
 		}),
 		getHeadElement = memoize(function () {
 			return document.head || document.getElementsByTagName("head")[0];
@@ -24194,4 +23136,4 @@ webpackJsonp([0],[
 
 
 /***/ }
-]);
+/******/ ]);
