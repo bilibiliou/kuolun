@@ -17,7 +17,7 @@ npm install kuolun
 or 
 
 ```
-git clone https://github.com/NumerHero/kuolun.git
+git clone https://github.com/bilibiliou/kuolun.git
 ```
 
 # 富文本功能（functions）
@@ -26,27 +26,27 @@ git clone https://github.com/NumerHero/kuolun.git
 
 ## 流光标题
 
-![shotpic](http://numerhero.github.io/assets/download/kuolun/insert-h1.gif)
+![shotpic](http://bilibiliou.github.io/assets/download/kuolun/insert-h1.gif)
 
 ## 插入表格
 
-![shotpic](http://numerhero.github.io/assets/download/kuolun/insert-table.gif)
+![shotpic](http://bilibiliou.github.io/assets/download/kuolun/insert-table.gif)
 
 ## 插入代码
 
-![shotpic](http://numerhero.github.io/assets/download/kuolun/code-highlight.gif)
+![shotpic](http://bilibiliou.github.io/assets/download/kuolun/code-highlight.gif)
 
 ## 插入上传图片
 
-![shotpic](http://numerhero.github.io/assets/download/kuolun/upload.gif)
+![shotpic](http://bilibiliou.github.io/assets/download/kuolun/upload.gif)
 
 ## 插入表情
 
-![shotpic](http://numerhero.github.io/assets/download/kuolun/comment_expressions.gif)
+![shotpic](http://bilibiliou.github.io/assets/download/kuolun/comment_expressions.gif)
 
 ## 自拍上传
 
-![shotpic](http://numerhero.github.io/assets/download/kuolun/snap-show.gif)
+![shotpic](http://bilibiliou.github.io/assets/download/kuolun/snap-show.gif)
 
 注：gif 经过压缩，所以视频质量并不清晰
 
@@ -154,7 +154,7 @@ Copyright (c) 2016 Kuo Lun (阔论-评论系统)
 
 Author: Owen(欧阳湘粤) 
 Email: <469564715@qq.com> <blackcodero@gmail.com>
-Github: github.com/numerhero
+Github: github.com/bilibiliou
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
